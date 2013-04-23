@@ -96,7 +96,7 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="177" id="1cA-la-lmq"/>
-                                    <constraint firstAttribute="height" constant="245" id="dAn-cy-bTu"/>
+                                    <constraint firstAttribute="height" constant="251" id="rfN-76-LmT"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -179,6 +179,7 @@
                             <constraint firstAttribute="bottom" secondItem="jyf-Rt-tCz" secondAttribute="bottom" constant="194" id="3qI-v1-C52"/>
                             <constraint firstAttribute="trailing" secondItem="2yI-HH-6ax" secondAttribute="trailing" constant="28" id="3vr-bW-zmA"/>
                             <constraint firstAttribute="bottom" secondItem="IdA-1U-yUM" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="5ZR-NF-Utd"/>
+                            <constraint firstItem="IdA-1U-yUM" firstAttribute="top" secondItem="4GG-Bv-TcK" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="9eC-8q-2YW"/>
                             <constraint firstItem="hWK-bm-vN6" firstAttribute="top" secondItem="3" secondAttribute="top" constant="87" id="CeQ-ms-JWh"/>
                             <constraint firstAttribute="trailing" secondItem="bUw-Q6-T9n" secondAttribute="trailing" constant="42" id="CfC-fM-BbA"/>
                             <constraint firstAttribute="trailing" secondItem="Pe2-sF-N7Z" secondAttribute="trailing" constant="30" id="FY2-BP-hGa"/>
@@ -209,11 +210,13 @@
                             <constraint firstItem="Pe2-sF-N7Z" firstAttribute="top" secondItem="3" secondAttribute="top" constant="56" id="w2V-pb-dR4"/>
                             <constraint firstItem="Dis-Km-yJN" firstAttribute="top" secondItem="3" secondAttribute="top" constant="7" id="xSy-Jb-pXD"/>
                             <constraint firstItem="uJZ-km-juv" firstAttribute="centerX" secondItem="jyf-Rt-tCz" secondAttribute="centerX" type="default" id="xcJ-IW-3Vp"/>
-                            <constraint firstItem="4GG-Bv-TcK" firstAttribute="top" secondItem="3" secondAttribute="top" constant="138" id="yLT-2J-zsd"/>
                             <constraint firstItem="Ied-aa-Ecd" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="yf4-dN-07U"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="RFS-6o-dXj"/>
+                    <connections>
+                        <outlet property="scrollingText" destination="IdA-1U-yUM" id="BFx-xe-Smg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
@@ -227,8 +230,9 @@
         <class className="TeamRunViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TeamRunViewController.h"/>
             <relationships>
-                <relationship kind="action" name="OpenGameCenter"/>
-                <relationship kind="action" name="StartStopButtonClicked"/>
+                <relationship kind="action" name="openGameCenter"/>
+                <relationship kind="action" name="startStopButtonClicked"/>
+                <relationship kind="outlet" name="scrollingText" candidateClass="UITextView"/>
             </relationships>
         </class>
     </classes>

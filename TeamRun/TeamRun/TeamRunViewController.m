@@ -13,13 +13,17 @@
 @interface TeamRunViewController ()
 <GKGameCenterControllerDelegate, GKMatchmakerViewControllerDelegate>
 
-@property (weak, nonatomic) GKMatch* match;
-
 - (IBAction)openGameCenter;
 - (IBAction)startStopButtonClicked;
 
+@property (weak, nonatomic) IBOutlet UITextView *scrollingText;
+
+
 - (void)createMatch;
 - (void)playerAuthenticated;
+- (void)log:(NSString*)format,...;
+
+@property (weak, nonatomic) GKMatch* match;
 
 @end
 
@@ -30,12 +34,26 @@
     [super viewDidLoad];
     
     [self authenticateLocalPlayer];
+    [self log:@"Authenticating player..."];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)log:(NSString *)format,...
+{
+    va_list args;
+    va_start(args, format);
+    NSString *message = [[NSString alloc] initWithFormat:format arguments:args];
+    va_end(args);
+    
+    NSLog(@"%@", message);
+    [self.scrollingText setText:[NSString stringWithFormat:@"%@\n\n%@", [self.scrollingText text], message]];
+    
+    [self.scrollingText scrollRangeToVisible:NSMakeRange([self.scrollingText.text length], 0)];
 }
 
 // Auto match works on simulator!  (Sending/receiving match invites doesn't work on simulator according to Apple docs)
@@ -60,7 +78,7 @@
         }
         else
         {
-            NSLog(@"Todo: better handle user authentication failure -- error: %@", error);
+            [self log:@"Todo: better handle user authentication failure -- error: %@", error];
         }
     };
 }
@@ -125,12 +143,13 @@
 - (void)matchmakerViewControllerWasCancelled:(GKMatchmakerViewController *)viewController
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+    [self log:@"Match cancelled"];
 }
 
 - (void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFailWithError:(NSError *)error
 {
     [self dismissViewControllerAnimated:YES completion:nil];
-    NSLog(@"matchmaker failed with error: %@", error);
+    [self log:@"matchmaker failed with error: %@", error];
 }
 
 - (void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFindMatch:(GKMatch *)match
@@ -138,7 +157,7 @@
     self.match = match;
     
     [self dismissViewControllerAnimated:YES completion:nil];
-    NSLog(@"Match found: %@", match);
+    [self log:@"Match found: %@", match];
     
     // todo: start run logic
 }
