@@ -1,0 +1,321 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		520276EE16762D300004BBDC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 520276ED16762D300004BBDC /* UIKit.framework */; };
+		520276F016762D300004BBDC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 520276EF16762D300004BBDC /* Foundation.framework */; };
+		520276F216762D300004BBDC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 520276F116762D300004BBDC /* CoreGraphics.framework */; };
+		520276F816762D300004BBDC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 520276F616762D300004BBDC /* InfoPlist.strings */; };
+		520276FA16762D300004BBDC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 520276F916762D300004BBDC /* main.m */; };
+		520276FE16762D300004BBDC /* TeamRunAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 520276FD16762D300004BBDC /* TeamRunAppDelegate.m */; };
+		5202770016762D300004BBDC /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 520276FF16762D300004BBDC /* Default.png */; };
+		5202770216762D300004BBDC /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5202770116762D300004BBDC /* Default@2x.png */; };
+		5202770416762D300004BBDC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5202770316762D300004BBDC /* Default-568h@2x.png */; };
+		5202770716762D300004BBDC /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5202770516762D300004BBDC /* MainStoryboard.storyboard */; };
+		5202770A16762D300004BBDC /* TeamRunViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5202770916762D300004BBDC /* TeamRunViewController.m */; };
+		5280DE22167EC5E700552081 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5280DE21167EC5E700552081 /* CoreLocation.framework */; };
+		52A5E03E1687898500E3A2AB /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A5E03D1687898500E3A2AB /* GameKit.framework */; };
+		52A5E0411687ECA800E3A2AB /* SampleMap.png in Resources */ = {isa = PBXBuildFile; fileRef = 52A5E0401687ECA800E3A2AB /* SampleMap.png */; };
+		52BA73D0168EC3700025C3EA /* mute mic.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 52BA73CF168EC3700025C3EA /* mute mic.tiff */; };
+		52F081F4168425D700F2749E /* icon114.png in Resources */ = {isa = PBXBuildFile; fileRef = 52F081F3168425D700F2749E /* icon114.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		520276E916762D300004BBDC /* teamrun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = teamrun.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		520276ED16762D300004BBDC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		520276EF16762D300004BBDC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		520276F116762D300004BBDC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		520276F516762D300004BBDC /* teamrun-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "teamrun-Info.plist"; sourceTree = "<group>"; };
+		520276F716762D300004BBDC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		520276F916762D300004BBDC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		520276FB16762D300004BBDC /* teamrun-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "teamrun-Prefix.pch"; sourceTree = "<group>"; };
+		520276FC16762D300004BBDC /* TeamRunAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeamRunAppDelegate.h; sourceTree = "<group>"; };
+		520276FD16762D300004BBDC /* TeamRunAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamRunAppDelegate.m; sourceTree = "<group>"; };
+		520276FF16762D300004BBDC /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		5202770116762D300004BBDC /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		5202770316762D300004BBDC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		5202770616762D300004BBDC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		5202770816762D300004BBDC /* TeamRunViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeamRunViewController.h; sourceTree = "<group>"; };
+		5202770916762D300004BBDC /* TeamRunViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamRunViewController.m; sourceTree = "<group>"; };
+		5280DE21167EC5E700552081 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		52A5E03D1687898500E3A2AB /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		52A5E0401687ECA800E3A2AB /* SampleMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SampleMap.png; sourceTree = "<group>"; };
+		52BA73CF168EC3700025C3EA /* mute mic.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "mute mic.tiff"; sourceTree = "<group>"; };
+		52F081F3168425D700F2749E /* icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		520276E616762D300004BBDC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52A5E03E1687898500E3A2AB /* GameKit.framework in Frameworks */,
+				5280DE22167EC5E700552081 /* CoreLocation.framework in Frameworks */,
+				520276EE16762D300004BBDC /* UIKit.framework in Frameworks */,
+				520276F016762D300004BBDC /* Foundation.framework in Frameworks */,
+				520276F216762D300004BBDC /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		520276DE16762D300004BBDC = {
+			isa = PBXGroup;
+			children = (
+				52A5E03D1687898500E3A2AB /* GameKit.framework */,
+				52F081F3168425D700F2749E /* icon114.png */,
+				5280DE21167EC5E700552081 /* CoreLocation.framework */,
+				520276F316762D300004BBDC /* TeamRun */,
+				520276EC16762D300004BBDC /* Frameworks */,
+				520276EA16762D300004BBDC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		520276EA16762D300004BBDC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				520276E916762D300004BBDC /* teamrun.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		520276EC16762D300004BBDC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				520276ED16762D300004BBDC /* UIKit.framework */,
+				520276EF16762D300004BBDC /* Foundation.framework */,
+				520276F116762D300004BBDC /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		520276F316762D300004BBDC /* TeamRun */ = {
+			isa = PBXGroup;
+			children = (
+				520276FC16762D300004BBDC /* TeamRunAppDelegate.h */,
+				520276FD16762D300004BBDC /* TeamRunAppDelegate.m */,
+				5202770516762D300004BBDC /* MainStoryboard.storyboard */,
+				5202770816762D300004BBDC /* TeamRunViewController.h */,
+				5202770916762D300004BBDC /* TeamRunViewController.m */,
+				520276F416762D300004BBDC /* Supporting Files */,
+			);
+			path = TeamRun;
+			sourceTree = "<group>";
+		};
+		520276F416762D300004BBDC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				520276F516762D300004BBDC /* teamrun-Info.plist */,
+				520276F616762D300004BBDC /* InfoPlist.strings */,
+				52BA73CF168EC3700025C3EA /* mute mic.tiff */,
+				520276F916762D300004BBDC /* main.m */,
+				520276FB16762D300004BBDC /* teamrun-Prefix.pch */,
+				52A5E0401687ECA800E3A2AB /* SampleMap.png */,
+				520276FF16762D300004BBDC /* Default.png */,
+				5202770116762D300004BBDC /* Default@2x.png */,
+				5202770316762D300004BBDC /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		520276E816762D300004BBDC /* teamrun */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5202770D16762D310004BBDC /* Build configuration list for PBXNativeTarget "teamrun" */;
+			buildPhases = (
+				520276E516762D300004BBDC /* Sources */,
+				520276E616762D300004BBDC /* Frameworks */,
+				520276E716762D300004BBDC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = teamrun;
+			productName = TeamRun;
+			productReference = 520276E916762D300004BBDC /* teamrun.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		520276E016762D300004BBDC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = TeamRun;
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "John DiMatteo";
+			};
+			buildConfigurationList = 520276E316762D300004BBDC /* Build configuration list for PBXProject "teamrun" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 520276DE16762D300004BBDC;
+			productRefGroup = 520276EA16762D300004BBDC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				520276E816762D300004BBDC /* teamrun */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		520276E716762D300004BBDC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				520276F816762D300004BBDC /* InfoPlist.strings in Resources */,
+				5202770016762D300004BBDC /* Default.png in Resources */,
+				5202770216762D300004BBDC /* Default@2x.png in Resources */,
+				5202770416762D300004BBDC /* Default-568h@2x.png in Resources */,
+				5202770716762D300004BBDC /* MainStoryboard.storyboard in Resources */,
+				52F081F4168425D700F2749E /* icon114.png in Resources */,
+				52A5E0411687ECA800E3A2AB /* SampleMap.png in Resources */,
+				52BA73D0168EC3700025C3EA /* mute mic.tiff in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		520276E516762D300004BBDC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				520276FA16762D300004BBDC /* main.m in Sources */,
+				520276FE16762D300004BBDC /* TeamRunAppDelegate.m in Sources */,
+				5202770A16762D300004BBDC /* TeamRunViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		520276F616762D300004BBDC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				520276F716762D300004BBDC /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		5202770516762D300004BBDC /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5202770616762D300004BBDC /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5202770B16762D300004BBDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		5202770C16762D310004BBDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5202770E16762D310004BBDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TeamRun/teamrun-Prefix.pch";
+				INFOPLIST_FILE = "TeamRun/teamrun-Info.plist";
+				PRODUCT_NAME = teamrun;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		5202770F16762D310004BBDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TeamRun/teamrun-Prefix.pch";
+				INFOPLIST_FILE = "TeamRun/teamrun-Info.plist";
+				PRODUCT_NAME = teamrun;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		520276E316762D300004BBDC /* Build configuration list for PBXProject "teamrun" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5202770B16762D300004BBDC /* Debug */,
+				5202770C16762D310004BBDC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5202770D16762D310004BBDC /* Build configuration list for PBXNativeTarget "teamrun" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5202770E16762D310004BBDC /* Debug */,
+				5202770F16762D310004BBDC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 520276E016762D300004BBDC /* Project object */;
+}
