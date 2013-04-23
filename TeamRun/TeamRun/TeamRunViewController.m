@@ -10,11 +10,9 @@
 
 #import <GameKit/GameKit.h>
 
-@interface TeamRunViewController ()
-<GKGameCenterControllerDelegate, GKMatchmakerViewControllerDelegate>
+@interface TeamRunViewController () <GKGameCenterControllerDelegate>
 
 - (IBAction)OpenGameCenter;
-- (IBAction)CreateMatch;
 
 - (void)PlayerAuthenticated;
 
@@ -69,7 +67,7 @@
         if (acceptedInvite)
         {
             GKMatchmakerViewController *mmvc = [[GKMatchmakerViewController alloc] initWithInvite:acceptedInvite];
-            mmvc.matchmakerDelegate = self;
+            // todo: mmvc.matchmakerDelegate = self;
             [self presentViewController:mmvc animated:YES completion:nil];
         }
         else if (playersToInvite)
@@ -80,7 +78,7 @@
             request.playersToInvite = playersToInvite;
             
             GKMatchmakerViewController *mmvc = [[GKMatchmakerViewController alloc] initWithMatchRequest:request];
-            mmvc.matchmakerDelegate = self;
+            // todo: mmvc.matchmakerDelegate = self;
             [self presentViewController:mmvc animated:YES completion:nil];
         }
     };
@@ -95,37 +93,9 @@
     }
 }
 
-- (IBAction)CreateMatch {
-    GKMatchRequest *request = [[GKMatchRequest alloc] init];
-    request.minPlayers = 2;
-    request.maxPlayers = 4;
-    request.defaultNumberOfPlayers = 2;
-    
-    GKMatchmakerViewController *mmvc = [[GKMatchmakerViewController alloc] initWithMatchRequest:request];
-    mmvc.matchmakerDelegate = self;
-    
-    [self presentViewController:mmvc animated:YES completion:nil];
-}
-
 - (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)matchmakerViewControllerWasCancelled:(GKMatchmakerViewController *)viewController
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFailWithError:(NSError *)error
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-    NSLog(@"matchmaker failed with error: %@", error);
-}
-
-- (void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFindMatch:(GKMatch *)match
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-    NSLog(@"Match found: %@", match);
-}
 @end
