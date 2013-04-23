@@ -10,11 +10,16 @@
 
 #import <GameKit/GameKit.h>
 
-@interface TeamRunViewController () <GKGameCenterControllerDelegate>
+@interface TeamRunViewController ()
+<GKGameCenterControllerDelegate, GKMatchmakerViewControllerDelegate>
 
-- (IBAction)OpenGameCenter;
+@property (weak, nonatomic) GKMatch* match;
 
-- (void)PlayerAuthenticated;
+- (IBAction)openGameCenter;
+- (IBAction)startStopButtonClicked;
+
+- (void)createMatch;
+- (void)playerAuthenticated;
 
 @end
 
@@ -35,6 +40,8 @@
 
 // Auto match works on simulator!  (Sending/receiving match invites doesn't work on simulator according to Apple docs)
 
+// pickup here: add logger to populate the scrolling text, add gps, end run, change text 
+
 - (void) authenticateLocalPlayer
 {
     GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
@@ -49,7 +56,7 @@
         }
         else if (localPlayerRef.authenticated)
         {
-            [self PlayerAuthenticated];
+            [self playerAuthenticated];
         }
         else
         {
@@ -58,7 +65,7 @@
     };
 }
 
-- (void)PlayerAuthenticated
+- (void)playerAuthenticated
 {
     [GKMatchmaker sharedMatchmaker].inviteHandler = ^(GKInvite *acceptedInvite, NSArray *playersToInvite) {
         
@@ -84,7 +91,7 @@
     };
 }
 
-- (IBAction)OpenGameCenter {
+- (IBAction)openGameCenter {
     GKGameCenterViewController *gameCenterController = [[GKGameCenterViewController alloc] init];
     if (gameCenterController != nil)
     {
@@ -97,5 +104,44 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+- (void)createMatch {
+    GKMatchRequest *request = [[GKMatchRequest alloc] init];
+    request.minPlayers = 2;
+    request.maxPlayers = 4;
+    request.defaultNumberOfPlayers = 2;
+    
+    GKMatchmakerViewController *mmvc = [[GKMatchmakerViewController alloc] initWithMatchRequest:request];
+    mmvc.matchmakerDelegate = self;
+    
+    [self presentViewController:mmvc animated:YES completion:nil];
+}
+
+- (IBAction)startStopButtonClicked {
+    [self createMatch];
+}
+
+
+- (void)matchmakerViewControllerWasCancelled:(GKMatchmakerViewController *)viewController
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFailWithError:(NSError *)error
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    NSLog(@"matchmaker failed with error: %@", error);
+}
+
+- (void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFindMatch:(GKMatch *)match
+{
+    self.match = match;
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    NSLog(@"Match found: %@", match);
+    
+    // todo: start run logic
+}
+
 
 @end

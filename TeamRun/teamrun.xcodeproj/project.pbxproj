@@ -23,7 +23,6 @@
 		52A5E0411687ECA800E3A2AB /* SampleMap.png in Resources */ = {isa = PBXBuildFile; fileRef = 52A5E0401687ECA800E3A2AB /* SampleMap.png */; };
 		52BA73D0168EC3700025C3EA /* mute mic.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 52BA73CF168EC3700025C3EA /* mute mic.tiff */; };
 		52F081F4168425D700F2749E /* icon114.png in Resources */ = {isa = PBXBuildFile; fileRef = 52F081F3168425D700F2749E /* icon114.png */; };
-		833A314417260AAE00E8A61E /* ActiveRunViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 833A314317260AAE00E8A61E /* ActiveRunViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,8 +47,6 @@
 		52A5E0401687ECA800E3A2AB /* SampleMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SampleMap.png; sourceTree = "<group>"; };
 		52BA73CF168EC3700025C3EA /* mute mic.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "mute mic.tiff"; sourceTree = "<group>"; };
 		52F081F3168425D700F2749E /* icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114.png; sourceTree = "<group>"; };
-		833A314217260AAE00E8A61E /* ActiveRunViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActiveRunViewController.h; sourceTree = "<group>"; };
-		833A314317260AAE00E8A61E /* ActiveRunViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActiveRunViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,8 +103,6 @@
 				5202770516762D300004BBDC /* MainStoryboard.storyboard */,
 				5202770816762D300004BBDC /* TeamRunViewController.h */,
 				5202770916762D300004BBDC /* TeamRunViewController.m */,
-				833A314217260AAE00E8A61E /* ActiveRunViewController.h */,
-				833A314317260AAE00E8A61E /* ActiveRunViewController.m */,
 				520276F416762D300004BBDC /* Supporting Files */,
 			);
 			path = TeamRun;
@@ -202,7 +197,6 @@
 				520276FA16762D300004BBDC /* main.m in Sources */,
 				520276FE16762D300004BBDC /* TeamRunAppDelegate.m in Sources */,
 				5202770A16762D300004BBDC /* TeamRunViewController.m in Sources */,
-				833A314417260AAE00E8A61E /* ActiveRunViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
