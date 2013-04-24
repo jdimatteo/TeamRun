@@ -18,6 +18,8 @@
 - (IBAction)startStopButtonClicked;
 
 @property (weak, nonatomic) IBOutlet UITextView *scrollingText;
+@property (weak, nonatomic) IBOutlet UILabel *timeRanLabel;
+@property (weak, nonatomic) IBOutlet UIButton *startStopButton;
 
 
 - (void)createMatch;
@@ -39,7 +41,6 @@
     
     [PSLocationManager sharedLocationManager].delegate = self;
     [[PSLocationManager sharedLocationManager] prepLocationUpdates];
-    [[PSLocationManager sharedLocationManager] startLocationUpdates]; // todo: consider only running this when a match is active
 }
 
 - (void)didReceiveMemoryWarning
@@ -63,7 +64,17 @@
 }
 
 - (IBAction)startStopButtonClicked {
-    [self createMatch];
+    if (self.match != nil)
+    {
+        [self.match disconnect];
+        self.match = nil;
+        
+        [self.startStopButton setTitle:@"Start" forState:UIControlStateNormal];
+    }
+    else
+    {
+        [self createMatch];
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -168,7 +179,9 @@
     [self dismissViewControllerAnimated:YES completion:nil];
     [self log:@"Match found: %@", match];
     
-    // todo: start run logic
+    [[PSLocationManager sharedLocationManager] startLocationUpdates];
+    
+    [self.startStopButton setTitle:@"Stop" forState:UIControlStateNormal];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
