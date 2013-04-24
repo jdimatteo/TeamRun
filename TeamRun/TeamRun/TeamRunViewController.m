@@ -7,11 +7,12 @@
 //
 
 #import "TeamRunViewController.h"
+#import "PSLocationManager.h"
 
 #import <GameKit/GameKit.h>
 
 @interface TeamRunViewController ()
-<GKGameCenterControllerDelegate, GKMatchmakerViewControllerDelegate>
+<GKGameCenterControllerDelegate, GKMatchmakerViewControllerDelegate, PSLocationManagerDelegate>
 
 - (IBAction)openGameCenter;
 - (IBAction)startStopButtonClicked;
@@ -35,6 +36,10 @@
     
     [self authenticateLocalPlayer];
     [self log:@"Authenticating player..."];
+    
+    [PSLocationManager sharedLocationManager].delegate = self;
+    [[PSLocationManager sharedLocationManager] prepLocationUpdates];
+    [[PSLocationManager sharedLocationManager] startLocationUpdates]; // todo: consider only running this when a match is active
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,6 +48,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+// todo: consider adding logInfo, logDebug, logError, etc.
 - (void)log:(NSString *)format,...
 {
     va_list args;
@@ -56,9 +62,17 @@
     [self.scrollingText scrollRangeToVisible:NSMakeRange([self.scrollingText.text length], 0)];
 }
 
-// Auto match works on simulator!  (Sending/receiving match invites doesn't work on simulator according to Apple docs)
+- (IBAction)startStopButtonClicked {
+    [self createMatch];
+}
 
-// pickup here: add logger to populate the scrolling text, add gps, end run, change text 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//   GameKit Related Methods
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// pickup here: add gps -- why isn't distance updates being received?, end run, change text 
 
 - (void) authenticateLocalPlayer
 {
@@ -135,11 +149,6 @@
     [self presentViewController:mmvc animated:YES completion:nil];
 }
 
-- (IBAction)startStopButtonClicked {
-    [self createMatch];
-}
-
-
 - (void)matchmakerViewControllerWasCancelled:(GKMatchmakerViewController *)viewController
 {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -160,6 +169,48 @@
     [self log:@"Match found: %@", match];
     
     // todo: start run logic
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//   GPS Location Manager Related Methods
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+- (void)locationManager:(PSLocationManager *)locationManager signalStrengthChanged:(PSLocationManagerGPSSignalStrength)signalStrength {
+    NSString *strengthText;
+    if (signalStrength == PSLocationManagerGPSSignalStrengthWeak) {
+        strengthText = @"weak";
+    } else if (signalStrength == PSLocationManagerGPSSignalStrengthStrong) {
+        strengthText = @"strong";
+    } else {
+        strengthText = @"...";
+    }
+    
+    [self log:@"Signal strength changed to %@", strengthText];
+}
+
+- (void)locationManagerSignalConsistentlyWeak:(PSLocationManager *)locationManager {
+    [self log:@"Signal strength consistently weak"];
+}
+
+- (void)locationManager:(PSLocationManager *)locationManager distanceUpdated:(CLLocationDistance)distance /* distance in meters */
+{
+    [self log:@"%.2f %@", distance, @"meters"];
+    
+    //[self changeDistance:distance*MILES_PER_METER];
+    
+    const double metersPerSecond = [PSLocationManager sharedLocationManager].currentSpeed;
+    [self log:@"current speed: %f m/s", metersPerSecond];
+    
+    //[self.currentPaceLabel setText:minutesPerMilePaceString(metersPerSecond)];
+    
+    //[self.averagePaceLabel setText:minutesPerMilePaceString(distance/[self.model currentRunDuration:kCFGregorianUnitsSeconds].seconds)];
+}
+
+- (void)locationManager:(PSLocationManager *)locationManager error:(NSError *)error {
+    // location services is probably not enabled for the app
+    [self log:@"Unable to determine location"];
 }
 
 
