@@ -6,6 +6,9 @@
 //  Copyright (c) 2012 John DiMatteo. All rights reserved.
 //
 
+// pickup here: display pace, get rid of unused UI elements,
+//              send updates to other players (display to log), voice notifications (http://www.politepix.com/openears/tutorial -- use already downloaded plugin)
+
 #import "TeamRunViewController.h"
 #import "PSLocationManager.h"
 
@@ -21,12 +24,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeRanLabel;
 @property (weak, nonatomic) IBOutlet UIButton *startStopButton;
 
-
 - (void)createMatch;
 - (void)playerAuthenticated;
 - (void)log:(NSString*)format,...;
+- (void)secondRan:(NSTimer *)timer;
 
 @property (weak, nonatomic) GKMatch* match;
+@property (nonatomic) NSTimer* runningTimer;
 
 @end
 
@@ -70,6 +74,12 @@
         self.match = nil;
         
         [self.startStopButton setTitle:@"Start" forState:UIControlStateNormal];
+        
+        [self.runningTimer invalidate];
+        self.runningTimer = nil;
+        
+        [[PSLocationManager sharedLocationManager] stopLocationUpdates];
+        [self log:@"takes ~10 seconds for GPS shutdown"];
     }
     else
     {
@@ -77,13 +87,17 @@
     }
 }
 
+- (void)secondRan:(NSTimer *)timer
+{
+    int seconds = [PSLocationManager sharedLocationManager].totalSeconds;
+    [self.timeRanLabel setText:[NSString stringWithFormat:@"%.2d:%.2d", seconds / 60, seconds % 60]];
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 //   GameKit Related Methods
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// pickup here: add gps -- why isn't distance updates being received?, end run, change text 
 
 - (void) authenticateLocalPlayer
 {
@@ -179,7 +193,14 @@
     [self dismissViewControllerAnimated:YES completion:nil];
     [self log:@"Match found: %@", match];
     
+    [[PSLocationManager sharedLocationManager] resetLocationUpdates];
     [[PSLocationManager sharedLocationManager] startLocationUpdates];
+    
+    self.runningTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                         target:self
+                                                       selector:@selector(secondRan:)
+                                                       userInfo:nil
+                                                        repeats:YES];
     
     [self.startStopButton setTitle:@"Stop" forState:UIControlStateNormal];
 }
