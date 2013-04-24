@@ -6,9 +6,14 @@
 //  Copyright (c) 2012 John DiMatteo. All rights reserved.
 //
 
-// pickup here: get rid of unused UI elements,
-//              send updates to other players (display to log), voice notifications (http://www.politepix.com/openears/tutorial -- use already downloaded plugin)
-
+// pickup here: send updates to other players (display to log), voice notifications (http://www.politepix.com/openears/tutorial -- use already downloaded plugin),
+/* todo:
+ don't use PSLocationManager directly -- instead use an abstract class, and have a Fake LocationManager available for testing that maintains a steady pace
+ -- allow changing the pace via temporary test buttons (faster, slower -- no directly modifying distance)
+ -- the fake can use a timer to send distance updates regularly, calculated from the last distance + (current pace * time since last distance)
+ -- have a constant that determines whether or not the test buttons are visible and whether or not the fake location manager is used
+*/
+ 
 #import "TeamRunViewController.h"
 #import "PSLocationManager.h"
 
