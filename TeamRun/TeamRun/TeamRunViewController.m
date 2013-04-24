@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 John DiMatteo. All rights reserved.
 //
 
-// pickup here: display pace, get rid of unused UI elements,
+// pickup here: get rid of unused UI elements,
 //              send updates to other players (display to log), voice notifications (http://www.politepix.com/openears/tutorial -- use already downloaded plugin)
 
 #import "TeamRunViewController.h"
@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *startStopButton;
 @property (weak, nonatomic) IBOutlet UILabel *currentPaceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *averagePaceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *milesRanLabel;
 
 - (void)createMatch;
 - (void)playerAuthenticated;
@@ -35,6 +36,8 @@
 @property (nonatomic) NSTimer* runningTimer;
 
 @end
+
+static const double MILES_PER_METER = 0.000621371;
 
 @implementation TeamRunViewController
 
@@ -234,7 +237,8 @@
 {
     [self log:@"%.2f %@", distance, @"meters"];
     
-    //[self changeDistance:distance*MILES_PER_METER];
+    const double milesRan = distance*MILES_PER_METER;
+    [self.milesRanLabel setText:[NSString stringWithFormat:@"%.2f", milesRan]];
     
     const double metersPerSecond = [PSLocationManager sharedLocationManager].currentSpeed;
     [self log:@"current speed: %f m/s", metersPerSecond];
@@ -275,8 +279,6 @@ NSString* minutesPerMilePaceString(const double metersPerSecond)
      *      so the pace is 13:45 (minutes:seconds per mile)
      */
     
-    static const double MILES_PER_METER = 0.000621371;
-
     const double milesPerSecond = metersPerSecond * MILES_PER_METER;
     
     if (milesPerSecond > 0) // prevent divide by zero errors

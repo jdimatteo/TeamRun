@@ -217,6 +217,7 @@
                     <connections>
                         <outlet property="averagePaceLabel" destination="1Ci-6o-oqB" id="Dwx-C3-8az"/>
                         <outlet property="currentPaceLabel" destination="Dis-Km-yJN" id="mDn-wK-1j5"/>
+                        <outlet property="milesRanLabel" destination="pM9-5X-sRE" id="dgC-MS-ARq"/>
                         <outlet property="scrollingText" destination="IdA-1U-yUM" id="BFx-xe-Smg"/>
                         <outlet property="startStopButton" destination="xaZ-jD-g4g" id="4Lf-1k-QPA"/>
                         <outlet property="timeRanLabel" destination="4Sp-T2-DtE" id="w4a-Fk-aPV"/>
@@ -227,23 +228,6 @@
             <point key="canvasLocation" x="167" y="139"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="TeamRunViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TeamRunViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="openGameCenter"/>
-                <relationship kind="action" name="startStopButtonClicked"/>
-                <relationship kind="outlet" name="averagePaceLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="currentPaceLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="scrollingText" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="startStopButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="timeRanLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
