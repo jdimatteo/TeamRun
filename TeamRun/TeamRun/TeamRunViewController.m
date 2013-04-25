@@ -6,9 +6,10 @@
 //  Copyright (c) 2012 John DiMatteo. All rights reserved.
 //
 
-// pickup here: get accepting/sending invites working,
-//              populate miles ahead label,
+// pickup here: test miles ahead label,
+//              figure out why "Nearby Players" is an option on simulator but not my phone,
 //              voice notifications (http://www.politepix.com/openears/tutorial -- use already downloaded plugin),
+//              get accepting/sending invites working,
 /* todo:
  
  don't use PSLocationManager directly -- instead use an abstract class, and have a Fake LocationManager available for testing that maintains a steady pace
@@ -28,6 +29,14 @@
  -- read up and experiment with colors and images
  -- learn how to use an image manipulation tool, or maybe find a collection of good stock images
  -- find a friend who is good at (iOS preferably) UI design and ask for advice
+ 
+ synchronize distance/times between players
+ -- if I just send distances and there is a couple second delay, then two runners running side by side will both report being ahead of each other
+ 
+ instead of radio mode, maybe record 2 sayings (one for faster, and one for slower), so recording can be sent just once,
+ which would eliminate most data transfer needs (just send a couple bytes instead of an audio recording)
+ 
+ design how more than 2 runners will work
 */
  
 #import "TeamRunViewController.h"
@@ -47,11 +56,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *currentPaceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *averagePaceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *milesRanLabel;
+@property (weak, nonatomic) IBOutlet UILabel *milesAheadLabel;
 
 - (void)createMatch;
 - (void)playerAuthenticated;
 - (void)log:(NSString*)format,...;
 - (void)secondRan:(NSTimer *)timer;
+- (void)updateMilesAhead:(double) milesOtherPlayerRan;
 
 @property (weak, nonatomic) GKMatch* match;
 @property (nonatomic) NSTimer* runningTimer;
@@ -116,7 +127,48 @@ static const double MILES_PER_METER = 0.000621371;
 - (void)secondRan:(NSTimer *)timer
 {
     int seconds = [PSLocationManager sharedLocationManager].totalSeconds;
-    [self.timeRanLabel setText:[NSString stringWithFormat:@"%.2d:%.2d", seconds / 60, seconds % 60]];    
+    [self.timeRanLabel setText:[NSString stringWithFormat:@"%.2d:%.2d", seconds / 60, seconds % 60]];
+}
+
+// todo: this probably isn't good style -- maybe make this an optional arg or overload the function?
+// pass in -1 for distance if it is unchanged
+- (void)updateMilesAhead:(double) milesOtherPlayerRan
+{
+    static double lastRecordedMilesOtherPlayerRan = 0;
+    
+    if (milesOtherPlayerRan == -1.0)
+    {
+        milesOtherPlayerRan = lastRecordedMilesOtherPlayerRan;
+    }
+    else
+    {
+        lastRecordedMilesOtherPlayerRan = milesOtherPlayerRan;
+    }
+    
+    static UIColor* darkGreen = nil;
+    static UIColor* darkRed = nil;
+    if (darkGreen == nil || darkRed == nil)
+    {
+        darkGreen = [UIColor colorWithRed:0.1015625 green:0.3984375 blue:0.125 alpha:1];
+        darkRed = [UIColor colorWithRed:0.75 green:0 blue:0 alpha:1];
+    }
+
+    const double milesRan = [PSLocationManager sharedLocationManager].totalDistance * MILES_PER_METER;
+
+    double milesAheadOfOtherRunner = milesRan - (milesOtherPlayerRan);
+    NSString* aheadOrBehind;
+    if (milesRan >= milesOtherPlayerRan)
+    {
+        aheadOrBehind = @"ahead";
+        [self.milesAheadLabel setTextColor:darkGreen];
+    }
+    else
+    {
+        milesAheadOfOtherRunner *= -1;
+        aheadOrBehind = @"behind";
+        [self.milesAheadLabel setTextColor:darkRed];
+    }
+    [self.milesAheadLabel setText:[NSString stringWithFormat:@"%.2f mi %@", milesAheadOfOtherRunner, aheadOrBehind]];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -165,7 +217,7 @@ static const double MILES_PER_METER = 0.000621371;
         {
             GKMatchRequest *request = [[GKMatchRequest alloc] init];
             request.minPlayers = 2;
-            request.maxPlayers = 4;
+            request.maxPlayers = 2;
             request.playersToInvite = playersToInvite;
             
             GKMatchmakerViewController *mmvc = [[GKMatchmakerViewController alloc] initWithMatchRequest:request];
@@ -190,9 +242,10 @@ static const double MILES_PER_METER = 0.000621371;
 }
 
 - (void)createMatch {
+    // todo: remove duplicate code from here and invite handler
     GKMatchRequest *request = [[GKMatchRequest alloc] init];
     request.minPlayers = 2;
-    request.maxPlayers = 4;
+    request.maxPlayers = 2;
     request.defaultNumberOfPlayers = 2;
     
     GKMatchmakerViewController *mmvc = [[GKMatchmakerViewController alloc] initWithMatchRequest:request];
@@ -224,6 +277,8 @@ static const double MILES_PER_METER = 0.000621371;
     [[PSLocationManager sharedLocationManager] resetLocationUpdates];
     [[PSLocationManager sharedLocationManager] startLocationUpdates];
     
+    [self.milesAheadLabel setText:@""];
+    
     self.runningTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                          target:self
                                                        selector:@selector(secondRan:)
@@ -251,8 +306,10 @@ static const double MILES_PER_METER = 0.000621371;
 - (void)match:(GKMatch *)match didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID
 {
     // todo: consider storing a struct with a message type and a double (if for nothing else than to make it future proof)
-    double* distanceInMiles = (double*)[data bytes];
-    [self log:@"player %@: %f miles", playerID, *distanceInMiles];
+    double* milesOtherPlayerRan = (double*)[data bytes];
+    [self log:@"player %@: %f miles", playerID, *milesOtherPlayerRan];
+    
+    [self updateMilesAhead:*milesOtherPlayerRan];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -300,6 +357,8 @@ static const double MILES_PER_METER = 0.000621371;
     {
         [self log:@"error sending data to players: %@", error.description];
     }
+    
+    [self updateMilesAhead:-1];
 }
 
 - (void)locationManager:(PSLocationManager *)locationManager error:(NSError *)error {
