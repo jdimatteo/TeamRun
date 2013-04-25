@@ -6,12 +6,28 @@
 //  Copyright (c) 2012 John DiMatteo. All rights reserved.
 //
 
-// pickup here: send updates to other players (display to log), voice notifications (http://www.politepix.com/openears/tutorial -- use already downloaded plugin),
+// pickup here: get accepting/sending invites working,
+//              populate miles ahead label,
+//              voice notifications (http://www.politepix.com/openears/tutorial -- use already downloaded plugin),
 /* todo:
+ 
  don't use PSLocationManager directly -- instead use an abstract class, and have a Fake LocationManager available for testing that maintains a steady pace
  -- allow changing the pace via temporary test buttons (faster, slower -- no directly modifying distance)
  -- the fake can use a timer to send distance updates regularly, calculated from the last distance + (current pace * time since last distance)
  -- have a constant that determines whether or not the test buttons are visible and whether or not the fake location manager is used
+ -- might want to call this the TeamRunModel and the location manager would just be part of it, and I could get rid of the silly singleton interface
+ 
+ read up on good iOS design
+ -- maybe I should have an explicit model (see above)? what is my controller (is it the storyboard)?
+ -- how to have multiple storyboard elements where there is a main screen that leads to others and back to the main screen
+ -- -- (maybe write a test app following a tutorial)
+ -- automatic testing
+ -- how users can report bugs (providing logs, stack trace, and/or a dump?), and how I can quickly diagnose/fix them
+ 
+ design a good UI
+ -- read up and experiment with colors and images
+ -- learn how to use an image manipulation tool, or maybe find a collection of good stock images
+ -- find a friend who is good at (iOS preferably) UI design and ask for advice
 */
  
 #import "TeamRunViewController.h"
@@ -20,7 +36,7 @@
 #import <GameKit/GameKit.h>
 
 @interface TeamRunViewController ()
-<GKGameCenterControllerDelegate, GKMatchmakerViewControllerDelegate, PSLocationManagerDelegate>
+<GKGameCenterControllerDelegate, GKMatchmakerViewControllerDelegate, GKMatchDelegate, PSLocationManagerDelegate>
 
 - (IBAction)openGameCenter;
 - (IBAction)startStopButtonClicked;
@@ -100,7 +116,7 @@ static const double MILES_PER_METER = 0.000621371;
 - (void)secondRan:(NSTimer *)timer
 {
     int seconds = [PSLocationManager sharedLocationManager].totalSeconds;
-    [self.timeRanLabel setText:[NSString stringWithFormat:@"%.2d:%.2d", seconds / 60, seconds % 60]];
+    [self.timeRanLabel setText:[NSString stringWithFormat:@"%.2d:%.2d", seconds / 60, seconds % 60]];    
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -135,13 +151,14 @@ static const double MILES_PER_METER = 0.000621371;
 - (void)playerAuthenticated
 {
     [GKMatchmaker sharedMatchmaker].inviteHandler = ^(GKInvite *acceptedInvite, NSArray *playersToInvite) {
-        
         // Insert game-specific code here to clean up any game in progress.
+        
+        [self log:@"invite handler called with acceptedInvite nil? %@, playersToInvite count: %d", acceptedInvite == nil, playersToInvite.count];
         
         if (acceptedInvite)
         {
             GKMatchmakerViewController *mmvc = [[GKMatchmakerViewController alloc] initWithInvite:acceptedInvite];
-            // todo: mmvc.matchmakerDelegate = self;
+            mmvc.matchmakerDelegate = self;
             [self presentViewController:mmvc animated:YES completion:nil];
         }
         else if (playersToInvite)
@@ -152,7 +169,7 @@ static const double MILES_PER_METER = 0.000621371;
             request.playersToInvite = playersToInvite;
             
             GKMatchmakerViewController *mmvc = [[GKMatchmakerViewController alloc] initWithMatchRequest:request];
-            // todo: mmvc.matchmakerDelegate = self;
+            mmvc.matchmakerDelegate = self;
             [self presentViewController:mmvc animated:YES completion:nil];
         }
     };
@@ -198,6 +215,7 @@ static const double MILES_PER_METER = 0.000621371;
 
 - (void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFindMatch:(GKMatch *)match
 {
+    match.delegate = self;
     self.match = match;
     
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -213,6 +231,28 @@ static const double MILES_PER_METER = 0.000621371;
                                                         repeats:YES];
     
     [self.startStopButton setTitle:@"Stop" forState:UIControlStateNormal];
+}
+
+- (void)match:(GKMatch *)match player:(NSString *)playerID didChangeState:(GKPlayerConnectionState)state
+{
+    [self log:@"match (%@) player (%@) did change state: %d\nexpected player count is now %d", match.description, playerID, state, match.expectedPlayerCount];
+    switch (state)
+    {
+        case GKPlayerStateConnected:
+            // Handle a new player connection.
+            break;
+        case GKPlayerStateDisconnected:
+            // A player just disconnected.
+            break;
+    }
+    // todo: consider not starting the match (the timer and gps) until match.expectedPlayerCount is 0
+}
+
+- (void)match:(GKMatch *)match didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID
+{
+    // todo: consider storing a struct with a message type and a double (if for nothing else than to make it future proof)
+    double* distanceInMiles = (double*)[data bytes];
+    [self log:@"player %@: %f miles", playerID, *distanceInMiles];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -251,6 +291,15 @@ static const double MILES_PER_METER = 0.000621371;
     [self.currentPaceLabel setText:minutesPerMilePaceString(metersPerSecond)];
     
     [self.averagePaceLabel setText:minutesPerMilePaceString(distance/[PSLocationManager sharedLocationManager].totalSeconds)];
+    
+    NSError *error;
+    // todo: change all stored distances to floats (I definately don't need the extra precision, and it doubles the amount of data transferred)
+    NSData *packet = [NSData dataWithBytes:&milesRan length:sizeof(milesRan)];
+    [self.match sendDataToAllPlayers: packet withDataMode: GKMatchSendDataReliable error:&error];
+    if (error != nil)
+    {
+        [self log:@"error sending data to players: %@", error.description];
+    }
 }
 
 - (void)locationManager:(PSLocationManager *)locationManager error:(NSError *)error {
