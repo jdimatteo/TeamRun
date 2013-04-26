@@ -24,6 +24,23 @@
 		52BA73D0168EC3700025C3EA /* mute mic.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 52BA73CF168EC3700025C3EA /* mute mic.tiff */; };
 		52F081F4168425D700F2749E /* icon114.png in Resources */ = {isa = PBXBuildFile; fileRef = 52F081F3168425D700F2749E /* icon114.png */; };
 		833A3147172746EC00E8A61E /* PSLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 833A3145172746EC00E8A61E /* PSLocationManager.m */; };
+		83CF152A1729FE57006044B0 /* cmu07a.dic in Resources */ = {isa = PBXBuildFile; fileRef = 83CF151A1729FE57006044B0 /* cmu07a.dic */; };
+		83CF152B1729FE57006044B0 /* feat.params in Resources */ = {isa = PBXBuildFile; fileRef = 83CF151C1729FE57006044B0 /* feat.params */; };
+		83CF152C1729FE57006044B0 /* mdef in Resources */ = {isa = PBXBuildFile; fileRef = 83CF151D1729FE57006044B0 /* mdef */; };
+		83CF152D1729FE57006044B0 /* means in Resources */ = {isa = PBXBuildFile; fileRef = 83CF151E1729FE57006044B0 /* means */; };
+		83CF152E1729FE57006044B0 /* noisedict in Resources */ = {isa = PBXBuildFile; fileRef = 83CF151F1729FE57006044B0 /* noisedict */; };
+		83CF152F1729FE57006044B0 /* sendump in Resources */ = {isa = PBXBuildFile; fileRef = 83CF15201729FE57006044B0 /* sendump */; };
+		83CF15301729FE57006044B0 /* transition_matrices in Resources */ = {isa = PBXBuildFile; fileRef = 83CF15211729FE57006044B0 /* transition_matrices */; };
+		83CF15311729FE57006044B0 /* variances in Resources */ = {isa = PBXBuildFile; fileRef = 83CF15221729FE57006044B0 /* variances */; };
+		83CF15321729FE57006044B0 /* OpenEars.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CF15231729FE57006044B0 /* OpenEars.framework */; };
+		83CF15331729FE57006044B0 /* OpenEars1.dic in Resources */ = {isa = PBXBuildFile; fileRef = 83CF15241729FE57006044B0 /* OpenEars1.dic */; };
+		83CF15341729FE57006044B0 /* OpenEars1.gram in Resources */ = {isa = PBXBuildFile; fileRef = 83CF15251729FE57006044B0 /* OpenEars1.gram */; };
+		83CF15351729FE57006044B0 /* OpenEars1.languagemodel in Resources */ = {isa = PBXBuildFile; fileRef = 83CF15261729FE57006044B0 /* OpenEars1.languagemodel */; };
+		83CF15361729FE57006044B0 /* OpenEars2.gram in Resources */ = {isa = PBXBuildFile; fileRef = 83CF15271729FE57006044B0 /* OpenEars2.gram */; };
+		83CF15371729FE57006044B0 /* OpenEarsCorpus.txt in Resources */ = {isa = PBXBuildFile; fileRef = 83CF15281729FE57006044B0 /* OpenEarsCorpus.txt */; };
+		83CF15381729FE57006044B0 /* Slt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CF15291729FE57006044B0 /* Slt.framework */; };
+		83CF153B1729FECB006044B0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CF15391729FECB006044B0 /* AudioToolbox.framework */; };
+		83CF153C1729FECB006044B0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CF153A1729FECB006044B0 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +67,23 @@
 		52F081F3168425D700F2749E /* icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114.png; sourceTree = "<group>"; };
 		833A3145172746EC00E8A61E /* PSLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSLocationManager.m; sourceTree = "<group>"; };
 		833A3146172746EC00E8A61E /* PSLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSLocationManager.h; sourceTree = "<group>"; };
+		83CF151A1729FE57006044B0 /* cmu07a.dic */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cmu07a.dic; sourceTree = "<group>"; };
+		83CF151C1729FE57006044B0 /* feat.params */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = feat.params; sourceTree = "<group>"; };
+		83CF151D1729FE57006044B0 /* mdef */ = {isa = PBXFileReference; lastKnownFileType = file; path = mdef; sourceTree = "<group>"; };
+		83CF151E1729FE57006044B0 /* means */ = {isa = PBXFileReference; lastKnownFileType = file; path = means; sourceTree = "<group>"; };
+		83CF151F1729FE57006044B0 /* noisedict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = noisedict; sourceTree = "<group>"; };
+		83CF15201729FE57006044B0 /* sendump */ = {isa = PBXFileReference; lastKnownFileType = file; path = sendump; sourceTree = "<group>"; };
+		83CF15211729FE57006044B0 /* transition_matrices */ = {isa = PBXFileReference; lastKnownFileType = file; path = transition_matrices; sourceTree = "<group>"; };
+		83CF15221729FE57006044B0 /* variances */ = {isa = PBXFileReference; lastKnownFileType = file; path = variances; sourceTree = "<group>"; };
+		83CF15231729FE57006044B0 /* OpenEars.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenEars.framework; sourceTree = "<group>"; };
+		83CF15241729FE57006044B0 /* OpenEars1.dic */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OpenEars1.dic; sourceTree = "<group>"; };
+		83CF15251729FE57006044B0 /* OpenEars1.gram */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OpenEars1.gram; sourceTree = "<group>"; };
+		83CF15261729FE57006044B0 /* OpenEars1.languagemodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OpenEars1.languagemodel; sourceTree = "<group>"; };
+		83CF15271729FE57006044B0 /* OpenEars2.gram */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OpenEars2.gram; sourceTree = "<group>"; };
+		83CF15281729FE57006044B0 /* OpenEarsCorpus.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OpenEarsCorpus.txt; sourceTree = "<group>"; };
+		83CF15291729FE57006044B0 /* Slt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Slt.framework; sourceTree = "<group>"; };
+		83CF15391729FECB006044B0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		83CF153A1729FECB006044B0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,11 +91,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83CF153B1729FECB006044B0 /* AudioToolbox.framework in Frameworks */,
+				83CF153C1729FECB006044B0 /* AVFoundation.framework in Frameworks */,
 				52A5E03E1687898500E3A2AB /* GameKit.framework in Frameworks */,
 				5280DE22167EC5E700552081 /* CoreLocation.framework in Frameworks */,
 				520276EE16762D300004BBDC /* UIKit.framework in Frameworks */,
 				520276F016762D300004BBDC /* Foundation.framework in Frameworks */,
 				520276F216762D300004BBDC /* CoreGraphics.framework in Frameworks */,
+				83CF15321729FE57006044B0 /* OpenEars.framework in Frameworks */,
+				83CF15381729FE57006044B0 /* Slt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +109,9 @@
 		520276DE16762D300004BBDC = {
 			isa = PBXGroup;
 			children = (
+				83CF15391729FECB006044B0 /* AudioToolbox.framework */,
+				83CF153A1729FECB006044B0 /* AVFoundation.framework */,
+				83CF15191729FE57006044B0 /* Framework */,
 				52A5E03D1687898500E3A2AB /* GameKit.framework */,
 				52F081F3168425D700F2749E /* icon114.png */,
 				5280DE21167EC5E700552081 /* CoreLocation.framework */,
@@ -127,6 +168,36 @@
 				5202770316762D300004BBDC /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		83CF15191729FE57006044B0 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				83CF151A1729FE57006044B0 /* cmu07a.dic */,
+				83CF151B1729FE57006044B0 /* hub4wsj_sc_8k */,
+				83CF15231729FE57006044B0 /* OpenEars.framework */,
+				83CF15241729FE57006044B0 /* OpenEars1.dic */,
+				83CF15251729FE57006044B0 /* OpenEars1.gram */,
+				83CF15261729FE57006044B0 /* OpenEars1.languagemodel */,
+				83CF15271729FE57006044B0 /* OpenEars2.gram */,
+				83CF15281729FE57006044B0 /* OpenEarsCorpus.txt */,
+				83CF15291729FE57006044B0 /* Slt.framework */,
+			);
+			path = Framework;
+			sourceTree = "<group>";
+		};
+		83CF151B1729FE57006044B0 /* hub4wsj_sc_8k */ = {
+			isa = PBXGroup;
+			children = (
+				83CF151C1729FE57006044B0 /* feat.params */,
+				83CF151D1729FE57006044B0 /* mdef */,
+				83CF151E1729FE57006044B0 /* means */,
+				83CF151F1729FE57006044B0 /* noisedict */,
+				83CF15201729FE57006044B0 /* sendump */,
+				83CF15211729FE57006044B0 /* transition_matrices */,
+				83CF15221729FE57006044B0 /* variances */,
+			);
+			path = hub4wsj_sc_8k;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,6 +260,19 @@
 				52F081F4168425D700F2749E /* icon114.png in Resources */,
 				52A5E0411687ECA800E3A2AB /* SampleMap.png in Resources */,
 				52BA73D0168EC3700025C3EA /* mute mic.tiff in Resources */,
+				83CF152A1729FE57006044B0 /* cmu07a.dic in Resources */,
+				83CF152B1729FE57006044B0 /* feat.params in Resources */,
+				83CF152C1729FE57006044B0 /* mdef in Resources */,
+				83CF152D1729FE57006044B0 /* means in Resources */,
+				83CF152E1729FE57006044B0 /* noisedict in Resources */,
+				83CF152F1729FE57006044B0 /* sendump in Resources */,
+				83CF15301729FE57006044B0 /* transition_matrices in Resources */,
+				83CF15311729FE57006044B0 /* variances in Resources */,
+				83CF15331729FE57006044B0 /* OpenEars1.dic in Resources */,
+				83CF15341729FE57006044B0 /* OpenEars1.gram in Resources */,
+				83CF15351729FE57006044B0 /* OpenEars1.languagemodel in Resources */,
+				83CF15361729FE57006044B0 /* OpenEars2.gram in Resources */,
+				83CF15371729FE57006044B0 /* OpenEarsCorpus.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +365,11 @@
 		5202770E16762D310004BBDC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEPLOYMENT_POSTPROCESSING = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Framework\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeamRun/teamrun-Prefix.pch";
 				INFOPLIST_FILE = "TeamRun/teamrun-Info.plist";
@@ -292,6 +381,11 @@
 		5202770F16762D310004BBDC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEPLOYMENT_POSTPROCESSING = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Framework\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeamRun/teamrun-Prefix.pch";
 				INFOPLIST_FILE = "TeamRun/teamrun-Info.plist";

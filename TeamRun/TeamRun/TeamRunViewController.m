@@ -7,7 +7,6 @@
 //
 
 // pickup here: voice notifications (http://www.politepix.com/openears/tutorial -- use already downloaded plugin),
-//              try having one voice for positive notifications and another voice for negative notifications or maybe just one voice that is better than Slt
 
 /* todo:
  
@@ -39,11 +38,19 @@
  
  figure out why "Nearby Players" is an option on simulator but not my phone,
  
- get accepting/sending invites working,
+ get accepting/sending invites working
+ 
+ better voices
+ -- try having one voice for positive notifications and another voice for negative notifications
+    or maybe just one voice that is better than Slt
+ -- https://bitbucket.org/Politepix/openearsextras
 */
  
 #import "TeamRunViewController.h"
 #import "PSLocationManager.h"
+
+#import <Slt/Slt.h>
+#import <OpenEars/FliteController.h>
 
 #import <GameKit/GameKit.h>
 
@@ -70,9 +77,15 @@
 @property (weak, nonatomic) GKMatch* match;
 @property (nonatomic) NSTimer* runningTimer;
 
+@property (strong, nonatomic) FliteController *fliteController;
+@property (strong, nonatomic) Slt *slt;
+
 @end
 
 static const double MILES_PER_METER = 0.000621371;
+
+FliteController *fliteController;
+Slt *slt;
 
 @implementation TeamRunViewController
 
@@ -85,6 +98,8 @@ static const double MILES_PER_METER = 0.000621371;
     
     [PSLocationManager sharedLocationManager].delegate = self;
     [[PSLocationManager sharedLocationManager] prepLocationUpdates];
+    
+    [self.fliteController say:@"A short statement!" withVoice:self.slt];
 }
 
 - (void)didReceiveMemoryWarning
@@ -367,6 +382,26 @@ static const double MILES_PER_METER = 0.000621371;
 - (void)locationManager:(PSLocationManager *)locationManager error:(NSError *)error {
     // location services is probably not enabled for the app
     [self log:@"Unable to determine location"];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//   OpenEars Methods
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+- (FliteController *)fliteController {
+	if (fliteController == nil) {
+		fliteController = [[FliteController alloc] init];
+	}
+	return fliteController;
+}
+
+- (Slt *)slt {
+	if (slt == nil) {
+		slt = [[Slt alloc] init];
+	}
+	return slt;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
