@@ -10,7 +10,7 @@
 
 @implementation TeamRunUtility
 
-+(NSString*) twoDecimalDigitStringWithoutRoundingFrom:(const double) value
+NSString* truncateToTwoDecimals(const double value)
 {
     const int integer = value;
     const int hundreths = (value - integer)*100;

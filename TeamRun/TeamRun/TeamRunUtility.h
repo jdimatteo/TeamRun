@@ -11,6 +11,6 @@
 @interface TeamRunUtility : NSObject
 
 // note that [NSString stringWithFormat:@"%.2f", 0.339] rounds to @"0.34" -- this function doesn't round
-+(NSString*) twoDecimalDigitStringWithoutRoundingFrom:(const double) value;
+NSString* truncateToTwoDecimals(const double value);
 
 @end

@@ -6,8 +6,7 @@
 //  Copyright (c) 2012 John DiMatteo. All rights reserved.
 //
 
-// pickup here: use twoDecimalDigitStringWithoutRoundingFrom everywhere instead of rounding,
-//              make app work in the background and when screen locked (gamekit/gps notifications sent and voice notifications spoken)
+// pickup here: make app work in the background and when screen locked (gamekit/gps notifications sent and voice notifications spoken)
 
 
 /* todo:
@@ -54,6 +53,8 @@
 */
  
 #import "TeamRunViewController.h"
+#import "TeamRunUtility.h"
+
 #import "PSLocationManager.h"
 
 #import <Slt/Slt.h>
@@ -191,7 +192,7 @@ Slt *slt;
         aheadOrBehind = @"behind";
         [self.milesAheadLabel setTextColor:darkRed];
     }
-    [self.milesAheadLabel setText:[NSString stringWithFormat:@"%.2f mi %@", milesAheadOfOtherRunner, aheadOrBehind]];
+    [self.milesAheadLabel setText:[NSString stringWithFormat:@"%@ mi %@", truncateToTwoDecimals(milesAheadOfOtherRunner), aheadOrBehind]];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -361,7 +362,7 @@ Slt *slt;
 - (void)locationManager:(PSLocationManager *)locationManager distanceUpdated:(CLLocationDistance)distance /* distance in meters */
 {    
     const double milesRan = distance*MILES_PER_METER;
-    [self.milesRanLabel setText:[NSString stringWithFormat:@"%.2f", milesRan]];
+    [self.milesRanLabel setText:truncateToTwoDecimals(milesRan)];
     [self log:@"%f miles", milesRan];
     
     const double metersPerSecond = [PSLocationManager sharedLocationManager].currentSpeed;

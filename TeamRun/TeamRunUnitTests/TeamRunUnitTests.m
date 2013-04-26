@@ -13,19 +13,15 @@
 
 // note: implement setUp and tearDown if necessary (calling super before and after respectively)
 
-- (void)testTwoDecimalDigitStringWithoutRoundingFrom
+- (void)testTruncateToTwoDecimals
 {
-    NSString* s = [TeamRunUtility twoDecimalDigitStringWithoutRoundingFrom:0.35];
-    STAssertEqualObjects(s, @"0.35", nil);
+    STAssertEqualObjects(truncateToTwoDecimals(0.35), @"0.35", nil);
     
-    s = [TeamRunUtility twoDecimalDigitStringWithoutRoundingFrom:0.354];
-    STAssertEqualObjects(s, @"0.35", nil);
+    STAssertEqualObjects(truncateToTwoDecimals(0.354), @"0.35", nil);
     
-    s = [TeamRunUtility twoDecimalDigitStringWithoutRoundingFrom:0.356];
-    STAssertEqualObjects(s, @"0.35", nil);
+    STAssertEqualObjects(truncateToTwoDecimals(0.356), @"0.35", nil);
 
-    s = [TeamRunUtility twoDecimalDigitStringWithoutRoundingFrom:135.359];
-    STAssertEqualObjects(s, @"135.35", nil);
+    STAssertEqualObjects(truncateToTwoDecimals(135.359), @"135.35", nil);
 }
 
 @end
