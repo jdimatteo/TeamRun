@@ -6,10 +6,9 @@
 //  Copyright (c) 2012 John DiMatteo. All rights reserved.
 //
 
-// pickup here: test miles ahead label,
-//              figure out why "Nearby Players" is an option on simulator but not my phone,
-//              voice notifications (http://www.politepix.com/openears/tutorial -- use already downloaded plugin),
-//              get accepting/sending invites working,
+// pickup here: voice notifications (http://www.politepix.com/openears/tutorial -- use already downloaded plugin),
+//              try having one voice for positive notifications and another voice for negative notifications or maybe just one voice that is better than Slt
+
 /* todo:
  
  don't use PSLocationManager directly -- instead use an abstract class, and have a Fake LocationManager available for testing that maintains a steady pace
@@ -37,6 +36,10 @@
  which would eliminate most data transfer needs (just send a couple bytes instead of an audio recording)
  
  design how more than 2 runners will work
+ 
+ figure out why "Nearby Players" is an option on simulator but not my phone,
+ 
+ get accepting/sending invites working,
 */
  
 #import "TeamRunViewController.h"
@@ -277,7 +280,7 @@ static const double MILES_PER_METER = 0.000621371;
     [[PSLocationManager sharedLocationManager] resetLocationUpdates];
     [[PSLocationManager sharedLocationManager] startLocationUpdates];
     
-    [self.milesAheadLabel setText:@""];
+    [self updateMilesAhead:0];
     
     self.runningTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                          target:self
