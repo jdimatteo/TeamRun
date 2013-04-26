@@ -6,9 +6,14 @@
 //  Copyright (c) 2012 John DiMatteo. All rights reserved.
 //
 
-// pickup here: voice notifications (http://www.politepix.com/openears/tutorial -- use already downloaded plugin),
+// pickup here: unit test twoDecimalDigitStringWithoutRoundingFrom and use it everywhere instead of rounding,
+//              make app work in the background and when screen locked (gamekit/gps notifications sent and voice notifications spoken)
+
 
 /* todo:
+ 
+ // 1 and .09 miles sounds bad
+ handle dropping/readding players
  
  don't use PSLocationManager directly -- instead use an abstract class, and have a Fake LocationManager available for testing that maintains a steady pace
  -- allow changing the pace via temporary test buttons (faster, slower -- no directly modifying distance)
@@ -44,6 +49,8 @@
  -- try having one voice for positive notifications and another voice for negative notifications
     or maybe just one voice that is better than Slt
  -- https://bitbucket.org/Politepix/openearsextras
+ 
+ setup unit tests for utility methods
 */
  
 #import "TeamRunViewController.h"
@@ -98,8 +105,6 @@ Slt *slt;
     
     [PSLocationManager sharedLocationManager].delegate = self;
     [[PSLocationManager sharedLocationManager] prepLocationUpdates];
-    
-    [self.fliteController say:@"A short statement!" withVoice:self.slt];
 }
 
 - (void)didReceiveMemoryWarning
@@ -354,11 +359,10 @@ Slt *slt;
 }
 
 - (void)locationManager:(PSLocationManager *)locationManager distanceUpdated:(CLLocationDistance)distance /* distance in meters */
-{
-    [self log:@"%.2f %@", distance, @"meters"];
-    
+{    
     const double milesRan = distance*MILES_PER_METER;
     [self.milesRanLabel setText:[NSString stringWithFormat:@"%.2f", milesRan]];
+    [self log:@"%f miles", milesRan];
     
     const double metersPerSecond = [PSLocationManager sharedLocationManager].currentSpeed;
     [self log:@"current speed: %f m/s", metersPerSecond];
@@ -377,6 +381,9 @@ Slt *slt;
     }
     
     [self updateMilesAhead:-1];
+    
+    NSString* textToSay = [NSString stringWithFormat:@"%@ miles ran", [self speachStringFromDecimal: milesRan]];
+    [self.fliteController say:textToSay withVoice:self.slt];
 }
 
 - (void)locationManager:(PSLocationManager *)locationManager error:(NSError *)error {
@@ -451,5 +458,41 @@ NSString* minutesPerMilePaceString(const double metersPerSecond)
     return @"0:00";
 }
 
+// open ears pernounces a blip after the point when saying strings like "1.03" but not strings like "1 and .03",
+// so this function formats strings to not pernounce the blip (this is working around a bug in open ears)
+-(NSString*) speachStringFromDecimal:(const double) value
+{
+    // test case I tried, all sounded fine:
+    //[self.fliteController say:[NSString stringWithFormat:@"%@ miles ran", [self speachStringFromDecimal:0.03]] withVoice:self.slt];
+    //[self.fliteController say:[NSString stringWithFormat:@"%@ miles ran", [self speachStringFromDecimal:1.00]] withVoice:self.slt];
+    //[self.fliteController say:[NSString stringWithFormat:@"%@ miles ran", [self speachStringFromDecimal:1.00723]] withVoice:self.slt];
+    //[self.fliteController say:[NSString stringWithFormat:@"%@ miles ran", [self speachStringFromDecimal:0.00]] withVoice:self.slt];
+    //[self.fliteController say:[NSString stringWithFormat:@"%@ miles ran", [self speachStringFromDecimal:0.0077]] withVoice:self.slt];
+    //[self.fliteController say:[NSString stringWithFormat:@"%@ miles ran", [self speachStringFromDecimal:1.03]] withVoice:self.slt];
+    
+    const int integer = value;
+    const int hundreths = (value - integer)*100;
+    if (integer == 0 && hundreths == 0)
+    {
+        return @".00";
+    }
+    else if (integer == 0 && hundreths != 0)
+    {
+        return [NSString stringWithFormat:@".%02d", hundreths];
+    }
+    else
+    {
+        return [NSString stringWithFormat:@"%d and .%02d", integer, hundreths];
+    }
+}
+
+// note that [NSString stringWithFormat:@"%.2f", 0.339] rounds to @"0.34" -- this function doesn't round
+-(NSString*) twoDecimalDigitStringWithoutRoundingFrom:(const double) value
+{
+    const int integer = value;
+    const int hundreths = (value - integer)*100;
+    
+    return [NSString stringWithFormat:@"%d.%02d", integer, hundreths];
+}
 
 @end
