@@ -41,7 +41,23 @@
 		83CF15381729FE57006044B0 /* Slt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CF15291729FE57006044B0 /* Slt.framework */; };
 		83CF153B1729FECB006044B0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CF15391729FECB006044B0 /* AudioToolbox.framework */; };
 		83CF153C1729FECB006044B0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CF153A1729FECB006044B0 /* AVFoundation.framework */; };
+		83CF1544172AB580006044B0 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CF1543172AB580006044B0 /* SenTestingKit.framework */; };
+		83CF1545172AB580006044B0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 520276ED16762D300004BBDC /* UIKit.framework */; };
+		83CF1546172AB580006044B0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 520276EF16762D300004BBDC /* Foundation.framework */; };
+		83CF154C172AB580006044B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83CF154A172AB580006044B0 /* InfoPlist.strings */; };
+		83CF154F172AB581006044B0 /* TeamRunUnitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CF154E172AB580006044B0 /* TeamRunUnitTests.m */; };
+		83CF1558172AB7C3006044B0 /* TeamRunUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CF1557172AB7C3006044B0 /* TeamRunUtility.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		83CF1554172AB5C6006044B0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 520276E016762D300004BBDC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 520276E816762D300004BBDC;
+			remoteInfo = teamrun;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		520276E916762D300004BBDC /* teamrun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = teamrun.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,6 +100,15 @@
 		83CF15291729FE57006044B0 /* Slt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Slt.framework; sourceTree = "<group>"; };
 		83CF15391729FECB006044B0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		83CF153A1729FECB006044B0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		83CF1542172AB580006044B0 /* TeamRunUnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TeamRunUnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		83CF1543172AB580006044B0 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		83CF1549172AB580006044B0 /* TeamRunUnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TeamRunUnitTests-Info.plist"; sourceTree = "<group>"; };
+		83CF154B172AB580006044B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		83CF154D172AB580006044B0 /* TeamRunUnitTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeamRunUnitTests.h; sourceTree = "<group>"; };
+		83CF154E172AB580006044B0 /* TeamRunUnitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamRunUnitTests.m; sourceTree = "<group>"; };
+		83CF1550172AB581006044B0 /* TeamRunUnitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TeamRunUnitTests-Prefix.pch"; sourceTree = "<group>"; };
+		83CF1556172AB7C3006044B0 /* TeamRunUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamRunUtility.h; sourceTree = "<group>"; };
+		83CF1557172AB7C3006044B0 /* TeamRunUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamRunUtility.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +128,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		83CF153E172AB580006044B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83CF1544172AB580006044B0 /* SenTestingKit.framework in Frameworks */,
+				83CF1545172AB580006044B0 /* UIKit.framework in Frameworks */,
+				83CF1546172AB580006044B0 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -116,6 +151,7 @@
 				52F081F3168425D700F2749E /* icon114.png */,
 				5280DE21167EC5E700552081 /* CoreLocation.framework */,
 				520276F316762D300004BBDC /* TeamRun */,
+				83CF1547172AB580006044B0 /* TeamRunUnitTests */,
 				520276EC16762D300004BBDC /* Frameworks */,
 				520276EA16762D300004BBDC /* Products */,
 			);
@@ -125,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				520276E916762D300004BBDC /* teamrun.app */,
+				83CF1542172AB580006044B0 /* TeamRunUnitTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -135,6 +172,7 @@
 				520276ED16762D300004BBDC /* UIKit.framework */,
 				520276EF16762D300004BBDC /* Foundation.framework */,
 				520276F116762D300004BBDC /* CoreGraphics.framework */,
+				83CF1543172AB580006044B0 /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -150,6 +188,8 @@
 				5202770816762D300004BBDC /* TeamRunViewController.h */,
 				5202770916762D300004BBDC /* TeamRunViewController.m */,
 				520276F416762D300004BBDC /* Supporting Files */,
+				83CF1556172AB7C3006044B0 /* TeamRunUtility.h */,
+				83CF1557172AB7C3006044B0 /* TeamRunUtility.m */,
 			);
 			path = TeamRun;
 			sourceTree = "<group>";
@@ -200,6 +240,26 @@
 			path = hub4wsj_sc_8k;
 			sourceTree = "<group>";
 		};
+		83CF1547172AB580006044B0 /* TeamRunUnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				83CF154D172AB580006044B0 /* TeamRunUnitTests.h */,
+				83CF154E172AB580006044B0 /* TeamRunUnitTests.m */,
+				83CF1548172AB580006044B0 /* Supporting Files */,
+			);
+			path = TeamRunUnitTests;
+			sourceTree = "<group>";
+		};
+		83CF1548172AB580006044B0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				83CF1549172AB580006044B0 /* TeamRunUnitTests-Info.plist */,
+				83CF154A172AB580006044B0 /* InfoPlist.strings */,
+				83CF1550172AB581006044B0 /* TeamRunUnitTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -219,6 +279,25 @@
 			productName = TeamRun;
 			productReference = 520276E916762D300004BBDC /* teamrun.app */;
 			productType = "com.apple.product-type.application";
+		};
+		83CF1541172AB580006044B0 /* TeamRunUnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 83CF1551172AB581006044B0 /* Build configuration list for PBXNativeTarget "TeamRunUnitTests" */;
+			buildPhases = (
+				83CF153D172AB580006044B0 /* Sources */,
+				83CF153E172AB580006044B0 /* Frameworks */,
+				83CF153F172AB580006044B0 /* Resources */,
+				83CF1540172AB580006044B0 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				83CF1555172AB5C6006044B0 /* PBXTargetDependency */,
+			);
+			name = TeamRunUnitTests;
+			productName = TeamRunUnitTests;
+			productReference = 83CF1542172AB580006044B0 /* TeamRunUnitTests.octest */;
+			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
@@ -243,6 +322,7 @@
 			projectRoot = "";
 			targets = (
 				520276E816762D300004BBDC /* teamrun */,
+				83CF1541172AB580006044B0 /* TeamRunUnitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -276,7 +356,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		83CF153F172AB580006044B0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83CF154C172AB580006044B0 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		83CF1540172AB580006044B0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		520276E516762D300004BBDC /* Sources */ = {
@@ -287,10 +391,27 @@
 				520276FE16762D300004BBDC /* TeamRunAppDelegate.m in Sources */,
 				5202770A16762D300004BBDC /* TeamRunViewController.m in Sources */,
 				833A3147172746EC00E8A61E /* PSLocationManager.m in Sources */,
+				83CF1558172AB7C3006044B0 /* TeamRunUtility.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83CF153D172AB580006044B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83CF154F172AB581006044B0 /* TeamRunUnitTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		83CF1555172AB5C6006044B0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 520276E816762D300004BBDC /* teamrun */;
+			targetProxy = 83CF1554172AB5C6006044B0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		520276F616762D300004BBDC /* InfoPlist.strings */ = {
@@ -307,6 +428,14 @@
 				5202770616762D300004BBDC /* en */,
 			);
 			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		83CF154A172AB580006044B0 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				83CF154B172AB580006044B0 /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -394,6 +523,48 @@
 			};
 			name = Release;
 		};
+		83CF1552172AB581006044B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/teamrun.app/TeamRun";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TeamRunUnitTests/TeamRunUnitTests-Prefix.pch";
+				INFOPLIST_FILE = "TeamRunUnitTests/TeamRunUnitTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "${BUNDLE_LOADER}";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		83CF1553172AB581006044B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/teamrun.app/TeamRun";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TeamRunUnitTests/TeamRunUnitTests-Prefix.pch";
+				INFOPLIST_FILE = "TeamRunUnitTests/TeamRunUnitTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "${BUNDLE_LOADER}";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -414,6 +585,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		83CF1551172AB581006044B0 /* Build configuration list for PBXNativeTarget "TeamRunUnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83CF1552172AB581006044B0 /* Debug */,
+				83CF1553172AB581006044B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

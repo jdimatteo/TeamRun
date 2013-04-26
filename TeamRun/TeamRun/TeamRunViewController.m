@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 John DiMatteo. All rights reserved.
 //
 
-// pickup here: unit test twoDecimalDigitStringWithoutRoundingFrom and use it everywhere instead of rounding,
+// pickup here: use twoDecimalDigitStringWithoutRoundingFrom everywhere instead of rounding,
 //              make app work in the background and when screen locked (gamekit/gps notifications sent and voice notifications spoken)
 
 
@@ -484,15 +484,6 @@ NSString* minutesPerMilePaceString(const double metersPerSecond)
     {
         return [NSString stringWithFormat:@"%d and .%02d", integer, hundreths];
     }
-}
-
-// note that [NSString stringWithFormat:@"%.2f", 0.339] rounds to @"0.34" -- this function doesn't round
--(NSString*) twoDecimalDigitStringWithoutRoundingFrom:(const double) value
-{
-    const int integer = value;
-    const int hundreths = (value - integer)*100;
-    
-    return [NSString stringWithFormat:@"%d.%02d", integer, hundreths];
 }
 
 @end
