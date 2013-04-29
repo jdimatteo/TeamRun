@@ -6,10 +6,12 @@
 //  Copyright (c) 2012 John DiMatteo. All rights reserved.
 //
 
-// pickup here: make app work in the background and when screen locked (gamekit/gps notifications sent and voice notifications spoken)
+/* pickup here: sketch out simple full game that could be complete by Friday,
+                make spoken text easy to understand when background music is playing,
+                make pace updates spoken every 30 seconds and configurable,
 
 
-/* todo:
+   todo:
  
  // 1 and .09 miles sounds bad
  handle dropping/readding players
@@ -59,6 +61,7 @@
 
 #import <Slt/Slt.h>
 #import <OpenEars/FliteController.h>
+#import <OpenEars/AudioSessionManager.h>
 
 #import <GameKit/GameKit.h>
 
@@ -80,10 +83,12 @@
 - (void)playerAuthenticated;
 - (void)log:(NSString*)format,...;
 - (void)secondRan:(NSTimer *)timer;
+- (void)speakPace:(NSTimer *)timer;
 - (void)updateMilesAhead:(double) milesOtherPlayerRan;
 
 @property (weak, nonatomic) GKMatch* match;
 @property (nonatomic) NSTimer* runningTimer;
+@property (nonatomic) NSTimer* paceUpdateTimer;
 
 @property (strong, nonatomic) FliteController *fliteController;
 @property (strong, nonatomic) Slt *slt;
@@ -91,6 +96,10 @@
 @end
 
 static const double MILES_PER_METER = 0.000621371;
+
+// todo: change to something like 60
+// todo: make user configurable
+static const int SECONDS_BETWEEN_PACE_UPDATES = 1;
 
 FliteController *fliteController;
 Slt *slt;
@@ -106,6 +115,19 @@ Slt *slt;
     
     [PSLocationManager sharedLocationManager].delegate = self;
     [[PSLocationManager sharedLocationManager] prepLocationUpdates];
+    
+    // following causes open ears speach to work while running in the background or locked
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    [[AudioSessionManager sharedAudioSessionManager]setSoundMixing:YES];
+    
+    // todo: start this when match found, and end it when stop clicked
+    self.paceUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:SECONDS_BETWEEN_PACE_UPDATES
+                                                            target:self
+                                                          selector:@selector(speakPace:)
+                                                          userInfo:nil
+                                                           repeats:YES];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -152,6 +174,12 @@ Slt *slt;
 {
     int seconds = [PSLocationManager sharedLocationManager].totalSeconds;
     [self.timeRanLabel setText:[NSString stringWithFormat:@"%.2d:%.2d", seconds / 60, seconds % 60]];
+}
+
+- (void)speakPace:(NSTimer *)timer
+{
+    NSString* textToSay = [NSString stringWithFormat:@"Average pace is %@", self.averagePaceLabel.text];
+    [self.fliteController say:textToSay withVoice:self.slt];
 }
 
 // todo: this probably isn't good style -- maybe make this an optional arg or overload the function?
@@ -384,7 +412,7 @@ Slt *slt;
     [self updateMilesAhead:-1];
     
     NSString* textToSay = [NSString stringWithFormat:@"%@ miles ran", [self speachStringFromDecimal: milesRan]];
-    [self.fliteController say:textToSay withVoice:self.slt];
+    //[self.fliteController say:textToSay withVoice:self.slt];
 }
 
 - (void)locationManager:(PSLocationManager *)locationManager error:(NSError *)error {
