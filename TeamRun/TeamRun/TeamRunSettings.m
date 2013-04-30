@@ -55,7 +55,7 @@
 
 + (void)setTargetSecondsPerMile:(const int) seconds
 {
-    [[NSUserDefaults standardUserDefaults] setInteger:seconds forKey:@"secondsBetweenPaceNotifications"];
+    [[NSUserDefaults standardUserDefaults] setInteger:seconds forKey:@"targetSecondsPerMile"];
 }
 
 + (BOOL)targetPaceEnabled

@@ -6,8 +6,7 @@
 //  Copyright (c) 2012 John DiMatteo. All rights reserved.
 //
 
-/* pickup here: finish loading/saving all settings,
-                implement behavior based on settings,
+/* pickup here: implement behavior based on settings,
                 make spoken text easy to understand when background music is playing,
                 current pace fluctautes too wildly,
    todo:

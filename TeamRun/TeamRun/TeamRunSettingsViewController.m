@@ -15,8 +15,8 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *minutesBetweenNotificationsTextField;
 @property (weak, nonatomic) IBOutlet UITextField *secondsBetweenNotificationsTextField;
-@property (weak, nonatomic) IBOutlet UITextField *targetMilePaceMinutes;
-@property (weak, nonatomic) IBOutlet UITextField *targetMilePaceSeconds;
+@property (weak, nonatomic) IBOutlet UITextField *targetMilePaceMinutesTextField;
+@property (weak, nonatomic) IBOutlet UITextField *targetMilePaceSecondsTextField;
 @property (weak, nonatomic) IBOutlet UISwitch *paceNotificationsSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *relativePositionNotificationsSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *targetMilePaceSwitch;
@@ -40,8 +40,8 @@
     [dismissKeypadToolbar sizeToFit];
     _minutesBetweenNotificationsTextField.inputAccessoryView = dismissKeypadToolbar;
     _secondsBetweenNotificationsTextField.inputAccessoryView = dismissKeypadToolbar;
-    _targetMilePaceMinutes.inputAccessoryView = dismissKeypadToolbar;
-    _targetMilePaceSeconds.inputAccessoryView = dismissKeypadToolbar;
+    _targetMilePaceMinutesTextField.inputAccessoryView = dismissKeypadToolbar;
+    _targetMilePaceSecondsTextField.inputAccessoryView = dismissKeypadToolbar;
     
     [_minutesBetweenNotificationsTextField setText:[NSString stringWithFormat:@"%d", [TeamRunSettings secondsBetweenNotifications]/60]];
     [_secondsBetweenNotificationsTextField setText:[NSString stringWithFormat:@"%d", [TeamRunSettings secondsBetweenNotifications]%60]];
@@ -49,6 +49,10 @@
     [_paceNotificationsSwitch setOn:[TeamRunSettings paceNotificationsEnabled]];
     [_relativePositionNotificationsSwitch setOn:[TeamRunSettings relativePositionNotificationsEnabled]];
     [_targetMilePaceSwitch setOn:[TeamRunSettings targetPaceEnabled]];
+    
+    
+    [_targetMilePaceMinutesTextField setText:[NSString stringWithFormat:@"%d", [TeamRunSettings targetSecondsPerMile]/60]];
+    [_targetMilePaceSecondsTextField setText:[NSString stringWithFormat:@"%d", [TeamRunSettings targetSecondsPerMile]%60]];
 }
 
 -(void)doneWithNumberPad
@@ -70,6 +74,8 @@
     [TeamRunSettings setRelativePositionNotificationsEnabled: _relativePositionNotificationsSwitch.isOn];
 
     [TeamRunSettings setTargetPaceEnabled: _targetMilePaceSwitch.isOn];
+    
+    [TeamRunSettings setTargetSecondsPerMile:[_targetMilePaceMinutesTextField.text intValue]*60 + [_targetMilePaceSecondsTextField.text intValue]];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }

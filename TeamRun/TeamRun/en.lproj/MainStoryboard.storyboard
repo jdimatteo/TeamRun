@@ -401,8 +401,8 @@ Note: to increase likelihood of finding running buddies, all runs are 30 minutes
                         <outlet property="paceNotificationsSwitch" destination="zBa-xS-pZz" id="0iS-KL-lah"/>
                         <outlet property="relativePositionNotificationsSwitch" destination="4ta-c9-4dz" id="ndr-8U-4B6"/>
                         <outlet property="secondsBetweenNotificationsTextField" destination="Nu9-fi-yAm" id="ZJt-Vf-6Y1"/>
-                        <outlet property="targetMilePaceMinutes" destination="cTr-Xy-Mww" id="miG-VU-0Oz"/>
-                        <outlet property="targetMilePaceSeconds" destination="miL-1j-GDI" id="9x1-8g-P2e"/>
+                        <outlet property="targetMilePaceMinutesTextField" destination="cTr-Xy-Mww" id="LI8-5u-b7P"/>
+                        <outlet property="targetMilePaceSecondsTextField" destination="miL-1j-GDI" id="ISa-MZ-Hgd"/>
                         <outlet property="targetMilePaceSwitch" destination="3dk-Vd-MHA" id="sKT-WD-ivr"/>
                     </connections>
                 </viewController>
