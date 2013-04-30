@@ -6,15 +6,23 @@
 //  Copyright (c) 2012 John DiMatteo. All rights reserved.
 //
 
-/* pickup here: sketch out simple full game that could be complete by Friday,
+/* pickup here: implement and test load/save settings using NSUserDefaults,
+                implement behavior based on settings,
                 make spoken text easy to understand when background music is playing,
-                make pace updates spoken every 30 seconds and configurable,
-
-
+                current pace fluctautes too wildly,
    todo:
  
- // 1 and .09 miles sounds bad
- handle dropping/readding players
+ include passing/delta ahead notification settings (on unconnected view controller)
+ 
+ 1 and .09 miles sounds bad
+ 
+ handle dropping/re-adding players
+ 
+ login not possible after you click the start button
+ 
+ login notification blocks top buttons
+ 
+ display remaining time instead of total time (or maybe both)
  
  don't use PSLocationManager directly -- instead use an abstract class, and have a Fake LocationManager available for testing that maintains a steady pace
  -- allow changing the pace via temporary test buttons (faster, slower -- no directly modifying distance)
@@ -52,6 +60,8 @@
  -- https://bitbucket.org/Politepix/openearsextras
  
  setup unit tests for utility methods
+ 
+ test what happens when a user pastes non-numeric text into number fields
 */
  
 #import "TeamRunViewController.h"
@@ -412,7 +422,7 @@ Slt *slt;
     [self updateMilesAhead:-1];
     
     NSString* textToSay = [NSString stringWithFormat:@"%@ miles ran", [self speachStringFromDecimal: milesRan]];
-    //[self.fliteController say:textToSay withVoice:self.slt];
+    [self.fliteController say:textToSay withVoice:self.slt];
 }
 
 - (void)locationManager:(PSLocationManager *)locationManager error:(NSError *)error {

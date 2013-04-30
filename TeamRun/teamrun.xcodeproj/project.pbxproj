@@ -47,6 +47,8 @@
 		83CF154C172AB580006044B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83CF154A172AB580006044B0 /* InfoPlist.strings */; };
 		83CF154F172AB581006044B0 /* TeamRunUnitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CF154E172AB580006044B0 /* TeamRunUnitTests.m */; };
 		83CF1558172AB7C3006044B0 /* TeamRunUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CF1557172AB7C3006044B0 /* TeamRunUtility.m */; };
+		83CF155E172F2129006044B0 /* TeamRunSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CF155D172F2129006044B0 /* TeamRunSettingsViewController.m */; };
+		83CF1561172F61CE006044B0 /* TeamRunSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CF1560172F61CE006044B0 /* TeamRunSettings.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +111,10 @@
 		83CF1550172AB581006044B0 /* TeamRunUnitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TeamRunUnitTests-Prefix.pch"; sourceTree = "<group>"; };
 		83CF1556172AB7C3006044B0 /* TeamRunUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamRunUtility.h; sourceTree = "<group>"; };
 		83CF1557172AB7C3006044B0 /* TeamRunUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamRunUtility.m; sourceTree = "<group>"; };
+		83CF155C172F2129006044B0 /* TeamRunSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamRunSettingsViewController.h; sourceTree = "<group>"; };
+		83CF155D172F2129006044B0 /* TeamRunSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamRunSettingsViewController.m; sourceTree = "<group>"; };
+		83CF155F172F61CE006044B0 /* TeamRunSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamRunSettings.h; sourceTree = "<group>"; };
+		83CF1560172F61CE006044B0 /* TeamRunSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamRunSettings.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +196,10 @@
 				520276F416762D300004BBDC /* Supporting Files */,
 				83CF1556172AB7C3006044B0 /* TeamRunUtility.h */,
 				83CF1557172AB7C3006044B0 /* TeamRunUtility.m */,
+				83CF155C172F2129006044B0 /* TeamRunSettingsViewController.h */,
+				83CF155D172F2129006044B0 /* TeamRunSettingsViewController.m */,
+				83CF155F172F61CE006044B0 /* TeamRunSettings.h */,
+				83CF1560172F61CE006044B0 /* TeamRunSettings.m */,
 			);
 			path = TeamRun;
 			sourceTree = "<group>";
@@ -392,6 +402,8 @@
 				5202770A16762D300004BBDC /* TeamRunViewController.m in Sources */,
 				833A3147172746EC00E8A61E /* PSLocationManager.m in Sources */,
 				83CF1558172AB7C3006044B0 /* TeamRunUtility.m in Sources */,
+				83CF155E172F2129006044B0 /* TeamRunSettingsViewController.m in Sources */,
+				83CF1561172F61CE006044B0 /* TeamRunSettings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
