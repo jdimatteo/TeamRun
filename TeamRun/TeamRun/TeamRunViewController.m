@@ -6,7 +6,8 @@
 //  Copyright (c) 2012 John DiMatteo. All rights reserved.
 //
 
-/* pickup here: implement and test load/save settings using NSUserDefaults,
+/* pickup here: finish loading/saving all settings,
+                disable text fields when corresponding setting is disabled,
                 implement behavior based on settings,
                 make spoken text easy to understand when background music is playing,
                 current pace fluctautes too wildly,

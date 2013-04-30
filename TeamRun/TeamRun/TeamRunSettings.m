@@ -8,15 +8,52 @@
 
 #import "TeamRunSettings.h"
 
-
 @implementation TeamRunSettings
 
-+ (int)secondsBetweenPaceNotifications
++ (int)secondsBetweenNotifications
 {
-    return [[NSUserDefaults standardUserDefaults] integerForKey:@"secondsBetweenPaceNotifications"];
+    int seconds = [[NSUserDefaults standardUserDefaults] integerForKey:@"secondsBetweenPaceNotifications"];
+    if (seconds <= 0) seconds = 60*5; // 5 minutes default
+
+    return seconds;
 }
 
-+ (void)setSecondsBetweenPaceNotifications:(const int) seconds
++ (void)setSecondsBetweenNotifications:(const int) seconds
+{
+    [[NSUserDefaults standardUserDefaults] setInteger:seconds forKey:@"secondsBetweenPaceNotifications"];
+}
+
+// note that I store paceNotificationsDisabled (and paceNotificationsDisabled) instead of paceNotificationsEnabled
+// (and paceNotificationsEnabled) so that that it defaults to pace notifications enabled (since the BOOL NSUserDefaults initial value is false)
++ (BOOL)paceNotificationsEnabled
+{
+    return ![[NSUserDefaults standardUserDefaults] boolForKey:@"paceNotificationsDisabled"];
+}
+
++ (void)setPaceNotificationsEnabled:(BOOL)enabled
+{
+    [[NSUserDefaults standardUserDefaults] setBool:!enabled forKey:@"paceNotificationsDisabled"];
+}
+
++ (BOOL)relativePositionNotificationsEnabled
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"relativePositionNotificationsDisabled"];
+}
+
++ (void)setRelativePositionNotificationsEnabled:(BOOL)enabled
+{
+    [[NSUserDefaults standardUserDefaults] setBool:enabled forKey:@"relativePositionNotificationsDisabled"];
+}
+
++ (int)targetSecondsPerMile
+{
+    int seconds = [[NSUserDefaults standardUserDefaults] integerForKey:@"targetSecondsPerMile"];
+    if (seconds <= 0) seconds = 60*9+30; // 9 minute 30 second mile pace default
+
+    return seconds;
+}
+
++ (void)setTargetSecondsPerMile:(const int) seconds
 {
     [[NSUserDefaults standardUserDefaults] setInteger:seconds forKey:@"secondsBetweenPaceNotifications"];
 }

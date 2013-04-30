@@ -308,7 +308,7 @@
                                     <constraint firstAttribute="width" constant="276" id="3F4-0T-P5z"/>
                                     <constraint firstAttribute="height" constant="182" id="dSq-NW-MIY"/>
                                 </constraints>
-                                <string key="text">When two runners specify a target pace, their distances are scaled.  For example, if your target is 7 minute miles and their target is 14 minute miles, then every mile they run shows as 2 miles to you (and every mile you run shows as half a mile to them).  
+                                <string key="text">When two runners specify a target pace, their distances are scaled.  For example, if your target is 7 minute miles and their target is 14 minute miles, then every mile they run shows as 2 miles to you (and every mile you run shows as half a mile to them).
 
 Note: to increase likelihood of finding running buddies, all runs are 30 minutes long.  Also, if you have trouble finding a buddy, try Saturday at 11:00 AM EST.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -325,19 +325,13 @@ Note: to increase likelihood of finding running buddies, all runs are 30 minutes
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="35" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nu9-fi-yAm">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nu9-fi-yAm">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="38" id="VxD-bQ-3nH"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Include Relative Positions" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VYo-Zb-Qpu">
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pUl-ce-bcj"/>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="every" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W8f-Cm-1os">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -348,56 +342,64 @@ Note: to increase likelihood of finding running buddies, all runs are 30 minutes
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="5" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kei-0i-8us">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="5" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kei-0i-8us">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="38" id="7K7-lu-TEI"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                             </textField>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Voice Relative Positions" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IGP-5E-2lZ">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4ta-c9-4dz"/>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="VYo-Zb-Qpu" firstAttribute="leading" secondItem="nTQ-KJ-O4V" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="0Gw-Rq-R4n"/>
                             <constraint firstItem="NzO-kL-A5H" firstAttribute="leading" secondItem="cTr-Xy-Mww" secondAttribute="leading" type="default" id="1gv-Xg-Bxc"/>
                             <constraint firstItem="miL-1j-GDI" firstAttribute="leading" secondItem="frc-fQ-BSu" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="7Jm-nD-h33"/>
-                            <constraint firstItem="pUl-ce-bcj" firstAttribute="centerY" secondItem="VYo-Zb-Qpu" secondAttribute="centerY" type="default" id="9O7-Nb-FI1"/>
                             <constraint firstAttribute="trailing" secondItem="zBa-xS-pZz" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="9tx-nJ-c0T"/>
                             <constraint firstItem="frc-fQ-BSu" firstAttribute="leading" secondItem="cTr-Xy-Mww" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="GLd-zy-F6l"/>
                             <constraint firstItem="mZG-9d-3qn" firstAttribute="baseline" secondItem="Kei-0i-8us" secondAttribute="baseline" type="default" id="HNi-EL-o49"/>
                             <constraint firstItem="mZG-9d-3qn" firstAttribute="leading" secondItem="Nu9-fi-yAm" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="J1L-1k-zhg"/>
                             <constraint firstItem="7LF-q0-WyH" firstAttribute="top" secondItem="3dk-Vd-MHA" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="JTi-Rg-KnA"/>
-                            <constraint firstItem="mZG-9d-3qn" firstAttribute="top" secondItem="zBa-xS-pZz" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="KEA-zI-ySd"/>
+                            <constraint firstItem="Na3-X7-Q5L" firstAttribute="leading" secondItem="nTQ-KJ-O4V" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="LQq-nx-d2a"/>
                             <constraint firstItem="GcF-3k-oLq" firstAttribute="top" secondItem="tDt-22-mdJ" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Lzb-mH-sJe"/>
                             <constraint firstItem="W8f-Cm-1os" firstAttribute="leading" secondItem="nTQ-KJ-O4V" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="MDN-YL-14e"/>
-                            <constraint firstItem="Na3-X7-Q5L" firstAttribute="centerX" secondItem="VYo-Zb-Qpu" secondAttribute="centerX" type="default" id="OFc-Df-Oo3"/>
                             <constraint firstItem="miL-1j-GDI" firstAttribute="baseline" secondItem="7LF-q0-WyH" secondAttribute="baseline" type="default" id="Orq-OI-PGJ"/>
                             <constraint firstItem="tDt-22-mdJ" firstAttribute="leading" secondItem="nTQ-KJ-O4V" secondAttribute="leading" constant="13" id="POa-RK-EYn"/>
                             <constraint firstItem="7LF-q0-WyH" firstAttribute="leading" secondItem="miL-1j-GDI" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="Pp8-Eb-V8m"/>
                             <constraint firstItem="NzO-kL-A5H" firstAttribute="centerX" secondItem="frc-fQ-BSu" secondAttribute="centerX" type="default" id="QFz-8i-Q39"/>
                             <constraint firstItem="NzO-kL-A5H" firstAttribute="top" secondItem="nTQ-KJ-O4V" secondAttribute="top" constant="130" id="SOt-pk-zgg"/>
-                            <constraint firstItem="Kei-0i-8us" firstAttribute="top" secondItem="Na3-X7-Q5L" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="TG9-et-6f7"/>
                             <constraint firstItem="miL-1j-GDI" firstAttribute="trailing" secondItem="NzO-kL-A5H" secondAttribute="trailing" type="default" id="UAe-8P-HHn"/>
                             <constraint firstItem="Kei-0i-8us" firstAttribute="leading" secondItem="W8f-Cm-1os" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="Ubn-n7-Nze"/>
-                            <constraint firstItem="pUl-ce-bcj" firstAttribute="top" secondItem="nTQ-KJ-O4V" secondAttribute="top" constant="77" id="V5h-Iq-img"/>
-                            <constraint firstItem="Nu9-fi-yAm" firstAttribute="top" secondItem="nTQ-KJ-O4V" secondAttribute="top" constant="38" id="VGe-GN-B3A"/>
                             <constraint firstAttribute="trailing" secondItem="mZG-9d-3qn" secondAttribute="trailing" constant="16" id="ZJ0-Gu-SZq"/>
+                            <constraint firstItem="4ta-c9-4dz" firstAttribute="centerY" secondItem="IGP-5E-2lZ" secondAttribute="centerY" type="default" id="ZR8-MU-Vfb"/>
                             <constraint firstItem="tDt-22-mdJ" firstAttribute="top" secondItem="frc-fQ-BSu" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="ZWD-pW-PjQ"/>
+                            <constraint firstItem="Nu9-fi-yAm" firstAttribute="top" secondItem="nTQ-KJ-O4V" secondAttribute="top" constant="79" id="dRu-Z1-ur2"/>
                             <constraint firstAttribute="trailing" secondItem="3dk-Vd-MHA" secondAttribute="trailing" constant="22" id="drn-tu-DQO"/>
                             <constraint firstItem="GcF-3k-oLq" firstAttribute="leading" secondItem="nTQ-KJ-O4V" secondAttribute="leading" constant="103" id="eSj-3l-cSX"/>
+                            <constraint firstItem="Kei-0i-8us" firstAttribute="top" secondItem="nTQ-KJ-O4V" secondAttribute="top" constant="78" id="fTS-7W-5wV"/>
                             <constraint firstItem="dDq-Na-4rq" firstAttribute="baseline" secondItem="Nu9-fi-yAm" secondAttribute="baseline" type="default" id="fxq-mi-7bX"/>
-                            <constraint firstAttribute="trailing" secondItem="pUl-ce-bcj" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="hEh-3e-I1q"/>
                             <constraint firstItem="7LF-q0-WyH" firstAttribute="trailing" secondItem="tDt-22-mdJ" secondAttribute="trailing" type="default" id="hLa-65-xGU"/>
                             <constraint firstItem="GcF-3k-oLq" firstAttribute="centerX" secondItem="dDq-Na-4rq" secondAttribute="centerX" type="default" id="lWw-mo-aBX"/>
+                            <constraint firstItem="Na3-X7-Q5L" firstAttribute="centerY" secondItem="zBa-xS-pZz" secondAttribute="centerY" type="default" id="mOu-6F-I6X"/>
+                            <constraint firstItem="4ta-c9-4dz" firstAttribute="top" secondItem="nTQ-KJ-O4V" secondAttribute="top" constant="39" id="nGw-WV-E6k"/>
+                            <constraint firstAttribute="trailing" secondItem="4ta-c9-4dz" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="p5o-hN-UIN"/>
+                            <constraint firstItem="zBa-xS-pZz" firstAttribute="top" secondItem="nTQ-KJ-O4V" secondAttribute="top" constant="7" id="rkV-ZH-LoW"/>
+                            <constraint firstItem="IGP-5E-2lZ" firstAttribute="leading" secondItem="nTQ-KJ-O4V" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="rkc-5N-Swi"/>
                             <constraint firstItem="NzO-kL-A5H" firstAttribute="top" secondItem="3dk-Vd-MHA" secondAttribute="top" type="default" id="sL7-C8-3bV"/>
                             <constraint firstItem="cTr-Xy-Mww" firstAttribute="top" secondItem="nTQ-KJ-O4V" secondAttribute="top" constant="161" id="siQ-9S-IT9"/>
                             <constraint firstItem="dDq-Na-4rq" firstAttribute="baseline" secondItem="W8f-Cm-1os" secondAttribute="baseline" type="default" id="vW2-8v-cBg"/>
-                            <constraint firstItem="zBa-xS-pZz" firstAttribute="top" secondItem="nTQ-KJ-O4V" secondAttribute="top" constant="5" id="w5c-0t-Klr"/>
                             <constraint firstItem="miL-1j-GDI" firstAttribute="baseline" secondItem="frc-fQ-BSu" secondAttribute="baseline" type="default" id="yDh-Jy-iLL"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="minutesBetweenNotificicationsTextField" destination="Kei-0i-8us" id="l3r-Ly-TuV"/>
+                        <outlet property="minutesBetweenNotificationsTextField" destination="Kei-0i-8us" id="B3t-jm-fdO"/>
+                        <outlet property="paceNotificationsSwitch" destination="zBa-xS-pZz" id="0iS-KL-lah"/>
+                        <outlet property="relativePositionNotificationsSwitch" destination="4ta-c9-4dz" id="ndr-8U-4B6"/>
                         <outlet property="secondsBetweenNotificationsTextField" destination="Nu9-fi-yAm" id="ZJt-Vf-6Y1"/>
                         <outlet property="targetMilePaceMinutes" destination="cTr-Xy-Mww" id="miG-VU-0Oz"/>
                         <outlet property="targetMilePaceSeconds" destination="miL-1j-GDI" id="9x1-8g-P2e"/>
@@ -408,35 +410,6 @@ Note: to increase likelihood of finding running buddies, all runs are 30 minutes
             <point key="canvasLocation" x="1" y="143"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="TeamRunSettingsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TeamRunSettingsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="doneChangingSettings"/>
-                <relationship kind="outlet" name="minutesBetweenNotificicationsTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="secondsBetweenNotificationsTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="targetMilePaceMinutes" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="targetMilePaceSeconds" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="TeamRunViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TeamRunViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="openGameCenter"/>
-                <relationship kind="action" name="startStopButtonClicked"/>
-                <relationship kind="outlet" name="averagePaceLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="currentPaceLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="milesAheadLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="milesRanLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="scrollingText" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="startStopButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="timeRanLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

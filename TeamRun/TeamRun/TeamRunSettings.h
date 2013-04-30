@@ -10,6 +10,16 @@
 
 @interface TeamRunSettings : NSObject
 
-@property (nonatomic) int secondsBetweenPaceNotifications;
++ (int)secondsBetweenNotifications;
++ (void)setSecondsBetweenNotifications:(const int) seconds;
+
++ (int)targetSecondsPerMile;
++ (void)setTargetSecondsPerMile:(const int) seconds;
+
++ (BOOL)paceNotificationsEnabled;
++ (void)setPaceNotificationsEnabled:(BOOL)enabled;
+
++ (BOOL)relativePositionNotificationsEnabled;
++ (void)setRelativePositionNotificationsEnabled:(BOOL)enabled;
 
 @end
