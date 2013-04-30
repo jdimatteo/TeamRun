@@ -17,9 +17,12 @@
 + (void)setTargetSecondsPerMile:(const int) seconds;
 
 + (BOOL)paceNotificationsEnabled;
-+ (void)setPaceNotificationsEnabled:(BOOL)enabled;
++ (void)setPaceNotificationsEnabled:(const BOOL)enabled;
 
 + (BOOL)relativePositionNotificationsEnabled;
-+ (void)setRelativePositionNotificationsEnabled:(BOOL)enabled;
++ (void)setRelativePositionNotificationsEnabled:(const BOOL)enabled;
+
++ (BOOL)targetPaceEnabled;
++ (void)setTargetPaceEnabled:(const BOOL)enabled;
 
 @end

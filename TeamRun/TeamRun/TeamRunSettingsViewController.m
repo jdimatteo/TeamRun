@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *targetMilePaceSeconds;
 @property (weak, nonatomic) IBOutlet UISwitch *paceNotificationsSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *relativePositionNotificationsSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *targetMilePaceSwitch;
 
 -(void)doneWithNumberPad;
 
@@ -47,6 +48,7 @@
     
     [_paceNotificationsSwitch setOn:[TeamRunSettings paceNotificationsEnabled]];
     [_relativePositionNotificationsSwitch setOn:[TeamRunSettings relativePositionNotificationsEnabled]];
+    [_targetMilePaceSwitch setOn:[TeamRunSettings targetPaceEnabled]];
 }
 
 -(void)doneWithNumberPad
@@ -66,6 +68,8 @@
     
     [TeamRunSettings setPaceNotificationsEnabled: _paceNotificationsSwitch.isOn];
     [TeamRunSettings setRelativePositionNotificationsEnabled: _relativePositionNotificationsSwitch.isOn];
+
+    [TeamRunSettings setTargetPaceEnabled: _targetMilePaceSwitch.isOn];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }

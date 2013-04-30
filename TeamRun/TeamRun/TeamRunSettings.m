@@ -30,19 +30,19 @@
     return ![[NSUserDefaults standardUserDefaults] boolForKey:@"paceNotificationsDisabled"];
 }
 
-+ (void)setPaceNotificationsEnabled:(BOOL)enabled
++ (void)setPaceNotificationsEnabled:(const BOOL)enabled
 {
     [[NSUserDefaults standardUserDefaults] setBool:!enabled forKey:@"paceNotificationsDisabled"];
 }
 
 + (BOOL)relativePositionNotificationsEnabled
 {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:@"relativePositionNotificationsDisabled"];
+    return ![[NSUserDefaults standardUserDefaults] boolForKey:@"relativePositionNotificationsDisabled"];
 }
 
-+ (void)setRelativePositionNotificationsEnabled:(BOOL)enabled
++ (void)setRelativePositionNotificationsEnabled:(const BOOL)enabled
 {
-    [[NSUserDefaults standardUserDefaults] setBool:enabled forKey:@"relativePositionNotificationsDisabled"];
+    [[NSUserDefaults standardUserDefaults] setBool:!enabled forKey:@"relativePositionNotificationsDisabled"];
 }
 
 + (int)targetSecondsPerMile
@@ -56,6 +56,16 @@
 + (void)setTargetSecondsPerMile:(const int) seconds
 {
     [[NSUserDefaults standardUserDefaults] setInteger:seconds forKey:@"secondsBetweenPaceNotifications"];
+}
+
++ (BOOL)targetPaceEnabled
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"targetPaceEnabled"];
+}
+
++ (void)setTargetPaceEnabled:(const BOOL)enabled
+{
+    [[NSUserDefaults standardUserDefaults] setBool:enabled forKey:@"targetPaceEnabled"];
 }
 
 @end

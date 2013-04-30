@@ -7,11 +7,12 @@
 //
 
 /* pickup here: finish loading/saving all settings,
-                disable text fields when corresponding setting is disabled,
                 implement behavior based on settings,
                 make spoken text easy to understand when background music is playing,
                 current pace fluctautes too wildly,
    todo:
+ 
+ disable text fields when corresponding setting is disabled
  
  include passing/delta ahead notification settings (on unconnected view controller)
  
@@ -62,8 +63,7 @@
  
  setup unit tests for utility methods
  
- test what happens when a user pastes non-numeric text into number fields
-*/
+ */
  
 #import "TeamRunViewController.h"
 #import "TeamRunUtility.h"

@@ -403,6 +403,7 @@ Note: to increase likelihood of finding running buddies, all runs are 30 minutes
                         <outlet property="secondsBetweenNotificationsTextField" destination="Nu9-fi-yAm" id="ZJt-Vf-6Y1"/>
                         <outlet property="targetMilePaceMinutes" destination="cTr-Xy-Mww" id="miG-VU-0Oz"/>
                         <outlet property="targetMilePaceSeconds" destination="miL-1j-GDI" id="9x1-8g-P2e"/>
+                        <outlet property="targetMilePaceSwitch" destination="3dk-Vd-MHA" id="sKT-WD-ivr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oe1-uo-fd4" userLabel="First Responder" sceneMemberID="firstResponder"/>
