@@ -6,9 +6,10 @@
 //  Copyright (c) 2012 John DiMatteo. All rights reserved.
 //
 
-/* pickup here: implement behavior based on settings,
+/* pickup here: current pace fluctautes too wildly,
+                speak pace based on setting duration,
+                implement rest of behavior based on settings,
                 make spoken text easy to understand when background music is playing,
-                current pace fluctautes too wildly,
    todo:
  
  disable text fields when corresponding setting is disabled
