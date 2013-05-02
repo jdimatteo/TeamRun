@@ -10,21 +10,45 @@
                 speak pace based on setting duration,
                 implement rest of behavior based on settings,
                 make spoken text easy to understand when background music is playing,
-   todo:
+
+UI Design:
  
  disable text fields when corresponding setting is disabled
- 
- include passing/delta ahead notification settings (on unconnected view controller)
- 
- 1 and .09 miles sounds bad
- 
+
  handle dropping/re-adding players
- 
+
  login not possible after you click the start button
  
  login notification blocks top buttons
  
- display remaining time instead of total time (or maybe both)
+ display remaining time instead of total time
+ 
+ design how more than 2 runners will work, and permit 2-4 players
+ 
+ make the settings screen have sections like the settings app, and maybe the pin stripes texture
+ 
+ settings screen should flip in instead of slide
+ 
+ "Target Pace" might be misleading
+ 
+ find a good name -- TeamRun, KeepPace, RunBuddy, ...
+ 
+ make a better app icon
+ 
+ end of run screen
+ 
+Required before initial release:
+ 
+ get accepting/sending invites working
+ 
+ facebook sharing (optionally including the names of everyone ran with, maybe using Facebook tagging or something)
+ - include a nice icon which when clicked is a link to buy the game
+  
+todo:
+ 
+ include passing/delta ahead notification settings (on unconnected view controller)
+ 
+ 1 and .09 miles sounds bad
  
  don't use PSLocationManager directly -- instead use an abstract class, and have a Fake LocationManager available for testing that maintains a steady pace
  -- allow changing the pace via temporary test buttons (faster, slower -- no directly modifying distance)
@@ -49,20 +73,17 @@
  
  instead of radio mode, maybe record 2 sayings (one for faster, and one for slower), so recording can be sent just once,
  which would eliminate most data transfer needs (just send a couple bytes instead of an audio recording)
- 
- design how more than 2 runners will work
- 
+  
  figure out why "Nearby Players" is an option on simulator but not my phone,
- 
- get accepting/sending invites working
- 
+  
  better voices
  -- try having one voice for positive notifications and another voice for negative notifications
     or maybe just one voice that is better than Slt
  -- https://bitbucket.org/Politepix/openearsextras
+  
+ design an automated application level test (e.g. to confirm that settings are saved properly)
  
- setup unit tests for utility methods
- 
+ twitter sharing
  */
  
 #import "TeamRunViewController.h"
@@ -219,19 +240,29 @@ Slt *slt;
     const double milesRan = [PSLocationManager sharedLocationManager].totalDistance * MILES_PER_METER;
 
     double milesAheadOfOtherRunner = milesRan - (milesOtherPlayerRan);
-    NSString* aheadOrBehind;
-    if (milesRan >= milesOtherPlayerRan)
+    if (abs(milesAheadOfOtherRunner) < 0.25)
     {
-        aheadOrBehind = @"ahead";
-        [self.milesAheadLabel setTextColor:darkGreen];
+        // gps could be off by 20 meters, so if there are two of them a difference of less than 40 meters
+        // could just be noise.  40 meters is about .249 miles, so don't report any difference less than .25 miles
+        [self.milesAheadLabel setText:@""];
     }
     else
     {
-        milesAheadOfOtherRunner *= -1;
-        aheadOrBehind = @"behind";
-        [self.milesAheadLabel setTextColor:darkRed];
+        NSString* aheadOrBehind;
+
+        if (milesRan >= milesOtherPlayerRan)
+        {
+            aheadOrBehind = @"ahead";
+            [self.milesAheadLabel setTextColor:darkGreen];
+        }
+        else
+        {
+            milesAheadOfOtherRunner *= -1;
+            aheadOrBehind = @"behind";
+            [self.milesAheadLabel setTextColor:darkRed];
+        }
+        [self.milesAheadLabel setText:[NSString stringWithFormat:@"%@ mi %@", truncateToTwoDecimals(milesAheadOfOtherRunner), aheadOrBehind]];
     }
-    [self.milesAheadLabel setText:[NSString stringWithFormat:@"%@ mi %@", truncateToTwoDecimals(milesAheadOfOtherRunner), aheadOrBehind]];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -335,7 +366,7 @@ Slt *slt;
     self.match = match;
     
     [self dismissViewControllerAnimated:YES completion:nil];
-    [self log:@"Match found: %@", match];
+    [self log:@"Match found"];
     
     [[PSLocationManager sharedLocationManager] resetLocationUpdates];
     [[PSLocationManager sharedLocationManager] startLocationUpdates];
@@ -353,15 +384,16 @@ Slt *slt;
 
 - (void)match:(GKMatch *)match player:(NSString *)playerID didChangeState:(GKPlayerConnectionState)state
 {
-    [self log:@"match (%@) player (%@) did change state: %d\nexpected player count is now %d", match.description, playerID, state, match.expectedPlayerCount];
     switch (state)
     {
         case GKPlayerStateConnected:
-            // Handle a new player connection.
+            [self log:@"player (%@) connected (%d\nexpected player count is now %d)", playerID, match.expectedPlayerCount];
             break;
         case GKPlayerStateDisconnected:
-            // A player just disconnected.
+            [self log:@"player (%@) disconnected (%d\nexpected player count is now %d)", playerID, match.expectedPlayerCount];
             break;
+        default:
+            [self log:@"match (%@) player (%@) unrecognized state (%d), nexpected player count is now %d", match.description, playerID, state, match.expectedPlayerCount];
     }
     // todo: consider not starting the match (the timer and gps) until match.expectedPlayerCount is 0
 }

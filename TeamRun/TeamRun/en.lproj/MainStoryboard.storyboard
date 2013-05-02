@@ -14,7 +14,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nby-MQ-r01">
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="High Scores">
+                                <state key="normal" title="Leaderboards">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -103,7 +103,7 @@
                             </textView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uJZ-km-juv">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="2rc-Ha-wWg"/>
+                                    <constraint firstAttribute="height" constant="21" id="hPL-Wj-8N4"/>
                                     <constraint firstAttribute="width" constant="129" id="sZs-PU-aF4"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -153,7 +153,6 @@
                             <constraint firstItem="4Sp-T2-DtE" firstAttribute="centerX" secondItem="nby-MQ-r01" secondAttribute="centerX" type="default" id="AEC-re-qig"/>
                             <constraint firstItem="2yI-HH-6ax" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="41" id="Brt-hM-TbD"/>
                             <constraint firstItem="IdA-1U-yUM" firstAttribute="top" secondItem="3" secondAttribute="top" constant="229" id="DUT-JR-Glx"/>
-                            <constraint firstAttribute="trailing" secondItem="Sfg-dv-I23" secondAttribute="trailing" constant="32" id="EAh-Qc-fgI"/>
                             <constraint firstItem="pM9-5X-sRE" firstAttribute="top" secondItem="3" secondAttribute="top" constant="117" id="G37-AQ-27C"/>
                             <constraint firstItem="Sfg-dv-I23" firstAttribute="baseline" secondItem="nby-MQ-r01" secondAttribute="baseline" type="default" id="KxW-th-uwd"/>
                             <constraint firstItem="IdA-1U-yUM" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="LR3-53-ebk"/>
@@ -165,6 +164,7 @@
                             <constraint firstItem="IdA-1U-yUM" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="X2O-Il-hAd"/>
                             <constraint firstItem="r1V-Tb-tbj" firstAttribute="top" secondItem="3" secondAttribute="top" constant="197" id="Xnh-bz-bEs"/>
                             <constraint firstItem="Dis-Km-yJN" firstAttribute="top" secondItem="Sfg-dv-I23" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="ctA-TS-OnH"/>
+                            <constraint firstAttribute="trailing" secondItem="uJZ-km-juv" secondAttribute="trailing" constant="24" id="eAI-O2-yIQ"/>
                             <constraint firstAttribute="trailing" secondItem="Dis-Km-yJN" secondAttribute="trailing" constant="17" id="g1F-pE-grP"/>
                             <constraint firstAttribute="bottom" secondItem="xaZ-jD-g4g" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="kII-38-vSy"/>
                             <constraint firstItem="uJZ-km-juv" firstAttribute="top" secondItem="3" secondAttribute="top" constant="139" id="ldm-VW-v8N"/>
