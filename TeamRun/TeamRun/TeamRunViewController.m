@@ -88,6 +88,7 @@ todo:
  
 #import "TeamRunViewController.h"
 #import "TeamRunUtility.h"
+#import "TeamRunCompletedViewController.h"
 
 #import "PSLocationManager.h"
 
@@ -104,7 +105,7 @@ todo:
 - (IBAction)startStopButtonClicked;
 
 @property (weak, nonatomic) IBOutlet UITextView *scrollingText;
-@property (weak, nonatomic) IBOutlet UILabel *timeRanLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeRemainingLabel;
 @property (weak, nonatomic) IBOutlet UIButton *startStopButton;
 @property (weak, nonatomic) IBOutlet UILabel *currentPaceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *averagePaceLabel;
@@ -112,6 +113,7 @@ todo:
 @property (weak, nonatomic) IBOutlet UILabel *milesAheadLabel;
 
 - (void)createMatch;
+- (void)endMatch;
 - (void)playerAuthenticated;
 - (void)log:(NSString*)format,...;
 - (void)secondRan:(NSTimer *)timer;
@@ -185,16 +187,7 @@ Slt *slt;
 - (IBAction)startStopButtonClicked {
     if (self.match != nil)
     {
-        [self.match disconnect];
-        self.match = nil;
-        
-        [self.startStopButton setTitle:@"Start" forState:UIControlStateNormal];
-        
-        [self.runningTimer invalidate];
-        self.runningTimer = nil;
-        
-        [[PSLocationManager sharedLocationManager] stopLocationUpdates];
-        [self log:@"takes ~10 seconds for GPS shutdown"];
+        [self endMatch];
     }
     else
     {
@@ -204,14 +197,23 @@ Slt *slt;
 
 - (void)secondRan:(NSTimer *)timer
 {
-    int seconds = [PSLocationManager sharedLocationManager].totalSeconds;
-    [self.timeRanLabel setText:[NSString stringWithFormat:@"%.2d:%.2d", seconds / 60, seconds % 60]];
+    // all runs are 30 minutes long
+    int remainingSeconds = 30*60 - [PSLocationManager sharedLocationManager].totalSeconds;
+    
+    if (remainingSeconds <= 0)
+    {
+        [self endMatch];
+    }
+    else
+    {
+        [self.timeRemainingLabel setText:[NSString stringWithFormat:@"%.2d:%.2d", remainingSeconds / 60, remainingSeconds % 60]];
+    }
 }
 
 - (void)speakPace:(NSTimer *)timer
 {
-    NSString* textToSay = [NSString stringWithFormat:@"Average pace is %@", self.averagePaceLabel.text];
-    [self.fliteController say:textToSay withVoice:self.slt];
+    //NSString* textToSay = [NSString stringWithFormat:@"Average pace is %@", self.averagePaceLabel.text];
+    //[self.fliteController say:textToSay withVoice:self.slt];
 }
 
 // todo: this probably isn't good style -- maybe make this an optional arg or overload the function?
@@ -380,6 +382,24 @@ Slt *slt;
                                                         repeats:YES];
     
     [self.startStopButton setTitle:@"Stop" forState:UIControlStateNormal];
+}
+
+- (void)endMatch
+{
+    [self.match disconnect];
+    self.match = nil;
+    
+    [self.startStopButton setTitle:@"Start" forState:UIControlStateNormal];
+    
+    [self.runningTimer invalidate];
+    self.runningTimer = nil;
+    
+    [[PSLocationManager sharedLocationManager] stopLocationUpdates];
+    [self log:@"takes ~10 seconds for GPS shutdown"];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    TeamRunCompletedViewController *completionViewController = [storyboard instantiateViewControllerWithIdentifier:@"RunCompletedViewController"];
+    [self presentViewController:completionViewController animated:YES completion:nil];
 }
 
 - (void)match:(GKMatch *)match player:(NSString *)playerID didChangeState:(GKPlayerConnectionState)state

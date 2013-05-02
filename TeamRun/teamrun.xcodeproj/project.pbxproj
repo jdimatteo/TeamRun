@@ -49,6 +49,7 @@
 		83CF1558172AB7C3006044B0 /* TeamRunUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CF1557172AB7C3006044B0 /* TeamRunUtility.m */; };
 		83CF155E172F2129006044B0 /* TeamRunSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CF155D172F2129006044B0 /* TeamRunSettingsViewController.m */; };
 		83CF1561172F61CE006044B0 /* TeamRunSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CF1560172F61CE006044B0 /* TeamRunSettings.m */; };
+		83CF15641732E225006044B0 /* TeamRunCompletedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CF15631732E225006044B0 /* TeamRunCompletedViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +116,8 @@
 		83CF155D172F2129006044B0 /* TeamRunSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamRunSettingsViewController.m; sourceTree = "<group>"; };
 		83CF155F172F61CE006044B0 /* TeamRunSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamRunSettings.h; sourceTree = "<group>"; };
 		83CF1560172F61CE006044B0 /* TeamRunSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamRunSettings.m; sourceTree = "<group>"; };
+		83CF15621732E225006044B0 /* TeamRunCompletedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamRunCompletedViewController.h; sourceTree = "<group>"; };
+		83CF15631732E225006044B0 /* TeamRunCompletedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamRunCompletedViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +203,8 @@
 				83CF155D172F2129006044B0 /* TeamRunSettingsViewController.m */,
 				83CF155F172F61CE006044B0 /* TeamRunSettings.h */,
 				83CF1560172F61CE006044B0 /* TeamRunSettings.m */,
+				83CF15621732E225006044B0 /* TeamRunCompletedViewController.h */,
+				83CF15631732E225006044B0 /* TeamRunCompletedViewController.m */,
 			);
 			path = TeamRun;
 			sourceTree = "<group>";
@@ -404,6 +409,7 @@
 				83CF1558172AB7C3006044B0 /* TeamRunUtility.m in Sources */,
 				83CF155E172F2129006044B0 /* TeamRunSettingsViewController.m in Sources */,
 				83CF1561172F61CE006044B0 /* TeamRunSettings.m in Sources */,
+				83CF15641732E225006044B0 /* TeamRunCompletedViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -605,6 +611,7 @@
 				83CF1553172AB581006044B0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
