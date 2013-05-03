@@ -18,11 +18,7 @@ UI Design:
  handle dropping/re-adding players
 
  login not possible after you click the start button
- 
- login notification blocks top buttons
- 
- display remaining time instead of total time
- 
+   
  design how more than 2 runners will work, and permit 2-4 players
  
  make the settings screen have sections like the settings app, and maybe the pin stripes texture
@@ -73,9 +69,7 @@ todo:
  
  instead of radio mode, maybe record 2 sayings (one for faster, and one for slower), so recording can be sent just once,
  which would eliminate most data transfer needs (just send a couple bytes instead of an audio recording)
-  
- figure out why "Nearby Players" is an option on simulator but not my phone,
-  
+    
  better voices
  -- try having one voice for positive notifications and another voice for negative notifications
     or maybe just one voice that is better than Slt
