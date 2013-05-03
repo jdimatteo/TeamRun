@@ -101,12 +101,12 @@ todo:
 @interface TeamRunViewController ()
 <GKGameCenterControllerDelegate, GKMatchmakerViewControllerDelegate, GKMatchDelegate, PSLocationManagerDelegate>
 
-- (IBAction)openGameCenter;
-- (IBAction)startStopButtonClicked;
+- (IBAction)startStopButtonClicked:(id)sender;
+- (IBAction)openLeaderboards:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UITextView *scrollingText;
 @property (weak, nonatomic) IBOutlet UILabel *timeRemainingLabel;
-@property (weak, nonatomic) IBOutlet UIButton *startStopButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *startStopButton;
 @property (weak, nonatomic) IBOutlet UILabel *currentPaceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *averagePaceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *milesRanLabel;
@@ -184,7 +184,8 @@ Slt *slt;
     [self.scrollingText scrollRangeToVisible:NSMakeRange([self.scrollingText.text length], 0)];
 }
 
-- (IBAction)startStopButtonClicked {
+- (IBAction)startStopButtonClicked:(id)sender
+{
     if (self.match != nil)
     {
         [self endMatch];
@@ -323,7 +324,8 @@ Slt *slt;
     };
 }
 
-- (IBAction)openGameCenter {
+- (IBAction)openLeaderboards:(id)sender
+{
     GKGameCenterViewController *gameCenterController = [[GKGameCenterViewController alloc] init];
     if (gameCenterController != nil)
     {
@@ -381,7 +383,7 @@ Slt *slt;
                                                        userInfo:nil
                                                         repeats:YES];
     
-    [self.startStopButton setTitle:@"Stop" forState:UIControlStateNormal];
+    [self.startStopButton setTitle:@"Stop"];
 }
 
 - (void)endMatch
@@ -389,7 +391,7 @@ Slt *slt;
     [self.match disconnect];
     self.match = nil;
     
-    [self.startStopButton setTitle:@"Start" forState:UIControlStateNormal];
+    [self.startStopButton setTitle:@"Start"];
     
     [self.runningTimer invalidate];
     self.runningTimer = nil;
