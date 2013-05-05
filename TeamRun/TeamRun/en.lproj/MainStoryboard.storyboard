@@ -99,6 +99,7 @@
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="0Sl-ct-V08"/>
                                     <barButtonItem title="Start" style="done" id="BKK-a1-tcW">
+                                        <color key="tintColor" red="0.48914531409373219" green="0.7442648121387283" blue="0.1369962308910225" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="startStopButtonClicked:" destination="2" id="vKv-83-8wS"/>
                                         </connections>

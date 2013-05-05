@@ -26,8 +26,8 @@
     
     CGRect currentBounds = self.bounds;
     CGPoint topCenter = CGPointMake(CGRectGetMidX(currentBounds), 0.0f);
-    CGPoint midCenter = CGPointMake(CGRectGetMidX(currentBounds), CGRectGetMidY(currentBounds));
-    CGContextDrawLinearGradient(currentContext, glossGradient, topCenter, midCenter, 0);
+    CGPoint bottomCenter = CGPointMake(CGRectGetMidX(currentBounds), CGRectGetHeight(currentBounds));
+    CGContextDrawLinearGradient(currentContext, glossGradient, topCenter, bottomCenter, 0);
     
     CGGradientRelease(glossGradient);
     CGColorSpaceRelease(rgbColorspace);
