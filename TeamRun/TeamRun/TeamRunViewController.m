@@ -13,6 +13,9 @@
 
 UI Design:
  
+ note: I experimented with a Tab Bar Controller, and using Toolbars, but I don't think either fit with my buttons and views
+       (e.g. tabs don't work because leaderboards is not a tab, and toolbar isn't supposed to be used to change views)
+ 
  disable text fields when corresponding setting is disabled
 
  handle dropping/re-adding players
