@@ -83,6 +83,11 @@ todo:
  test that screen resizes properly when phone call green bar is at top of screen of iPhone 4 
  
  test that starting a second run works properly (e.g. GPS starts back up properly, fields display new run info, average pace is reset, etc.)
+ 
+ Additional Features (maybe version 2)
+ 
+ - Announce Ahead/Behind changed by X meters setting
+ - Announce passing setting
  */
  
 #import "TeamRunViewController.h"
