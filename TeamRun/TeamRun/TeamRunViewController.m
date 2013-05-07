@@ -157,8 +157,6 @@ Slt *slt;
                                                           selector:@selector(speakPace:)
                                                           userInfo:nil
                                                            repeats:YES];
-    
-    
 }
 
 - (void)didReceiveMemoryWarning
