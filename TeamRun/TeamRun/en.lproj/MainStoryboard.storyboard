@@ -20,7 +20,10 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="1.34 mi ahead" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OEi-bS-BKb">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="on pace" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OEi-bS-BKb">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="229" id="sXg-z4-bff"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -41,7 +44,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="22:34" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aEd-jh-KIp">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="30:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aEd-jh-KIp">
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="161" type="user" id="fYp-Q2-SXX"/>
                                 </constraints>
@@ -60,6 +63,9 @@
                                         <state key="highlighted">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="startStopButtonClicked:" destination="2" eventType="touchUpInside" id="t32-5f-TgJ"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bxd-6G-T09">
                                         <constraints>
@@ -74,6 +80,9 @@
                                         <state key="highlighted">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="7VN-1N-Sd7" kind="modal" id="1e2-W8-MKj"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ol6-CP-9Mo">
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -84,6 +93,9 @@
                                         <state key="highlighted">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="openLeaderboards:" destination="2" eventType="touchUpInside" id="Uc8-lW-iYM"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -166,6 +178,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="RFS-6o-dXj"/>
+                    <connections>
+                        <outlet property="averagePaceLabel" destination="Y7u-lm-hIR" id="uyL-Wf-Uwd"/>
+                        <outlet property="currentPaceLabel" destination="tNo-Bc-8nc" id="oE5-Mp-OrW"/>
+                        <outlet property="milesAheadLabel" destination="OEi-bS-BKb" id="aJD-8U-DUr"/>
+                        <outlet property="milesRanLabel" destination="CCp-oV-Hae" id="f8i-kS-hvs"/>
+                        <outlet property="startStopButton" destination="5mu-FP-zpB" id="Lhk-jo-BvT"/>
+                        <outlet property="timeRemainingLabel" destination="aEd-jh-KIp" id="036-xv-8d9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
@@ -526,7 +546,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oe1-uo-fd4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="260" y="143"/>
+            <point key="canvasLocation" x="-8" y="143"/>
         </scene>
     </scenes>
     <classes>
@@ -568,7 +588,7 @@
                 <relationship kind="outlet" name="milesAheadLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="milesRanLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="scrollingText" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="startStopButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="startStopButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="timeRemainingLabel" candidateClass="UILabel"/>
             </relationships>
         </class>

@@ -103,7 +103,7 @@ todo:
 
 @property (weak, nonatomic) IBOutlet UITextView *scrollingText;
 @property (weak, nonatomic) IBOutlet UILabel *timeRemainingLabel;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *startStopButton;
+@property (weak, nonatomic) IBOutlet UIButton *startStopButton;
 @property (weak, nonatomic) IBOutlet UILabel *currentPaceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *averagePaceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *milesRanLabel;
@@ -227,13 +227,14 @@ Slt *slt;
         lastRecordedMilesOtherPlayerRan = milesOtherPlayerRan;
     }
     
+    /* todo: consider setting ahead / behind colors 
     static UIColor* darkGreen = nil;
     static UIColor* darkRed = nil;
     if (darkGreen == nil || darkRed == nil)
     {
         darkGreen = [UIColor colorWithRed:0.1015625 green:0.3984375 blue:0.125 alpha:1];
         darkRed = [UIColor colorWithRed:0.75 green:0 blue:0 alpha:1];
-    }
+    }*/
 
     const double milesRan = [PSLocationManager sharedLocationManager].totalDistance * MILES_PER_METER;
 
@@ -242,7 +243,7 @@ Slt *slt;
     {
         // gps could be off by 20 meters, so if there are two of them a difference of less than 40 meters
         // could just be noise.  40 meters is about .249 miles, so don't report any difference less than .25 miles
-        [self.milesAheadLabel setText:@""];
+        [self.milesAheadLabel setText:@"on pace"];
     }
     else
     {
@@ -251,13 +252,13 @@ Slt *slt;
         if (milesRan >= milesOtherPlayerRan)
         {
             aheadOrBehind = @"ahead";
-            [self.milesAheadLabel setTextColor:darkGreen];
+            //[self.milesAheadLabel setTextColor:darkGreen];
         }
         else
         {
             milesAheadOfOtherRunner *= -1;
             aheadOrBehind = @"behind";
-            [self.milesAheadLabel setTextColor:darkRed];
+            //[self.milesAheadLabel setTextColor:darkRed];
         }
         [self.milesAheadLabel setText:[NSString stringWithFormat:@"%@ mi %@", truncateToTwoDecimals(milesAheadOfOtherRunner), aheadOrBehind]];
     }
@@ -378,7 +379,7 @@ Slt *slt;
                                                        userInfo:nil
                                                         repeats:YES];
     
-    [self.startStopButton setTitle:@"Stop"];
+    [self.startStopButton setTitle:@"Stop" forState:UIControlStateNormal];
 }
 
 - (void)endMatch
@@ -386,7 +387,7 @@ Slt *slt;
     [self.match disconnect];
     self.match = nil;
     
-    [self.startStopButton setTitle:@"Start"];
+    [self.startStopButton setTitle:@"Run" forState:UIControlStateNormal];
     
     [self.runningTimer invalidate];
     self.runningTimer = nil;
