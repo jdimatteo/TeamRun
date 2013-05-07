@@ -81,6 +81,8 @@ todo:
  design an automated application level test (e.g. to confirm that settings are saved properly)
  
  twitter sharing
+ 
+ test that screen resizes properly when phone call green bar is at top of screen of iPhone 4 
  */
  
 #import "TeamRunViewController.h"
@@ -239,7 +241,7 @@ Slt *slt;
     const double milesRan = [PSLocationManager sharedLocationManager].totalDistance * MILES_PER_METER;
 
     double milesAheadOfOtherRunner = milesRan - (milesOtherPlayerRan);
-    if (abs(milesAheadOfOtherRunner) < 0.25)
+    if ( (milesAheadOfOtherRunner < 0 ? -1.0 * milesAheadOfOtherRunner : milesAheadOfOtherRunner ) < 0.25)
     {
         // gps could be off by 20 meters, so if there are two of them a difference of less than 40 meters
         // could just be noise.  40 meters is about .249 miles, so don't report any difference less than .25 miles
