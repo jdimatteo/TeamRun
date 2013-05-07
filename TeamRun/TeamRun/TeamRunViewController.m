@@ -25,9 +25,7 @@ UI Design:
  design how more than 2 runners will work, and permit 2-4 players
  
  make the settings screen have sections like the settings app, and maybe the pin stripes texture
- 
- settings screen should flip in instead of slide
- 
+  
  "Target Pace" might be misleading
  
  find a good name -- TeamRun, KeepPace, RunBuddy, ...
@@ -83,6 +81,8 @@ todo:
  twitter sharing
  
  test that screen resizes properly when phone call green bar is at top of screen of iPhone 4 
+ 
+ test that starting a second run works properly (e.g. GPS starts back up properly, fields display new run info, average pace is reset, etc.)
  */
  
 #import "TeamRunViewController.h"
