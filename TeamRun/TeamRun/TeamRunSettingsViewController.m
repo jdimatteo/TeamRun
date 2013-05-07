@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIView *notificationsSectionView;
 @property (weak, nonatomic) IBOutlet UIView *targetPaceSectionView;
 @property (weak, nonatomic) IBOutlet UIView *noteSectionView;
+- (IBAction)updateEnabledFields;
 
 -(void)doneWithNumberPad;
 
@@ -65,6 +66,24 @@
     _targetPaceSectionView.layer.masksToBounds = YES;
     _noteSectionView.layer.cornerRadius = 5;
     _noteSectionView.layer.masksToBounds = YES;
+    
+    [self updateEnabledFields];
+}
+
+void enable(UITextField* textField, const bool enabled)
+{
+    textField.enabled = enabled;
+    textField.alpha = enabled ? 1 : 0.6;
+}
+
+- (IBAction)updateEnabledFields
+{
+    const bool notificationsEnabled = _paceNotificationsSwitch.on || _relativePositionNotificationsSwitch.on;
+    enable(_minutesBetweenNotificationsTextField, notificationsEnabled);
+    enable(_secondsBetweenNotificationsTextField, notificationsEnabled);
+    
+    enable(_targetMilePaceMinutesTextField, _targetMilePaceSwitch.on);
+    enable(_targetMilePaceSecondsTextField, _targetMilePaceSwitch.on);
 }
 
 -(void)doneWithNumberPad

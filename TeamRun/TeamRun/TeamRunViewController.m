@@ -14,10 +14,11 @@
 UI Design:
  
  note: I experimented with a Tab Bar Controller, and using Toolbars, but I don't think either fit with my buttons and views
-       (e.g. tabs don't work because leaderboards is not a tab, and toolbar isn't supposed to be used to change views)
+       (e.g. tabs don't work because leaderboards is not a tab, and toolbar isn't supposed to be used to change views).
+       I also tried implementing the settings screen as a table view, but the scrolling seemed unnecessary and it didn't
+       look good either.  I also tried setting the background to an empty table view, but that also looked poor.
+       The settings and main screen are good enough as is, stop fiddling!
  
- disable text fields when corresponding setting is disabled
-
  handle dropping/re-adding players
 
  login not possible after you click the start button
