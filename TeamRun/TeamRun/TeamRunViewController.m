@@ -94,6 +94,7 @@ todo:
 #import "TeamRunViewController.h"
 #import "TeamRunUtility.h"
 #import "TeamRunCompletedViewController.h"
+#import "TeamRunSettings.h"
 
 #import "PSLocationManager.h"
 
@@ -122,8 +123,9 @@ todo:
 - (void)playerAuthenticated;
 - (void)log:(NSString*)format,...;
 - (void)secondRan:(NSTimer *)timer;
-- (void)speakPace:(NSTimer *)timer;
+- (void)speakNotification:(NSTimer *)timer;
 - (void)updateMilesAhead:(double) milesOtherPlayerRan;
+- (void)updateNotificationsTimerIfNecessary;
 
 @property (weak, nonatomic) GKMatch* match;
 @property (nonatomic) NSTimer* runningTimer;
@@ -135,10 +137,6 @@ todo:
 @end
 
 static const double MILES_PER_METER = 0.000621371;
-
-// todo: change to something like 60
-// todo: make user configurable
-static const int SECONDS_BETWEEN_PACE_UPDATES = 1;
 
 FliteController *fliteController;
 Slt *slt;
@@ -157,14 +155,37 @@ Slt *slt;
     
     // following causes open ears speach to work while running in the background or locked
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
-    [[AudioSessionManager sharedAudioSessionManager]setSoundMixing:YES];
+    [[AudioSessionManager sharedAudioSessionManager]setSoundMixing:YES];    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     
-    // todo: start this when match found, and end it when stop clicked
-    self.paceUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:SECONDS_BETWEEN_PACE_UPDATES
-                                                            target:self
-                                                          selector:@selector(speakPace:)
-                                                          userInfo:nil
-                                                           repeats:YES];
+    [self updateNotificationsTimerIfNecessary];
+}
+
+- (void)updateNotificationsTimerIfNecessary
+{
+    bool notifications = [TeamRunSettings notificationsEnabled] && self.match != nil;
+    
+    if (self.paceUpdateTimer != nil)
+    {
+        if (!notifications || [self.paceUpdateTimer timeInterval] != [TeamRunSettings secondsBetweenNotifications])
+        {
+            [self.paceUpdateTimer invalidate];
+            self.paceUpdateTimer = nil;
+        }
+    }
+    
+    if (notifications && self.paceUpdateTimer == nil)
+    {
+        self.paceUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:[TeamRunSettings secondsBetweenNotifications]
+                                                                target:self
+                                                              selector:@selector(speakNotification:)
+                                                              userInfo:nil
+                                                               repeats:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -214,10 +235,11 @@ Slt *slt;
     }
 }
 
-- (void)speakPace:(NSTimer *)timer
+- (void)speakNotification:(NSTimer *)timer
 {
-    //NSString* textToSay = [NSString stringWithFormat:@"Average pace is %@", self.averagePaceLabel.text];
-    //[self.fliteController say:textToSay withVoice:self.slt];
+    NSString* textToSay = [NSString stringWithFormat:@"Average pace is %@", self.averagePaceLabel.text];
+    [self log:@"About to say: %@", textToSay];
+    [self.fliteController say:textToSay withVoice:self.slt];
 }
 
 // todo: this probably isn't good style -- maybe make this an optional arg or overload the function?
@@ -388,6 +410,8 @@ Slt *slt;
                                                         repeats:YES];
     
     [self.startStopButton setTitle:@"Stop" forState:UIControlStateNormal];
+    
+    [self updateNotificationsTimerIfNecessary];
 }
 
 - (void)endMatch
@@ -399,6 +423,8 @@ Slt *slt;
     
     [self.runningTimer invalidate];
     self.runningTimer = nil;
+    
+    [self updateNotificationsTimerIfNecessary];
     
     [[PSLocationManager sharedLocationManager] stopLocationUpdates];
     [self log:@"takes ~10 seconds for GPS shutdown"];

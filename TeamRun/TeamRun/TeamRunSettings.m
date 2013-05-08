@@ -23,6 +23,11 @@
     [[NSUserDefaults standardUserDefaults] setInteger:seconds forKey:@"secondsBetweenPaceNotifications"];
 }
 
++ (BOOL)notificationsEnabled
+{
+    return [TeamRunSettings paceNotificationsEnabled] || [TeamRunSettings relativePositionNotificationsEnabled];
+}
+
 // note that I store paceNotificationsDisabled (and paceNotificationsDisabled) instead of paceNotificationsEnabled
 // (and paceNotificationsEnabled) so that that it defaults to pace notifications enabled (since the BOOL NSUserDefaults initial value is false)
 + (BOOL)paceNotificationsEnabled

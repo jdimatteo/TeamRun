@@ -16,6 +16,8 @@
 + (int)targetSecondsPerMile;
 + (void)setTargetSecondsPerMile:(const int) seconds;
 
++ (BOOL)notificationsEnabled;
+
 + (BOOL)paceNotificationsEnabled;
 + (void)setPaceNotificationsEnabled:(const BOOL)enabled;
 
