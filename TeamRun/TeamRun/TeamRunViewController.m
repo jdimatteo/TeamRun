@@ -6,8 +6,9 @@
 //  Copyright (c) 2012 John DiMatteo. All rights reserved.
 //
 
-/* pickup here: current pace fluctautes too wildly,
-                speak pace based on setting duration,
+/* pickup here: if pace enabled: speak distance, time remaining, average, and current pace during notifications,
+                optionally speak relative positions,
+                current pace fluctautes too wildly,
                 implement rest of behavior based on settings,
                 make spoken text easy to understand when background music is playing,
 
@@ -98,7 +99,7 @@ todo:
 
 #import "PSLocationManager.h"
 
-#import <Slt/Slt.h>
+#import <Awb/Awb.h>
 #import <OpenEars/FliteController.h>
 #import <OpenEars/AudioSessionManager.h>
 
@@ -131,15 +132,12 @@ todo:
 @property (nonatomic) NSTimer* runningTimer;
 @property (nonatomic) NSTimer* paceUpdateTimer;
 
-@property (strong, nonatomic) FliteController *fliteController;
-@property (strong, nonatomic) Slt *slt;
-
 @end
 
 static const double MILES_PER_METER = 0.000621371;
 
 FliteController *fliteController;
-Slt *slt;
+Awb *voice;
 
 @implementation TeamRunViewController
 
@@ -155,7 +153,9 @@ Slt *slt;
     
     // following causes open ears speach to work while running in the background or locked
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
-    [[AudioSessionManager sharedAudioSessionManager]setSoundMixing:YES];    
+    [[AudioSessionManager sharedAudioSessionManager]setSoundMixing:YES];
+    
+    [self speakNotification:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -237,9 +237,11 @@ Slt *slt;
 
 - (void)speakNotification:(NSTimer *)timer
 {
-    NSString* textToSay = [NSString stringWithFormat:@"Average pace is %@", self.averagePaceLabel.text];
+    //NSString* textToSay = [NSString stringWithFormat:@"Average pace is %@", self.averagePaceLabel.text];
+    //todo:
+    NSString* textToSay = @"You have run 7 minutes 22 seconds, 2.41 miles, with average pace 7 minutes 22 seconds";
     [self log:@"About to say: %@", textToSay];
-    [self.fliteController say:textToSay withVoice:self.slt];
+    [self say:textToSay];
 }
 
 // todo: this probably isn't good style -- maybe make this an optional arg or overload the function?
@@ -507,7 +509,7 @@ Slt *slt;
     [self updateMilesAhead:-1];
     
     NSString* textToSay = [NSString stringWithFormat:@"%@ miles ran", [self speachStringFromDecimal: milesRan]];
-    [self.fliteController say:textToSay withVoice:self.slt];
+    [self say:textToSay];
 }
 
 - (void)locationManager:(PSLocationManager *)locationManager error:(NSError *)error {
@@ -521,19 +523,19 @@ Slt *slt;
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-- (FliteController *)fliteController {
-	if (fliteController == nil) {
+- (void) say:(NSString*)textToSay
+{
+    if (voice == nil) {
+		voice = [[Awb alloc] init];
+	}
+    
+    if (fliteController == nil) {
 		fliteController = [[FliteController alloc] init];
 	}
-	return fliteController;
+    
+    [fliteController say:textToSay withVoice:voice];
 }
 
-- (Slt *)slt {
-	if (slt == nil) {
-		slt = [[Slt alloc] init];
-	}
-	return slt;
-}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //

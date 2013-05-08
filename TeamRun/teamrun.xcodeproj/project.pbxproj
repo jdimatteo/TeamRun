@@ -51,6 +51,7 @@
 		83CF1561172F61CE006044B0 /* TeamRunSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CF1560172F61CE006044B0 /* TeamRunSettings.m */; };
 		83CF15641732E225006044B0 /* TeamRunCompletedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CF15631732E225006044B0 /* TeamRunCompletedViewController.m */; };
 		83CF15671733E82B006044B0 /* TeamRunView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CF15661733E82B006044B0 /* TeamRunView.m */; };
+		83CF1608173B13D4006044B0 /* Awb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CF1607173B13D4006044B0 /* Awb.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +122,7 @@
 		83CF15631732E225006044B0 /* TeamRunCompletedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamRunCompletedViewController.m; sourceTree = "<group>"; };
 		83CF15651733E82B006044B0 /* TeamRunView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamRunView.h; sourceTree = "<group>"; };
 		83CF15661733E82B006044B0 /* TeamRunView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamRunView.m; sourceTree = "<group>"; };
+		83CF1607173B13D4006044B0 /* Awb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Awb.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 				520276F216762D300004BBDC /* CoreGraphics.framework in Frameworks */,
 				83CF15321729FE57006044B0 /* OpenEars.framework in Frameworks */,
 				83CF15381729FE57006044B0 /* Slt.framework in Frameworks */,
+				83CF1608173B13D4006044B0 /* Awb.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,6 +159,7 @@
 		520276DE16762D300004BBDC = {
 			isa = PBXGroup;
 			children = (
+				83CF1607173B13D4006044B0 /* Awb.framework */,
 				83CF15391729FECB006044B0 /* AudioToolbox.framework */,
 				83CF153A1729FECB006044B0 /* AVFoundation.framework */,
 				83CF15191729FE57006044B0 /* Framework */,
@@ -522,6 +526,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Framework\"",
+					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeamRun/teamrun-Prefix.pch";
@@ -538,6 +543,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Framework\"",
+					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeamRun/teamrun-Prefix.pch";
