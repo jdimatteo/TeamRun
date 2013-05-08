@@ -508,7 +508,7 @@ Awb *voice;
     
     [self updateMilesAhead:-1];
     
-    NSString* textToSay = [NSString stringWithFormat:@"%@ miles ran", [self speachStringFromDecimal: milesRan]];
+    NSString* textToSay = [NSString stringWithFormat:@"%@ miles ran", truncateToTwoDecimals(milesRan)];
     [self say:textToSay];
 }
 
@@ -582,34 +582,6 @@ NSString* minutesPerMilePaceString(const double metersPerSecond)
         }
     }
     return @"0:00";
-}
-
-// open ears pernounces a blip after the point when saying strings like "1.03" but not strings like "1 and .03",
-// so this function formats strings to not pernounce the blip (this is working around a bug in open ears)
--(NSString*) speachStringFromDecimal:(const double) value
-{
-    // test case I tried, all sounded fine:
-    //[self.fliteController say:[NSString stringWithFormat:@"%@ miles ran", [self speachStringFromDecimal:0.03]] withVoice:self.slt];
-    //[self.fliteController say:[NSString stringWithFormat:@"%@ miles ran", [self speachStringFromDecimal:1.00]] withVoice:self.slt];
-    //[self.fliteController say:[NSString stringWithFormat:@"%@ miles ran", [self speachStringFromDecimal:1.00723]] withVoice:self.slt];
-    //[self.fliteController say:[NSString stringWithFormat:@"%@ miles ran", [self speachStringFromDecimal:0.00]] withVoice:self.slt];
-    //[self.fliteController say:[NSString stringWithFormat:@"%@ miles ran", [self speachStringFromDecimal:0.0077]] withVoice:self.slt];
-    //[self.fliteController say:[NSString stringWithFormat:@"%@ miles ran", [self speachStringFromDecimal:1.03]] withVoice:self.slt];
-    
-    const int integer = value;
-    const int hundreths = (value - integer)*100;
-    if (integer == 0 && hundreths == 0)
-    {
-        return @".00";
-    }
-    else if (integer == 0 && hundreths != 0)
-    {
-        return [NSString stringWithFormat:@".%02d", hundreths];
-    }
-    else
-    {
-        return [NSString stringWithFormat:@"%d and .%02d", integer, hundreths];
-    }
 }
 
 @end
