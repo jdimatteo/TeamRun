@@ -20,6 +20,10 @@ UI Design:
        look good either.  I also tried setting the background to an empty table view, but that also looked poor.
        The settings and main screen are good enough as is, stop fiddling!
  
+ on the settings screen, add a ? button (or some other info button) that explains the settings, and remove the text from the main screen
+ 
+ when tapping a number field on the settings screen, highlight what is already selected so that it can be overwritten without deleting
+ 
  handle dropping/re-adding players
 
  login not possible after you click the start button
@@ -37,8 +41,6 @@ UI Design:
  end of run screen
  
 Required before initial release:
- 
- get accepting/sending invites working
  
  facebook sharing (optionally including the names of everyone ran with, maybe using Facebook tagging or something)
  - include a nice icon which when clicked is a link to buy the game
@@ -73,16 +75,13 @@ todo:
  instead of radio mode, maybe record 2 sayings (one for faster, and one for slower), so recording can be sent just once,
  which would eliminate most data transfer needs (just send a couple bytes instead of an audio recording)
     
- better voices
- -- try having one voice for positive notifications and another voice for negative notifications
-    or maybe just one voice that is better than Slt
- -- https://bitbucket.org/Politepix/openearsextras
+ try having one voice for positive notifications and another voice for negative notifications
   
  design an automated application level test (e.g. to confirm that settings are saved properly)
  
  twitter sharing
  
- test that screen resizes properly when phone call green bar is at top of screen of iPhone 4 
+ test that screen resizes properly when phone call green bar is at top of screen of iPhone 4
  
  test that starting a second run works properly (e.g. GPS starts back up properly, fields display new run info, average pace is reset, etc.)
  
@@ -125,7 +124,7 @@ todo:
 - (void)log:(NSString*)format,...;
 - (void)secondRan:(NSTimer *)timer;
 - (void)speakNotification:(NSTimer *)timer;
-- (void)updateMilesAhead:(double) milesOtherPlayerRan;
+- (double)updateMilesAhead:(double) milesOtherPlayerRan;
 - (void)updateNotificationsTimerIfNecessary;
 
 @property (weak, nonatomic) GKMatch* match;
@@ -153,7 +152,7 @@ Awb *voice;
     
     // following causes open ears speach to work while running in the background or locked
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
-    [[AudioSessionManager sharedAudioSessionManager]setSoundMixing:YES];
+    [[AudioSessionManager sharedAudioSessionManager]setSoundMixing:YES];    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -241,14 +240,21 @@ Awb *voice;
         
     NSString* pace = minutesPerMilePaceString([PSLocationManager sharedLocationManager].totalDistance/[PSLocationManager sharedLocationManager].totalSeconds, true);
     
-    NSString* paceNotification = [NSString stringWithFormat:@"You have run %@, %@ miles, at %@ mile pace", durationRan, self.milesRanLabel.text, pace];
-    [self log:@"About to say: %@", paceNotification];
-    [self say:paceNotification];
+    NSString* paceNotification = [NSString stringWithFormat:@"You have run %@, %@ miles, at %@ mile pace.", durationRan, self.milesRanLabel.text, pace];
+    
+    NSString* relativePositionNotification = [NSString stringWithFormat:@"You are about %@ miles ahead.", truncateToTwoDecimals([self updateMilesAhead:-1])];
+    
+    NSString* notification = [NSString stringWithFormat:@"%@ %@",
+                              [TeamRunSettings paceNotificationsEnabled] ? paceNotification : @"",
+                              [TeamRunSettings relativePositionNotificationsEnabled] ? relativePositionNotification : @""];
+    [self log:@"About to say: %@", notification];
+    [self say:notification];
 }
 
 // todo: this probably isn't good style -- maybe make this an optional arg or overload the function?
 // pass in -1 for distance if it is unchanged
-- (void)updateMilesAhead:(double) milesOtherPlayerRan
+// returns milesAhead of other runner
+- (double)updateMilesAhead:(double) milesOtherPlayerRan
 {
     static double lastRecordedMilesOtherPlayerRan = 0;
     
@@ -296,6 +302,8 @@ Awb *voice;
         }
         [self.milesAheadLabel setText:[NSString stringWithFormat:@"%@ mi %@", truncateToTwoDecimals(milesAheadOfOtherRunner), aheadOrBehind]];
     }
+    
+    return milesAheadOfOtherRunner;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
