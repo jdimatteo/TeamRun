@@ -154,8 +154,6 @@ Awb *voice;
     // following causes open ears speach to work while running in the background or locked
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     [[AudioSessionManager sharedAudioSessionManager]setSoundMixing:YES];
-    
-    [self speakNotification:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -237,11 +235,15 @@ Awb *voice;
 
 - (void)speakNotification:(NSTimer *)timer
 {
-    //NSString* textToSay = [NSString stringWithFormat:@"Average pace is %@", self.averagePaceLabel.text];
-    //todo:
-    NSString* textToSay = @"You have run 7 minutes 22 seconds, 2.41 miles, with average pace 7 minutes 22 seconds";
-    [self log:@"About to say: %@", textToSay];
-    [self say:textToSay];
+    const int secondsRan = [PSLocationManager sharedLocationManager].totalSeconds;
+    NSString* durationRan = secondsRan >= 60 ? [NSString stringWithFormat:@"%d minutes %d seconds", secondsRan/60, secondsRan % 60]
+                                             : [NSString stringWithFormat:@"%d seconds", secondsRan];
+        
+    NSString* pace = minutesPerMilePaceString([PSLocationManager sharedLocationManager].totalDistance/[PSLocationManager sharedLocationManager].totalSeconds, true);
+    
+    NSString* paceNotification = [NSString stringWithFormat:@"You have run %@, %@ miles, at %@ mile pace", durationRan, self.milesRanLabel.text, pace];
+    [self log:@"About to say: %@", paceNotification];
+    [self say:paceNotification];
 }
 
 // todo: this probably isn't good style -- maybe make this an optional arg or overload the function?
@@ -493,9 +495,9 @@ Awb *voice;
     const double metersPerSecond = [PSLocationManager sharedLocationManager].currentSpeed;
     [self log:@"current speed: %f m/s", metersPerSecond];
     
-    [self.currentPaceLabel setText:minutesPerMilePaceString(metersPerSecond)];
+    [self.currentPaceLabel setText:minutesPerMilePaceString(metersPerSecond, false)];
     
-    [self.averagePaceLabel setText:minutesPerMilePaceString(distance/[PSLocationManager sharedLocationManager].totalSeconds)];
+    [self.averagePaceLabel setText:minutesPerMilePaceString(distance/[PSLocationManager sharedLocationManager].totalSeconds, false)];
     
     NSError *error;
     // todo: change all stored distances to floats (I definately don't need the extra precision, and it doubles the amount of data transferred)
@@ -507,9 +509,6 @@ Awb *voice;
     }
     
     [self updateMilesAhead:-1];
-    
-    NSString* textToSay = [NSString stringWithFormat:@"%@ miles ran", truncateToTwoDecimals(milesRan)];
-    [self say:textToSay];
 }
 
 - (void)locationManager:(PSLocationManager *)locationManager error:(NSError *)error {
@@ -543,8 +542,7 @@ Awb *voice;
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-NSString* minutesPerMilePaceString(const double metersPerSecond)
+NSString* minutesPerMilePaceString(const double metersPerSecond, bool verbose)
 {
     /* e.g. if currentSpeed = 1.95 (meters per second),
      *      then that is ~ 0.00121167345 miles per second (1.95 * MILES_PER_METER = 0.00121167),
@@ -565,6 +563,8 @@ NSString* minutesPerMilePaceString(const double metersPerSecond)
     
     const double milesPerSecond = metersPerSecond * MILES_PER_METER;
     
+    NSString* noPace = verbose ? @"0 minutes and 0 seconds" : @"0:00";
+    
     if (milesPerSecond > 0) // prevent divide by zero errors
     {
         const int secondsPerMile = round(1.0 / milesPerSecond);
@@ -574,14 +574,15 @@ NSString* minutesPerMilePaceString(const double metersPerSecond)
         
         if (paceMinutes > 59)
         {
-            return @"0:00";
+            return noPace;
         }
         else
         {
-            return [NSString stringWithFormat:@"%d:%02d", paceMinutes, paceSeconds];
+            return verbose ? [NSString stringWithFormat:@"%d minutes and %d seconds", paceMinutes, paceSeconds]
+                           : [NSString stringWithFormat:@"%d:%02d", paceMinutes, paceSeconds];
         }
     }
-    return @"0:00";
+    return noPace;
 }
 
 @end
