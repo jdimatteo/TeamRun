@@ -153,6 +153,8 @@ static const double MILES_PER_METER = 0.000621371;
 FliteController *fliteController;
 Awb *voice;
 
+dispatch_queue_t speachQueue;
+
 @implementation TeamRunViewController
 
 - (void)viewDidLoad
@@ -167,7 +169,9 @@ Awb *voice;
     
     // following causes open ears speach to work while running in the background or locked
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
-    [[AudioSessionManager sharedAudioSessionManager]setSoundMixing:YES];    
+    [[AudioSessionManager sharedAudioSessionManager]setSoundMixing:YES];
+    
+    speachQueue = dispatch_queue_create("org.TeamRun.SpeachQueue", NULL);
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -179,7 +183,7 @@ Awb *voice;
 
 - (void)updateNotificationsTimerIfNecessary
 {
-    bool notifications = [TeamRunSettings notificationsEnabled];// todo: && self.match != nil;
+    bool notifications = [TeamRunSettings notificationsEnabled] && self.match != nil;
     
     if (self.paceUpdateTimer != nil)
     {
@@ -555,11 +559,10 @@ Awb *voice;
 		fliteController = [[FliteController alloc] init];
 	}
     
-    //AudioSessionSetProperty(kAudioSessionProperty_OtherMixableAudioShouldDuck, sizeof(allowMixing), &allowMixing);
-    
-    //fliteController.audioPlayer
-    
-    [fliteController say:textToSay withVoice:voice];
+    // creating the audio from text takes a second or two to create (before it starts playing),
+    // and this noticibly ties up the main thread preventing user interaction (e.g. buttons don't respond to taps),
+    // so we execute this asynchronously
+    dispatch_async(speachQueue, ^{ [fliteController say:textToSay withVoice:voice]; });    
 }
 
 
