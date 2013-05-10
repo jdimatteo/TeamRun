@@ -6,11 +6,14 @@
 //  Copyright (c) 2012 John DiMatteo. All rights reserved.
 //
 
-/* pickup here: if pace enabled: speak distance, time remaining, average, and current pace during notifications,
-                optionally speak relative positions,
-                current pace fluctautes too wildly,
-                implement rest of behavior based on settings,
-                make spoken text easy to understand when background music is playing,
+/* pickup here: I just got ducking to work, but the background music never goes back up to its original volume,
+                and it would be good if the voice was slightly higher volume (or the music volume went down more)
+ 
+            
+   urgent todos: current pace fluctautes too wildly,
+                 verify "On Pace" text changes when appropriate,
+                 implement rest of behavior based on settings,
+                 make spoken text easy to understand when background music is playing,
 
 UI Design:
  
@@ -20,7 +23,10 @@ UI Design:
        look good either.  I also tried setting the background to an empty table view, but that also looked poor.
        The settings and main screen are good enough as is, stop fiddling!
  
- on the settings screen, add a ? button (or some other info button) that explains the settings, and remove the text from the main screen
+ settings
+ -- on the settings screen, add a ? button (or some other info button) that explains the settings, and remove the text from the main screen
+ 
+ experiment with blue color and talk to a designer
  
  when tapping a number field on the settings screen, highlight what is already selected so that it can be overwritten without deleting
  
@@ -44,6 +50,7 @@ Required before initial release:
  
  facebook sharing (optionally including the names of everyone ran with, maybe using Facebook tagging or something)
  - include a nice icon which when clicked is a link to buy the game
+ - test audio behavior when a phone call occurs during game play
   
 todo:
  
@@ -85,10 +92,16 @@ todo:
  
  test that starting a second run works properly (e.g. GPS starts back up properly, fields display new run info, average pace is reset, etc.)
  
+ test effect of audio on battery life with and without open ears
+ - I think OpenEars disables hardware audio decoding -- see http://developer.apple.com/library/ios/#documentation/Audio/Conceptual/AudioSessionProgrammingGuide/Configuration/Configuration.html , the section discussing mixing disabling hardware decoding
+ - maybe I could setup the audio session to use hardware for audio decoding, maybe just temporarily switching to software
+   decoding while openears is speaking, or maybe disable mixing and disable music when speaking (and enable it again when done speaking)
+ 
  Additional Features (maybe version 2)
  
  - Announce Ahead/Behind changed by X meters setting
  - Announce passing setting
+ - reverse radar like noise so that it increases frequency when ahead or behind
  */
  
 #import "TeamRunViewController.h"
@@ -103,6 +116,8 @@ todo:
 #import <OpenEars/AudioSessionManager.h>
 
 #import <GameKit/GameKit.h>
+
+#import <AudioToolbox/AudioSession.h>
 
 @interface TeamRunViewController ()
 <GKGameCenterControllerDelegate, GKMatchmakerViewControllerDelegate, GKMatchDelegate, PSLocationManagerDelegate>
@@ -152,7 +167,9 @@ Awb *voice;
     
     // following causes open ears speach to work while running in the background or locked
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
-    [[AudioSessionManager sharedAudioSessionManager]setSoundMixing:YES];    
+    [[AudioSessionManager sharedAudioSessionManager]setSoundMixing:YES];
+    
+    [self say:@"Anything"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -164,7 +181,7 @@ Awb *voice;
 
 - (void)updateNotificationsTimerIfNecessary
 {
-    bool notifications = [TeamRunSettings notificationsEnabled] && self.match != nil;
+    bool notifications = [TeamRunSettings notificationsEnabled];// todo: && self.match != nil;
     
     if (self.paceUpdateTimer != nil)
     {
@@ -539,6 +556,10 @@ Awb *voice;
     if (fliteController == nil) {
 		fliteController = [[FliteController alloc] init];
 	}
+    
+    //AudioSessionSetProperty(kAudioSessionProperty_OtherMixableAudioShouldDuck, sizeof(allowMixing), &allowMixing);
+    
+    //fliteController.audioPlayer
     
     [fliteController say:textToSay withVoice:voice];
 }
