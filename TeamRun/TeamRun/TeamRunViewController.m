@@ -6,14 +6,10 @@
 //  Copyright (c) 2012 John DiMatteo. All rights reserved.
 //
 
-/* pickup here: I just got ducking to work, but the background music never goes back up to its original volume,
-                and it would be good if the voice was slightly higher volume (or the music volume went down more)
- 
-            
-   urgent todos: current pace fluctautes too wildly,
-                 verify "On Pace" text changes when appropriate,
-                 implement rest of behavior based on settings,
-                 make spoken text easy to understand when background music is playing,
+/* pickup here: make speach processing occur in background thread to free up gui thread,
+                current pace fluctautes too wildly,
+                verify "On Pace" text changes when appropriate,
+                implement rest of behavior based on settings,
 
 UI Design:
  
@@ -171,9 +167,7 @@ Awb *voice;
     
     // following causes open ears speach to work while running in the background or locked
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
-    [[AudioSessionManager sharedAudioSessionManager]setSoundMixing:YES];
-    
-    [self say:@"Anything"];
+    [[AudioSessionManager sharedAudioSessionManager]setSoundMixing:YES];    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -268,7 +262,6 @@ Awb *voice;
     NSString* notification = [NSString stringWithFormat:@"%@ %@",
                               [TeamRunSettings paceNotificationsEnabled] ? paceNotification : @"",
                               [TeamRunSettings relativePositionNotificationsEnabled] ? relativePositionNotification : @""];
-    [self log:@"About to say: %@", notification];
     [self say:notification];
 }
 

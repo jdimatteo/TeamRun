@@ -23,21 +23,21 @@
 		52A5E0411687ECA800E3A2AB /* SampleMap.png in Resources */ = {isa = PBXBuildFile; fileRef = 52A5E0401687ECA800E3A2AB /* SampleMap.png */; };
 		52BA73D0168EC3700025C3EA /* mute mic.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 52BA73CF168EC3700025C3EA /* mute mic.tiff */; };
 		52F081F4168425D700F2749E /* icon114.png in Resources */ = {isa = PBXBuildFile; fileRef = 52F081F3168425D700F2749E /* icon114.png */; };
-		83369502173D2F0A00923D88 /* cmu07a.dic in Resources */ = {isa = PBXBuildFile; fileRef = 833694F2173D2F0A00923D88 /* cmu07a.dic */; };
-		83369503173D2F0A00923D88 /* feat.params in Resources */ = {isa = PBXBuildFile; fileRef = 833694F4173D2F0A00923D88 /* feat.params */; };
-		83369504173D2F0A00923D88 /* mdef in Resources */ = {isa = PBXBuildFile; fileRef = 833694F5173D2F0A00923D88 /* mdef */; };
-		83369505173D2F0A00923D88 /* means in Resources */ = {isa = PBXBuildFile; fileRef = 833694F6173D2F0A00923D88 /* means */; };
-		83369506173D2F0A00923D88 /* noisedict in Resources */ = {isa = PBXBuildFile; fileRef = 833694F7173D2F0A00923D88 /* noisedict */; };
-		83369507173D2F0A00923D88 /* sendump in Resources */ = {isa = PBXBuildFile; fileRef = 833694F8173D2F0A00923D88 /* sendump */; };
-		83369508173D2F0A00923D88 /* transition_matrices in Resources */ = {isa = PBXBuildFile; fileRef = 833694F9173D2F0A00923D88 /* transition_matrices */; };
-		83369509173D2F0A00923D88 /* variances in Resources */ = {isa = PBXBuildFile; fileRef = 833694FA173D2F0A00923D88 /* variances */; };
-		8336950A173D2F0A00923D88 /* OpenEars.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 833694FB173D2F0A00923D88 /* OpenEars.framework */; };
-		8336950B173D2F0A00923D88 /* OpenEars1.dic in Resources */ = {isa = PBXBuildFile; fileRef = 833694FC173D2F0A00923D88 /* OpenEars1.dic */; };
-		8336950C173D2F0A00923D88 /* OpenEars1.gram in Resources */ = {isa = PBXBuildFile; fileRef = 833694FD173D2F0A00923D88 /* OpenEars1.gram */; };
-		8336950D173D2F0A00923D88 /* OpenEars1.languagemodel in Resources */ = {isa = PBXBuildFile; fileRef = 833694FE173D2F0A00923D88 /* OpenEars1.languagemodel */; };
-		8336950E173D2F0A00923D88 /* OpenEars2.gram in Resources */ = {isa = PBXBuildFile; fileRef = 833694FF173D2F0A00923D88 /* OpenEars2.gram */; };
-		8336950F173D2F0A00923D88 /* OpenEarsCorpus.txt in Resources */ = {isa = PBXBuildFile; fileRef = 83369500173D2F0A00923D88 /* OpenEarsCorpus.txt */; };
-		83369510173D2F0A00923D88 /* Slt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83369501173D2F0A00923D88 /* Slt.framework */; };
+		83369522173DAFDB00923D88 /* cmu07a.dic in Resources */ = {isa = PBXBuildFile; fileRef = 83369512173DAFDB00923D88 /* cmu07a.dic */; };
+		83369523173DAFDB00923D88 /* feat.params in Resources */ = {isa = PBXBuildFile; fileRef = 83369514173DAFDB00923D88 /* feat.params */; };
+		83369524173DAFDB00923D88 /* mdef in Resources */ = {isa = PBXBuildFile; fileRef = 83369515173DAFDB00923D88 /* mdef */; };
+		83369525173DAFDB00923D88 /* means in Resources */ = {isa = PBXBuildFile; fileRef = 83369516173DAFDB00923D88 /* means */; };
+		83369526173DAFDB00923D88 /* noisedict in Resources */ = {isa = PBXBuildFile; fileRef = 83369517173DAFDB00923D88 /* noisedict */; };
+		83369527173DAFDB00923D88 /* sendump in Resources */ = {isa = PBXBuildFile; fileRef = 83369518173DAFDB00923D88 /* sendump */; };
+		83369528173DAFDB00923D88 /* transition_matrices in Resources */ = {isa = PBXBuildFile; fileRef = 83369519173DAFDB00923D88 /* transition_matrices */; };
+		83369529173DAFDB00923D88 /* variances in Resources */ = {isa = PBXBuildFile; fileRef = 8336951A173DAFDB00923D88 /* variances */; };
+		8336952A173DAFDB00923D88 /* OpenEars.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8336951B173DAFDB00923D88 /* OpenEars.framework */; };
+		8336952B173DAFDB00923D88 /* OpenEars1.dic in Resources */ = {isa = PBXBuildFile; fileRef = 8336951C173DAFDB00923D88 /* OpenEars1.dic */; };
+		8336952C173DAFDB00923D88 /* OpenEars1.gram in Resources */ = {isa = PBXBuildFile; fileRef = 8336951D173DAFDB00923D88 /* OpenEars1.gram */; };
+		8336952D173DAFDB00923D88 /* OpenEars1.languagemodel in Resources */ = {isa = PBXBuildFile; fileRef = 8336951E173DAFDB00923D88 /* OpenEars1.languagemodel */; };
+		8336952E173DAFDB00923D88 /* OpenEars2.gram in Resources */ = {isa = PBXBuildFile; fileRef = 8336951F173DAFDB00923D88 /* OpenEars2.gram */; };
+		8336952F173DAFDB00923D88 /* OpenEarsCorpus.txt in Resources */ = {isa = PBXBuildFile; fileRef = 83369520173DAFDB00923D88 /* OpenEarsCorpus.txt */; };
+		83369530173DAFDB00923D88 /* Slt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83369521173DAFDB00923D88 /* Slt.framework */; };
 		833A3147172746EC00E8A61E /* PSLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 833A3145172746EC00E8A61E /* PSLocationManager.m */; };
 		83CF153B1729FECB006044B0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CF15391729FECB006044B0 /* AudioToolbox.framework */; };
 		83CF153C1729FECB006044B0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CF153A1729FECB006044B0 /* AVFoundation.framework */; };
@@ -86,21 +86,21 @@
 		52A5E0401687ECA800E3A2AB /* SampleMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SampleMap.png; sourceTree = "<group>"; };
 		52BA73CF168EC3700025C3EA /* mute mic.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "mute mic.tiff"; sourceTree = "<group>"; };
 		52F081F3168425D700F2749E /* icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114.png; sourceTree = "<group>"; };
-		833694F2173D2F0A00923D88 /* cmu07a.dic */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cmu07a.dic; sourceTree = "<group>"; };
-		833694F4173D2F0A00923D88 /* feat.params */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = feat.params; sourceTree = "<group>"; };
-		833694F5173D2F0A00923D88 /* mdef */ = {isa = PBXFileReference; lastKnownFileType = file; path = mdef; sourceTree = "<group>"; };
-		833694F6173D2F0A00923D88 /* means */ = {isa = PBXFileReference; lastKnownFileType = file; path = means; sourceTree = "<group>"; };
-		833694F7173D2F0A00923D88 /* noisedict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = noisedict; sourceTree = "<group>"; };
-		833694F8173D2F0A00923D88 /* sendump */ = {isa = PBXFileReference; lastKnownFileType = file; path = sendump; sourceTree = "<group>"; };
-		833694F9173D2F0A00923D88 /* transition_matrices */ = {isa = PBXFileReference; lastKnownFileType = file; path = transition_matrices; sourceTree = "<group>"; };
-		833694FA173D2F0A00923D88 /* variances */ = {isa = PBXFileReference; lastKnownFileType = file; path = variances; sourceTree = "<group>"; };
-		833694FB173D2F0A00923D88 /* OpenEars.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenEars.framework; sourceTree = "<group>"; };
-		833694FC173D2F0A00923D88 /* OpenEars1.dic */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OpenEars1.dic; sourceTree = "<group>"; };
-		833694FD173D2F0A00923D88 /* OpenEars1.gram */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OpenEars1.gram; sourceTree = "<group>"; };
-		833694FE173D2F0A00923D88 /* OpenEars1.languagemodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OpenEars1.languagemodel; sourceTree = "<group>"; };
-		833694FF173D2F0A00923D88 /* OpenEars2.gram */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OpenEars2.gram; sourceTree = "<group>"; };
-		83369500173D2F0A00923D88 /* OpenEarsCorpus.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OpenEarsCorpus.txt; sourceTree = "<group>"; };
-		83369501173D2F0A00923D88 /* Slt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Slt.framework; sourceTree = "<group>"; };
+		83369512173DAFDB00923D88 /* cmu07a.dic */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cmu07a.dic; sourceTree = "<group>"; };
+		83369514173DAFDB00923D88 /* feat.params */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = feat.params; sourceTree = "<group>"; };
+		83369515173DAFDB00923D88 /* mdef */ = {isa = PBXFileReference; lastKnownFileType = file; path = mdef; sourceTree = "<group>"; };
+		83369516173DAFDB00923D88 /* means */ = {isa = PBXFileReference; lastKnownFileType = file; path = means; sourceTree = "<group>"; };
+		83369517173DAFDB00923D88 /* noisedict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = noisedict; sourceTree = "<group>"; };
+		83369518173DAFDB00923D88 /* sendump */ = {isa = PBXFileReference; lastKnownFileType = file; path = sendump; sourceTree = "<group>"; };
+		83369519173DAFDB00923D88 /* transition_matrices */ = {isa = PBXFileReference; lastKnownFileType = file; path = transition_matrices; sourceTree = "<group>"; };
+		8336951A173DAFDB00923D88 /* variances */ = {isa = PBXFileReference; lastKnownFileType = file; path = variances; sourceTree = "<group>"; };
+		8336951B173DAFDB00923D88 /* OpenEars.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenEars.framework; sourceTree = "<group>"; };
+		8336951C173DAFDB00923D88 /* OpenEars1.dic */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OpenEars1.dic; sourceTree = "<group>"; };
+		8336951D173DAFDB00923D88 /* OpenEars1.gram */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OpenEars1.gram; sourceTree = "<group>"; };
+		8336951E173DAFDB00923D88 /* OpenEars1.languagemodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OpenEars1.languagemodel; sourceTree = "<group>"; };
+		8336951F173DAFDB00923D88 /* OpenEars2.gram */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OpenEars2.gram; sourceTree = "<group>"; };
+		83369520173DAFDB00923D88 /* OpenEarsCorpus.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OpenEarsCorpus.txt; sourceTree = "<group>"; };
+		83369521173DAFDB00923D88 /* Slt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Slt.framework; sourceTree = "<group>"; };
 		833A3145172746EC00E8A61E /* PSLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSLocationManager.m; sourceTree = "<group>"; };
 		833A3146172746EC00E8A61E /* PSLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSLocationManager.h; sourceTree = "<group>"; };
 		83CF15391729FECB006044B0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -138,8 +138,8 @@
 				520276F016762D300004BBDC /* Foundation.framework in Frameworks */,
 				520276F216762D300004BBDC /* CoreGraphics.framework in Frameworks */,
 				83CF1608173B13D4006044B0 /* Awb.framework in Frameworks */,
-				8336950A173D2F0A00923D88 /* OpenEars.framework in Frameworks */,
-				83369510173D2F0A00923D88 /* Slt.framework in Frameworks */,
+				8336952A173DAFDB00923D88 /* OpenEars.framework in Frameworks */,
+				83369530173DAFDB00923D88 /* Slt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,7 +159,7 @@
 		520276DE16762D300004BBDC = {
 			isa = PBXGroup;
 			children = (
-				833694F1173D2F0A00923D88 /* Framework */,
+				83369511173DAFDB00923D88 /* Framework */,
 				83CF1607173B13D4006044B0 /* Awb.framework */,
 				83CF15391729FECB006044B0 /* AudioToolbox.framework */,
 				83CF153A1729FECB006044B0 /* AVFoundation.framework */,
@@ -234,32 +234,32 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		833694F1173D2F0A00923D88 /* Framework */ = {
+		83369511173DAFDB00923D88 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
-				833694F2173D2F0A00923D88 /* cmu07a.dic */,
-				833694F3173D2F0A00923D88 /* hub4wsj_sc_8k */,
-				833694FB173D2F0A00923D88 /* OpenEars.framework */,
-				833694FC173D2F0A00923D88 /* OpenEars1.dic */,
-				833694FD173D2F0A00923D88 /* OpenEars1.gram */,
-				833694FE173D2F0A00923D88 /* OpenEars1.languagemodel */,
-				833694FF173D2F0A00923D88 /* OpenEars2.gram */,
-				83369500173D2F0A00923D88 /* OpenEarsCorpus.txt */,
-				83369501173D2F0A00923D88 /* Slt.framework */,
+				83369512173DAFDB00923D88 /* cmu07a.dic */,
+				83369513173DAFDB00923D88 /* hub4wsj_sc_8k */,
+				8336951B173DAFDB00923D88 /* OpenEars.framework */,
+				8336951C173DAFDB00923D88 /* OpenEars1.dic */,
+				8336951D173DAFDB00923D88 /* OpenEars1.gram */,
+				8336951E173DAFDB00923D88 /* OpenEars1.languagemodel */,
+				8336951F173DAFDB00923D88 /* OpenEars2.gram */,
+				83369520173DAFDB00923D88 /* OpenEarsCorpus.txt */,
+				83369521173DAFDB00923D88 /* Slt.framework */,
 			);
 			path = Framework;
 			sourceTree = "<group>";
 		};
-		833694F3173D2F0A00923D88 /* hub4wsj_sc_8k */ = {
+		83369513173DAFDB00923D88 /* hub4wsj_sc_8k */ = {
 			isa = PBXGroup;
 			children = (
-				833694F4173D2F0A00923D88 /* feat.params */,
-				833694F5173D2F0A00923D88 /* mdef */,
-				833694F6173D2F0A00923D88 /* means */,
-				833694F7173D2F0A00923D88 /* noisedict */,
-				833694F8173D2F0A00923D88 /* sendump */,
-				833694F9173D2F0A00923D88 /* transition_matrices */,
-				833694FA173D2F0A00923D88 /* variances */,
+				83369514173DAFDB00923D88 /* feat.params */,
+				83369515173DAFDB00923D88 /* mdef */,
+				83369516173DAFDB00923D88 /* means */,
+				83369517173DAFDB00923D88 /* noisedict */,
+				83369518173DAFDB00923D88 /* sendump */,
+				83369519173DAFDB00923D88 /* transition_matrices */,
+				8336951A173DAFDB00923D88 /* variances */,
 			);
 			path = hub4wsj_sc_8k;
 			sourceTree = "<group>";
@@ -364,19 +364,19 @@
 				52F081F4168425D700F2749E /* icon114.png in Resources */,
 				52A5E0411687ECA800E3A2AB /* SampleMap.png in Resources */,
 				52BA73D0168EC3700025C3EA /* mute mic.tiff in Resources */,
-				83369502173D2F0A00923D88 /* cmu07a.dic in Resources */,
-				83369503173D2F0A00923D88 /* feat.params in Resources */,
-				83369504173D2F0A00923D88 /* mdef in Resources */,
-				83369505173D2F0A00923D88 /* means in Resources */,
-				83369506173D2F0A00923D88 /* noisedict in Resources */,
-				83369507173D2F0A00923D88 /* sendump in Resources */,
-				83369508173D2F0A00923D88 /* transition_matrices in Resources */,
-				83369509173D2F0A00923D88 /* variances in Resources */,
-				8336950B173D2F0A00923D88 /* OpenEars1.dic in Resources */,
-				8336950C173D2F0A00923D88 /* OpenEars1.gram in Resources */,
-				8336950D173D2F0A00923D88 /* OpenEars1.languagemodel in Resources */,
-				8336950E173D2F0A00923D88 /* OpenEars2.gram in Resources */,
-				8336950F173D2F0A00923D88 /* OpenEarsCorpus.txt in Resources */,
+				83369522173DAFDB00923D88 /* cmu07a.dic in Resources */,
+				83369523173DAFDB00923D88 /* feat.params in Resources */,
+				83369524173DAFDB00923D88 /* mdef in Resources */,
+				83369525173DAFDB00923D88 /* means in Resources */,
+				83369526173DAFDB00923D88 /* noisedict in Resources */,
+				83369527173DAFDB00923D88 /* sendump in Resources */,
+				83369528173DAFDB00923D88 /* transition_matrices in Resources */,
+				83369529173DAFDB00923D88 /* variances in Resources */,
+				8336952B173DAFDB00923D88 /* OpenEars1.dic in Resources */,
+				8336952C173DAFDB00923D88 /* OpenEars1.gram in Resources */,
+				8336952D173DAFDB00923D88 /* OpenEars1.languagemodel in Resources */,
+				8336952E173DAFDB00923D88 /* OpenEars2.gram in Resources */,
+				8336952F173DAFDB00923D88 /* OpenEarsCorpus.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
