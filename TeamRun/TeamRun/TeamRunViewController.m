@@ -50,7 +50,11 @@ Required before initial release:
  
  facebook sharing (optionally including the names of everyone ran with, maybe using Facebook tagging or something)
  - include a nice icon which when clicked is a link to buy the game
- - test audio behavior when a phone call occurs during game play
+ 
+ test audio behavior when a phone call occurs during game play
+ 
+ gui buttons sometimes seem unresponsive, particularly when speaking audio -- what is going on?
+ -- for example, while a pace notification is being spoken, in the setting screen often the pace notification slider and done button is unresponsive to touch
   
 todo:
  
@@ -549,6 +553,7 @@ Awb *voice;
 
 - (void) say:(NSString*)textToSay
 {
+    [self log:@"say %@", textToSay];
     if (voice == nil) {
 		voice = [[Awb alloc] init];
 	}
