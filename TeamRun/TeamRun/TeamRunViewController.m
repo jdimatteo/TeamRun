@@ -6,9 +6,7 @@
 //  Copyright (c) 2012 John DiMatteo. All rights reserved.
 //
 
-/* pickup here: make speach processing occur in background thread to free up gui thread,
-                current pace fluctautes too wildly,
-                verify "On Pace" text changes when appropriate,
+/* pickup here: current pace fluctautes too wildly,
                 implement rest of behavior based on settings,
 
 UI Design:

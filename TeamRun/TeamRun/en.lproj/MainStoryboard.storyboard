@@ -22,7 +22,7 @@
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="on pace" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OEi-bS-BKb">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="229" id="sXg-z4-bff"/>
+                                    <constraint firstAttribute="width" constant="300" type="user" id="sXg-z4-bff"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -112,7 +112,6 @@
                             </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="current pace" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="82" translatesAutoresizingMaskIntoConstraints="NO" id="eZQ-AQ-LCZ">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="43" id="0QG-9Z-cVR"/>
                                     <constraint firstAttribute="width" constant="82" id="6nv-tk-HCB"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -154,6 +153,7 @@
                             <constraint firstItem="qQY-1Z-lPc" firstAttribute="centerX" secondItem="aEd-jh-KIp" secondAttribute="centerX" type="user" id="Qqf-Wa-Lda"/>
                             <constraint firstAttribute="trailing" secondItem="eZQ-AQ-LCZ" secondAttribute="trailing" constant="21" id="SQ7-rt-dr9"/>
                             <constraint firstItem="OEi-bS-BKb" firstAttribute="top" secondItem="tNo-Bc-8nc" secondAttribute="bottom" constant="-10" type="user" id="Wrb-D1-n8X"/>
+                            <constraint firstItem="OEi-bS-BKb" firstAttribute="top" secondItem="eZQ-AQ-LCZ" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="XSM-pO-14m"/>
                             <constraint firstItem="OEi-bS-BKb" firstAttribute="height" secondItem="Y7u-lm-hIR" secondAttribute="height" type="user" id="Xmh-V8-YVr"/>
                             <constraint firstItem="qQY-1Z-lPc" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="user" id="ZYS-RX-5SX"/>
                             <constraint firstItem="qQY-1Z-lPc" firstAttribute="top" secondItem="aEd-jh-KIp" secondAttribute="bottom" type="user" id="cC6-rH-hth"/>
@@ -497,6 +497,51 @@
             <point key="canvasLocation" x="-8" y="143"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="TeamRunCompletedViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TeamRunCompletedViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="doneTapped"/>
+            </relationships>
+        </class>
+        <class className="TeamRunSettingsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TeamRunSettingsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="doneChangingSettings"/>
+                <relationship kind="action" name="updateEnabledFields"/>
+                <relationship kind="outlet" name="minutesBetweenNotificationsTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="noteSectionView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="notificationsSectionView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="paceNotificationsSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="relativePositionNotificationsSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="secondsBetweenNotificationsTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="targetMilePaceMinutesTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="targetMilePaceSecondsTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="targetMilePaceSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="targetPaceSectionView" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="TeamRunView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TeamRunView.h"/>
+        </class>
+        <class className="TeamRunViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TeamRunViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="openLeaderboards:"/>
+                <relationship kind="action" name="startStopButtonClicked:"/>
+                <relationship kind="outlet" name="averagePaceLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="currentPaceLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="milesAheadLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="milesRanLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="scrollingText" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="startStopButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="timeRemainingLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
