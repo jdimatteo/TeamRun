@@ -137,6 +137,15 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oXd-wa-f0B">
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="177" type="user" id="6xN-fE-qtU"/>
+                                    <constraint firstAttribute="width" constant="305" id="uts-ih-ooq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -144,6 +153,7 @@
                             <constraint firstItem="OEi-bS-BKb" firstAttribute="height" secondItem="aEd-jh-KIp" secondAttribute="height" type="user" id="7CF-vT-BiT"/>
                             <constraint firstItem="OEi-bS-BKb" firstAttribute="height" secondItem="tNo-Bc-8nc" secondAttribute="height" type="user" id="9I8-py-1TX"/>
                             <constraint firstItem="fVf-gr-kG5" firstAttribute="centerY" secondItem="CCp-oV-Hae" secondAttribute="centerY" type="user" id="Axx-Zd-1zD"/>
+                            <constraint firstItem="OEi-bS-BKb" firstAttribute="trailing" secondItem="oXd-wa-f0B" secondAttribute="trailing" type="default" id="B5R-DB-Ok8"/>
                             <constraint firstItem="OEi-bS-BKb" firstAttribute="height" secondItem="CCp-oV-Hae" secondAttribute="height" type="user" id="Bjf-Wa-OwR"/>
                             <constraint firstItem="CCp-oV-Hae" firstAttribute="leading" secondItem="Y7u-lm-hIR" secondAttribute="leading" type="user" id="DB5-zl-Djs"/>
                             <constraint firstItem="qQY-1Z-lPc" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="user" id="FlP-KL-ofW"/>
@@ -152,6 +162,7 @@
                             <constraint firstItem="CCp-oV-Hae" firstAttribute="top" secondItem="Y7u-lm-hIR" secondAttribute="bottom" type="user" id="N2h-3c-81v"/>
                             <constraint firstItem="qQY-1Z-lPc" firstAttribute="centerX" secondItem="aEd-jh-KIp" secondAttribute="centerX" type="user" id="Qqf-Wa-Lda"/>
                             <constraint firstAttribute="trailing" secondItem="eZQ-AQ-LCZ" secondAttribute="trailing" constant="21" id="SQ7-rt-dr9"/>
+                            <constraint firstAttribute="bottom" secondItem="oXd-wa-f0B" secondAttribute="bottom" constant="72" type="user" id="UE2-rw-z8I"/>
                             <constraint firstItem="OEi-bS-BKb" firstAttribute="top" secondItem="tNo-Bc-8nc" secondAttribute="bottom" constant="-10" type="user" id="Wrb-D1-n8X"/>
                             <constraint firstItem="OEi-bS-BKb" firstAttribute="top" secondItem="eZQ-AQ-LCZ" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="XSM-pO-14m"/>
                             <constraint firstItem="OEi-bS-BKb" firstAttribute="height" secondItem="Y7u-lm-hIR" secondAttribute="height" type="user" id="Xmh-V8-YVr"/>
@@ -179,6 +190,7 @@
                         <outlet property="currentPaceLabel" destination="tNo-Bc-8nc" id="oE5-Mp-OrW"/>
                         <outlet property="milesAheadLabel" destination="OEi-bS-BKb" id="aJD-8U-DUr"/>
                         <outlet property="milesRanLabel" destination="CCp-oV-Hae" id="f8i-kS-hvs"/>
+                        <outlet property="scrollingText" destination="oXd-wa-f0B" id="5lh-jQ-wb9"/>
                         <outlet property="startStopButton" destination="5mu-FP-zpB" id="Lhk-jo-BvT"/>
                         <outlet property="timeRemainingLabel" destination="aEd-jh-KIp" id="036-xv-8d9"/>
                     </connections>

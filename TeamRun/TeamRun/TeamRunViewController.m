@@ -6,9 +6,42 @@
 //  Copyright (c) 2012 John DiMatteo. All rights reserved.
 //
 
-/* pickup here: current pace fluctautes too wildly,
-                implement rest of behavior based on settings,
-
+/* pickup here: implement single player mode (I think I need this before release, and it would make testing easier),
+                implement rest of behavior based on settings
+ 
+   next time running: have Sarah's phone use speedCalcMethod = PS and my phone use speedCalcMethod = CL, and compare smoothness, and responsiveness to sprinting and stopping
+  
+Current Pace Fluctuations:
+ 
+ -  current pace fluctautes too wildly: this problem must be well studied: read up on the best solution to gps discrete location updates to calculate current speed
+ -- Kalman Filters
+ ---- try https://github.com/lacker/ikalman/blob/master/gps.h
+ -- try Apple's CLLocation speed and setting kCLLocationAccuracyBest for the accuracty
+ ---- Apple's speed calculation probably uses Kalman filters and might leverage additional info in the GPS anyway to deliver superior results,
+      e.g. maybe it uses "frequency shift (Doppler shift) of the GPS D-band carrier" http://gpsinformation.net/main/gpsspeed.htm
+ 
+ experiments with PSLocationManager kNumSpeedHistoriesToAverage:
+ 
+     s: last 3 - bad: fluctuate crazily
+     j: last 4 - seems about just as bad: fluctuate crazily (see below)
+     
+     I get a distance update about once every 2 seconds
+     
+     so 4*2 = 8 seconds -- this currently seems to fluctuate crazily, like from 7 minute pace to 10 minute pace to 11:30 minute pace,
+     so 8 seconds isn't enough
+     
+     what if I doubled this to 16 seconds -- that sounds more reasonable I think
+     
+     j: last 8 -- I just tried this out and when I was running a steady pace, this seemed reasonable: nice steady current pace
+     -- this seems to deal well with the noise (before with last 4, when I was running at a steady pace it seemed to fluctuate pretty wildly, which I guess was due to noise)
+     -- this didn't seem to be *current* enough -- when I started sprinting, there was a delay in it being represented, and then when I basically stopped running,
+        there was a long delay in the pace going back up... I think the pace might have actually continued to get faster *after* I stopped (I'm not certain about this)
+     -- this isn't good enough, I guess I could just try 6, but this simple algorithm doesn't seem good enough
+     
+     
+     j: last 6 -- felt just as steady as last 8 when trying to run at a steady pace (seemed better than last 4),
+                  but when sprinting delay again seemed very long, and stopping still showed a running speed for a while
+ 
 UI Design:
  
  note: I experimented with a Tab Bar Controller, and using Toolbars, but I don't think either fit with my buttons and views
@@ -16,6 +49,8 @@ UI Design:
        I also tried implementing the settings screen as a table view, but the scrolling seemed unnecessary and it didn't
        look good either.  I also tried setting the background to an empty table view, but that also looked poor.
        The settings and main screen are good enough as is, stop fiddling!
+ 
+ display gps accuracy
  
  settings
  -- on the settings screen, add a ? button (or some other info button) that explains the settings, and remove the text from the main screen
@@ -148,6 +183,9 @@ todo:
 
 static const double MILES_PER_METER = 0.000621371;
 
+typedef enum {PS, CL} SpeedCalcMethod;
+static const SpeedCalcMethod speedCalcMethod = CL;
+
 FliteController *fliteController;
 Awb *voice;
 
@@ -170,6 +208,8 @@ dispatch_queue_t speachQueue;
     [[AudioSessionManager sharedAudioSessionManager]setSoundMixing:YES];
     
     speachQueue = dispatch_queue_create("org.TeamRun.SpeachQueue", NULL);
+    
+    self.scrollingText.hidden = true; // hide unless needed for debugging
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -516,13 +556,6 @@ dispatch_queue_t speachQueue;
     [self.milesRanLabel setText:truncateToTwoDecimals(milesRan)];
     [self log:@"%f miles", milesRan];
     
-    const double metersPerSecond = [PSLocationManager sharedLocationManager].currentSpeed;
-    [self log:@"current speed: %f m/s", metersPerSecond];
-    
-    [self.currentPaceLabel setText:minutesPerMilePaceString(metersPerSecond, false)];
-    
-    [self.averagePaceLabel setText:minutesPerMilePaceString(distance/[PSLocationManager sharedLocationManager].totalSeconds, false)];
-    
     NSError *error;
     // todo: change all stored distances to floats (I definately don't need the extra precision, and it doubles the amount of data transferred)
     NSData *packet = [NSData dataWithBytes:&milesRan length:sizeof(milesRan)];
@@ -533,6 +566,29 @@ dispatch_queue_t speachQueue;
     }
     
     [self updateMilesAhead:-1];
+}
+
+- (void)locationManager:(PSLocationManager *)locationManager waypoint:(CLLocation *)waypoint calculatedSpeed:(double)calculatedSpeed
+{
+    [self log:@"Location Update %@:\n\tPS: %@\n\tCL: %@\n\tDelta:%f\n",
+     truncateToTwoDecimals([PSLocationManager sharedLocationManager].totalSeconds),
+     truncateToTwoDecimals(calculatedSpeed),
+     truncateToTwoDecimals(waypoint.speed),
+     calculatedSpeed - waypoint.speed
+     ];
+    
+    if (speedCalcMethod == PS)
+    {
+        const double metersPerSecond = [PSLocationManager sharedLocationManager].currentSpeed;
+        
+        [self.currentPaceLabel setText:minutesPerMilePaceString(metersPerSecond, false)];        
+    }
+    else if (speedCalcMethod == CL)
+    {        
+        [self.currentPaceLabel setText:minutesPerMilePaceString(waypoint.speed, false)];
+    }
+    
+    [self.averagePaceLabel setText:minutesPerMilePaceString([PSLocationManager sharedLocationManager].totalDistance/[PSLocationManager sharedLocationManager].totalSeconds, false)];
 }
 
 - (void)locationManager:(PSLocationManager *)locationManager error:(NSError *)error {
