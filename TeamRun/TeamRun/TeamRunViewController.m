@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 John DiMatteo. All rights reserved.
 //
 
-/* pickup here: single player mode timer should go up (not starting at 30:00), and initially show as 0:00 time ran (not time remaining), then in multiplayer mode it can switch to time remaining,
+/* pickup here: single player mode timer should go up (not starting at 30:00), and initially show as 0:00 time ran (not time remaining), then in multiplayer mode it can switch to time remaining, on pace needs to switch to something reasonable in single player mode
                 make completed run screen look OK and populate it with some data,
                 implement pace scaling based off setting,
                 store/display personal best scores and total miles / team miles
@@ -376,10 +376,10 @@ bool runInProgress;
     const double milesRan = [PSLocationManager sharedLocationManager].totalDistance * MILES_PER_METER;
 
     double milesAheadOfOtherRunner = milesRan - (milesOtherPlayerRan);
-    if ( (milesAheadOfOtherRunner < 0 ? -1.0 * milesAheadOfOtherRunner : milesAheadOfOtherRunner ) < 0.25)
+    if ( (milesAheadOfOtherRunner < 0 ? -1.0 * milesAheadOfOtherRunner : milesAheadOfOtherRunner ) < 0.025)
     {
         // gps could be off by 20 meters, so if there are two of them a difference of less than 40 meters
-        // could just be noise.  40 meters is about .249 miles, so don't report any difference less than .25 miles
+        // could just be noise.  40 meters is about .0249 miles, so don't report any difference less than .025 miles
         [self.milesAheadLabel setText:@"on pace"];
     }
     else
