@@ -6,8 +6,10 @@
 //  Copyright (c) 2012 John DiMatteo. All rights reserved.
 //
 
-/* pickup here: implement single player mode (I think I need this before release, and it would make testing easier),
-                implement rest of behavior based on settings
+/* pickup here: single player mode timer should go up (not starting at 30:00), and initially show as 0:00 time ran (not time remaining), then in multiplayer mode it can switch to time remaining,
+                make completed run screen look OK and populate it with some data,
+                implement pace scaling based off setting,
+                store/display personal best scores and total miles / team miles
  
    next time running: have Sarah's phone use speedCalcMethod = PS and my phone use speedCalcMethod = CL, and compare smoothness, and responsiveness to sprinting and stopping
   
@@ -166,8 +168,10 @@ todo:
 @property (weak, nonatomic) IBOutlet UILabel *milesRanLabel;
 @property (weak, nonatomic) IBOutlet UILabel *milesAheadLabel;
 
+- (void)clearText;
 - (void)createMatch;
-- (void)endMatch;
+- (void)startRun;
+- (void)endRun;
 - (void)playerAuthenticated;
 - (void)log:(NSString*)format,...;
 - (void)secondRan:(NSTimer *)timer;
@@ -191,6 +195,12 @@ Awb *voice;
 
 dispatch_queue_t speachQueue;
 
+UIAlertView *runModePrompt;
+
+bool multiplayerEnabled;
+
+bool runInProgress;
+
 @implementation TeamRunViewController
 
 - (void)viewDidLoad
@@ -210,6 +220,36 @@ dispatch_queue_t speachQueue;
     speachQueue = dispatch_queue_create("org.TeamRun.SpeachQueue", NULL);
     
     self.scrollingText.hidden = true; // hide unless needed for debugging
+    
+    runModePrompt = [[UIAlertView alloc] initWithTitle:@"What kind of run?" message:@"" delegate:self cancelButtonTitle:@"Solo" otherButtonTitles:@"With a friend", nil];
+    
+    runInProgress = false;
+    
+    [self clearText];
+}
+
+- (void)clearText
+{
+    [self.currentPaceLabel setText:@"0:00"];
+    [self.averagePaceLabel setText:@"0:00"];
+    [self.milesRanLabel setText:@"0.00"];
+    [self.timeRemainingLabel setText:@"30:00"];
+    [self.milesAheadLabel setText:@"on pace"];
+}
+
+- (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        // single player button tapped
+        [self startRun];
+    }
+    else
+    {
+        // multiplayer button tapped
+        
+        [self createMatch];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -221,7 +261,7 @@ dispatch_queue_t speachQueue;
 
 - (void)updateNotificationsTimerIfNecessary
 {
-    bool notifications = [TeamRunSettings notificationsEnabled] && self.match != nil;
+    bool notifications = [TeamRunSettings notificationsEnabled] && runInProgress;
     
     if (self.paceUpdateTimer != nil)
     {
@@ -264,24 +304,25 @@ dispatch_queue_t speachQueue;
 
 - (IBAction)startStopButtonClicked:(id)sender
 {
-    if (self.match != nil)
+    if (runInProgress)
     {
-        [self endMatch];
+        [self endRun];
     }
     else
     {
-        [self createMatch];
+        [self clearText];
+        [runModePrompt show];
     }
 }
 
 - (void)secondRan:(NSTimer *)timer
 {
     // all runs are 30 minutes long
-    int remainingSeconds = 30*60 - [PSLocationManager sharedLocationManager].totalSeconds;
+    int remainingSeconds = 30*60 - round([PSLocationManager sharedLocationManager].totalSeconds);
     
     if (remainingSeconds <= 0)
     {
-        [self endMatch];
+        [self endRun];
     }
     else
     {
@@ -466,6 +507,13 @@ dispatch_queue_t speachQueue;
     [self dismissViewControllerAnimated:YES completion:nil];
     [self log:@"Match found"];
     
+    [self startRun];
+}
+
+- (void)startRun
+{
+    runInProgress = true;
+    
     [[PSLocationManager sharedLocationManager] resetLocationUpdates];
     [[PSLocationManager sharedLocationManager] startLocationUpdates];
     
@@ -482,10 +530,15 @@ dispatch_queue_t speachQueue;
     [self updateNotificationsTimerIfNecessary];
 }
 
-- (void)endMatch
+- (void)endRun
 {
-    [self.match disconnect];
-    self.match = nil;
+    runInProgress = false;
+
+    if (self.match != nil)
+    {
+        [self.match disconnect];
+        self.match = nil;
+    }
     
     [self.startStopButton setTitle:@"Run" forState:UIControlStateNormal];
     
@@ -556,13 +609,16 @@ dispatch_queue_t speachQueue;
     [self.milesRanLabel setText:truncateToTwoDecimals(milesRan)];
     [self log:@"%f miles", milesRan];
     
-    NSError *error;
-    // todo: change all stored distances to floats (I definately don't need the extra precision, and it doubles the amount of data transferred)
-    NSData *packet = [NSData dataWithBytes:&milesRan length:sizeof(milesRan)];
-    [self.match sendDataToAllPlayers: packet withDataMode: GKMatchSendDataReliable error:&error];
-    if (error != nil)
+    if (self.match != nil)
     {
-        [self log:@"error sending data to players: %@", error.description];
+        NSError *error;
+        // todo: change all stored distances to floats (I definately don't need the extra precision, and it doubles the amount of data transferred)
+        NSData *packet = [NSData dataWithBytes:&milesRan length:sizeof(milesRan)];
+        [self.match sendDataToAllPlayers: packet withDataMode: GKMatchSendDataReliable error:&error];
+        if (error != nil)
+        {
+            [self log:@"error sending data to players: %@", error.description];
+        }
     }
     
     [self updateMilesAhead:-1];

@@ -137,7 +137,7 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oXd-wa-f0B">
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oXd-wa-f0B">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="177" type="user" id="6xN-fE-qtU"/>
@@ -203,59 +203,59 @@
         <scene sceneID="ikl-x4-pby">
             <objects>
                 <viewController storyboardIdentifier="RunCompletedViewController" id="xUX-un-ppx" customClass="TeamRunCompletedViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="E1L-6b-IP2">
+                    <view key="view" contentMode="scaleToFill" id="E1L-6b-IP2" customClass="TeamRunView">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Run Completed" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5aZ-3a-LYw">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Miles:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HcL-t6-Owq">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Time:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zQh-8c-w9R">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Average Pace:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6eE-P5-UHw">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Personal Record" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecA-mf-zbv">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Team Run Miles:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c14-7i-Rkq">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Achievements:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g0z-sa-7PP">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Total Miles:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hsw-Yx-rrX">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Total Team Miles:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Dk-G0-Obr">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uF7-dh-lDU">
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Done">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
@@ -266,15 +266,15 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="zQh-8c-w9R" firstAttribute="leading" secondItem="HcL-t6-Owq" secondAttribute="leading" type="default" id="2TX-SJ-DPX"/>
                             <constraint firstAttribute="bottom" secondItem="3Dk-G0-Obr" secondAttribute="bottom" constant="135" id="5BE-4v-QJD"/>
                             <constraint firstItem="3Dk-G0-Obr" firstAttribute="leading" secondItem="hsw-Yx-rrX" secondAttribute="leading" type="default" id="5tq-Uj-tOR"/>
+                            <constraint firstItem="uF7-dh-lDU" firstAttribute="leading" secondItem="E1L-6b-IP2" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="BaL-kI-LUU"/>
                             <constraint firstItem="zQh-8c-w9R" firstAttribute="top" secondItem="E1L-6b-IP2" secondAttribute="top" constant="120" id="D8l-L2-fH0"/>
                             <constraint firstItem="hsw-Yx-rrX" firstAttribute="leading" secondItem="g0z-sa-7PP" secondAttribute="leading" type="default" id="FYq-oj-aAr"/>
                             <constraint firstItem="c14-7i-Rkq" firstAttribute="top" secondItem="E1L-6b-IP2" secondAttribute="top" constant="192" id="JXW-Wt-J9j"/>
-                            <constraint firstItem="HcL-t6-Owq" firstAttribute="leading" secondItem="E1L-6b-IP2" secondAttribute="leading" constant="39" id="NiK-h3-eZZ"/>
                             <constraint firstAttribute="bottom" secondItem="uF7-dh-lDU" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="Obn-TH-OGU"/>
                             <constraint firstAttribute="bottom" secondItem="g0z-sa-7PP" secondAttribute="bottom" constant="206" id="Od5-Fg-pjZ"/>
                             <constraint firstAttribute="trailing" secondItem="ecA-mf-zbv" secondAttribute="trailing" constant="29" id="PTv-hv-mj4"/>
@@ -286,7 +286,7 @@
                             <constraint firstItem="6eE-P5-UHw" firstAttribute="leading" secondItem="zQh-8c-w9R" secondAttribute="leading" type="default" id="efx-xR-QZS"/>
                             <constraint firstItem="c14-7i-Rkq" firstAttribute="leading" secondItem="6eE-P5-UHw" secondAttribute="leading" type="default" id="hJE-XD-P0g"/>
                             <constraint firstItem="ecA-mf-zbv" firstAttribute="top" secondItem="E1L-6b-IP2" secondAttribute="top" constant="57" id="hwQ-tR-tT3"/>
-                            <constraint firstItem="uF7-dh-lDU" firstAttribute="centerX" secondItem="5aZ-3a-LYw" secondAttribute="centerX" type="default" id="m4B-oY-o4G"/>
+                            <constraint firstItem="uF7-dh-lDU" firstAttribute="trailing" secondItem="zQh-8c-w9R" secondAttribute="trailing" type="default" id="kBc-sy-1sf"/>
                             <constraint firstItem="5aZ-3a-LYw" firstAttribute="top" secondItem="E1L-6b-IP2" secondAttribute="top" constant="20" symbolic="YES" type="default" id="srd-du-Rw1"/>
                         </constraints>
                     </view>
