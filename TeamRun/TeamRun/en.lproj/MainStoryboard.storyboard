@@ -271,7 +271,6 @@
                             <constraint firstItem="zQh-8c-w9R" firstAttribute="leading" secondItem="HcL-t6-Owq" secondAttribute="leading" type="default" id="2TX-SJ-DPX"/>
                             <constraint firstAttribute="bottom" secondItem="3Dk-G0-Obr" secondAttribute="bottom" constant="135" id="5BE-4v-QJD"/>
                             <constraint firstItem="3Dk-G0-Obr" firstAttribute="leading" secondItem="hsw-Yx-rrX" secondAttribute="leading" type="default" id="5tq-Uj-tOR"/>
-                            <constraint firstItem="uF7-dh-lDU" firstAttribute="leading" secondItem="E1L-6b-IP2" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="BaL-kI-LUU"/>
                             <constraint firstItem="zQh-8c-w9R" firstAttribute="top" secondItem="E1L-6b-IP2" secondAttribute="top" constant="120" id="D8l-L2-fH0"/>
                             <constraint firstItem="hsw-Yx-rrX" firstAttribute="leading" secondItem="g0z-sa-7PP" secondAttribute="leading" type="default" id="FYq-oj-aAr"/>
                             <constraint firstItem="c14-7i-Rkq" firstAttribute="top" secondItem="E1L-6b-IP2" secondAttribute="top" constant="192" id="JXW-Wt-J9j"/>
@@ -286,8 +285,9 @@
                             <constraint firstItem="6eE-P5-UHw" firstAttribute="leading" secondItem="zQh-8c-w9R" secondAttribute="leading" type="default" id="efx-xR-QZS"/>
                             <constraint firstItem="c14-7i-Rkq" firstAttribute="leading" secondItem="6eE-P5-UHw" secondAttribute="leading" type="default" id="hJE-XD-P0g"/>
                             <constraint firstItem="ecA-mf-zbv" firstAttribute="top" secondItem="E1L-6b-IP2" secondAttribute="top" constant="57" id="hwQ-tR-tT3"/>
-                            <constraint firstItem="uF7-dh-lDU" firstAttribute="trailing" secondItem="zQh-8c-w9R" secondAttribute="trailing" type="default" id="kBc-sy-1sf"/>
                             <constraint firstItem="5aZ-3a-LYw" firstAttribute="top" secondItem="E1L-6b-IP2" secondAttribute="top" constant="20" symbolic="YES" type="default" id="srd-du-Rw1"/>
+                            <constraint firstAttribute="trailing" secondItem="uF7-dh-lDU" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="tQr-8H-7GM"/>
+                            <constraint firstItem="HcL-t6-Owq" firstAttribute="leading" secondItem="E1L-6b-IP2" secondAttribute="leading" constant="39" id="tzC-oa-vTZ"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -413,53 +413,73 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tDt-22-mdJ">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Scales your pace when running with friends with different target paces." translatesAutoresizingMaskIntoConstraints="NO" id="tDt-22-mdJ">
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="276" id="3F4-0T-P5z"/>
-                                            <constraint firstAttribute="height" constant="103" id="4oH-wj-392"/>
+                                            <constraint firstAttribute="height" constant="46" id="5kd-2A-ZHm"/>
                                         </constraints>
-                                        <string key="text">When two runners specify a target pace, their distances are scaled.  For example, if your target is 7 minute miles and their target is 14 minute miles, then every mile they run shows as 2 miles to you (and every mile you run shows as half a mile to them).</string>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="tDt-22-mdJ" firstAttribute="leading" secondItem="Kpl-LI-dc8" secondAttribute="leading" type="default" id="E1m-nB-RFl"/>
                                     <constraint firstItem="miL-1j-GDI" firstAttribute="leading" secondItem="Kpl-LI-dc8" secondAttribute="leading" constant="78" id="JmE-z7-UX4"/>
                                     <constraint firstItem="frc-fQ-BSu" firstAttribute="leading" secondItem="Kpl-LI-dc8" secondAttribute="leading" constant="67" id="MXm-Sq-Q7E"/>
                                     <constraint firstItem="frc-fQ-BSu" firstAttribute="baseline" secondItem="cTr-Xy-Mww" secondAttribute="baseline" type="default" id="O0D-9j-emj"/>
                                     <constraint firstItem="3dk-Vd-MHA" firstAttribute="top" secondItem="NzO-kL-A5H" secondAttribute="top" type="default" id="Q51-zu-011"/>
+                                    <constraint firstItem="7LF-q0-WyH" firstAttribute="leading" secondItem="Kpl-LI-dc8" secondAttribute="leading" constant="142" id="WDB-ol-qLH"/>
                                     <constraint firstItem="cTr-Xy-Mww" firstAttribute="top" secondItem="Kpl-LI-dc8" secondAttribute="top" constant="33" id="YkH-HJ-0x4"/>
-                                    <constraint firstAttribute="height" constant="174" type="user" id="YtA-dU-rTK"/>
+                                    <constraint firstItem="tDt-22-mdJ" firstAttribute="trailing" secondItem="3dk-Vd-MHA" secondAttribute="trailing" type="default" id="alX-Bf-I8k"/>
                                     <constraint firstItem="cTr-Xy-Mww" firstAttribute="leading" secondItem="NzO-kL-A5H" secondAttribute="leading" type="default" id="ase-wA-hEb"/>
-                                    <constraint firstItem="7LF-q0-WyH" firstAttribute="leading" secondItem="Kpl-LI-dc8" secondAttribute="leading" constant="142" id="fdC-eL-uBN"/>
                                     <constraint firstItem="NzO-kL-A5H" firstAttribute="top" secondItem="Kpl-LI-dc8" secondAttribute="top" constant="6" id="h6R-rH-XYQ"/>
                                     <constraint firstItem="NzO-kL-A5H" firstAttribute="leading" secondItem="Kpl-LI-dc8" secondAttribute="leading" constant="7" id="i5l-db-c37"/>
                                     <constraint firstItem="miL-1j-GDI" firstAttribute="baseline" secondItem="frc-fQ-BSu" secondAttribute="baseline" type="default" id="leQ-TW-h0R"/>
                                     <constraint firstItem="miL-1j-GDI" firstAttribute="baseline" secondItem="7LF-q0-WyH" secondAttribute="baseline" type="default" id="mjr-Br-UPB"/>
                                     <constraint firstItem="tDt-22-mdJ" firstAttribute="top" secondItem="frc-fQ-BSu" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="oD5-Rp-MbQ"/>
-                                    <constraint firstItem="tDt-22-mdJ" firstAttribute="trailing" secondItem="3dk-Vd-MHA" secondAttribute="trailing" type="default" id="xPj-8G-yHc"/>
+                                    <constraint firstItem="tDt-22-mdJ" firstAttribute="leading" secondItem="Kpl-LI-dc8" secondAttribute="leading" type="default" id="pYx-lD-jXT"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wed-1O-lmy">
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="269" translatesAutoresizingMaskIntoConstraints="NO" id="LYQ-dE-xSR">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="All multiplayer runs are 30 minutes long.  " lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="275" translatesAutoresizingMaskIntoConstraints="NO" id="LYQ-dE-xSR">
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="80" id="QP0-kK-hMc"/>
+                                            <constraint firstAttribute="height" constant="35" id="5pC-hn-4WE"/>
+                                            <constraint firstAttribute="width" constant="275" id="Bq9-br-QXD"/>
                                         </constraints>
-                                        <string key="text">Note: to increase likelihood of finding running buddies, all runs are 30 minutes long.  Also, if you have trouble finding a buddy, try Sunday at 11:00 AM EST.</string>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="If you have trouble finding a running buddy, try Sunday at 11 AM EST." lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="275" translatesAutoresizingMaskIntoConstraints="NO" id="z36-LH-hES">
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fYH-oe-7wE">
+                                        <connections>
+                                            <action selector="updateEnabledFields" destination="7VN-1N-Sd7" eventType="valueChanged" id="dcs-SY-7Q3"/>
+                                        </connections>
+                                    </switch>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Next Run is Multiplayer" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zfQ-yl-Txq">
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="LYQ-dE-xSR" firstAttribute="bottom" secondItem="wed-1O-lmy" secondAttribute="bottom" type="default" id="BiG-YC-llm"/>
-                                    <constraint firstAttribute="height" constant="74" type="user" id="PQD-p9-han"/>
-                                    <constraint firstItem="LYQ-dE-xSR" firstAttribute="leading" secondItem="wed-1O-lmy" secondAttribute="leading" constant="8" id="izE-zt-F9Y"/>
+                                    <constraint firstItem="zfQ-yl-Txq" firstAttribute="leading" secondItem="wed-1O-lmy" secondAttribute="leading" constant="8" id="0or-qh-e7z"/>
+                                    <constraint firstAttribute="height" constant="121" type="user" id="8NJ-Cn-lT2"/>
+                                    <constraint firstAttribute="trailing" secondItem="fYH-oe-7wE" secondAttribute="trailing" constant="11" id="9dz-Oc-vUg"/>
+                                    <constraint firstItem="zfQ-yl-Txq" firstAttribute="leading" secondItem="LYQ-dE-xSR" secondAttribute="leading" type="default" id="CZn-ew-VfK"/>
+                                    <constraint firstItem="zfQ-yl-Txq" firstAttribute="centerY" secondItem="fYH-oe-7wE" secondAttribute="centerY" type="default" id="DUn-ph-eBc"/>
+                                    <constraint firstAttribute="bottom" secondItem="z36-LH-hES" secondAttribute="bottom" constant="11" id="GMO-dP-7re"/>
+                                    <constraint firstItem="z36-LH-hES" firstAttribute="trailing" secondItem="LYQ-dE-xSR" secondAttribute="trailing" type="default" id="RYe-Es-WNa"/>
+                                    <constraint firstItem="LYQ-dE-xSR" firstAttribute="top" secondItem="zfQ-yl-Txq" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Ss2-B0-ueU"/>
+                                    <constraint firstItem="fYH-oe-7wE" firstAttribute="top" secondItem="wed-1O-lmy" secondAttribute="top" constant="6" type="user" id="W6O-9l-AIU"/>
+                                    <constraint firstItem="z36-LH-hES" firstAttribute="leading" secondItem="LYQ-dE-xSR" secondAttribute="leading" type="default" id="hoi-pD-fB3"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XGb-oS-V35">
@@ -479,20 +499,21 @@
                         <constraints>
                             <constraint firstItem="Kpl-LI-dc8" firstAttribute="leading" secondItem="Ird-Lq-cpv" secondAttribute="leading" type="default" id="BhQ-mY-xRp"/>
                             <constraint firstAttribute="bottom" secondItem="XGb-oS-V35" secondAttribute="bottom" constant="20" symbolic="YES" type="user" id="J4X-zC-gaR"/>
-                            <constraint firstItem="Kpl-LI-dc8" firstAttribute="top" secondItem="Ird-Lq-cpv" secondAttribute="bottom" constant="7" type="user" id="JnC-Tp-WXe"/>
+                            <constraint firstItem="wed-1O-lmy" firstAttribute="centerX" secondItem="nTQ-KJ-O4V" secondAttribute="centerX" type="default" id="KaN-87-bU6"/>
+                            <constraint firstItem="Ird-Lq-cpv" firstAttribute="leading" secondItem="nTQ-KJ-O4V" secondAttribute="leading" constant="16" id="XkD-ca-anH"/>
                             <constraint firstItem="Ird-Lq-cpv" firstAttribute="top" secondItem="nTQ-KJ-O4V" secondAttribute="top" constant="6" type="user" id="YpT-m3-rrd"/>
                             <constraint firstItem="Kpl-LI-dc8" firstAttribute="trailing" secondItem="Ird-Lq-cpv" secondAttribute="trailing" type="default" id="ZD3-mV-be7"/>
+                            <constraint firstItem="wed-1O-lmy" firstAttribute="top" secondItem="nTQ-KJ-O4V" secondAttribute="top" constant="259" type="user" id="cFz-i1-ObA"/>
+                            <constraint firstItem="Kpl-LI-dc8" firstAttribute="top" secondItem="nTQ-KJ-O4V" secondAttribute="top" constant="133" id="cYV-h8-HdJ"/>
                             <constraint firstItem="XGb-oS-V35" firstAttribute="leading" secondItem="wed-1O-lmy" secondAttribute="leading" type="default" id="dmK-t1-gSs"/>
                             <constraint firstItem="wed-1O-lmy" firstAttribute="leading" secondItem="Kpl-LI-dc8" secondAttribute="leading" type="default" id="lQT-GB-igD"/>
-                            <constraint firstItem="wed-1O-lmy" firstAttribute="top" secondItem="Kpl-LI-dc8" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="mXS-LL-7th"/>
-                            <constraint firstItem="wed-1O-lmy" firstAttribute="top" secondItem="nTQ-KJ-O4V" secondAttribute="top" constant="315" type="user" id="mq8-pm-jVe"/>
-                            <constraint firstItem="XGb-oS-V35" firstAttribute="leading" secondItem="nTQ-KJ-O4V" secondAttribute="leading" constant="16" id="nuc-oy-Eet"/>
-                            <constraint firstItem="wed-1O-lmy" firstAttribute="centerX" secondItem="nTQ-KJ-O4V" secondAttribute="centerX" type="default" id="s2Z-kC-Gea"/>
+                            <constraint firstItem="wed-1O-lmy" firstAttribute="top" secondItem="Kpl-LI-dc8" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="smu-WQ-DRi"/>
                             <constraint firstItem="wed-1O-lmy" firstAttribute="trailing" secondItem="Kpl-LI-dc8" secondAttribute="trailing" type="default" id="zGd-8a-aQ2"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="minutesBetweenNotificationsTextField" destination="Kei-0i-8us" id="B3t-jm-fdO"/>
+                        <outlet property="multiplayerModeSwitch" destination="fYH-oe-7wE" id="fR8-km-n72"/>
                         <outlet property="noteSectionView" destination="wed-1O-lmy" id="Ppo-U4-Q0F"/>
                         <outlet property="notificationsSectionView" destination="Ird-Lq-cpv" id="Fnh-cp-WId"/>
                         <outlet property="paceNotificationsSwitch" destination="zBa-xS-pZz" id="0iS-KL-lah"/>
@@ -525,6 +546,7 @@
                 <relationship kind="action" name="doneChangingSettings"/>
                 <relationship kind="action" name="updateEnabledFields"/>
                 <relationship kind="outlet" name="minutesBetweenNotificationsTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="multiplayerModeSwitch" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="noteSectionView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="notificationsSectionView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="paceNotificationsSwitch" candidateClass="UISwitch"/>
