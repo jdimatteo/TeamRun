@@ -490,7 +490,7 @@ bool runInProgress;
 
 - (void)logWithLevel:(LogLevel)level message:(NSString*)message
 {
-    static LogLevel currentLevel = LOG_INFO;
+    static LogLevel currentLevel = LOG_DEBUG;
     
     if (level >= currentLevel)
     {
@@ -589,7 +589,7 @@ bool runInProgress;
 - (void)matchmakerViewControllerWasCancelled:(GKMatchmakerViewController *)viewController
 {
     [self dismissViewControllerAnimated:YES completion:nil];
-    [self logTmp:@"Match cancelled"];
+    [self logTrace:@"Match cancelled"];
 }
 
 - (void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFailWithError:(NSError *)error
@@ -604,7 +604,7 @@ bool runInProgress;
     self.match = match;
     
     [self dismissViewControllerAnimated:YES completion:nil];
-    [self logTmp:@"Match found -- expectedPlayerCount: %d", match.expectedPlayerCount];
+    [self logTrace:@"Match found -- expectedPlayerCount: %d", match.expectedPlayerCount];
     
     if (runInProgress) [self logError:@"runInProgress should be false if didFindMatch called"];
     
@@ -672,7 +672,7 @@ bool runInProgress;
     {
         [GKPlayer loadPlayersForIdentifiers:self.match.playerIDs withCompletionHandler:^(NSArray *players, NSError *error)
         {
-            [self logTmp:@"loadPlayersForIdentifiers completion handler called"];
+            [self logTrace:@"loadPlayersForIdentifiers completion handler called"];
             if (error != nil)
             {
                 [self logError:@"Error loading player information: %@", error];
@@ -681,12 +681,11 @@ bool runInProgress;
             }
             
             self.players = players;
-            [self logTmp:@"players set: %@", self.players];
+            [self logTrace:@"players set: %@", self.players];
         }];
     }
     else
     {
-        [self logError:@"update players called but match is nil"];
         self.players = nil;
     }
 }
@@ -696,13 +695,13 @@ bool runInProgress;
     switch (state)
     {
         case GKPlayerStateConnected:
-            [self logTmp:@"player (%@) connected (%d\nexpected player count is now %d)", playerID, match.expectedPlayerCount];
+            [self logDebug:@"player (%@) connected (%d\nexpected player count is now %d)", playerID, match.expectedPlayerCount];
             break;
         case GKPlayerStateDisconnected:
-            [self logTmp:@"player (%@) disconnected (%d\nexpected player count is now %d)", playerID, match.expectedPlayerCount];
+            [self logWarn:@"player (%@) disconnected (%d\nexpected player count is now %d)", playerID, match.expectedPlayerCount];
             break;
         default:
-            [self logTmp:@"match (%@) player (%@) unrecognized state (%d), expected player count is now %d", match.description, playerID, state, match.expectedPlayerCount];
+            [self logError:@"match (%@) player (%@) unrecognized state (%d), expected player count is now %d", match.description, playerID, state, match.expectedPlayerCount];
     }
     
     if (!runInProgress && match.expectedPlayerCount == 0)
