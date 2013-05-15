@@ -6,10 +6,7 @@
 //  Copyright (c) 2012 John DiMatteo. All rights reserved.
 //
 
-/* pickup here: test if self.players is set properly, and if so populate a list of names,
- 
-                create a single object that represents a Run -- there are too many things floating around this view controller and it is getting hard to keep them straight
- 
+/* pickup here: done button shouldn't be in same place as run button -- it is too easy to mistakenly press run after finishing a run
                 on pace needs to switch to something reasonable in single player mode
                 make completed run screen look OK and populate it with some data,
                 implement pace scaling based off setting,
@@ -77,7 +74,7 @@ UI Design:
   
  "Target Pace" might be misleading
  
- find a good name -- TeamRun, KeepPace, RunBuddy, ...
+ find a good name -- TeamRun, KeepPace, RunBuddy, Pace, ...
  
  make a better app icon
  
@@ -107,6 +104,8 @@ todo:
  
  read up on good iOS design
  -- maybe I should have an explicit model (see above)? what is my controller (is it the storyboard)?
+    -- create a single object that represents a Run
+    -- there are too many things floating around this view controller and it is getting hard to keep them straight
  -- how to have multiple storyboard elements where there is a main screen that leads to others and back to the main screen
  -- -- (maybe write a test app following a tutorial)
  -- automatic testing
@@ -287,6 +286,24 @@ bool runInProgress;
     if (runInProgress)
     {
         NSString *message = @"Are you sure you want to end your run?";
+        
+        if (self.match != nil && self.players != nil)
+        {
+            NSMutableString *playerNames = [[NSMutableString alloc] init];
+
+            for (int i=0; i < self.players.count; ++i)
+            {
+                if (i != 0) [playerNames appendString:@", "];
+                
+                if (self.players.count != 1 && i == self.players.count - 1) [playerNames appendString:@"and "];
+                
+                [playerNames appendString:[self.players[i] displayName]];
+            }
+            
+            const int remainingMinutes = (30*60 - round([PSLocationManager sharedLocationManager].totalSeconds))/60;
+            
+            message = [[NSString alloc] initWithFormat:@"%@\n\nThere are %d minutes remaining in your run with %@.", message, remainingMinutes, playerNames];
+        }
         
         UIActionSheet *endRunConfirmationPrompt = [[UIActionSheet alloc] initWithTitle:message delegate:self cancelButtonTitle:@"Keep Running" destructiveButtonTitle:@"End Run" otherButtonTitles:nil];
         
@@ -664,7 +681,7 @@ bool runInProgress;
             }
             
             self.players = players;
-            [self logTmp:@"players set: ", self.players];
+            [self logTmp:@"players set: %@", self.players];
         }];
     }
     else
