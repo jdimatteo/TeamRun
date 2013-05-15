@@ -155,7 +155,7 @@ todo:
 #import <AudioToolbox/AudioSession.h>
 
 @interface TeamRunViewController ()
-<GKGameCenterControllerDelegate, GKMatchmakerViewControllerDelegate, GKMatchDelegate, PSLocationManagerDelegate>
+<GKGameCenterControllerDelegate, GKMatchmakerViewControllerDelegate, GKMatchDelegate, PSLocationManagerDelegate, UIActionSheetDelegate>
 
 - (IBAction)startStopButtonClicked:(id)sender;
 - (IBAction)openLeaderboards:(id)sender;
@@ -168,7 +168,6 @@ todo:
 @property (weak, nonatomic) IBOutlet UILabel *milesRanLabel;
 @property (weak, nonatomic) IBOutlet UILabel *milesAheadLabel;
 
-- (void)clearText;
 - (void)createMatch;
 - (void)startRun;
 - (void)endRun;
@@ -195,10 +194,6 @@ Awb *voice;
 
 dispatch_queue_t speachQueue;
 
-UIAlertView *runModePrompt;
-
-bool multiplayerEnabled;
-
 bool runInProgress;
 
 @implementation TeamRunViewController
@@ -221,35 +216,7 @@ bool runInProgress;
     
     self.scrollingText.hidden = true; // hide unless needed for debugging
     
-    runModePrompt = [[UIAlertView alloc] initWithTitle:@"What kind of run?" message:@"" delegate:self cancelButtonTitle:@"Solo" otherButtonTitles:@"With a friend", nil];
-    
     runInProgress = false;
-    
-    [self clearText];
-}
-
-- (void)clearText
-{
-    [self.currentPaceLabel setText:@"0:00"];
-    [self.averagePaceLabel setText:@"0:00"];
-    [self.milesRanLabel setText:@"0.00"];
-    [self.timeRemainingLabel setText:@"30:00"];
-    [self.milesAheadLabel setText:@"on pace"];
-}
-
-- (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 0)
-    {
-        // single player button tapped
-        [self startRun];
-    }
-    else
-    {
-        // multiplayer button tapped
-        
-        [self createMatch];
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -302,16 +269,36 @@ bool runInProgress;
     [self.scrollingText scrollRangeToVisible:NSMakeRange([self.scrollingText.text length], 0)];
 }
 
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        // End Run confirmation button tapped
+        [self endRun];
+    }
+}
+
 - (IBAction)startStopButtonClicked:(id)sender
 {
     if (runInProgress)
     {
-        [self endRun];
+        NSString *message = @"Are you sure you want to end your run?";
+        
+        UIActionSheet *endRunConfirmationPrompt = [[UIActionSheet alloc] initWithTitle:message delegate:self cancelButtonTitle:@"Keep Running" destructiveButtonTitle:@"End Run" otherButtonTitles:nil];
+        
+        endRunConfirmationPrompt.actionSheetStyle = UIBarStyleBlackOpaque;
+        [endRunConfirmationPrompt showInView:self.view];
     }
     else
     {
-        [self clearText];
-        [runModePrompt show];
+        if ([TeamRunSettings multiplayerMode])
+        {
+            [self createMatch];
+        }
+        else
+        {
+            [self startRun];
+        }
     }
 }
 
