@@ -44,7 +44,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="30:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aEd-jh-KIp">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aEd-jh-KIp">
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="161" type="user" id="fYp-Q2-SXX"/>
                                 </constraints>
@@ -128,7 +128,7 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="time remaining" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="78" translatesAutoresizingMaskIntoConstraints="NO" id="0cf-Rh-IEq">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="time ran" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="78" translatesAutoresizingMaskIntoConstraints="NO" id="0cf-Rh-IEq">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="78" id="GIW-cb-HvH"/>
                                     <constraint firstAttribute="height" constant="49" id="lw3-tI-aDL"/>
@@ -192,6 +192,7 @@
                         <outlet property="milesRanLabel" destination="CCp-oV-Hae" id="f8i-kS-hvs"/>
                         <outlet property="scrollingText" destination="oXd-wa-f0B" id="5lh-jQ-wb9"/>
                         <outlet property="startStopButton" destination="5mu-FP-zpB" id="Lhk-jo-BvT"/>
+                        <outlet property="timeLabel" destination="0cf-Rh-IEq" id="Pva-a0-g0G"/>
                         <outlet property="timeRemainingLabel" destination="aEd-jh-KIp" id="036-xv-8d9"/>
                     </connections>
                 </viewController>
@@ -572,6 +573,7 @@
                 <relationship kind="outlet" name="milesRanLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="scrollingText" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="startStopButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="timeLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="timeRemainingLabel" candidateClass="UILabel"/>
             </relationships>
         </class>

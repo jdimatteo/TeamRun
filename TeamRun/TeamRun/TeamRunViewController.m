@@ -10,9 +10,7 @@
  
                 create a single object that represents a Run -- there are too many things floating around this view controller and it is getting hard to keep them straight
  
-                
- 
- single player mode timer should go up (not starting at 30:00), and initially show as 0:00 time ran (not time remaining), then in multiplayer mode it can switch to time remaining, on pace needs to switch to something reasonable in single player mode
+                on pace needs to switch to something reasonable in single player mode
                 make completed run screen look OK and populate it with some data,
                 implement pace scaling based off setting,
                 store/display personal best scores and total miles / team miles
@@ -59,6 +57,8 @@ UI Design:
        The settings and main screen are good enough as is, stop fiddling!
  
  display gps accuracy
+ 
+ display some sort of notification to user if match making error occurred (e.g. if not connected to internet, automatch will time out)
  
  settings
  -- on the settings screen, add a ? button (or some other info button) that explains the settings, and remove the text from the main screen
@@ -175,6 +175,7 @@ typedef enum {LOG_TRACE, LOG_DEBUG, LOG_INFO, LOG_WARN, LOG_ERROR, LOG_TEMP_ESCA
 @property (weak, nonatomic) IBOutlet UILabel *averagePaceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *milesRanLabel;
 @property (weak, nonatomic) IBOutlet UILabel *milesAheadLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
 - (void)createMatch;
 - (void)startRun;
@@ -307,16 +308,24 @@ bool runInProgress;
 
 - (void)secondRan:(NSTimer *)timer
 {
-    // all runs are 30 minutes long
-    int remainingSeconds = 30*60 - round([PSLocationManager sharedLocationManager].totalSeconds);
-    
-    if (remainingSeconds <= 0)
+    if (self.match == nil)
     {
-        [self endRun];
+        const int secondsRan = round([PSLocationManager sharedLocationManager].totalSeconds);
+        [self.timeRemainingLabel setText:[NSString stringWithFormat:@"%.2d:%.2d", secondsRan / 60, secondsRan % 60]];
     }
     else
     {
-        [self.timeRemainingLabel setText:[NSString stringWithFormat:@"%.2d:%.2d", remainingSeconds / 60, remainingSeconds % 60]];
+        // all multiplayer runs are 30 minutes long
+        const int remainingSeconds = 30*60 - round([PSLocationManager sharedLocationManager].totalSeconds);
+        
+        if (remainingSeconds <= 0)
+        {
+            [self endRun];
+        }
+        else
+        {
+            [self.timeRemainingLabel setText:[NSString stringWithFormat:@"%.2d:%.2d", remainingSeconds / 60, remainingSeconds % 60]];
+        }
     }
 }
 
@@ -608,6 +617,9 @@ bool runInProgress;
     [self updateNotificationsTimerIfNecessary];
     
     [self updatePlayers];
+    
+    [self.timeLabel setText:(self.match == nil ? @"time ran" : @"time remaining")];
+    [self secondRan:nil];
 }
 
 - (void)endRun
