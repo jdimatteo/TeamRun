@@ -6,7 +6,13 @@
 //  Copyright (c) 2012 John DiMatteo. All rights reserved.
 //
 
-/* pickup here: single player mode timer should go up (not starting at 30:00), and initially show as 0:00 time ran (not time remaining), then in multiplayer mode it can switch to time remaining, on pace needs to switch to something reasonable in single player mode
+/* pickup here: test if self.players is set properly, and if so populate a list of names,
+ 
+                create a single object that represents a Run -- there are too many things floating around this view controller and it is getting hard to keep them straight
+ 
+                
+ 
+ single player mode timer should go up (not starting at 30:00), and initially show as 0:00 time ran (not time remaining), then in multiplayer mode it can switch to time remaining, on pace needs to switch to something reasonable in single player mode
                 make completed run screen look OK and populate it with some data,
                 implement pace scaling based off setting,
                 store/display personal best scores and total miles / team miles
@@ -173,6 +179,7 @@ typedef enum {LOG_TRACE, LOG_DEBUG, LOG_INFO, LOG_WARN, LOG_ERROR, LOG_TEMP_ESCA
 - (void)createMatch;
 - (void)startRun;
 - (void)endRun;
+- (void)updatePlayers;
 - (void)playerAuthenticated;
 - (void)logTrace:(NSString*)format,...;
 - (void)logDebug:(NSString*)format,...;
@@ -186,7 +193,9 @@ typedef enum {LOG_TRACE, LOG_DEBUG, LOG_INFO, LOG_WARN, LOG_ERROR, LOG_TEMP_ESCA
 - (double)updateMilesAhead:(double) milesOtherPlayerRan;
 - (void)updateNotificationsTimerIfNecessary;
 
-@property (weak, nonatomic) GKMatch* match;
+@property (strong, nonatomic) GKMatch* match;
+@property (strong, nonatomic) NSArray* players;
+
 @property (nonatomic) NSTimer* runningTimer;
 @property (nonatomic) NSTimer* paceUpdateTimer;
 
@@ -569,9 +578,14 @@ bool runInProgress;
     self.match = match;
     
     [self dismissViewControllerAnimated:YES completion:nil];
-    [self logTmp:@"Match found"];
+    [self logTmp:@"Match found -- expectedPlayerCount: %d", match.expectedPlayerCount];
     
-    [self startRun];
+    if (runInProgress) [self logError:@"runInProgress should be false if didFindMatch called"];
+    
+    if (!runInProgress && match.expectedPlayerCount == 0)
+    {
+        [self startRun];
+    }
 }
 
 - (void)startRun
@@ -592,6 +606,8 @@ bool runInProgress;
     [self.startStopButton setTitle:@"Stop" forState:UIControlStateNormal];
     
     [self updateNotificationsTimerIfNecessary];
+    
+    [self updatePlayers];
 }
 
 - (void)endRun
@@ -603,6 +619,8 @@ bool runInProgress;
         [self.match disconnect];
         self.match = nil;
     }
+    
+    self.players = nil;
     
     [self.startStopButton setTitle:@"Run" forState:UIControlStateNormal];
     
@@ -619,6 +637,31 @@ bool runInProgress;
     [self presentViewController:completionViewController animated:YES completion:nil];
 }
 
+- (void)updatePlayers
+{
+    if (self.match != nil)
+    {
+        [GKPlayer loadPlayersForIdentifiers:self.match.playerIDs withCompletionHandler:^(NSArray *players, NSError *error)
+        {
+            [self logTmp:@"loadPlayersForIdentifiers completion handler called"];
+            if (error != nil)
+            {
+                [self logError:@"Error loading player information: %@", error];
+                
+                // todo: consider retrying to get players
+            }
+            
+            self.players = players;
+            [self logTmp:@"players set: ", self.players];
+        }];
+    }
+    else
+    {
+        [self logError:@"update players called but match is nil"];
+        self.players = nil;
+    }
+}
+
 - (void)match:(GKMatch *)match player:(NSString *)playerID didChangeState:(GKPlayerConnectionState)state
 {
     switch (state)
@@ -632,7 +675,11 @@ bool runInProgress;
         default:
             [self logTmp:@"match (%@) player (%@) unrecognized state (%d), expected player count is now %d", match.description, playerID, state, match.expectedPlayerCount];
     }
-    // todo: consider not starting the match (the timer and gps) until match.expectedPlayerCount is 0
+    
+    if (!runInProgress && match.expectedPlayerCount == 0)
+    {
+        [self startRun];
+    }
 }
 
 - (void)match:(GKMatch *)match didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID
