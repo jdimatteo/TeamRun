@@ -10,8 +10,6 @@
 
 @interface TeamRunCompletedViewController : UIViewController
 
-- (void)setMilesRan:(double)miles;
-- (void)setTimeRan:(double)miles;
-- (void)setAveragePace:(NSString*)averagePace;
+- (void)setRunMiles:(double)rawMiles inSeconds:(int)seconds withTeamRunMiles:(double)teamMiles;
 
 @end

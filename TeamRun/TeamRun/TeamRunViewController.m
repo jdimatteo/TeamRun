@@ -6,9 +6,7 @@
 //  Copyright (c) 2012 John DiMatteo. All rights reserved.
 //
 
-/* pickup here: store/display personal best scores and total miles / team miles
-                on pace needs to switch to something reasonable in single player mode
-                make completed run screen look OK and populate it with some data,
+/* pickup here: store/display personal best scores and total miles / team miles,
                 implement pace scaling based off setting,
  
    next time running: have Sarah's phone use speedCalcMethod = PS and my phone use speedCalcMethod = CL, and compare smoothness, and responsiveness to sprinting and stopping
@@ -173,13 +171,13 @@ typedef enum {LOG_TRACE, LOG_DEBUG, LOG_INFO, LOG_WARN, LOG_ERROR, LOG_TEMP_ESCA
 - (IBAction)openLeaderboards:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UITextView *scrollingText;
-@property (weak, nonatomic) IBOutlet UILabel *timeRemainingLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *startStopButton;
 @property (weak, nonatomic) IBOutlet UILabel *currentPaceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *averagePaceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *milesRanLabel;
 @property (weak, nonatomic) IBOutlet UILabel *milesAheadLabel;
-@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeDescriptionLabel;
 
 - (void)createMatch;
 - (void)startRun;
@@ -333,7 +331,7 @@ bool runInProgress;
     if (self.match == nil)
     {
         const int secondsRan = round([PSLocationManager sharedLocationManager].totalSeconds);
-        [self.timeRemainingLabel setText:[NSString stringWithFormat:@"%.2d:%.2d", secondsRan / 60, secondsRan % 60]];
+        [self.timeLabel setText:[NSString stringWithFormat:@"%.2d:%.2d", secondsRan / 60, secondsRan % 60]];
     }
     else
     {
@@ -346,7 +344,7 @@ bool runInProgress;
         }
         else
         {
-            [self.timeRemainingLabel setText:[NSString stringWithFormat:@"%.2d:%.2d", remainingSeconds / 60, remainingSeconds % 60]];
+            [self.timeLabel setText:[NSString stringWithFormat:@"%.2d:%.2d", remainingSeconds / 60, remainingSeconds % 60]];
         }
     }
 }
@@ -640,7 +638,7 @@ bool runInProgress;
     
     [self updatePlayers];
     
-    [self.timeLabel setText:(self.match == nil ? @"time ran" : @"time remaining")];
+    [self.timeDescriptionLabel setText:(self.match == nil ? @"time ran" : @"time remaining")];
     [self secondRan:nil];
 }
 
@@ -669,9 +667,16 @@ bool runInProgress;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     TeamRunCompletedViewController *completionViewController = [storyboard instantiateViewControllerWithIdentifier:@"RunCompletedViewController"];
     // todo: we should just be passing a run object here
-    [completionViewController setMilesRan:[PSLocationManager sharedLocationManager].totalDistance*MILES_PER_METER];
-    [completionViewController setTimeRan:[PSLocationManager sharedLocationManager].totalSeconds];
+    
+    const double rawMiles = [PSLocationManager sharedLocationManager].totalDistance*MILES_PER_METER;
+    const double teamRunMiles = self.match == nil ? rawMiles
+                                                  : 2*(rawMiles + [self updateMilesAhead:0]);
+    
     [self presentViewController:completionViewController animated:YES completion:nil];
+    
+    [completionViewController setRunMiles:rawMiles
+                                inSeconds:[PSLocationManager sharedLocationManager].totalSeconds
+                         withTeamRunMiles:teamRunMiles];
 }
 
 - (void)updatePlayers
