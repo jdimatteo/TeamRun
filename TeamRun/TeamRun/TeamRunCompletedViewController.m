@@ -8,8 +8,12 @@
 
 #import "TeamRunCompletedViewController.h"
 
+#import <GameKit/GameKit.h>
+
 @interface TeamRunCompletedViewController ()
 - (IBAction)doneTapped;
+
+- (void)reportScore: (int64_t) score forLeaderboardID: (NSString*) category;
 
 @end
 
@@ -39,5 +43,32 @@
 - (IBAction)doneTapped
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)setMilesRan:(double)miles
+{
+    
+}
+
+- (void)setTimeRan:(double)miles
+{
+    
+}
+
+- (void)setAveragePace:(NSString*)averagePace
+{
+    
+}
+
+- (void)reportScore: (int64_t) score forLeaderboardID: (NSString*) category
+{
+    GKScore *scoreReporter = [[GKScore alloc] initWithCategory:category];
+    scoreReporter.value = score;
+    scoreReporter.context = 0;
+    
+    [scoreReporter reportScoreWithCompletionHandler:^(NSError *error) {
+        // game center will automatically resend the score later
+        // todo: test that this really is automatically resent
+    }];
 }
 @end

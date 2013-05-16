@@ -6,11 +6,10 @@
 //  Copyright (c) 2012 John DiMatteo. All rights reserved.
 //
 
-/* pickup here: done button shouldn't be in same place as run button -- it is too easy to mistakenly press run after finishing a run
+/* pickup here: store/display personal best scores and total miles / team miles
                 on pace needs to switch to something reasonable in single player mode
                 make completed run screen look OK and populate it with some data,
                 implement pace scaling based off setting,
-                store/display personal best scores and total miles / team miles
  
    next time running: have Sarah's phone use speedCalcMethod = PS and my phone use speedCalcMethod = CL, and compare smoothness, and responsiveness to sprinting and stopping
   
@@ -82,6 +81,10 @@ UI Design:
  
 Required before initial release:
  
+ verify that time ran shows hours correctly (e.g. it shouldn't show > 60 minutes)
+ 
+ update icon to not look so unprofessional, and provide icons for leaderboards
+ 
  facebook sharing (optionally including the names of everyone ran with, maybe using Facebook tagging or something)
  - include a nice icon which when clicked is a link to buy the game
  
@@ -89,7 +92,9 @@ Required before initial release:
  
  gui buttons sometimes seem unresponsive, particularly when speaking audio -- what is going on?
  -- for example, while a pace notification is being spoken, in the setting screen often the pace notification slider and done button is unresponsive to touch
-  
+ 
+ move my game to a game group, so that leaderboards can be shared if I make a paid version
+ 
 todo:
  
  include passing/delta ahead notification settings (on unconnected view controller)
@@ -663,6 +668,9 @@ bool runInProgress;
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     TeamRunCompletedViewController *completionViewController = [storyboard instantiateViewControllerWithIdentifier:@"RunCompletedViewController"];
+    // todo: we should just be passing a run object here
+    [completionViewController setMilesRan:[PSLocationManager sharedLocationManager].totalDistance*MILES_PER_METER];
+    [completionViewController setTimeRan:[PSLocationManager sharedLocationManager].totalSeconds];
     [self presentViewController:completionViewController animated:YES completion:nil];
 }
 
