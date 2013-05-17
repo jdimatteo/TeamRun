@@ -26,7 +26,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *bestRunTeamMilesLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *totalRawMilesLabel;
-@property (weak, nonatomic) IBOutlet UILabel *totalTeamRunMilesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *totalTeamMilesLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *teamMilesRowLabel;
 @property (weak, nonatomic) IBOutlet UILabel *personalBestLabel;
@@ -69,6 +69,8 @@
 
 - (void)setRunMiles:(double)rawMiles inSeconds:(int)seconds withTeamRunMiles:(double)teamMiles
 {
+    // todo: this function is a mess, clean it up!
+    
     [self.currentRunRawMilesLabel setText:truncateToTwoDecimals(rawMiles)];
     [self.currentRunTimeLabel setText:[NSString stringWithFormat:@"%.2d:%.2d", seconds / 60, seconds % 60]];
     [self.currentRunTeamMilesLabel setText:truncateToTwoDecimals(teamMiles)];
@@ -80,13 +82,18 @@
     
     // todo: populate pace label and submit pace score
     
+    // todo: use score formattedValue for current run scores
+    // todo: report/display float minutes instead of seconds
+    
     NSArray* currentPlayer = @[[GKLocalPlayer localPlayer].playerID];
     
-    NSArray* scoreCateogries = @[@"org.teamrun.SingleRunRawMiles", @"org.teamrun.SingleRunTeamMiles", @"org.teamrun.SingleRunSeconds"];
+    NSArray* bestScoreCateogries = @[@"org.teamrun.SingleRunRawMiles", @"org.teamrun.SingleRunTeamMiles", @"org.teamrun.SingleRunSeconds"];
     
-    self.remainingScoresToLoad = scoreCateogries.count;
+    NSArray* totalScoreCateogries = @[@"org.teamrun.TotalRawMiles", @"org.teamrun.TotalTeamMiles"];
     
-    for (NSString* scoreCategory in scoreCateogries)
+    self.remainingScoresToLoad = bestScoreCateogries.count + totalScoreCateogries.count;
+    
+    for (NSString* scoreCategory in bestScoreCateogries)
     {
         GKLeaderboard *bestScoreRequest = [[GKLeaderboard alloc] initWithPlayerIDs:currentPlayer];
         if (bestScoreRequest != nil)
@@ -97,7 +104,7 @@
             [bestScoreRequest loadScoresWithCompletionHandler: ^(NSArray *scores, NSError *error) {
                 if (error != nil)
                 {
-                    NSLog(@"todo, remove this NSLog: loadScoresWithCompletionHandler error: %@", error);
+                    NSLog(@"todo, remove this NSLog: %@ loadScoresWithCompletionHandler error: %@", scoreCategory, error);
                 }
                 if (scores != nil)
                 {
@@ -133,7 +140,63 @@
         }
         else
         {
-            NSLog(@"todo, remove this NSLog: bestScoreRequest is nil");
+            NSLog(@"todo, remove this NSLog: %@ bestScoreRequest is nil", scoreCategory);
+        }
+    }
+    
+    for (NSString* scoreCategory in totalScoreCateogries)
+    {
+        GKLeaderboard *totalScoreRequest = [[GKLeaderboard alloc] initWithPlayerIDs:currentPlayer];
+        if (totalScoreRequest != nil)
+        {
+            totalScoreRequest.timeScope = GKLeaderboardTimeScopeAllTime;
+            totalScoreRequest.category = scoreCategory;
+            totalScoreRequest.range = NSMakeRange(1,1);
+            [totalScoreRequest loadScoresWithCompletionHandler: ^(NSArray *scores, NSError *error) {
+                if (error != nil)
+                {
+                    NSLog(@"todo, remove this NSLog: totalScoreRequest loadScoresWithCompletionHandler error: %@", error);
+                }
+                GKScore* currentScore = [scoreCategory isEqualToString:@"org.teamrun.TotalRawMiles"]
+                                      ? categoryToCurrentScore[@"org.teamrun.SingleRunRawMiles"]
+                                      : categoryToCurrentScore[@"org.teamrun.SingleRunTeamMiles"];
+                
+                GKScore* totalScore = [[GKScore alloc] initWithCategory:scoreCategory];
+                totalScore.value = currentScore.value; // temporarily set to just the current score
+                totalScore.context = 0;
+                
+                if (scores != nil && scores.count > 0)
+                {
+                    totalScore.value += ((GKScore*)scores[0]).value;
+                }
+                
+                [totalScore reportScoreWithCompletionHandler:^(NSError *error) {
+                    if (error != nil) NSLog(@"todo, remove this NSLog: reportScoreWithCompletionHandler error: %@", error);
+                    // game center will automatically resend the score later
+                }];
+                
+                NSString* formattedScore = truncateToTwoDecimals(totalScore.value/100.0);
+                
+                if ([scoreCategory isEqualToString:@"org.teamrun.TotalRawMiles"])
+                {
+                    [self.totalRawMilesLabel setText:[[NSString alloc] initWithFormat:@"%@ total miles", formattedScore]];
+                }
+                else
+                {
+                    [self.totalTeamMilesLabel setText:[[NSString alloc] initWithFormat:@"%@ total team miles", formattedScore]];
+                }
+                
+                self.remainingScoresToLoad--;
+                if (self.remainingScoresToLoad == 0)
+                {
+                    // this whole process is super fast and the user probably will never see the original title "Personal Best (Loading...)"
+                    [self.personalBestLabel setText:@"Personal Best"];
+                }
+            }];
+        }
+        else
+        {
+            NSLog(@"todo, remove this NSLog: totalScoreRequest is nil");
         }
     }
 }

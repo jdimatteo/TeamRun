@@ -7,11 +7,15 @@
 //
 
 /* pickup here: store/display total miles / team miles,
+                current pace being populated when not running,
+                customize ahead label for single and multiplayer mode,
                 store/display averages,
                 cache best and total score per player per category in case best/total score can't be found or is outdated,
                 implement pace scaling based off setting,
  
-   next time running: have Sarah's phone use speedCalcMethod = PS and my phone use speedCalcMethod = CL, and compare smoothness, and responsiveness to sprinting and stopping
+   next time running with two phones:
+        -- have Sarah's phone use speedCalcMethod = PS and my phone use speedCalcMethod = CL, and compare smoothness, and responsiveness to sprinting and stopping
+        -- test/implement total team miles calculation/reporting/display
   
 Current Pace Fluctuations:
  

@@ -260,7 +260,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="134.32 total miles" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Vp-hQ-PSD">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="... total miles" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Vp-hQ-PSD">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="275" id="hWI-MV-tai"/>
                                 </constraints>
@@ -268,7 +268,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="924.24 total team miles" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9s4-sq-zCu">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="... total team miles" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9s4-sq-zCu">
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -397,7 +397,7 @@
                         <outlet property="personalBestLabel" destination="0Ev-ng-OY8" id="h4n-YB-UfU"/>
                         <outlet property="teamMilesRowLabel" destination="IYs-1x-PAE" id="DkI-Mu-KD0"/>
                         <outlet property="totalRawMilesLabel" destination="3Vp-hQ-PSD" id="o82-wC-g9N"/>
-                        <outlet property="totalTeamRunMilesLabel" destination="9s4-sq-zCu" id="g20-5G-Sk9"/>
+                        <outlet property="totalTeamMilesLabel" destination="9s4-sq-zCu" id="B7E-UH-PDU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oME-O7-xQV" userLabel="First Responder" sceneMemberID="firstResponder"/>
