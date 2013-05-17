@@ -273,7 +273,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Personal Best" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ev-ng-OY8">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Personal Best (loading...)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="130" translatesAutoresizingMaskIntoConstraints="NO" id="0Ev-ng-OY8">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="WGq-rq-wIp"/>
                                     <constraint firstAttribute="width" constant="130" id="a3P-uw-j8Q"/>
@@ -282,7 +282,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="1h 42m 16s" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="17" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="122" translatesAutoresizingMaskIntoConstraints="NO" id="QNW-BB-KEB">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="17" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="122" translatesAutoresizingMaskIntoConstraints="NO" id="QNW-BB-KEB">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="122" type="user" id="vSs-Pv-aMI"/>
                                 </constraints>
@@ -320,17 +320,17 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="10.58" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P4p-k5-cBm">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P4p-k5-cBm">
                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="7:55" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="moG-id-yFF">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="moG-id-yFF">
                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="58.43" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPA-vG-cs0">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPA-vG-cs0">
                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -394,6 +394,7 @@
                         <outlet property="currentRunRawMilesLabel" destination="hyf-BC-8Qj" id="FRm-Ld-6yE"/>
                         <outlet property="currentRunTeamMilesLabel" destination="Ovm-2r-ClE" id="3W4-20-470"/>
                         <outlet property="currentRunTimeLabel" destination="MOO-Wh-cGA" id="lyV-cY-cfK"/>
+                        <outlet property="personalBestLabel" destination="0Ev-ng-OY8" id="h4n-YB-UfU"/>
                         <outlet property="teamMilesRowLabel" destination="IYs-1x-PAE" id="DkI-Mu-KD0"/>
                         <outlet property="totalRawMilesLabel" destination="3Vp-hQ-PSD" id="o82-wC-g9N"/>
                         <outlet property="totalTeamRunMilesLabel" destination="9s4-sq-zCu" id="g20-5G-Sk9"/>
@@ -638,64 +639,6 @@
             <point key="canvasLocation" x="-8" y="143"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="TeamRunCompletedViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TeamRunCompletedViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="doneTapped"/>
-                <relationship kind="outlet" name="bestRunPaceLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="bestRunRawMilesLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="bestRunTeamMilesLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="bestRunTimeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="currentRunPaceLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="currentRunRawMilesLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="currentRunTeamMilesLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="currentRunTimeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="teamMilesRowLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="totalRawMilesLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="totalTeamRunMilesLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="TeamRunSettingsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TeamRunSettingsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="doneChangingSettings"/>
-                <relationship kind="action" name="updateEnabledFields"/>
-                <relationship kind="outlet" name="minutesBetweenNotificationsTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="multiplayerModeSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="noteSectionView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="notificationsSectionView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="paceNotificationsSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="relativePositionNotificationsSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="secondsBetweenNotificationsTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="targetMilePaceMinutesTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="targetMilePaceSecondsTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="targetMilePaceSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="targetPaceSectionView" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="TeamRunView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TeamRunView.h"/>
-        </class>
-        <class className="TeamRunViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TeamRunViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="openLeaderboards:"/>
-                <relationship kind="action" name="startStopButtonClicked:"/>
-                <relationship kind="outlet" name="averagePaceLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="currentPaceLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="milesAheadLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="milesRanLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="scrollingText" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="startStopButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="timeDescriptionLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="timeLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

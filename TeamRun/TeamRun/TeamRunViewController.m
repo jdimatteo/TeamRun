@@ -6,7 +6,9 @@
 //  Copyright (c) 2012 John DiMatteo. All rights reserved.
 //
 
-/* pickup here: store/display personal best scores and total miles / team miles,
+/* pickup here: store/display total miles / team miles,
+                store/display averages,
+                cache best and total score per player per category in case best/total score can't be found or is outdated,
                 implement pace scaling based off setting,
  
    next time running: have Sarah's phone use speedCalcMethod = PS and my phone use speedCalcMethod = CL, and compare smoothness, and responsiveness to sprinting and stopping
