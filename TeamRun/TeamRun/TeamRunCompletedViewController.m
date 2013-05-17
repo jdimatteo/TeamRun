@@ -68,9 +68,9 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)setRunMiles:(double)rawMiles
+- (void)setMilesRan:(double)rawMiles
           inSeconds:(int)seconds
-   withTeamRunMiles:(double)teamMiles
+   withTeamMiles:(double)teamMiles
          withLogger:(id<TeamRunLogger>)logger
 {
     // todo: this function is a mess, clean it up!
@@ -79,16 +79,22 @@
     [self.currentRunTimeLabel setText:[NSString stringWithFormat:@"%.2d:%.2d", seconds / 60, seconds % 60]];
     [self.currentRunTeamMilesLabel setText:truncateToTwoDecimals(teamMiles)];
     
+    {
+        const int secondsPerMile = seconds/rawMiles;
+        [self.currentRunPaceLabel setText:[NSString stringWithFormat:@"%.2d:%.2d", secondsPerMile / 60, secondsPerMile % 60]];
+    }
+    
     NSMutableDictionary* categoryToCurrentScore = [NSMutableDictionary dictionaryWithCapacity:3];
     [self reportScore:rawMiles*100 forLeaderboardID:@"org.teamrun.SingleRunRawMiles" addTo:categoryToCurrentScore withLogger:logger];
     [self reportScore:teamMiles*100 forLeaderboardID:@"org.teamrun.SingleRunTeamMiles" addTo:categoryToCurrentScore withLogger:logger];
     [self reportScore:seconds forLeaderboardID:@"org.teamrun.SingleRunSeconds" addTo:categoryToCurrentScore withLogger:logger];
+    [self reportScore:seconds/rawMiles forLeaderboardID:@"org.teamrun.SingleRunSecondsPerMile" addTo:categoryToCurrentScore withLogger:logger];
     
     // todo: populate pace label and submit pace score
         
     NSArray* currentPlayer = @[[GKLocalPlayer localPlayer].playerID];
     
-    NSArray* bestScoreCateogries = @[@"org.teamrun.SingleRunRawMiles", @"org.teamrun.SingleRunTeamMiles", @"org.teamrun.SingleRunSeconds"];
+    NSArray* bestScoreCateogries = @[@"org.teamrun.SingleRunRawMiles", @"org.teamrun.SingleRunTeamMiles", @"org.teamrun.SingleRunSeconds", @"org.teamrun.SingleRunSecondsPerMile"];
     
     NSArray* totalScoreCateogries = @[@"org.teamrun.TotalRawMiles", @"org.teamrun.TotalTeamMiles"];
     
@@ -136,6 +142,16 @@
                             const int bestSeconds = personalBest.value;
                             [self.bestRunTimeLabel setText:[NSString stringWithFormat:@"%.2d:%.2d", bestSeconds/ 60, bestSeconds % 60]];
                         }
+                        else if ([scoreCategory isEqualToString:@"org.teamrun.SingleRunSecondsPerMile"])
+                        {
+                            const int bestSecondsPerMile = personalBest.value;
+                            [self.bestRunPaceLabel setText:[NSString stringWithFormat:@"%.2d:%.2d", bestSecondsPerMile / 60, bestSecondsPerMile % 60]];
+                        }
+                        else
+                        {
+                            [logger logError:@"Unexpected category in loop: %@", scoreCategory];
+                        }
+
                     }
                 }
                 self.remainingScoresToLoad--;

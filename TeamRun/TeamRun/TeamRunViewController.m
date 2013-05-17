@@ -7,7 +7,6 @@
 //
 
 /* pickup here: customize ahead label for single and multiplayer mode (say ahead of target pace, or ahead of Molly and make two lines),
-                report/display current and best paces,
                 implement pace scaling based off setting,
                 facebook posting,
  
@@ -16,6 +15,8 @@
         -- test/implement total team miles calculation/reporting/display
   
 Required before initial release:
+ 
+ if I click start too soon, location updates never come in!  some sort of race condition?
  
  verify that time ran shows hours correctly (e.g. it shouldn't show > 60 minutes)
  
@@ -29,6 +30,8 @@ Required before initial release:
  test that screen resizes properly when phone call green bar is at top of screen of iPhone 4
  
  test that starting a second run works properly (e.g. GPS starts back up properly, fields display new run info, average pace is reset, etc.)
+ 
+ review all inline todos in every file
  
 UI Design (probably good to cover all these items before initial release):
  
@@ -54,6 +57,8 @@ UI Design (probably good to cover all these items before initial release):
  add icons for the high scores (this can be done after game published)
  
 Additional Todos (maybe version 2)
+ 
+ preface log messages with their level (e.g. ERROR:)
  
  walkie talkie like communication, or maybe just record 2 sayings (one for faster, and one for slower), so recording can be sent just once,
  which would eliminate most data transfer needs (just send a couple bytes instead of an audio recording)
@@ -657,9 +662,9 @@ bool runInProgress;
     
     [self presentViewController:completionViewController animated:YES completion:nil];
     
-    [completionViewController setRunMiles:rawMiles
+    [completionViewController setMilesRan:rawMiles
                                 inSeconds:[PSLocationManager sharedLocationManager].totalSeconds
-                         withTeamRunMiles:teamRunMiles
+                         withTeamMiles:teamRunMiles
                                withLogger:self];
 }
 

@@ -12,9 +12,9 @@
 
 @interface TeamRunCompletedViewController : UIViewController
 
-- (void)setRunMiles:(double)rawMiles
+- (void)setMilesRan:(double)rawMiles
           inSeconds:(int)seconds
-   withTeamRunMiles:(double)teamMiles
+   withTeamMiles:(double)teamMiles
          withLogger:(id<TeamRunLogger>)logger;
 
 @end
