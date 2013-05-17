@@ -15,9 +15,7 @@
         -- test/implement total team miles calculation/reporting/display
   
 Required before initial release:
- 
- if I click start too soon, location updates never come in!  some sort of race condition?
- 
+  
  verify that time ran shows hours correctly (e.g. it shouldn't show > 60 minutes)
  
  facebook sharing (optionally including the names of everyone ran with, maybe using Facebook tagging or something)

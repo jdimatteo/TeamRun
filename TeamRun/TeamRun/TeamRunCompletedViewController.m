@@ -94,15 +94,13 @@
         
     NSArray* currentPlayer = @[[GKLocalPlayer localPlayer].playerID];
     
-    NSArray* bestScoreCateogries = @[@"org.teamrun.SingleRunRawMiles", @"org.teamrun.SingleRunTeamMiles", @"org.teamrun.SingleRunSeconds", @"org.teamrun.SingleRunSecondsPerMile"];
-    
     NSArray* totalScoreCateogries = @[@"org.teamrun.TotalRawMiles", @"org.teamrun.TotalTeamMiles"];
     
-    self.remainingScoresToLoad = bestScoreCateogries.count + totalScoreCateogries.count;
+    self.remainingScoresToLoad = categoryToCurrentScore.count + totalScoreCateogries.count;
     
     // note: I am not using any GKScore formattedValue properties because these are null for scores that I initialize (they are only set for downloaded scores)
     
-    for (NSString* scoreCategory in bestScoreCateogries)
+    for (NSString* scoreCategory in categoryToCurrentScore.allKeys)
     {
         GKLeaderboard *bestScoreRequest = [[GKLeaderboard alloc] initWithPlayerIDs:currentPlayer];
         if (bestScoreRequest != nil)
