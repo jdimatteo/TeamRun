@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+#import "TeamRunLogger.h"
+
 @interface TeamRunCompletedViewController : UIViewController
 
-- (void)setRunMiles:(double)rawMiles inSeconds:(int)seconds withTeamRunMiles:(double)teamMiles;
+- (void)setRunMiles:(double)rawMiles
+          inSeconds:(int)seconds
+   withTeamRunMiles:(double)teamMiles
+         withLogger:(id<TeamRunLogger>)logger;
 
 @end

@@ -33,7 +33,8 @@
 
 - (void) reportScore: (int64_t) score
     forLeaderboardID: (NSString*) category
-               addTo: (NSMutableDictionary*) categoryToCurrentScore;
+               addTo: (NSMutableDictionary*) categoryToCurrentScore
+          withLogger: (id<TeamRunLogger>) logger;
 
 @property (nonatomic) int remainingScoresToLoad;
 
@@ -67,7 +68,10 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)setRunMiles:(double)rawMiles inSeconds:(int)seconds withTeamRunMiles:(double)teamMiles
+- (void)setRunMiles:(double)rawMiles
+          inSeconds:(int)seconds
+   withTeamRunMiles:(double)teamMiles
+         withLogger:(id<TeamRunLogger>)logger
 {
     // todo: this function is a mess, clean it up!
     
@@ -76,9 +80,9 @@
     [self.currentRunTeamMilesLabel setText:truncateToTwoDecimals(teamMiles)];
     
     NSMutableDictionary* categoryToCurrentScore = [NSMutableDictionary dictionaryWithCapacity:3];
-    [self reportScore:rawMiles*100 forLeaderboardID:@"org.teamrun.SingleRunRawMiles" addTo:categoryToCurrentScore];
-    [self reportScore:teamMiles*100 forLeaderboardID:@"org.teamrun.SingleRunTeamMiles" addTo:categoryToCurrentScore];
-    [self reportScore:seconds forLeaderboardID:@"org.teamrun.SingleRunSeconds" addTo:categoryToCurrentScore];
+    [self reportScore:rawMiles*100 forLeaderboardID:@"org.teamrun.SingleRunRawMiles" addTo:categoryToCurrentScore withLogger:logger];
+    [self reportScore:teamMiles*100 forLeaderboardID:@"org.teamrun.SingleRunTeamMiles" addTo:categoryToCurrentScore withLogger:logger];
+    [self reportScore:seconds forLeaderboardID:@"org.teamrun.SingleRunSeconds" addTo:categoryToCurrentScore withLogger:logger];
     
     // todo: populate pace label and submit pace score
         
@@ -103,7 +107,7 @@
             [bestScoreRequest loadScoresWithCompletionHandler: ^(NSArray *scores, NSError *error) {
                 if (error != nil)
                 {
-                    NSLog(@"todo, remove this NSLog: %@ loadScoresWithCompletionHandler error: %@", scoreCategory, error);
+                    [logger logError:@"%@ loadScoresWithCompletionHandler error: %@", scoreCategory, error];
                 }
                 if (scores != nil)
                 {
@@ -143,7 +147,7 @@
         }
         else
         {
-            NSLog(@"todo, remove this NSLog: %@ bestScoreRequest is nil", scoreCategory);
+            [logger logError:@"%@ bestScoreRequest is nil", scoreCategory];
         }
     }
     
@@ -158,7 +162,7 @@
             [totalScoreRequest loadScoresWithCompletionHandler: ^(NSArray *scores, NSError *error) {
                 if (error != nil)
                 {
-                    NSLog(@"todo, remove this NSLog: totalScoreRequest loadScoresWithCompletionHandler error: %@", error);
+                    [logger logError:@"%@ loadScoresWithCompletionHandler error: %@", scoreCategory, error];
                 }
                 GKScore* currentScore = [scoreCategory isEqualToString:@"org.teamrun.TotalRawMiles"]
                                       ? categoryToCurrentScore[@"org.teamrun.SingleRunRawMiles"]
@@ -174,7 +178,7 @@
                 }
                 
                 [totalScore reportScoreWithCompletionHandler:^(NSError *error) {
-                    if (error != nil) NSLog(@"todo, remove this NSLog: reportScoreWithCompletionHandler error: %@", error);
+                    if (error != nil) [logger logError:@"%@ reportScoreWithCompletionHandler error: %@", scoreCategory, error];
                     // game center will automatically resend the score later
                 }];
                 
@@ -199,7 +203,7 @@
         }
         else
         {
-            NSLog(@"todo, remove this NSLog: totalScoreRequest is nil");
+            [logger logError:@"%@ totalScoreRequest is nil", scoreCategory];
         }
     }
 }
@@ -207,13 +211,14 @@
 - (void) reportScore: (int64_t) score
     forLeaderboardID: (NSString*) category
                addTo: (NSMutableDictionary*) categoryToCurrentScore
+          withLogger: (id<TeamRunLogger>) logger
 {
     GKScore *scoreReporter = [[GKScore alloc] initWithCategory:category];
     scoreReporter.value = score;
     scoreReporter.context = 0;
     
     [scoreReporter reportScoreWithCompletionHandler:^(NSError *error) {
-        if (error != nil) NSLog(@"todo, remove this NSLog: reportScoreWithCompletionHandler error: %@", error);
+        if (error != nil) [logger logError:@"%@ reportScoreWithCompletionHandler error: %@", category, error];
         // game center will automatically resend the score later
         // todo: test that this really is automatically resent
     }];

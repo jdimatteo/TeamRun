@@ -8,7 +8,7 @@
 
 /* pickup here: current pace being populated when not running,
                 customize ahead label for single and multiplayer mode,
-                store/display averages,
+                report/display current and best paces,
                 cache best and total score per player per category in case best/total score can't be found or is outdated,
                 implement pace scaling based off setting,
  
@@ -156,6 +156,7 @@ todo:
 #import "TeamRunUtility.h"
 #import "TeamRunCompletedViewController.h"
 #import "TeamRunSettings.h"
+#import "TeamRunLogger.h"
 
 #import "PSLocationManager.h"
 
@@ -167,10 +168,8 @@ todo:
 
 #import <AudioToolbox/AudioSession.h>
 
-typedef enum {LOG_TRACE, LOG_DEBUG, LOG_INFO, LOG_WARN, LOG_ERROR, LOG_TEMP_ESCALATION} LogLevel;
-
 @interface TeamRunViewController ()
-<GKGameCenterControllerDelegate, GKMatchmakerViewControllerDelegate, GKMatchDelegate, PSLocationManagerDelegate, UIActionSheetDelegate>
+<GKGameCenterControllerDelegate, GKMatchmakerViewControllerDelegate, GKMatchDelegate, PSLocationManagerDelegate, UIActionSheetDelegate, TeamRunLogger>
 
 - (IBAction)startStopButtonClicked:(id)sender;
 - (IBAction)openLeaderboards:(id)sender;
@@ -189,13 +188,6 @@ typedef enum {LOG_TRACE, LOG_DEBUG, LOG_INFO, LOG_WARN, LOG_ERROR, LOG_TEMP_ESCA
 - (void)endRun;
 - (void)updatePlayers;
 - (void)playerAuthenticated;
-- (void)logTrace:(NSString*)format,...;
-- (void)logDebug:(NSString*)format,...;
-- (void)logInfo:(NSString*)format,...;
-- (void)logWarn:(NSString*)format,...;
-- (void)logError:(NSString*)format,...;
-- (void)logTmp:(NSString*)format,...;
-- (void)logWithLevel:(LogLevel)level message:(NSString*)message;
 - (void)secondRan:(NSTimer *)timer;
 - (void)speakNotification:(NSTimer *)timer;
 - (double)updateMilesAhead:(double) milesOtherPlayerRan;
@@ -681,7 +673,8 @@ bool runInProgress;
     
     [completionViewController setRunMiles:rawMiles
                                 inSeconds:[PSLocationManager sharedLocationManager].totalSeconds
-                         withTeamRunMiles:teamRunMiles];
+                         withTeamRunMiles:teamRunMiles
+                               withLogger:self];
 }
 
 - (void)updatePlayers
