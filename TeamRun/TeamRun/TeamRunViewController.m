@@ -6,8 +6,7 @@
 //  Copyright (c) 2012 John DiMatteo. All rights reserved.
 //
 
-/* pickup here: current pace being populated when not running,
-                customize ahead label for single and multiplayer mode (say ahead of target pace, or ahead of Molly and make two lines),
+/* pickup here: customize ahead label for single and multiplayer mode (say ahead of target pace, or ahead of Molly and make two lines),
                 report/display current and best paces,
                 implement pace scaling based off setting,
                 facebook posting,
@@ -764,25 +763,28 @@ bool runInProgress;
 
 - (void)locationManager:(PSLocationManager *)locationManager waypoint:(CLLocation *)waypoint calculatedSpeed:(double)calculatedSpeed
 {
-    [self logTrace:@"Location Update %@:\n\tPS: %@\n\tCL: %@\n\tDelta:%f\n",
-     truncateToTwoDecimals([PSLocationManager sharedLocationManager].totalSeconds),
-     truncateToTwoDecimals(calculatedSpeed),
-     truncateToTwoDecimals(waypoint.speed),
-     calculatedSpeed - waypoint.speed
-     ];
-    
-    if (speedCalcMethod == PS)
+    if (runInProgress)
     {
-        const double metersPerSecond = [PSLocationManager sharedLocationManager].currentSpeed;
+        [self logTrace:@"Location Update %@:\n\tPS: %@\n\tCL: %@\n\tDelta:%f\n",
+         truncateToTwoDecimals([PSLocationManager sharedLocationManager].totalSeconds),
+         truncateToTwoDecimals(calculatedSpeed),
+         truncateToTwoDecimals(waypoint.speed),
+         calculatedSpeed - waypoint.speed
+         ];
         
-        [self.currentPaceLabel setText:minutesPerMilePaceString(metersPerSecond, false)];        
+        if (speedCalcMethod == PS)
+        {
+            const double metersPerSecond = [PSLocationManager sharedLocationManager].currentSpeed;
+            
+            [self.currentPaceLabel setText:minutesPerMilePaceString(metersPerSecond, false)];        
+        }
+        else if (speedCalcMethod == CL)
+        {        
+            [self.currentPaceLabel setText:minutesPerMilePaceString(waypoint.speed, false)];
+        }
+        
+        [self.averagePaceLabel setText:minutesPerMilePaceString([PSLocationManager sharedLocationManager].totalDistance/[PSLocationManager sharedLocationManager].totalSeconds, false)];
     }
-    else if (speedCalcMethod == CL)
-    {        
-        [self.currentPaceLabel setText:minutesPerMilePaceString(waypoint.speed, false)];
-    }
-    
-    [self.averagePaceLabel setText:minutesPerMilePaceString([PSLocationManager sharedLocationManager].totalDistance/[PSLocationManager sharedLocationManager].totalSeconds, false)];
 }
 
 - (void)locationManager:(PSLocationManager *)locationManager error:(NSError *)error {
