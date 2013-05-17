@@ -6,8 +6,7 @@
 //  Copyright (c) 2012 John DiMatteo. All rights reserved.
 //
 
-/* pickup here: store/display total miles / team miles,
-                current pace being populated when not running,
+/* pickup here: current pace being populated when not running,
                 customize ahead label for single and multiplayer mode,
                 store/display averages,
                 cache best and total score per player per category in case best/total score can't be found or is outdated,

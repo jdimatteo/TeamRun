@@ -81,10 +81,7 @@
     [self reportScore:seconds forLeaderboardID:@"org.teamrun.SingleRunSeconds" addTo:categoryToCurrentScore];
     
     // todo: populate pace label and submit pace score
-    
-    // todo: use score formattedValue for current run scores
-    // todo: report/display float minutes instead of seconds
-    
+        
     NSArray* currentPlayer = @[[GKLocalPlayer localPlayer].playerID];
     
     NSArray* bestScoreCateogries = @[@"org.teamrun.SingleRunRawMiles", @"org.teamrun.SingleRunTeamMiles", @"org.teamrun.SingleRunSeconds"];
@@ -92,6 +89,8 @@
     NSArray* totalScoreCateogries = @[@"org.teamrun.TotalRawMiles", @"org.teamrun.TotalTeamMiles"];
     
     self.remainingScoresToLoad = bestScoreCateogries.count + totalScoreCateogries.count;
+    
+    // note: I am not using any GKScore formattedValue properties because these are null for scores that I initialize (they are only set for downloaded scores)
     
     for (NSString* scoreCategory in bestScoreCateogries)
     {
@@ -112,28 +111,32 @@
                     {
                         GKScore* personalBest = scores[0];
                         GKScore* currentScore = categoryToCurrentScore[scoreCategory];
+                        
                         if (currentScore.value > personalBest.value)
                         {
                             personalBest = currentScore;
                         }
+                        
+                        NSString* formattedMiles = truncateToTwoDecimals(personalBest.value/100.0);
+                        
                         if ([scoreCategory isEqualToString:@"org.teamrun.SingleRunRawMiles"])
                         {
-                            [self.bestRunRawMilesLabel setText:personalBest.formattedValue];
+                            [self.bestRunRawMilesLabel setText:formattedMiles];
                         }
                         else if ([scoreCategory isEqualToString:@"org.teamrun.SingleRunTeamMiles"])
                         {
-                            [self.bestRunTeamMilesLabel setText:personalBest.formattedValue];
+                            [self.bestRunTeamMilesLabel setText:formattedMiles];
                         }
                         else if ([scoreCategory isEqualToString:@"org.teamrun.SingleRunSeconds"])
                         {
-                            [self.bestRunTimeLabel setText:personalBest.formattedValue];
+                            const int bestSeconds = personalBest.value;
+                            [self.bestRunTimeLabel setText:[NSString stringWithFormat:@"%.2d:%.2d", bestSeconds/ 60, bestSeconds % 60]];
                         }
                     }
                 }
                 self.remainingScoresToLoad--;
                 if (self.remainingScoresToLoad == 0)
                 {
-                    // this whole process is super fast and the user probably will never see the original title "Personal Best (Loading...)"
                     [self.personalBestLabel setText:@"Personal Best"];
                 }
             }];
