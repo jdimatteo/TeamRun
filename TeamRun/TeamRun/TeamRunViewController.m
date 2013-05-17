@@ -7,26 +7,108 @@
 //
 
 /* pickup here: current pace being populated when not running,
-                customize ahead label for single and multiplayer mode,
+                customize ahead label for single and multiplayer mode (say ahead of target pace, or ahead of Molly and make two lines),
                 report/display current and best paces,
-                cache best and total score per player per category in case best/total score can't be found or is outdated,
                 implement pace scaling based off setting,
+                facebook posting,
  
    next time running with two phones:
         -- have Sarah's phone use speedCalcMethod = PS and my phone use speedCalcMethod = CL, and compare smoothness, and responsiveness to sprinting and stopping
         -- test/implement total team miles calculation/reporting/display
   
-Current Pace Fluctuations:
+Required before initial release:
  
- -  current pace fluctautes too wildly: this problem must be well studied: read up on the best solution to gps discrete location updates to calculate current speed
- -- Kalman Filters
- ---- try https://github.com/lacker/ikalman/blob/master/gps.h
- -- try Apple's CLLocation speed and setting kCLLocationAccuracyBest for the accuracty
- ---- Apple's speed calculation probably uses Kalman filters and might leverage additional info in the GPS anyway to deliver superior results,
-      e.g. maybe it uses "frequency shift (Doppler shift) of the GPS D-band carrier" http://gpsinformation.net/main/gpsspeed.htm
+ verify that time ran shows hours correctly (e.g. it shouldn't show > 60 minutes)
  
- experiments with PSLocationManager kNumSpeedHistoriesToAverage:
+ facebook sharing (optionally including the names of everyone ran with, maybe using Facebook tagging or something)
+ - include a nice icon which when clicked is a link to buy the game
  
+ test audio behavior when a phone call occurs during game play
+  
+ move my game to a game group, so that leaderboards can be shared if I make a paid version
+        
+ test that screen resizes properly when phone call green bar is at top of screen of iPhone 4
+ 
+ test that starting a second run works properly (e.g. GPS starts back up properly, fields display new run info, average pace is reset, etc.)
+ 
+UI Design (probably good to cover all these items before initial release):
+ 
+ display gps accuracy
+ 
+ display some sort of notification to user if match making error occurred (e.g. if not connected to internet, automatch will time out)
+ 
+ settings
+ -- on the settings screen, add a ? button (or some other info button) that explains the settings
+ 
+ when tapping a number field on the settings screen, highlight what is already selected so that it can be overwritten without deleting
+ 
+ handle dropping/re-adding players (test if this ever occurs... hopefully GameCenter is fairly lenient with regards to poor network)
+ 
+ login not possible after you click the start button
+ 
+ "Target Pace" might be misleading
+ 
+ find a good name -- TeamRun, KeepPace, Keep Up, RunBuddy, Pace, ...
+ 
+ make a better app icon
+ 
+ add icons for the high scores (this can be done after game published)
+ 
+Additional Todos (maybe version 2)
+ 
+ walkie talkie like communication, or maybe just record 2 sayings (one for faster, and one for slower), so recording can be sent just once,
+ which would eliminate most data transfer needs (just send a couple bytes instead of an audio recording)
+ 
+ - twitter sharing
+ - cache best and total score per player per category in case best/total score can't be found or is outdated,
+ - make logger a concrete class, and move the logging definitions there
+ - design how more than 2 runners will work, and permit 2-4 players
+ - Announce Ahead/Behind changed by X meters setting
+ - Announce passing setting
+ - reverse radar like noise so that it increases frequency when ahead or behind
+ - experiment with blue color and talk to a designer
+ 
+ - don't use PSLocationManager directly -- instead use an abstract class, and have a Fake LocationManager available for testing that maintains a steady pace
+ -- allow changing the pace via temporary test buttons (faster, slower -- no directly modifying distance)
+ -- the fake can use a timer to send distance updates regularly, calculated from the last distance + (current pace * time since last distance)
+ -- have a constant that determines whether or not the test buttons are visible and whether or not the fake location manager is used
+ -- might want to call this the TeamRunModel and the location manager would just be part of it, and I could get rid of the silly singleton interface
+ 
+ - read up on good iOS design
+ -- maybe I should have an explicit model (see above reference to TeamRunModel)? 
+ 
+ - design a good UI
+ -- experiment with colors and images
+ -- create a single object that represents a Run
+ -- there are too many things floating around this view controller and it is getting hard to keep them straight
+ -- how to have multiple storyboard elements where there is a main screen that leads to others and back to the main screen
+ -- -- (maybe write a test app following a tutorial)
+ -- automatic testing
+ -- how users can report bugs (providing logs, stack trace, and/or a dump?), and how I can quickly diagnose/fix them 
+ -- learn how to use an image manipulation tool, or maybe find a collection of good stock images
+ -- find a friend who is good at (iOS preferably) UI design and ask for advice
+ 
+ - design an automated application level test (e.g. to confirm that settings are saved properly)
+ 
+ - try having one voice for positive notifications and another voice for negative notifications
+ 
+ - synchronize distance/times between players
+ -- if I just send distances and there is a couple second delay, then two runners running side by side will both report being ahead of each other
+ 
+ Misc Notes
+ 
+     Current Pace Fluctuations:
+     
+     -  current pace fluctautes too wildly: this problem must be well studied: read up on the best solution to gps discrete location updates to
+        calculate current speed
+     -- Kalman Filters
+     ---- try https://github.com/lacker/ikalman/blob/master/gps.h
+     -- I'm currently probably just going to settle with Apple's CLLocation speed
+     ---- Apple's speed calculation probably uses Kalman filters and might leverage additional info in the GPS anyway to deliver superior results,
+     e.g. maybe it uses "frequency shift (Doppler shift) of the GPS D-band carrier" http://gpsinformation.net/main/gpsspeed.htm
+     
+     experiments with PSLocationManager kNumSpeedHistoriesToAverage:
+     
      s: last 3 - bad: fluctuate crazily
      j: last 4 - seems about just as bad: fluctuate crazily (see below)
      
@@ -38,120 +120,25 @@ Current Pace Fluctuations:
      what if I doubled this to 16 seconds -- that sounds more reasonable I think
      
      j: last 8 -- I just tried this out and when I was running a steady pace, this seemed reasonable: nice steady current pace
-     -- this seems to deal well with the noise (before with last 4, when I was running at a steady pace it seemed to fluctuate pretty wildly, which I guess was due to noise)
-     -- this didn't seem to be *current* enough -- when I started sprinting, there was a delay in it being represented, and then when I basically stopped running,
-        there was a long delay in the pace going back up... I think the pace might have actually continued to get faster *after* I stopped (I'm not certain about this)
+     -- this seems to deal well with the noise (before with last 4, when I was running at a steady pace it seemed to fluctuate pretty wildly,
+        which I guess was due to noise)
+     -- this didn't seem to be *current* enough -- when I started sprinting, there was a delay in it being represented, and then when I basically 
+        stopped running, there was a long delay in the pace going back up... I think the pace might have actually continued to get faster *after*
+        I stopped (I'm not certain about this)
      -- this isn't good enough, I guess I could just try 6, but this simple algorithm doesn't seem good enough
      
      
      j: last 6 -- felt just as steady as last 8 when trying to run at a steady pace (seemed better than last 4),
-                  but when sprinting delay again seemed very long, and stopping still showed a running speed for a while
+     but when sprinting delay again seemed very long, and stopping still showed a running speed for a while
  
-UI Design:
+ UI Design: I experimented with a Tab Bar Controller, and using Toolbars, but I don't think either fit with my buttons and views
+ (e.g. tabs don't work because leaderboards is not a tab, and toolbar isn't supposed to be used to change views).
+ I also tried implementing the settings screen as a table view, but the scrolling seemed unnecessary and it didn't
+ look good either.  I also tried setting the background to an empty table view, but that also looked poor.
+ The settings and main screen are good enough as is, stop fiddling!
  
- note: I experimented with a Tab Bar Controller, and using Toolbars, but I don't think either fit with my buttons and views
-       (e.g. tabs don't work because leaderboards is not a tab, and toolbar isn't supposed to be used to change views).
-       I also tried implementing the settings screen as a table view, but the scrolling seemed unnecessary and it didn't
-       look good either.  I also tried setting the background to an empty table view, but that also looked poor.
-       The settings and main screen are good enough as is, stop fiddling!
- 
- display gps accuracy
- 
- display some sort of notification to user if match making error occurred (e.g. if not connected to internet, automatch will time out)
- 
- settings
- -- on the settings screen, add a ? button (or some other info button) that explains the settings, and remove the text from the main screen
- 
- experiment with blue color and talk to a designer
- 
- when tapping a number field on the settings screen, highlight what is already selected so that it can be overwritten without deleting
- 
- handle dropping/re-adding players
-
- login not possible after you click the start button
-   
- design how more than 2 runners will work, and permit 2-4 players
- 
- make the settings screen have sections like the settings app, and maybe the pin stripes texture
-  
- "Target Pace" might be misleading
- 
- find a good name -- TeamRun, KeepPace, RunBuddy, Pace, ...
- 
- make a better app icon
- 
- end of run screen
- 
-Required before initial release:
- 
- verify that time ran shows hours correctly (e.g. it shouldn't show > 60 minutes)
- 
- update icon to not look so unprofessional, and provide icons for leaderboards
- 
- facebook sharing (optionally including the names of everyone ran with, maybe using Facebook tagging or something)
- - include a nice icon which when clicked is a link to buy the game
- 
- test audio behavior when a phone call occurs during game play
- 
- gui buttons sometimes seem unresponsive, particularly when speaking audio -- what is going on?
- -- for example, while a pace notification is being spoken, in the setting screen often the pace notification slider and done button is unresponsive to touch
- 
- move my game to a game group, so that leaderboards can be shared if I make a paid version
- 
-todo:
- 
- include passing/delta ahead notification settings (on unconnected view controller)
- 
- 1 and .09 miles sounds bad
- 
- don't use PSLocationManager directly -- instead use an abstract class, and have a Fake LocationManager available for testing that maintains a steady pace
- -- allow changing the pace via temporary test buttons (faster, slower -- no directly modifying distance)
- -- the fake can use a timer to send distance updates regularly, calculated from the last distance + (current pace * time since last distance)
- -- have a constant that determines whether or not the test buttons are visible and whether or not the fake location manager is used
- -- might want to call this the TeamRunModel and the location manager would just be part of it, and I could get rid of the silly singleton interface
- 
- read up on good iOS design
- -- maybe I should have an explicit model (see above)? what is my controller (is it the storyboard)?
-    -- create a single object that represents a Run
-    -- there are too many things floating around this view controller and it is getting hard to keep them straight
- -- how to have multiple storyboard elements where there is a main screen that leads to others and back to the main screen
- -- -- (maybe write a test app following a tutorial)
- -- automatic testing
- -- how users can report bugs (providing logs, stack trace, and/or a dump?), and how I can quickly diagnose/fix them
- 
- design a good UI
- -- read up and experiment with colors and images
- -- learn how to use an image manipulation tool, or maybe find a collection of good stock images
- -- find a friend who is good at (iOS preferably) UI design and ask for advice
- 
- synchronize distance/times between players
- -- if I just send distances and there is a couple second delay, then two runners running side by side will both report being ahead of each other
- 
- instead of radio mode, maybe record 2 sayings (one for faster, and one for slower), so recording can be sent just once,
- which would eliminate most data transfer needs (just send a couple bytes instead of an audio recording)
-    
- try having one voice for positive notifications and another voice for negative notifications
-  
- design an automated application level test (e.g. to confirm that settings are saved properly)
- 
- twitter sharing
- 
- test that screen resizes properly when phone call green bar is at top of screen of iPhone 4
- 
- test that starting a second run works properly (e.g. GPS starts back up properly, fields display new run info, average pace is reset, etc.)
- 
- test effect of audio on battery life with and without open ears
- - I think OpenEars disables hardware audio decoding -- see http://developer.apple.com/library/ios/#documentation/Audio/Conceptual/AudioSessionProgrammingGuide/Configuration/Configuration.html , the section discussing mixing disabling hardware decoding
- - maybe I could setup the audio session to use hardware for audio decoding, maybe just temporarily switching to software
-   decoding while openears is speaking, or maybe disable mixing and disable music when speaking (and enable it again when done speaking)
- 
- Additional Features (maybe version 2)
- 
- - Announce Ahead/Behind changed by X meters setting
- - Announce passing setting
- - reverse radar like noise so that it increases frequency when ahead or behind
  */
- 
+
 #import "TeamRunViewController.h"
 #import "TeamRunUtility.h"
 #import "TeamRunCompletedViewController.h"
