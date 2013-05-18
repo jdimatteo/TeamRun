@@ -9,6 +9,9 @@
 #import "TeamRunCompletedViewController.h"
 #import "TeamRunUtility.h"
 
+#import <Social/Social.h>
+#import <Accounts/Accounts.h>
+
 #import <GameKit/GameKit.h>
 
 @interface TeamRunCompletedViewController ()
@@ -55,6 +58,36 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    SLComposeViewController *mySLComposerSheet;
+    
+    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) //check if Facebook Account is linked
+    {
+        mySLComposerSheet = [[SLComposeViewController alloc] init]; //initiate the Social Controller
+        mySLComposerSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook]; //Tell him with what social plattform to use it, e.g. facebook or twitter
+        [mySLComposerSheet setInitialText:@"Test"]; //the message you want to post
+        //[mySLComposerSheet addImage:yourimage]; //an image you could post
+        //for more instance methodes, go here:https://developer.apple.com/library/ios/#documentation/NetworkingInternet/Reference/SLComposeViewController_Class/Reference/Reference.html#//apple_ref/doc/uid/TP40012205
+        [self presentViewController:mySLComposerSheet animated:YES completion:nil];
+    }
+    [mySLComposerSheet setCompletionHandler:^(SLComposeViewControllerResult result) {
+        NSString *output;
+        switch (result) {
+            case SLComposeViewControllerResultCancelled:
+                output = @"Action Cancelled";
+                break;
+            case SLComposeViewControllerResultDone:
+                output = @"Post Successfull";
+                break;
+            default:
+                break;
+        } //check if everythink worked properly. Give out a message on the state.
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Facebook" message:output delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [alert show];
+    }];
 }
 
 - (void)didReceiveMemoryWarning

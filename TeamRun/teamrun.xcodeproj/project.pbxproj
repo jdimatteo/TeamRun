@@ -52,6 +52,7 @@
 		83CF15641732E225006044B0 /* TeamRunCompletedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CF15631732E225006044B0 /* TeamRunCompletedViewController.m */; };
 		83CF15671733E82B006044B0 /* TeamRunView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CF15661733E82B006044B0 /* TeamRunView.m */; };
 		83CF1608173B13D4006044B0 /* Awb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CF1607173B13D4006044B0 /* Awb.framework */; };
+		83E9C8541746F6B7004D8879 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83E9C8531746F6B7004D8879 /* Social.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +125,7 @@
 		83CF15661733E82B006044B0 /* TeamRunView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamRunView.m; sourceTree = "<group>"; };
 		83CF1607173B13D4006044B0 /* Awb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Awb.framework; sourceTree = "<group>"; };
 		83E9C85217465DB7004D8879 /* TeamRunLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeamRunLogger.h; sourceTree = "<group>"; };
+		83E9C8531746F6B7004D8879 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83E9C8541746F6B7004D8879 /* Social.framework in Frameworks */,
 				83CF153B1729FECB006044B0 /* AudioToolbox.framework in Frameworks */,
 				83CF153C1729FECB006044B0 /* AVFoundation.framework in Frameworks */,
 				52A5E03E1687898500E3A2AB /* GameKit.framework in Frameworks */,
@@ -160,6 +163,7 @@
 		520276DE16762D300004BBDC = {
 			isa = PBXGroup;
 			children = (
+				83E9C8531746F6B7004D8879 /* Social.framework */,
 				83369511173DAFDB00923D88 /* Framework */,
 				83CF1607173B13D4006044B0 /* Awb.framework */,
 				83CF15391729FECB006044B0 /* AudioToolbox.framework */,

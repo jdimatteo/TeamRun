@@ -335,32 +335,45 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NOf-5a-vtr"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Facebook Post:" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="119" translatesAutoresizingMaskIntoConstraints="NO" id="qKo-gs-N5x">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="119" id="31n-H7-cm0"/>
+                                    <constraint firstAttribute="height" constant="45" id="vIG-PY-nCU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wed-FR-O4l" firstAttribute="height" secondItem="3Vp-hQ-PSD" secondAttribute="height" type="user" id="0hJ-6V-9J6"/>
                             <constraint firstItem="Ovm-2r-ClE" firstAttribute="top" secondItem="wed-FR-O4l" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="1kB-lL-kwV"/>
+                            <constraint firstItem="wed-FR-O4l" firstAttribute="leading" secondItem="MOO-Wh-cGA" secondAttribute="leading" type="default" id="2Ad-Vs-XTK"/>
                             <constraint firstItem="wed-FR-O4l" firstAttribute="height" secondItem="9s4-sq-zCu" secondAttribute="height" type="user" id="3p6-pr-D21"/>
+                            <constraint firstItem="uF7-dh-lDU" firstAttribute="bottom" secondItem="qKo-gs-N5x" secondAttribute="bottom" type="default" id="53m-rr-Mmf"/>
                             <constraint firstItem="BXh-eS-A8v" firstAttribute="centerY" secondItem="hyf-BC-8Qj" secondAttribute="centerY" type="user" id="5bW-DD-yz9"/>
                             <constraint firstItem="moG-id-yFF" firstAttribute="centerX" secondItem="0Ev-ng-OY8" secondAttribute="centerX" type="user" id="5fE-KD-h3O"/>
                             <constraint firstItem="hyf-BC-8Qj" firstAttribute="top" secondItem="E1L-6b-IP2" secondAttribute="top" constant="82" type="user" id="6DT-vU-74l"/>
                             <constraint firstItem="3Vp-hQ-PSD" firstAttribute="leading" secondItem="9s4-sq-zCu" secondAttribute="leading" type="default" id="6K5-9u-czR"/>
+                            <constraint firstItem="NOf-5a-vtr" firstAttribute="leading" secondItem="qKo-gs-N5x" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="6eN-fe-oYg"/>
                             <constraint firstItem="ImY-cv-mvG" firstAttribute="centerY" secondItem="wed-FR-O4l" secondAttribute="centerY" type="user" id="6gW-Bb-ye1"/>
                             <constraint firstItem="uF7-dh-lDU" firstAttribute="leading" secondItem="E1L-6b-IP2" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="6t5-48-zjU"/>
                             <constraint firstItem="BXh-eS-A8v" firstAttribute="trailing" secondItem="Q1t-Ef-5j6" secondAttribute="trailing" type="default" id="7rX-r4-6J9"/>
                             <constraint firstItem="moG-id-yFF" firstAttribute="centerY" secondItem="wed-FR-O4l" secondAttribute="centerY" type="user" id="873-Ca-9PQ"/>
-                            <constraint firstItem="MOO-Wh-cGA" firstAttribute="leading" secondItem="E1L-6b-IP2" secondAttribute="leading" constant="57" id="8L0-hw-rEv"/>
                             <constraint firstItem="tPA-vG-cs0" firstAttribute="leading" secondItem="moG-id-yFF" secondAttribute="leading" type="default" id="8Lg-el-LBj"/>
                             <constraint firstItem="9s4-sq-zCu" firstAttribute="top" secondItem="3Vp-hQ-PSD" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="BXG-Su-TPC"/>
                             <constraint firstItem="QNW-BB-KEB" firstAttribute="centerY" secondItem="MOO-Wh-cGA" secondAttribute="centerY" type="user" id="Blz-YF-fST"/>
-                            <constraint firstAttribute="bottom" secondItem="uF7-dh-lDU" secondAttribute="bottom" constant="18" id="Gor-07-zJt"/>
                             <constraint firstItem="ImY-cv-mvG" firstAttribute="trailing" secondItem="Q1t-Ef-5j6" secondAttribute="trailing" type="default" id="HbG-Ql-9Tw"/>
+                            <constraint firstItem="hyf-BC-8Qj" firstAttribute="leading" secondItem="MOO-Wh-cGA" secondAttribute="leading" type="default" id="I4y-ha-n71"/>
                             <constraint firstItem="3Vp-hQ-PSD" firstAttribute="trailing" secondItem="9s4-sq-zCu" secondAttribute="trailing" type="default" id="IDd-JZ-yTR"/>
                             <constraint firstItem="MOO-Wh-cGA" firstAttribute="top" secondItem="hyf-BC-8Qj" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="Ilz-9N-xll"/>
-                            <constraint firstItem="MOO-Wh-cGA" firstAttribute="trailing" secondItem="wed-FR-O4l" secondAttribute="trailing" type="default" id="Lad-uu-CGg"/>
+                            <constraint firstItem="qKo-gs-N5x" firstAttribute="top" secondItem="9s4-sq-zCu" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="KI0-ca-eil"/>
                             <constraint firstItem="P4p-k5-cBm" firstAttribute="leading" secondItem="QNW-BB-KEB" secondAttribute="leading" type="default" id="Ngr-aM-GhD"/>
                             <constraint firstItem="Ovm-2r-ClE" firstAttribute="centerY" secondItem="IYs-1x-PAE" secondAttribute="centerY" type="user" id="PhZ-5I-ht4"/>
                             <constraint firstItem="Q1t-Ef-5j6" firstAttribute="leading" secondItem="E1L-6b-IP2" secondAttribute="leading" type="default" id="Rse-yR-C0f"/>
+                            <constraint firstItem="hyf-BC-8Qj" firstAttribute="leading" secondItem="E1L-6b-IP2" secondAttribute="leading" constant="57" id="TKd-ou-Ywv"/>
                             <constraint firstItem="3Vp-hQ-PSD" firstAttribute="top" secondItem="Ovm-2r-ClE" secondAttribute="bottom" constant="50" type="user" id="WNC-k8-Xsl"/>
                             <constraint firstAttribute="centerX" secondItem="3Vp-hQ-PSD" secondAttribute="centerX" type="user" id="ZE5-jw-ap0"/>
                             <constraint firstItem="MOO-Wh-cGA" firstAttribute="centerY" secondItem="Q1t-Ef-5j6" secondAttribute="centerY" type="user" id="Zz0-JZ-2fP"/>
@@ -369,15 +382,16 @@
                             <constraint firstItem="IYs-1x-PAE" firstAttribute="centerX" secondItem="BXh-eS-A8v" secondAttribute="centerX" type="default" id="apw-20-1mh"/>
                             <constraint firstItem="wed-FR-O4l" firstAttribute="centerX" secondItem="hyf-BC-8Qj" secondAttribute="centerX" type="user" id="cKN-nZ-Mck"/>
                             <constraint firstItem="wed-FR-O4l" firstAttribute="height" secondItem="Ovm-2r-ClE" secondAttribute="height" type="user" id="e0q-pM-MbW"/>
-                            <constraint firstItem="hyf-BC-8Qj" firstAttribute="leading" secondItem="wed-FR-O4l" secondAttribute="leading" type="default" id="gor-Pb-UWg"/>
+                            <constraint firstItem="uF7-dh-lDU" firstAttribute="centerY" secondItem="NOf-5a-vtr" secondAttribute="centerY" type="default" id="fPE-0R-1CX"/>
+                            <constraint firstItem="Ovm-2r-ClE" firstAttribute="leading" secondItem="wed-FR-O4l" secondAttribute="leading" type="default" id="fdt-fX-3LH"/>
                             <constraint firstItem="tPA-vG-cs0" firstAttribute="centerX" secondItem="0Ev-ng-OY8" secondAttribute="centerX" type="user" id="hOl-ya-KMG"/>
                             <constraint firstItem="tPA-vG-cs0" firstAttribute="centerY" secondItem="Ovm-2r-ClE" secondAttribute="centerY" type="user" id="jaw-Fl-g0z"/>
+                            <constraint firstItem="NOf-5a-vtr" firstAttribute="trailing" secondItem="9s4-sq-zCu" secondAttribute="trailing" type="default" id="mKH-6q-Pbx"/>
                             <constraint firstItem="wed-FR-O4l" firstAttribute="centerX" secondItem="Ovm-2r-ClE" secondAttribute="centerX" type="user" id="oEh-bm-6nM"/>
                             <constraint firstItem="0Ev-ng-OY8" firstAttribute="centerY" secondItem="5aZ-3a-LYw" secondAttribute="centerY" type="default" id="rMk-Hh-mcn"/>
                             <constraint firstItem="0Ev-ng-OY8" firstAttribute="centerX" secondItem="P4p-k5-cBm" secondAttribute="centerX" type="user" id="t2f-t4-F3W"/>
-                            <constraint firstItem="MOO-Wh-cGA" firstAttribute="leading" secondItem="Ovm-2r-ClE" secondAttribute="leading" type="default" id="u6M-8G-uGC"/>
+                            <constraint firstAttribute="trailing" secondItem="0Ev-ng-OY8" secondAttribute="trailing" constant="11" id="tEt-9x-5p6"/>
                             <constraint firstItem="5aZ-3a-LYw" firstAttribute="top" secondItem="E1L-6b-IP2" secondAttribute="top" constant="20" symbolic="YES" type="default" id="uBC-5X-n3a"/>
-                            <constraint firstAttribute="trailing" secondItem="moG-id-yFF" secondAttribute="trailing" constant="15" id="uhj-EI-skf"/>
                             <constraint firstItem="MOO-Wh-cGA" firstAttribute="centerX" secondItem="5aZ-3a-LYw" secondAttribute="centerX" type="user" id="wWp-TO-g7B"/>
                             <constraint firstItem="moG-id-yFF" firstAttribute="leading" secondItem="QNW-BB-KEB" secondAttribute="leading" type="default" id="xnq-yF-nno"/>
                             <constraint firstItem="wed-FR-O4l" firstAttribute="top" secondItem="MOO-Wh-cGA" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="yVE-Ta-6UW"/>
@@ -639,6 +653,65 @@
             <point key="canvasLocation" x="-8" y="143"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="TeamRunCompletedViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TeamRunCompletedViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="doneTapped"/>
+                <relationship kind="outlet" name="bestRunPaceLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="bestRunRawMilesLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="bestRunTeamMilesLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="bestRunTimeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="currentRunPaceLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="currentRunRawMilesLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="currentRunTeamMilesLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="currentRunTimeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="personalBestLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="teamMilesRowLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="totalRawMilesLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="totalTeamMilesLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="TeamRunSettingsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TeamRunSettingsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="doneChangingSettings"/>
+                <relationship kind="action" name="updateEnabledFields"/>
+                <relationship kind="outlet" name="minutesBetweenNotificationsTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="multiplayerModeSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="noteSectionView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="notificationsSectionView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="paceNotificationsSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="relativePositionNotificationsSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="secondsBetweenNotificationsTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="targetMilePaceMinutesTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="targetMilePaceSecondsTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="targetMilePaceSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="targetPaceSectionView" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="TeamRunView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TeamRunView.h"/>
+        </class>
+        <class className="TeamRunViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TeamRunViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="openLeaderboards:"/>
+                <relationship kind="action" name="startStopButtonClicked:"/>
+                <relationship kind="outlet" name="averagePaceLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="currentPaceLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="milesAheadLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="milesRanLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="scrollingText" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="startStopButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="timeDescriptionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="timeLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
