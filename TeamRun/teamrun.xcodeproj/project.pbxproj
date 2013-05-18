@@ -53,6 +53,8 @@
 		83CF15671733E82B006044B0 /* TeamRunView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CF15661733E82B006044B0 /* TeamRunView.m */; };
 		83CF1608173B13D4006044B0 /* Awb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CF1607173B13D4006044B0 /* Awb.framework */; };
 		83E9C8541746F6B7004D8879 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83E9C8531746F6B7004D8879 /* Social.framework */; };
+		83E9C8901747FBD0004D8879 /* FB-f-Logo__blue_29.png in Resources */ = {isa = PBXBuildFile; fileRef = 83E9C88F1747FBD0004D8879 /* FB-f-Logo__blue_29.png */; };
+		83E9C8921747FD3C004D8879 /* FB-f-Logo__blue_29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83E9C8911747FD3C004D8879 /* FB-f-Logo__blue_29@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +128,8 @@
 		83CF1607173B13D4006044B0 /* Awb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Awb.framework; sourceTree = "<group>"; };
 		83E9C85217465DB7004D8879 /* TeamRunLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeamRunLogger.h; sourceTree = "<group>"; };
 		83E9C8531746F6B7004D8879 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		83E9C88F1747FBD0004D8879 /* FB-f-Logo__blue_29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FB-f-Logo__blue_29.png"; sourceTree = "<group>"; };
+		83E9C8911747FD3C004D8879 /* FB-f-Logo__blue_29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FB-f-Logo__blue_29@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +174,8 @@
 				83CF153A1729FECB006044B0 /* AVFoundation.framework */,
 				52A5E03D1687898500E3A2AB /* GameKit.framework */,
 				52F081F3168425D700F2749E /* icon114.png */,
+				83E9C88F1747FBD0004D8879 /* FB-f-Logo__blue_29.png */,
+				83E9C8911747FD3C004D8879 /* FB-f-Logo__blue_29@2x.png */,
 				5280DE21167EC5E700552081 /* CoreLocation.framework */,
 				520276F316762D300004BBDC /* TeamRun */,
 				83CF1547172AB580006044B0 /* TeamRunUnitTests */,
@@ -383,6 +389,8 @@
 				8336952D173DAFDB00923D88 /* OpenEars1.languagemodel in Resources */,
 				8336952E173DAFDB00923D88 /* OpenEars2.gram in Resources */,
 				8336952F173DAFDB00923D88 /* OpenEarsCorpus.txt in Resources */,
+				83E9C8901747FBD0004D8879 /* FB-f-Logo__blue_29.png in Resources */,
+				83E9C8921747FD3C004D8879 /* FB-f-Logo__blue_29@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

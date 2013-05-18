@@ -14,8 +14,10 @@
         -- have Sarah's phone use speedCalcMethod = PS and my phone use speedCalcMethod = CL, and compare smoothness, and responsiveness to sprinting and stopping
         -- test/implement total team miles calculation/reporting/display
   
-Required before initial release:
-  
+Proably required before initial release:
+ 
+ test when a user drops out of a match -- for example, there seems to be a bug where if John and Sarah are running together and Sarah drops out, then John is still warned about Sarah running if John tries to cancel early -- we need better behavior and notification, I guess converting to a single player run
+ 
  verify that time ran shows hours correctly (e.g. it shouldn't show > 60 minutes)
  
  facebook sharing (optionally including the names of everyone ran with, maybe using Facebook tagging or something)
@@ -181,6 +183,7 @@ Additional Todos (maybe version 2)
 - (void)speakNotification:(NSTimer *)timer;
 - (double)updateMilesAhead:(double) milesOtherPlayerRan;
 - (void)updateNotificationsTimerIfNecessary;
+- (NSString*) playerNames;
 
 @property (strong, nonatomic) GKMatch* match;
 @property (strong, nonatomic) NSArray* players;
@@ -276,19 +279,10 @@ bool runInProgress;
     {
         NSString *message = @"Are you sure you want to end your run?";
         
-        if (self.match != nil && self.players != nil)
+        NSString *playerNames = [self playerNames];
+        
+        if (playerNames.length > 0)
         {
-            NSMutableString *playerNames = [[NSMutableString alloc] init];
-
-            for (int i=0; i < self.players.count; ++i)
-            {
-                if (i != 0) [playerNames appendString:@", "];
-                
-                if (self.players.count != 1 && i == self.players.count - 1) [playerNames appendString:@"and "];
-                
-                [playerNames appendString:[self.players[i] displayName]];
-            }
-            
             const int remainingMinutes = (30*60 - round([PSLocationManager sharedLocationManager].totalSeconds))/60;
             
             message = [[NSString alloc] initWithFormat:@"%@\n\nThere are %d minutes remaining in your run with %@.", message, remainingMinutes, playerNames];
@@ -630,6 +624,33 @@ bool runInProgress;
 
 - (void)endRun
 {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    TeamRunCompletedViewController *completionViewController = [storyboard instantiateViewControllerWithIdentifier:@"RunCompletedViewController"];
+    
+    {
+        // todo: we should probably just be passing a run object here
+        
+        const double rawMiles = [PSLocationManager sharedLocationManager].totalDistance*MILES_PER_METER;
+        const double teamRunMiles = self.match == nil ? rawMiles
+                                                      : 2*(rawMiles + [self updateMilesAhead:0]);
+        
+        NSString* withMessage = @"";
+        NSString* playerNames = [self playerNames];
+        if (playerNames.length > 0 )
+        {
+            withMessage = [[NSString alloc] initWithFormat:@" with %@", playerNames];
+        }
+        
+        NSString* facebookMessage = [[NSString alloc] initWithFormat:@"I completed a %@ TeamRun%@", truncateToTwoDecimals(rawMiles), withMessage];
+
+        
+        [completionViewController setMilesRan:rawMiles
+                                      seconds:[PSLocationManager sharedLocationManager].totalSeconds
+                                    teamMiles:teamRunMiles
+                                       logger:self
+                              facebookMessage:facebookMessage];
+    }
+    
     runInProgress = false;
 
     if (self.match != nil)
@@ -650,20 +671,8 @@ bool runInProgress;
     [[PSLocationManager sharedLocationManager] stopLocationUpdates];
     [self logTrace:@"takes ~10 seconds for GPS shutdown"];
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-    TeamRunCompletedViewController *completionViewController = [storyboard instantiateViewControllerWithIdentifier:@"RunCompletedViewController"];
-    // todo: we should just be passing a run object here
-    
-    const double rawMiles = [PSLocationManager sharedLocationManager].totalDistance*MILES_PER_METER;
-    const double teamRunMiles = self.match == nil ? rawMiles
-                                                  : 2*(rawMiles + [self updateMilesAhead:0]);
     
     [self presentViewController:completionViewController animated:YES completion:nil];
-    
-    [completionViewController setMilesRan:rawMiles
-                                inSeconds:[PSLocationManager sharedLocationManager].totalSeconds
-                         withTeamMiles:teamRunMiles
-                               withLogger:self];
 }
 
 - (void)updatePlayers
@@ -825,6 +834,24 @@ bool runInProgress;
 //   Utility Methods
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+- (NSString*) playerNames
+{
+    NSMutableString *playerNames = [[NSMutableString alloc] init];
+
+    if (self.match != nil && self.players != nil)
+    {
+        for (int i=0; i < self.players.count; ++i)
+        {
+            if (i != 0) [playerNames appendString:@", "];
+            
+            if (self.players.count != 1 && i == self.players.count - 1) [playerNames appendString:@"and "];
+            
+            [playerNames appendString:[self.players[i] displayName]];
+        }
+    }
+    return playerNames;
+}
 
 NSString* minutesPerMilePaceString(const double metersPerSecond, bool verbose)
 {

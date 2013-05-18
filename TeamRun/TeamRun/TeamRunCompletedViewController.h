@@ -13,8 +13,9 @@
 @interface TeamRunCompletedViewController : UIViewController
 
 - (void)setMilesRan:(double)rawMiles
-          inSeconds:(int)seconds
-   withTeamMiles:(double)teamMiles
-         withLogger:(id<TeamRunLogger>)logger;
+            seconds:(int)seconds
+          teamMiles:(double)teamMiles
+             logger:(id<TeamRunLogger>)logger
+    facebookMessage:(NSString*)message;
 
 @end
