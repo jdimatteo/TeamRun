@@ -79,7 +79,7 @@
         postSheet = [[SLComposeViewController alloc] init];
         postSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
         [postSheet setInitialText:self.initialPostMessage];
-        [postSheet addImage:[UIImage imageNamed:@"icon114"]];
+        [postSheet addImage:[UIImage imageNamed:@"icon1024"]];
         [postSheet addURL:[NSURL URLWithString:@"http://teamrun.org/"]];
         [self presentViewController:postSheet animated:YES completion:nil];
     }
