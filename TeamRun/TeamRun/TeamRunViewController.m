@@ -410,7 +410,7 @@ bool runInProgress;
     {
         NSString* aheadOrBehind;
 
-        if (milesRan >= milesOtherPlayerRan)
+        if (milesRan >= referenceMiles)
         {
             aheadOrBehind = @"ahead";
             //[self.milesAheadLabel setTextColor:darkGreen];
