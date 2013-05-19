@@ -667,7 +667,7 @@ bool runInProgress;
             withMessage = [[NSString alloc] initWithFormat:@" with %@", playerNames];
         }
         
-        NSString* facebookMessage = [[NSString alloc] initWithFormat:@"I completed a %@ mile TeamRun%@", truncateToTwoDecimals(rawMiles), withMessage];
+        NSString* facebookMessage = [[NSString alloc] initWithFormat:@"I completed a %@ mile run%@", truncateToTwoDecimals(rawMiles), withMessage];
 
         [self presentViewController:completionViewController animated:YES completion:nil];
         
