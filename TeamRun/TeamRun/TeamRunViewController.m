@@ -322,7 +322,7 @@ bool runInProgress;
     if (self.match == nil)
     {
         const int secondsRan = round([PSLocationManager sharedLocationManager].totalSeconds);
-        [self.timeLabel setText:[NSString stringWithFormat:@"%.2d:%.2d", secondsRan / 60, secondsRan % 60]];
+        [self.timeLabel setText:[NSString stringWithFormat:@"%d:%02d", secondsRan / 60, secondsRan % 60]];
     }
     else
     {
@@ -335,7 +335,7 @@ bool runInProgress;
         }
         else
         {
-            [self.timeLabel setText:[NSString stringWithFormat:@"%.2d:%.2d", remainingSeconds / 60, remainingSeconds % 60]];
+            [self.timeLabel setText:[NSString stringWithFormat:@"%d:%02d", remainingSeconds / 60, remainingSeconds % 60]];
         }
     }
     [self updateMilesAhead];
@@ -395,7 +395,7 @@ bool runInProgress;
     
     const double targetMilesRanIfRunningAtTargetMilePace = ([TeamRunSettings targetSecondsPerMile] > 0) ?[PSLocationManager sharedLocationManager].totalSeconds / [TeamRunSettings targetSecondsPerMile] : 0;
     
-    [self logTmp:@"targetMilesRanIfRunningAtTargetMilePace = %@, seconds: %d, target seconds per mile: %d", truncateToTwoDecimals(targetMilesRanIfRunningAtTargetMilePace), (int) [PSLocationManager sharedLocationManager].totalSeconds, [TeamRunSettings targetSecondsPerMile]];
+    [self logTrace:@"targetMilesRanIfRunningAtTargetMilePace = %@, seconds: %d, target seconds per mile: %d", truncateToTwoDecimals(targetMilesRanIfRunningAtTargetMilePace), (int) [PSLocationManager sharedLocationManager].totalSeconds, [TeamRunSettings targetSecondsPerMile]];
     
     const double referenceMiles = (self.match != nil) ? milesOtherPlayerRan : targetMilesRanIfRunningAtTargetMilePace;
     
