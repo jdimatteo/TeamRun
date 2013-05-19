@@ -8,15 +8,25 @@
 
 /* pickup here: customize ahead label for single and multiplayer mode (say ahead of target pace, or ahead of Molly and make two lines),
                 implement pace scaling based off setting,
-                facebook posting,
  
    next time running with two phones:
         -- have Sarah's phone use speedCalcMethod = PS and my phone use speedCalcMethod = CL, and compare smoothness, and responsiveness to sprinting and stopping
         -- test/implement total team miles calculation/reporting/display
   
+ rename app from "Team Run" to "TeamRun", add screenshots, move my game to a game group, so that leaderboards can be shared if I make a paid version, and update description to be the following:
+ 
+ - first and only multiplayer running game to keep pace with remote friends running real time in remote locations
+ - social element to motivate exercise: studies show running with a friend increases miles ran by 53% and calories burned by 66%
+ - scale paces so runners of different abilities can still motivate each other to maintain a target pace
+ - configurable audio pace and relative position notifications while you run
+ - track distance ran and pace, with personal bests recorded, and leaderboards to compete with other runners
+ - team miles: the more people you run with, the more team miles you earn
+ - global weekly Sunday TeamRun at 11 AM eastern standard time
+ - full featured and completely free with no ads
+ 
 Proably required before initial release:
  
- unconfirmed bug: speaking notifications continues after run stopped
+ unconfirmed bug: speaking notifications continues after run stopped (maybe one extra sometimes?)
  
  test when user not logged into Facebook on app -- it looks like it just silently fails to post, but it should prompt user to login
  
@@ -24,18 +34,15 @@ Proably required before initial release:
  
  verify that time ran shows hours correctly (e.g. it shouldn't show > 60 minutes)
  
- facebook sharing (optionally including the names of everyone ran with, maybe using Facebook tagging or something)
- - include a nice icon which when clicked is a link to buy the game
- 
  test audio behavior when a phone call occurs during game play
-  
- move my game to a game group, so that leaderboards can be shared if I make a paid version
-        
+          
  test that screen resizes properly when phone call green bar is at top of screen of iPhone 4
  
  test that starting a second run works properly (e.g. GPS starts back up properly, fields display new run info, average pace is reset, etc.)
  
  review all inline todos in every file
+ 
+ review logs for errors about contraints not being met and fix this
  
 UI Design (probably good to cover all these items before initial release):
  
@@ -53,14 +60,13 @@ UI Design (probably good to cover all these items before initial release):
  login not possible after you click the start button
  
  "Target Pace" might be misleading
- 
- find a good name -- TeamRun, KeepPace, Keep Up, RunBuddy, Pace, ...
- 
- make a better app icon
- 
+  
  add icons for the high scores (this can be done after game published)
  
 Additional Todos (maybe version 2)
+ 
+ facebook sharing (optionally including the names of everyone ran with, maybe using Facebook tagging or something)
+ - include a nice icon which when clicked is a link to buy the game
  
  preface log messages with their level (e.g. ERROR:)
  
