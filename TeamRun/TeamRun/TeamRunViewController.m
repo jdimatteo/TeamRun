@@ -351,7 +351,9 @@ bool runInProgress;
     
     NSString* paceNotification = [NSString stringWithFormat:@"You have run %@, %@ miles, at %@ mile pace.", durationRan, self.milesRanLabel.text, pace];
     
-    NSString* relativePositionNotification = [NSString stringWithFormat:@"You are about %@ miles ahead.", truncateToTwoDecimals([self updateMilesAhead])];
+    const double milesAhead = [self updateMilesAhead];
+    
+    NSString* relativePositionNotification = [NSString stringWithFormat:@"You are about %@ miles %@.", truncateToTwoDecimals(absoluteValue(milesAhead)), milesAhead >= 0 ? @"ahead" : @"behind"];
     
     NSString* notification = [NSString stringWithFormat:@"%@ %@",
                               [TeamRunSettings paceNotificationsEnabled] ? paceNotification : @"",
@@ -400,7 +402,7 @@ bool runInProgress;
     [self.milesAheadLabel setHidden:(self.match == nil && ![TeamRunSettings targetPaceEnabled])];
     
     double milesAhead = milesRan - referenceMiles;
-    if ( (milesAhead < 0 ? -1.0 * milesAhead : milesAhead ) < 0.025)
+    if ( absoluteValue(milesAhead) < 0.025)
     {
         // gps could be off by 20 meters, so if there are two of them a difference of less than 40 meters
         // could just be noise.  40 meters is about .0249 miles, so don't report any difference less than .025 miles
@@ -417,11 +419,10 @@ bool runInProgress;
         }
         else
         {
-            milesAhead *= -1;
             aheadOrBehind = @"behind";
             //[self.milesAheadLabel setTextColor:darkRed];
         }
-        [self.milesAheadLabel setText:[NSString stringWithFormat:@"%@ mi %@", truncateToTwoDecimals(milesAhead), aheadOrBehind]];
+        [self.milesAheadLabel setText:[NSString stringWithFormat:@"%@ mi %@", truncateToTwoDecimals(absoluteValue(milesAhead)), aheadOrBehind]];
     }
     
     return milesAhead;

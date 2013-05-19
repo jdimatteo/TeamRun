@@ -12,5 +12,6 @@
 
 // note that [NSString stringWithFormat:@"%.2f", 0.339] rounds to @"0.34" -- this function doesn't round
 NSString* truncateToTwoDecimals(const double value);
+double absoluteValue(const double value);
 
 @end

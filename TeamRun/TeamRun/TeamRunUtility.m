@@ -18,4 +18,13 @@ NSString* truncateToTwoDecimals(const double value)
     return [NSString stringWithFormat:@"%d.%02d", integer, hundreths];
 }
 
+double absoluteValue(const double value)
+{
+    if (value < 0)
+    {
+        return -1.0 * value;
+    }
+    return value;
+}
+
 @end
