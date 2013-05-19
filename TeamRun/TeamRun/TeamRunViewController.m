@@ -26,7 +26,8 @@
  
 Proably required before initial release:
  
- unconfirmed bug: speaking notifications continues after run stopped (maybe one extra sometimes?)
+ hard to reproduce bug: speaking notifications continues after run stopped (maybe one extra sometimes?)
+ -- this just happened again when the notifications were set to occur every second, and I stopped the run after like 30 seconds, and multiple spoken notifications continued after the run had stopped -- do the spoken notifications go into a queue and fall behind?
  
  test when user not logged into Facebook on app -- it looks like it just silently fails to post, but it should prompt user to login
  
@@ -65,7 +66,9 @@ UI Design (probably good to cover all these items before initial release):
  
 Additional Todos (maybe version 2)
  
- facebook sharing (optionally including the names of everyone ran with, maybe using Facebook tagging or something)
+ hard to reproduce bug?  audio from pandora stops when switching to team run game
+ 
+ better facebook sharing (optionally including the names of everyone ran with, maybe using Facebook tagging or something)
  - include a nice icon which when clicked is a link to buy the game
  
  preface log messages with their level (e.g. ERROR:)
@@ -205,6 +208,10 @@ Additional Todos (maybe version 2)
 @end
 
 static const double MILES_PER_METER = 0.000621371;
+
+// gps could be off by 20 meters, so if there are two of them a difference of less than 40 meters
+// could just be noise.  40 meters is about .0249 miles, so don't report any difference less than .025 miles
+static const double ON_PACE_THRESHOLD_MILES = 0.025;
 
 typedef enum {PS, CL} SpeedCalcMethod;
 static const SpeedCalcMethod speedCalcMethod = CL;
@@ -353,7 +360,9 @@ bool runInProgress;
     
     const double milesAhead = [self updateMilesAhead];
     
-    NSString* relativePositionNotification = [NSString stringWithFormat:@"You are about %@ miles %@.", truncateToTwoDecimals(absoluteValue(milesAhead)), milesAhead >= 0 ? @"ahead" : @"behind"];
+    NSString* relativePositionNotification = absoluteValue(milesAhead) > ON_PACE_THRESHOLD_MILES
+        ? [NSString stringWithFormat:@"You are about %@ miles %@.", truncateToTwoDecimals(absoluteValue(milesAhead)), milesAhead >= 0 ? @"ahead" : @"behind"]
+        : @"You are on pace";
     
     NSString* notification = [NSString stringWithFormat:@"%@ %@",
                               [TeamRunSettings paceNotificationsEnabled] ? paceNotification : @"",
@@ -402,10 +411,8 @@ bool runInProgress;
     [self.milesAheadLabel setHidden:(self.match == nil && ![TeamRunSettings targetPaceEnabled])];
     
     double milesAhead = milesRan - referenceMiles;
-    if ( absoluteValue(milesAhead) < 0.025)
+    if ( absoluteValue(milesAhead) < ON_PACE_THRESHOLD_MILES)
     {
-        // gps could be off by 20 meters, so if there are two of them a difference of less than 40 meters
-        // could just be noise.  40 meters is about .0249 miles, so don't report any difference less than .025 miles
         [self.milesAheadLabel setText:@"on pace"];
     }
     else
