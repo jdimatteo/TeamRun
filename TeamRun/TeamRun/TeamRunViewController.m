@@ -15,7 +15,7 @@
   
  rename app from "Team Run" to "TeamRun", add screenshots, move my game to a game group, so that leaderboards can be shared if I make a paid version, and update description to be the following:
  
- - first and only multiplayer running game to keep pace with remote friends running real time in remote locations
+ - first and only multiplayer running game to keep pace with friends running real time in remote locations
  - social element to motivate exercise: studies show running with a friend increases miles ran by 53% and calories burned by 66%
  - scale paces so runners of different abilities can still motivate each other to maintain a target pace
  - configurable audio pace and relative position notifications while you run
@@ -191,6 +191,7 @@ Additional Todos (maybe version 2)
 - (void)playerAuthenticated;
 - (void)secondRan:(NSTimer *)timer;
 - (void)speakNotification:(NSTimer *)timer;
+- (double)updateMilesAhead;
 - (double)updateMilesAhead:(double) milesOtherPlayerRan;
 - (void)updateNotificationsTimerIfNecessary;
 - (NSString*) playerNames;
@@ -337,6 +338,7 @@ bool runInProgress;
             [self.timeLabel setText:[NSString stringWithFormat:@"%.2d:%.2d", remainingSeconds / 60, remainingSeconds % 60]];
         }
     }
+    [self updateMilesAhead];
 }
 
 - (void)speakNotification:(NSTimer *)timer
@@ -349,12 +351,17 @@ bool runInProgress;
     
     NSString* paceNotification = [NSString stringWithFormat:@"You have run %@, %@ miles, at %@ mile pace.", durationRan, self.milesRanLabel.text, pace];
     
-    NSString* relativePositionNotification = [NSString stringWithFormat:@"You are about %@ miles ahead.", truncateToTwoDecimals([self updateMilesAhead:-1])];
+    NSString* relativePositionNotification = [NSString stringWithFormat:@"You are about %@ miles ahead.", truncateToTwoDecimals([self updateMilesAhead])];
     
     NSString* notification = [NSString stringWithFormat:@"%@ %@",
                               [TeamRunSettings paceNotificationsEnabled] ? paceNotification : @"",
                               [TeamRunSettings relativePositionNotificationsEnabled] ? relativePositionNotification : @""];
     [self say:notification];
+}
+
+- (double)updateMilesAhead
+{
+    return [self updateMilesAhead:-1];
 }
 
 // todo: this probably isn't good style -- maybe make this an optional arg or overload the function?
@@ -383,9 +390,17 @@ bool runInProgress;
     }*/
 
     const double milesRan = [PSLocationManager sharedLocationManager].totalDistance * MILES_PER_METER;
-
-    double milesAheadOfOtherRunner = milesRan - (milesOtherPlayerRan);
-    if ( (milesAheadOfOtherRunner < 0 ? -1.0 * milesAheadOfOtherRunner : milesAheadOfOtherRunner ) < 0.025)
+    
+    const double targetMilesRanIfRunningAtTargetMilePace = ([TeamRunSettings targetSecondsPerMile] > 0) ?[PSLocationManager sharedLocationManager].totalSeconds / [TeamRunSettings targetSecondsPerMile] : 0;
+    
+    [self logTmp:@"targetMilesRanIfRunningAtTargetMilePace = %@, seconds: %d, target seconds per mile: %d", truncateToTwoDecimals(targetMilesRanIfRunningAtTargetMilePace), (int) [PSLocationManager sharedLocationManager].totalSeconds, [TeamRunSettings targetSecondsPerMile]];
+    
+    const double referenceMiles = (self.match != nil) ? milesOtherPlayerRan : targetMilesRanIfRunningAtTargetMilePace;
+    
+    [self.milesAheadLabel setHidden:(self.match == nil && ![TeamRunSettings targetPaceEnabled])];
+    
+    double milesAhead = milesRan - referenceMiles;
+    if ( (milesAhead < 0 ? -1.0 * milesAhead : milesAhead ) < 0.025)
     {
         // gps could be off by 20 meters, so if there are two of them a difference of less than 40 meters
         // could just be noise.  40 meters is about .0249 miles, so don't report any difference less than .025 miles
@@ -402,14 +417,14 @@ bool runInProgress;
         }
         else
         {
-            milesAheadOfOtherRunner *= -1;
+            milesAhead *= -1;
             aheadOrBehind = @"behind";
             //[self.milesAheadLabel setTextColor:darkRed];
         }
-        [self.milesAheadLabel setText:[NSString stringWithFormat:@"%@ mi %@", truncateToTwoDecimals(milesAheadOfOtherRunner), aheadOrBehind]];
+        [self.milesAheadLabel setText:[NSString stringWithFormat:@"%@ mi %@", truncateToTwoDecimals(milesAhead), aheadOrBehind]];
     }
     
-    return milesAheadOfOtherRunner;
+    return milesAhead;
 }
 
 #pragma mark - Logging
@@ -642,7 +657,7 @@ bool runInProgress;
         
         const double rawMiles = [PSLocationManager sharedLocationManager].totalDistance*MILES_PER_METER;
         const double teamRunMiles = self.match == nil ? rawMiles
-                                                      : 2*(rawMiles + [self updateMilesAhead:0]);
+                                                      : 2*(rawMiles + [self updateMilesAhead]);
         
         NSString* withMessage = @"";
         NSString* playerNames = [self playerNames];
@@ -778,7 +793,7 @@ bool runInProgress;
         }
     }
     
-    [self updateMilesAhead:-1];
+    [self updateMilesAhead];
 }
 
 - (void)locationManager:(PSLocationManager *)locationManager waypoint:(CLLocation *)waypoint calculatedSpeed:(double)calculatedSpeed
