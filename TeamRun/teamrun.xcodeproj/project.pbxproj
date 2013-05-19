@@ -89,7 +89,7 @@
 		52A5E03D1687898500E3A2AB /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		52A5E0401687ECA800E3A2AB /* SampleMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SampleMap.png; sourceTree = "<group>"; };
 		52BA73CF168EC3700025C3EA /* mute mic.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "mute mic.tiff"; sourceTree = "<group>"; };
-		52F081F3168425D700F2749E /* icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114.png; sourceTree = "<group>"; };
+		52F081F3168425D700F2749E /* icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon114.png; path = ../icon114.png; sourceTree = "<group>"; };
 		83369512173DAFDB00923D88 /* cmu07a.dic */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cmu07a.dic; sourceTree = "<group>"; };
 		83369514173DAFDB00923D88 /* feat.params */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = feat.params; sourceTree = "<group>"; };
 		83369515173DAFDB00923D88 /* mdef */ = {isa = PBXFileReference; lastKnownFileType = file; path = mdef; sourceTree = "<group>"; };
@@ -129,9 +129,9 @@
 		83CF1607173B13D4006044B0 /* Awb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Awb.framework; sourceTree = "<group>"; };
 		83E9C85217465DB7004D8879 /* TeamRunLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeamRunLogger.h; sourceTree = "<group>"; };
 		83E9C8531746F6B7004D8879 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		83E9C88F1747FBD0004D8879 /* FB-f-Logo__blue_29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FB-f-Logo__blue_29.png"; sourceTree = "<group>"; };
-		83E9C8911747FD3C004D8879 /* FB-f-Logo__blue_29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FB-f-Logo__blue_29@2x.png"; sourceTree = "<group>"; };
-		83E9C89317481980004D8879 /* icon1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon1024.png; sourceTree = "<group>"; };
+		83E9C88F1747FBD0004D8879 /* FB-f-Logo__blue_29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "FB-f-Logo__blue_29.png"; path = "../FB-f-Logo__blue_29.png"; sourceTree = "<group>"; };
+		83E9C8911747FD3C004D8879 /* FB-f-Logo__blue_29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "FB-f-Logo__blue_29@2x.png"; path = "../FB-f-Logo__blue_29@2x.png"; sourceTree = "<group>"; };
+		83E9C89317481980004D8879 /* icon1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon1024.png; path = ../icon1024.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,10 +175,6 @@
 				83CF15391729FECB006044B0 /* AudioToolbox.framework */,
 				83CF153A1729FECB006044B0 /* AVFoundation.framework */,
 				52A5E03D1687898500E3A2AB /* GameKit.framework */,
-				52F081F3168425D700F2749E /* icon114.png */,
-				83E9C89317481980004D8879 /* icon1024.png */,
-				83E9C88F1747FBD0004D8879 /* FB-f-Logo__blue_29.png */,
-				83E9C8911747FD3C004D8879 /* FB-f-Logo__blue_29@2x.png */,
 				5280DE21167EC5E700552081 /* CoreLocation.framework */,
 				520276F316762D300004BBDC /* TeamRun */,
 				83CF1547172AB580006044B0 /* TeamRunUnitTests */,
@@ -245,6 +241,10 @@
 				520276FF16762D300004BBDC /* Default.png */,
 				5202770116762D300004BBDC /* Default@2x.png */,
 				5202770316762D300004BBDC /* Default-568h@2x.png */,
+				52F081F3168425D700F2749E /* icon114.png */,
+				83E9C89317481980004D8879 /* icon1024.png */,
+				83E9C88F1747FBD0004D8879 /* FB-f-Logo__blue_29.png */,
+				83E9C8911747FD3C004D8879 /* FB-f-Logo__blue_29@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";

@@ -16,6 +16,10 @@
   
 Proably required before initial release:
  
+ unconfirmed bug: speaking notifications continues after run stopped
+ 
+ test when user not logged into Facebook on app -- it looks like it just silently fails to post, but it should prompt user to login
+ 
  test when a user drops out of a match -- for example, there seems to be a bug where if John and Sarah are running together and Sarah drops out, then John is still warned about Sarah running if John tries to cancel early -- we need better behavior and notification, I guess converting to a single player run
  
  verify that time ran shows hours correctly (e.g. it shouldn't show > 60 minutes)
@@ -643,6 +647,7 @@ bool runInProgress;
         
         NSString* facebookMessage = [[NSString alloc] initWithFormat:@"I completed a %@ mile TeamRun%@", truncateToTwoDecimals(rawMiles), withMessage];
 
+        [self presentViewController:completionViewController animated:YES completion:nil];
         
         [completionViewController setMilesRan:rawMiles
                                       seconds:[PSLocationManager sharedLocationManager].totalSeconds
@@ -670,9 +675,6 @@ bool runInProgress;
     
     [[PSLocationManager sharedLocationManager] stopLocationUpdates];
     [self logTrace:@"takes ~10 seconds for GPS shutdown"];
-    
-    
-    [self presentViewController:completionViewController animated:YES completion:nil];
 }
 
 - (void)updatePlayers
