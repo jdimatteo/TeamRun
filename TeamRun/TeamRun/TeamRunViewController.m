@@ -216,6 +216,14 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
 typedef enum {PS, CL} SpeedCalcMethod;
 static const SpeedCalcMethod speedCalcMethod = CL;
 
+typedef enum : char {MILES_RAN, TARGET_PACE} TeamRunMessageType;
+
+typedef struct
+{
+    TeamRunMessageType type;
+    float data;
+} TeamRunMessageV1;
+
 FliteController *fliteController;
 Awb *voice;
 
@@ -753,10 +761,29 @@ bool runInProgress;
 - (void)match:(GKMatch *)match didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID
 {
     // todo: consider storing a struct with a message type and a double (if for nothing else than to make it future proof)
-    double* milesOtherPlayerRan = (double*)[data bytes];
-    [self logTrace:@"player %@: %f miles", playerID, *milesOtherPlayerRan];
-    
-    [self updateMilesAhead:*milesOtherPlayerRan];
+    if ([data length] == sizeof(TeamRunMessageV1))
+    {
+        TeamRunMessageV1* message = (TeamRunMessageV1*)[data bytes];
+        if (message->type == MILES_RAN)
+        {
+            [self logTrace:@"player %@: %f miles", playerID, message->data];
+            
+            [self updateMilesAhead:message->data];
+        }
+        else if (message->type == TARGET_PACE)
+        {
+            // todo
+        }
+        else
+        {
+            [self logWarn:@"discarding unsupported TeamRunMessageV1 message type %d from player %@", message->type, playerID];
+        }
+    }
+    else
+    {
+        [self logWarn:@"discarding unsupported message of length %d from player %@", [data length], playerID];
+    }
+    // else -- handle future message type sizes
 }
 
 #pragma mark - GPS
@@ -785,15 +812,19 @@ bool runInProgress;
 
 - (void)locationManager:(PSLocationManager *)locationManager distanceUpdated:(CLLocationDistance)distance /* distance in meters */
 {    
-    const double milesRan = distance*MILES_PER_METER;
+    const float milesRan = distance*MILES_PER_METER;
     [self.milesRanLabel setText:truncateToTwoDecimals(milesRan)];
     [self logTrace:@"%f miles", milesRan];
     
     if (self.match != nil)
     {
+        TeamRunMessageV1 message;
+        message.type = MILES_RAN;
+        message.data = milesRan;
+        
         NSError *error;
         // todo: change all stored distances to floats (I definately don't need the extra precision, and it doubles the amount of data transferred)
-        NSData *packet = [NSData dataWithBytes:&milesRan length:sizeof(milesRan)];
+        NSData *packet = [NSData dataWithBytes:&message length:sizeof(message)];
         [self.match sendDataToAllPlayers: packet withDataMode: GKMatchSendDataReliable error:&error];
         if (error != nil)
         {
