@@ -6,7 +6,9 @@
 //  Copyright (c) 2012 John DiMatteo. All rights reserved.
 //
 
-/* pickup here: customize ahead label for single and multiplayer mode (say ahead of target pace, or ahead of Molly and make two lines)
+/* pickup here: customize ahead label for single and multiplayer mode (say ahead of target pace, or ahead of Molly and make two lines),
+                some way to see information about other player: e.g. their display name, and their target pace,
+                some way to communicate with other player especially before timer starts (maybe a chat room that can be re-opened by swiping to the side?),
  
    next time running with two phones:
         -- have Sarah's phone use speedCalcMethod = PS and my phone use speedCalcMethod = CL, and compare smoothness, and responsiveness to sprinting and stopping
