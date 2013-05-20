@@ -6,8 +6,7 @@
 //  Copyright (c) 2012 John DiMatteo. All rights reserved.
 //
 
-/* pickup here: customize ahead label for single and multiplayer mode (say ahead of target pace, or ahead of Molly and make two lines),
-                implement pace scaling based off setting,
+/* pickup here: customize ahead label for single and multiplayer mode (say ahead of target pace, or ahead of Molly and make two lines)
  
    next time running with two phones:
         -- have Sarah's phone use speedCalcMethod = PS and my phone use speedCalcMethod = CL, and compare smoothness, and responsiveness to sprinting and stopping
@@ -57,9 +56,7 @@ UI Design (probably good to cover all these items before initial release):
  when tapping a number field on the settings screen, highlight what is already selected so that it can be overwritten without deleting
  
  handle dropping/re-adding players (test if this ever occurs... hopefully GameCenter is fairly lenient with regards to poor network)
- 
- login not possible after you click the start button
- 
+  
  "Target Pace" might be misleading
   
  add icons for the high scores (this can be done after game published)
@@ -195,7 +192,7 @@ Additional Todos (maybe version 2)
 - (void)secondRan:(NSTimer *)timer;
 - (void)speakNotification:(NSTimer *)timer;
 - (double)updateMilesAhead;
-- (double)updateMilesAhead:(double) milesOtherPlayerRan;
+- (double)updateMilesAhead:(double) milesOtherPlayerRan targetSecondsPerMile:(int)secondsPerMileTargetPace;
 - (void)updateNotificationsTimerIfNecessary;
 - (NSString*) playerNames;
 
@@ -216,12 +213,10 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
 typedef enum {PS, CL} SpeedCalcMethod;
 static const SpeedCalcMethod speedCalcMethod = CL;
 
-typedef enum : char {MILES_RAN, TARGET_PACE} TeamRunMessageType;
-
 typedef struct
 {
-    TeamRunMessageType type;
-    float data;
+    float milesRan;
+    int32_t secondsPerMileTargetPace; // <= 0 if no target pace set
 } TeamRunMessageV1;
 
 FliteController *fliteController;
@@ -380,13 +375,14 @@ bool runInProgress;
 
 - (double)updateMilesAhead
 {
-    return [self updateMilesAhead:-1];
+    return [self updateMilesAhead:-1 targetSecondsPerMile:-1];
 }
 
 // todo: this probably isn't good style -- maybe make this an optional arg or overload the function?
 // pass in -1 for distance if it is unchanged
+// pass in 0 (or less) for secondsPerMileTargetPace if no mile target pace set
 // returns milesAhead of other runner
-- (double)updateMilesAhead:(double) milesOtherPlayerRan
+- (double)updateMilesAhead:(double) milesOtherPlayerRan targetSecondsPerMile:(int)secondsPerMileTargetPace
 {
     static double lastRecordedMilesOtherPlayerRan = 0;
     
@@ -396,7 +392,14 @@ bool runInProgress;
     }
     else
     {
+        double scalingFactor = 1.0;
+        if (secondsPerMileTargetPace > 0 && [TeamRunSettings targetPaceEnabled] && [TeamRunSettings targetSecondsPerMile] > 0)
+        {
+            scalingFactor = secondsPerMileTargetPace / (double) [TeamRunSettings targetSecondsPerMile];
+        }
+        milesOtherPlayerRan = milesOtherPlayerRan * scalingFactor;
         lastRecordedMilesOtherPlayerRan = milesOtherPlayerRan;
+        [self logTrace:@"Updated lastRecordedMilesOtherPlayerRan: %@ (scaling factor %@)", truncateToTwoDecimals(lastRecordedMilesOtherPlayerRan), truncateToTwoDecimals(scalingFactor)];
     }
     
     /* todo: consider setting ahead / behind colors 
@@ -645,7 +648,7 @@ bool runInProgress;
     [[PSLocationManager sharedLocationManager] resetLocationUpdates];
     [[PSLocationManager sharedLocationManager] startLocationUpdates];
     
-    [self updateMilesAhead:0];
+    [self updateMilesAhead:0 targetSecondsPerMile:-1];
     
     self.runningTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                          target:self
@@ -760,24 +763,13 @@ bool runInProgress;
 
 - (void)match:(GKMatch *)match didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID
 {
-    // todo: consider storing a struct with a message type and a double (if for nothing else than to make it future proof)
     if ([data length] == sizeof(TeamRunMessageV1))
     {
         TeamRunMessageV1* message = (TeamRunMessageV1*)[data bytes];
-        if (message->type == MILES_RAN)
-        {
-            [self logTrace:@"player %@: %f miles", playerID, message->data];
-            
-            [self updateMilesAhead:message->data];
-        }
-        else if (message->type == TARGET_PACE)
-        {
-            // todo
-        }
-        else
-        {
-            [self logWarn:@"discarding unsupported TeamRunMessageV1 message type %d from player %@", message->type, playerID];
-        }
+        
+        [self logTrace:@"player %@: %f miles (%d seconds target mile pace)", playerID, message->milesRan, message->secondsPerMileTargetPace];
+        
+        [self updateMilesAhead:message->milesRan targetSecondsPerMile:message->secondsPerMileTargetPace];
     }
     else
     {
@@ -819,8 +811,8 @@ bool runInProgress;
     if (self.match != nil)
     {
         TeamRunMessageV1 message;
-        message.type = MILES_RAN;
-        message.data = milesRan;
+        message.milesRan = milesRan;
+        message.secondsPerMileTargetPace = [TeamRunSettings targetPaceEnabled] ? [TeamRunSettings targetSecondsPerMile] : -1;
         
         NSError *error;
         // todo: change all stored distances to floats (I definately don't need the extra precision, and it doubles the amount of data transferred)
