@@ -540,6 +540,8 @@
 		5202770E16762D310004BBDC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: JOHN DIMATTEO";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: JOHN DIMATTEO";
 				DEPLOYMENT_POSTPROCESSING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -550,6 +552,8 @@
 				GCC_PREFIX_HEADER = "TeamRun/teamrun-Prefix.pch";
 				INFOPLIST_FILE = "TeamRun/teamrun-Info.plist";
 				PRODUCT_NAME = teamrun;
+				PROVISIONING_PROFILE = "42C3BC27-0F0D-4CFF-BF92-20D5A60CE7AB";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "42C3BC27-0F0D-4CFF-BF92-20D5A60CE7AB";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -557,6 +561,8 @@
 		5202770F16762D310004BBDC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: JOHN DIMATTEO";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: JOHN DIMATTEO";
 				DEPLOYMENT_POSTPROCESSING = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -567,6 +573,8 @@
 				GCC_PREFIX_HEADER = "TeamRun/teamrun-Prefix.pch";
 				INFOPLIST_FILE = "TeamRun/teamrun-Info.plist";
 				PRODUCT_NAME = teamrun;
+				PROVISIONING_PROFILE = "42C3BC27-0F0D-4CFF-BF92-20D5A60CE7AB";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "42C3BC27-0F0D-4CFF-BF92-20D5A60CE7AB";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
