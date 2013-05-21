@@ -41,7 +41,7 @@
 
 @property (nonatomic) int remainingScoresToLoad;
 
-@property (weak, nonatomic) id<TeamRunLogger> logger;
+@property (weak, nonatomic) TeamRunLogger* logger;
 
 @property (strong, nonatomic) NSString* initialPostMessage;
 
@@ -105,7 +105,7 @@
 - (void)setMilesRan:(double)rawMiles
             seconds:(int)seconds
           teamMiles:(double)teamMiles
-             logger:(id<TeamRunLogger>)logger
+             logger:(TeamRunLogger*)logger
     facebookMessage:(NSString*)message
 {
     // todo: this function is a mess, clean it up!

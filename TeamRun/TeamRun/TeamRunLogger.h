@@ -11,7 +11,10 @@
 // todo: preface this type def and enumerations with TEAM_RUN
 typedef enum {LOG_TRACE, LOG_DEBUG, LOG_INFO, LOG_WARN, LOG_ERROR, LOG_TEMP_ESCALATION} LogLevel;
 
-@protocol TeamRunLogger <NSObject>
+
+@interface TeamRunLogger : NSObject
+
+@property UITextView *scrollingLogText;
 
 - (void)logTrace:(NSString*)format,...;
 - (void)logDebug:(NSString*)format,...;
@@ -19,6 +22,5 @@ typedef enum {LOG_TRACE, LOG_DEBUG, LOG_INFO, LOG_WARN, LOG_ERROR, LOG_TEMP_ESCA
 - (void)logWarn:(NSString*)format,...;
 - (void)logError:(NSString*)format,...;
 - (void)logTmp:(NSString*)format,...;
-- (void)logWithLevel:(LogLevel)level message:(NSString*)message;
 
 @end
