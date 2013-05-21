@@ -86,7 +86,7 @@ bool runInProgress;
     [super viewDidLoad];
     
     [self authenticateLocalPlayer];
-    [self logDebug:@"Authenticating player..."];
+    [self logInfo:@"Authenticating player..."];
     
     [PSLocationManager sharedLocationManager].delegate = self;
     [[PSLocationManager sharedLocationManager] prepLocationUpdates];
@@ -252,7 +252,7 @@ bool runInProgress;
         }
         milesOtherPlayerRan = milesOtherPlayerRan * scalingFactor;
         lastRecordedMilesOtherPlayerRan = milesOtherPlayerRan;
-        [self logTrace:@"Updated lastRecordedMilesOtherPlayerRan: %@ (scaling factor %@)", truncateToTwoDecimals(lastRecordedMilesOtherPlayerRan), truncateToTwoDecimals(scalingFactor)];
+        [self logDebug:@"Updated lastRecordedMilesOtherPlayerRan: %@ (scaling factor %@)", truncateToTwoDecimals(lastRecordedMilesOtherPlayerRan), truncateToTwoDecimals(scalingFactor)];
     }
     
     /* todo: consider setting ahead / behind colors 
@@ -268,7 +268,7 @@ bool runInProgress;
     
     const double targetMilesRanIfRunningAtTargetMilePace = ([TeamRunSettings targetSecondsPerMile] > 0) ?[PSLocationManager sharedLocationManager].totalSeconds / [TeamRunSettings targetSecondsPerMile] : 0;
     
-    [self logTrace:@"targetMilesRanIfRunningAtTargetMilePace = %@, seconds: %d, target seconds per mile: %d", truncateToTwoDecimals(targetMilesRanIfRunningAtTargetMilePace), (int) [PSLocationManager sharedLocationManager].totalSeconds, [TeamRunSettings targetSecondsPerMile]];
+    [self logDebug:@"targetMilesRanIfRunningAtTargetMilePace = %@, seconds: %d, target seconds per mile: %d", truncateToTwoDecimals(targetMilesRanIfRunningAtTargetMilePace), (int) [PSLocationManager sharedLocationManager].totalSeconds, [TeamRunSettings targetSecondsPerMile]];
     
     const double referenceMiles = (self.match != nil) ? milesOtherPlayerRan : targetMilesRanIfRunningAtTargetMilePace;
     
@@ -370,8 +370,7 @@ bool runInProgress;
 
 - (void)logWithLevel:(LogLevel)level message:(NSString*)message
 {
-    /*
-    static LogLevel currentLevel = LOG_DEBUG;
+    static LogLevel currentLevel = 0;//LOG_DEBUG;
     
     if (level >= currentLevel)
     {
@@ -379,7 +378,7 @@ bool runInProgress;
         [self.scrollingText setText:[NSString stringWithFormat:@"%@\n\n%@", [self.scrollingText text], message]];
         
         [self.scrollingText scrollRangeToVisible:NSMakeRange([self.scrollingText.text length], 0)];
-    }*/
+    }
 }
 
 #pragma mark - GameKit
@@ -417,7 +416,7 @@ bool runInProgress;
     [GKMatchmaker sharedMatchmaker].inviteHandler = ^(GKInvite *acceptedInvite, NSArray *playersToInvite) {
         // Insert game-specific code here to clean up any game in progress.
         
-        [self logDebug:@"invite handler called with acceptedInvite nil? %@, playersToInvite count: %d", acceptedInvite == nil, playersToInvite.count];
+        [self logInfo:@"invite handler called with acceptedInvite nil? %@, playersToInvite count: %d", acceptedInvite == nil, playersToInvite.count];
         
         if (acceptedInvite)
         {
@@ -470,7 +469,7 @@ bool runInProgress;
 - (void)matchmakerViewControllerWasCancelled:(GKMatchmakerViewController *)viewController
 {
     [self dismissViewControllerAnimated:YES completion:nil];
-    [self logTrace:@"Match cancelled"];
+    [self logDebug:@"Match cancelled"];
 }
 
 - (void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFailWithError:(NSError *)error
@@ -485,7 +484,7 @@ bool runInProgress;
     self.match = match;
     
     [self dismissViewControllerAnimated:YES completion:nil];
-    [self logTrace:@"Match found -- expectedPlayerCount: %d", match.expectedPlayerCount];
+    [self logDebug:@"Match found -- expectedPlayerCount: %d", match.expectedPlayerCount];
     
     if (runInProgress) [self logError:@"runInProgress should be false if didFindMatch called"];
     
@@ -568,7 +567,7 @@ bool runInProgress;
     [self updateNotificationsTimerIfNecessary];
     
     [[PSLocationManager sharedLocationManager] stopLocationUpdates];
-    [self logTrace:@"takes ~10 seconds for GPS shutdown"];
+    [self logDebug:@"takes ~10 seconds for GPS shutdown"];
 }
 
 - (void)updatePlayers
@@ -577,7 +576,7 @@ bool runInProgress;
     {
         [GKPlayer loadPlayersForIdentifiers:self.match.playerIDs withCompletionHandler:^(NSArray *players, NSError *error)
         {
-            [self logTrace:@"loadPlayersForIdentifiers completion handler called"];
+            [self logDebug:@"loadPlayersForIdentifiers completion handler called"];
             if (error != nil)
             {
                 [self logError:@"Error loading player information: %@", error];
@@ -586,7 +585,7 @@ bool runInProgress;
             }
             
             self.players = players;
-            [self logTrace:@"players set: %@", self.players];
+            [self logDebug:@"players set: %@", self.players];
         }];
     }
     else
@@ -600,7 +599,7 @@ bool runInProgress;
     switch (state)
     {
         case GKPlayerStateConnected:
-            [self logDebug:@"player (%@) connected (%d\nexpected player count is now %d)", playerID, match.expectedPlayerCount];
+            [self logInfo:@"player (%@) connected (%d\nexpected player count is now %d)", playerID, match.expectedPlayerCount];
             break;
         case GKPlayerStateDisconnected:
             [self logWarn:@"player (%@) disconnected (%d\nexpected player count is now %d)", playerID, match.expectedPlayerCount];
@@ -621,7 +620,7 @@ bool runInProgress;
     {
         TeamRunMessageV1* message = (TeamRunMessageV1*)[data bytes];
         
-        [self logTrace:@"player %@: %f miles (%d seconds target mile pace)", playerID, message->milesRan, message->secondsPerMileTargetPace];
+        [self logDebug:@"player %@: %f miles (%d seconds target mile pace)", playerID, message->milesRan, message->secondsPerMileTargetPace];
         
         [self updateMilesAhead:message->milesRan targetSecondsPerMile:message->secondsPerMileTargetPace];
     }
@@ -649,18 +648,18 @@ bool runInProgress;
         strengthText = @"...";
     }
     
-    [self logTrace:@"Signal strength changed to %@", strengthText];
+    [self logDebug:@"Signal strength changed to %@", strengthText];
 }
 
 - (void)locationManagerSignalConsistentlyWeak:(PSLocationManager *)locationManager {
-    [self logTrace:@"Signal strength consistently weak"];
+    [self logDebug:@"Signal strength consistently weak"];
 }
 
 - (void)locationManager:(PSLocationManager *)locationManager distanceUpdated:(CLLocationDistance)distance /* distance in meters */
 {    
     const float milesRan = distance*MILES_PER_METER;
     [self.milesRanLabel setText:truncateToTwoDecimals(milesRan)];
-    [self logTrace:@"%f miles", milesRan];
+    [self logDebug:@"%f miles", milesRan];
     
     if (self.match != nil)
     {
@@ -685,7 +684,7 @@ bool runInProgress;
 {
     if (runInProgress)
     {
-        [self logTrace:@"Location Update %@:\n\tPS: %@\n\tCL: %@\n\tDelta:%f\n",
+        [self logDebug:@"Location Update %@:\n\tPS: %@\n\tCL: %@\n\tDelta:%f\n",
          truncateToTwoDecimals([PSLocationManager sharedLocationManager].totalSeconds),
          truncateToTwoDecimals(calculatedSpeed),
          truncateToTwoDecimals(waypoint.speed),
@@ -721,7 +720,7 @@ bool runInProgress;
 
 - (void) say:(NSString*)textToSay
 {
-    [self logTrace:@"say %@", textToSay];
+    [self logDebug:@"say %@", textToSay];
     if (voice == nil) {
 		voice = [[Awb alloc] init];
 	}
