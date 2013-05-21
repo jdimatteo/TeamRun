@@ -40,6 +40,7 @@
 		833A3147172746EC00E8A61E /* PSLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 833A3145172746EC00E8A61E /* PSLocationManager.m */; };
 		839027A4174B907600C53698 /* icon57.png in Resources */ = {isa = PBXBuildFile; fileRef = 839027A3174B907600C53698 /* icon57.png */; };
 		839027A6174B907E00C53698 /* icon57@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 839027A5174B907E00C53698 /* icon57@2x.png */; };
+		839027A8174B978100C53698 /* Notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 839027A7174B978100C53698 /* Notes.txt */; };
 		83CF153B1729FECB006044B0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CF15391729FECB006044B0 /* AudioToolbox.framework */; };
 		83CF153C1729FECB006044B0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CF153A1729FECB006044B0 /* AVFoundation.framework */; };
 		83CF1544172AB580006044B0 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CF1543172AB580006044B0 /* SenTestingKit.framework */; };
@@ -109,6 +110,7 @@
 		833A3146172746EC00E8A61E /* PSLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSLocationManager.h; sourceTree = "<group>"; };
 		839027A3174B907600C53698 /* icon57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon57.png; sourceTree = "<group>"; };
 		839027A5174B907E00C53698 /* icon57@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon57@2x.png"; sourceTree = "<group>"; };
+		839027A7174B978100C53698 /* Notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Notes.txt; sourceTree = "<group>"; };
 		83CF15391729FECB006044B0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		83CF153A1729FECB006044B0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		83CF1542172AB580006044B0 /* TeamRunUnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TeamRunUnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -208,6 +210,7 @@
 		520276F316762D300004BBDC /* TeamRun */ = {
 			isa = PBXGroup;
 			children = (
+				839027A7174B978100C53698 /* Notes.txt */,
 				833A3145172746EC00E8A61E /* PSLocationManager.m */,
 				833A3146172746EC00E8A61E /* PSLocationManager.h */,
 				520276FC16762D300004BBDC /* TeamRunAppDelegate.h */,
@@ -399,6 +402,7 @@
 				83E9C89417481980004D8879 /* icon1024.png in Resources */,
 				839027A4174B907600C53698 /* icon57.png in Resources */,
 				839027A6174B907E00C53698 /* icon57@2x.png in Resources */,
+				839027A8174B978100C53698 /* Notes.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
