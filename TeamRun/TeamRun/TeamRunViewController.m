@@ -13,17 +13,6 @@
    next time running with two phones:
         -- have Sarah's phone use speedCalcMethod = PS and my phone use speedCalcMethod = CL, and compare smoothness, and responsiveness to sprinting and stopping
         -- test/implement total team miles calculation/reporting/display
-  
- rename app from "Team Run" to "TeamRun", add screenshots, move my game to a game group, so that leaderboards can be shared if I make a paid version, and update description to be the following:
- 
- - first and only multiplayer running game to keep pace with friends running real time in remote locations
- - social element to motivate exercise: studies show running with a friend increases miles ran by 53% and calories burned by 66%
- - scale paces so runners of different abilities can still motivate each other to maintain a target pace
- - configurable audio pace and relative position notifications while you run
- - track distance ran and pace, with personal bests recorded, and leaderboards to compete with other runners
- - team miles: the more people you run with, the more team miles you earn
- - global weekly Sunday TeamRun at 11 AM eastern standard time
- - full featured and completely free with no ads
  
 Proably required before initial release:
  
@@ -519,6 +508,7 @@ bool runInProgress;
 
 - (void)logWithLevel:(LogLevel)level message:(NSString*)message
 {
+    /*
     static LogLevel currentLevel = LOG_DEBUG;
     
     if (level >= currentLevel)
@@ -527,7 +517,7 @@ bool runInProgress;
         [self.scrollingText setText:[NSString stringWithFormat:@"%@\n\n%@", [self.scrollingText text], message]];
         
         [self.scrollingText scrollRangeToVisible:NSMakeRange([self.scrollingText.text length], 0)];
-    }
+    }*/
 }
 
 #pragma mark - GameKit

@@ -123,16 +123,16 @@
     }
     
     NSMutableDictionary* categoryToCurrentScore = [NSMutableDictionary dictionaryWithCapacity:3];
-    [self reportScore:rawMiles*100 forLeaderboardID:@"org.teamrun.SingleRunRawMiles" addTo:categoryToCurrentScore];
-    [self reportScore:teamMiles*100 forLeaderboardID:@"org.teamrun.SingleRunTeamMiles" addTo:categoryToCurrentScore];
-    [self reportScore:seconds forLeaderboardID:@"org.teamrun.SingleRunSeconds" addTo:categoryToCurrentScore];
-    [self reportScore:seconds/rawMiles forLeaderboardID:@"org.teamrun.SingleRunSecondsPerMile" addTo:categoryToCurrentScore];
+    [self reportScore:rawMiles*100 forLeaderboardID:@"grp.org.teamrun.SingleRunRawMiles" addTo:categoryToCurrentScore];
+    [self reportScore:teamMiles*100 forLeaderboardID:@"grp.org.teamrun.SingleRunTeamMiles" addTo:categoryToCurrentScore];
+    [self reportScore:seconds forLeaderboardID:@"grp.org.teamrun.SingleRunSeconds" addTo:categoryToCurrentScore];
+    [self reportScore:seconds/rawMiles forLeaderboardID:@"grp.org.teamrun.SingleRunSecondsPerMile" addTo:categoryToCurrentScore];
     
     // todo: populate pace label and submit pace score
         
     NSArray* currentPlayer = @[[GKLocalPlayer localPlayer].playerID];
     
-    NSArray* totalScoreCateogries = @[@"org.teamrun.TotalRawMiles", @"org.teamrun.TotalTeamMiles"];
+    NSArray* totalScoreCateogries = @[@"grp.org.teamrun.TotalRawMiles", @"grp.org.teamrun.TotalTeamMiles"];
     
     self.remainingScoresToLoad = categoryToCurrentScore.count + totalScoreCateogries.count;
     
@@ -165,20 +165,20 @@
                         
                         NSString* formattedMiles = truncateToTwoDecimals(personalBest.value/100.0);
                         
-                        if ([scoreCategory isEqualToString:@"org.teamrun.SingleRunRawMiles"])
+                        if ([scoreCategory isEqualToString:@"grp.org.teamrun.SingleRunRawMiles"])
                         {
                             [self.bestRunRawMilesLabel setText:formattedMiles];
                         }
-                        else if ([scoreCategory isEqualToString:@"org.teamrun.SingleRunTeamMiles"])
+                        else if ([scoreCategory isEqualToString:@"grp.org.teamrun.SingleRunTeamMiles"])
                         {
                             [self.bestRunTeamMilesLabel setText:formattedMiles];
                         }
-                        else if ([scoreCategory isEqualToString:@"org.teamrun.SingleRunSeconds"])
+                        else if ([scoreCategory isEqualToString:@"grp.org.teamrun.SingleRunSeconds"])
                         {
                             const int bestSeconds = personalBest.value;
                             [self.bestRunTimeLabel setText:[NSString stringWithFormat:@"%.2d:%.2d", bestSeconds/ 60, bestSeconds % 60]];
                         }
-                        else if ([scoreCategory isEqualToString:@"org.teamrun.SingleRunSecondsPerMile"])
+                        else if ([scoreCategory isEqualToString:@"grp.org.teamrun.SingleRunSecondsPerMile"])
                         {
                             const int bestSecondsPerMile = personalBest.value;
                             [self.bestRunPaceLabel setText:[NSString stringWithFormat:@"%.2d:%.2d", bestSecondsPerMile / 60, bestSecondsPerMile % 60]];
@@ -216,9 +216,9 @@
                 {
                     [logger logError:@"%@ loadScoresWithCompletionHandler error: %@", scoreCategory, error];
                 }
-                GKScore* currentScore = [scoreCategory isEqualToString:@"org.teamrun.TotalRawMiles"]
-                                      ? categoryToCurrentScore[@"org.teamrun.SingleRunRawMiles"]
-                                      : categoryToCurrentScore[@"org.teamrun.SingleRunTeamMiles"];
+                GKScore* currentScore = [scoreCategory isEqualToString:@"grp.org.teamrun.TotalRawMiles"]
+                                      ? categoryToCurrentScore[@"grp.org.teamrun.SingleRunRawMiles"]
+                                      : categoryToCurrentScore[@"grp.org.teamrun.SingleRunTeamMiles"];
                 
                 GKScore* totalScore = [[GKScore alloc] initWithCategory:scoreCategory];
                 totalScore.value = currentScore.value; // temporarily set to just the current score
@@ -236,7 +236,7 @@
                 
                 NSString* formattedScore = truncateToTwoDecimals(totalScore.value/100.0);
                 
-                if ([scoreCategory isEqualToString:@"org.teamrun.TotalRawMiles"])
+                if ([scoreCategory isEqualToString:@"grp.org.teamrun.TotalRawMiles"])
                 {
                     [self.totalRawMilesLabel setText:[[NSString alloc] initWithFormat:@"%@ total miles", formattedScore]];
                 }
