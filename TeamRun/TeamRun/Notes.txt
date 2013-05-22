@@ -1,3 +1,10 @@
+Deployment Instructions:
+
+- SaveAs: TeamRunBeta3.ipa
+- Url: http://teamrun.org/uploads/TeamRunBeta3.ipa
+- Title: TeamRun
+- rest leave blank
+
 Release History
 
     May 20, 2012 - distributed to testers for beta testing as http://teamrun.org/uploads/TeamRunBeta2.plist
