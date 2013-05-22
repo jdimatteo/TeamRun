@@ -43,7 +43,14 @@
  Each log entry is also added to a file, so that it persists if the app crashes.
  */
 
+#define LOG_TRACE() [self.logger logDebug:[[NSString alloc] initWithFormat:@"TRACE: %s [Line %d]", __PRETTY_FUNCTION__, __LINE__]]
+
 #define LOG_DEBUG(fmt, ...) [self.logger logDebug:[[NSString alloc] initWithFormat:@"DEBUG: %s [Line %d] %@", __PRETTY_FUNCTION__, __LINE__, fmt], ##__VA_ARGS__]
+#define LOG_INFO(fmt, ...) [self.logger logDebug:[[NSString alloc] initWithFormat:@"INFO: %s [Line %d] %@", __PRETTY_FUNCTION__, __LINE__, fmt], ##__VA_ARGS__]
+#define LOG_WARN(fmt, ...) [self.logger logDebug:[[NSString alloc] initWithFormat:@"WARN: %s [Line %d] %@", __PRETTY_FUNCTION__, __LINE__, fmt], ##__VA_ARGS__]
+#define LOG_ERROR(fmt, ...) [self.logger logDebug:[[NSString alloc] initWithFormat:@"ERROR: %s [Line %d] %@", __PRETTY_FUNCTION__, __LINE__, fmt], ##__VA_ARGS__]
+#define LOG_TMP(fmt, ...) [self.logger logDebug:[[NSString alloc] initWithFormat:@"TMP: %s [Line %d] %@", __PRETTY_FUNCTION__, __LINE__, fmt], ##__VA_ARGS__]
+
 
 @property UITextView *scrollingLogText;
 
