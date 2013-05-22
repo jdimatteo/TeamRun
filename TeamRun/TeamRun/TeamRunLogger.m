@@ -82,7 +82,7 @@ typedef enum {TEAMRUN_LOG_TRACE, TEAMRUN_LOG_DEBUG, TEAMRUN_LOG_INFO, TEAMRUN_LO
 
 - (void)logWithLevel:(LogLevel)level message:(NSString*)message
 {
-    static LogLevel currentLevel = 0;//TEAMRUN_LOG_DEBUG;
+    static LogLevel currentLevel = TEAMRUN_LOG_WARN;
     
     if (level >= currentLevel)
     {
