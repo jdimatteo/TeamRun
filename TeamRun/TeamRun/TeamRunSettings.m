@@ -58,6 +58,7 @@
 + (void)setRelativePositionNotificationsEnabled:(const BOOL)enabled
 {
     [[NSUserDefaults standardUserDefaults] setBool:!enabled forKey:@"relativePositionNotificationsDisabled"];
+    [[NSUserDefaults standardUserDefaults] setValue:@"test" forKey:@"log"];
 }
 
 + (int)targetSecondsPerMile

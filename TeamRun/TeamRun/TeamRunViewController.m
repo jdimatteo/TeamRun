@@ -92,7 +92,7 @@ bool runInProgress;
     
     [self authenticateLocalPlayer];
     [self.logger logInfo:@"Authenticating player..."];
-    
+        
     [PSLocationManager sharedLocationManager].delegate = self;
     [[PSLocationManager sharedLocationManager] prepLocationUpdates];
     
@@ -468,7 +468,7 @@ bool runInProgress;
         [completionViewController setMilesRan:rawMiles
                                       seconds:[PSLocationManager sharedLocationManager].totalSeconds
                                     teamMiles:teamRunMiles
-                                       logger:self
+                                       logger:self.logger
                               facebookMessage:facebookMessage];
     }
     
