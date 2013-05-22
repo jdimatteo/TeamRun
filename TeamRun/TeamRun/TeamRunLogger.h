@@ -32,16 +32,9 @@
  
    DEBUG: -[TeamRunViewController viewDidLoad] [Line 98] Hi 3 2 1
  
- TODO: update all code to use macro
- TODO: make the following correct
- 
-   At any time the full log (regardless of the logging level set) is available via the fullLog 
-   method.  Note that these lines include a timestamp, e.g.
- 
-    2013-05-21 19:00:20.227 DEBUG: -[TeamRunViewController viewDidLoad] [Line 98] Hi 3 2 1
- 
- Each log entry is also added to a file, so that it persists if the app crashes.
- */
+ TODO: consider updating all code to use below macros
+ TODO: consider saving all logs to a file, and allowing a user to email me the log -- note that I should carefully review all log statements and verify that there is no personal info (e.g. GK names and GPS coordinates)
+*/
 
 #define LOG_TRACE() [self.logger logDebug:[[NSString alloc] initWithFormat:@"TRACE: %s [Line %d]", __PRETTY_FUNCTION__, __LINE__]]
 
@@ -54,7 +47,6 @@
 
 @property UITextView *scrollingLogText;
 
-// the following should not be directly called, use the macros above instead
 - (void)logTrace:(NSString*)format,...;
 - (void)logDebug:(NSString*)format,...;
 - (void)logInfo:(NSString*)format,...;
