@@ -32,7 +32,7 @@
  
    DEBUG: -[TeamRunViewController viewDidLoad] [Line 98] Hi 3 2 1
  
- TODO: consider updating all code to use below macros
+ TODO: consider updating all code to use below macros, which would allow me to compile out all logging to improve performance, and easily change to a different logging library
  TODO: consider saving all logs to a file, and allowing a user to email me the log -- note that I should carefully review all log statements and verify that there is no personal info (e.g. GK names and GPS coordinates)
 */
 
