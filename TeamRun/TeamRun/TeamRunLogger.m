@@ -82,7 +82,6 @@ typedef enum {TEAMRUN_LOG_TRACE, TEAMRUN_LOG_DEBUG, TEAMRUN_LOG_INFO, TEAMRUN_LO
 
 - (void)logWithLevel:(LogLevel)level message:(NSString*)message
 {
-    /*
     static LogLevel currentLevel = TEAMRUN_LOG_WARN;
     
     if (level >= currentLevel)
@@ -96,7 +95,6 @@ typedef enum {TEAMRUN_LOG_TRACE, TEAMRUN_LOG_DEBUG, TEAMRUN_LOG_INFO, TEAMRUN_LO
             [self.scrollingLogText scrollRangeToVisible:NSMakeRange([self.scrollingLogText.text length], 0)];
         }
     }
-    */
 }
 
 @end

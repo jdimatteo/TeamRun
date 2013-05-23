@@ -164,7 +164,7 @@ bool runInProgress;
         {
             const int remainingMinutes = (30*60 - round([PSLocationManager sharedLocationManager].totalSeconds))/60;
             
-            message = [[NSString alloc] initWithFormat:@"%@\n\nThere are %d minutes remaining in your run with %@.", message, remainingMinutes, playerNames];
+            message = [NSString stringWithFormat:@"%@\n\nThere are %d minutes remaining in your run with %@.", message, remainingMinutes, playerNames];
         }
         
         UIActionSheet *endRunConfirmationPrompt = [[UIActionSheet alloc] initWithTitle:message delegate:self cancelButtonTitle:@"Keep Running" destructiveButtonTitle:@"End Run" otherButtonTitles:nil];
@@ -458,10 +458,10 @@ bool runInProgress;
         NSString* playerNames = [self playerNames];
         if (playerNames.length > 0 )
         {
-            withMessage = [[NSString alloc] initWithFormat:@" with %@", playerNames];
+            withMessage = [NSString stringWithFormat:@" with %@", playerNames];
         }
         
-        NSString* facebookMessage = [[NSString alloc] initWithFormat:@"I completed a %@ mile run%@", truncateToTwoDecimals(rawMiles), withMessage];
+        NSString* facebookMessage = [NSString stringWithFormat:@"I completed a %@ mile run%@", truncateToTwoDecimals(rawMiles), withMessage];
 
         [self presentViewController:completionViewController animated:YES completion:nil];
         

@@ -242,11 +242,11 @@
                     
                     if ([scoreCategory isEqualToString:@"grp.org.teamrun.TotalRawMiles"])
                     {
-                        [self.totalRawMilesLabel setText:[[NSString alloc] initWithFormat:@"%@ total miles", formattedScore]];
+                        [self.totalRawMilesLabel setText:[NSString stringWithFormat:@"%@ total miles", formattedScore]];
                     }
                     else
                     {
-                        [self.totalTeamMilesLabel setText:[[NSString alloc] initWithFormat:@"%@ total team miles", formattedScore]];
+                        [self.totalTeamMilesLabel setText:[NSString stringWithFormat:@"%@ total team miles", formattedScore]];
                     }
                     
                     self.remainingScoresToLoad--;
