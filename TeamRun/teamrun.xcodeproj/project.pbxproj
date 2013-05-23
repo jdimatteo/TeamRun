@@ -215,8 +215,6 @@
 				839027A7174B978100C53698 /* Notes.txt */,
 				833A3145172746EC00E8A61E /* PSLocationManager.m */,
 				833A3146172746EC00E8A61E /* PSLocationManager.h */,
-				520276FC16762D300004BBDC /* TeamRunAppDelegate.h */,
-				520276FD16762D300004BBDC /* TeamRunAppDelegate.m */,
 				5202770516762D300004BBDC /* MainStoryboard.storyboard */,
 				5202770816762D300004BBDC /* TeamRunViewController.h */,
 				5202770916762D300004BBDC /* TeamRunViewController.m */,
@@ -229,8 +227,6 @@
 				83CF1560172F61CE006044B0 /* TeamRunSettings.m */,
 				83CF15621732E225006044B0 /* TeamRunCompletedViewController.h */,
 				83CF15631732E225006044B0 /* TeamRunCompletedViewController.m */,
-				83CF15651733E82B006044B0 /* TeamRunView.h */,
-				83CF15661733E82B006044B0 /* TeamRunView.m */,
 				83E9C85217465DB7004D8879 /* TeamRunLogger.h */,
 				839027A9174C2AD100C53698 /* TeamRunLogger.m */,
 			);
@@ -240,6 +236,10 @@
 		520276F416762D300004BBDC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				520276FC16762D300004BBDC /* TeamRunAppDelegate.h */,
+				520276FD16762D300004BBDC /* TeamRunAppDelegate.m */,
+				83CF15661733E82B006044B0 /* TeamRunView.m */,
+				83CF15651733E82B006044B0 /* TeamRunView.h */,
 				839027A5174B907E00C53698 /* icon57@2x.png */,
 				520276F516762D300004BBDC /* teamrun-Info.plist */,
 				839027A3174B907600C53698 /* icon57.png */,
