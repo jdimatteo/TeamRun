@@ -42,6 +42,7 @@
 		839027A6174B907E00C53698 /* icon57@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 839027A5174B907E00C53698 /* icon57@2x.png */; };
 		839027A8174B978100C53698 /* Notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 839027A7174B978100C53698 /* Notes.txt */; };
 		839027AA174C2AD100C53698 /* TeamRunLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 839027A9174C2AD100C53698 /* TeamRunLogger.m */; };
+		839027B0174EF03500C53698 /* TeamRun.m in Sources */ = {isa = PBXBuildFile; fileRef = 839027AF174EF03500C53698 /* TeamRun.m */; };
 		83CF153B1729FECB006044B0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CF15391729FECB006044B0 /* AudioToolbox.framework */; };
 		83CF153C1729FECB006044B0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CF153A1729FECB006044B0 /* AVFoundation.framework */; };
 		83CF1544172AB580006044B0 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CF1543172AB580006044B0 /* SenTestingKit.framework */; };
@@ -113,6 +114,8 @@
 		839027A5174B907E00C53698 /* icon57@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon57@2x.png"; sourceTree = "<group>"; };
 		839027A7174B978100C53698 /* Notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Notes.txt; sourceTree = "<group>"; };
 		839027A9174C2AD100C53698 /* TeamRunLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamRunLogger.m; sourceTree = "<group>"; };
+		839027AE174EF03400C53698 /* TeamRun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamRun.h; sourceTree = "<group>"; };
+		839027AF174EF03500C53698 /* TeamRun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamRun.m; sourceTree = "<group>"; };
 		83CF15391729FECB006044B0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		83CF153A1729FECB006044B0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		83CF1542172AB580006044B0 /* TeamRunUnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TeamRunUnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -216,6 +219,8 @@
 				5202770516762D300004BBDC /* MainStoryboard.storyboard */,
 				5202770816762D300004BBDC /* TeamRunViewController.h */,
 				5202770916762D300004BBDC /* TeamRunViewController.m */,
+				839027AE174EF03400C53698 /* TeamRun.h */,
+				839027AF174EF03500C53698 /* TeamRun.m */,
 				520276F416762D300004BBDC /* Supporting Files */,
 				83CF1556172AB7C3006044B0 /* TeamRunUtility.h */,
 				83CF1557172AB7C3006044B0 /* TeamRunUtility.m */,
@@ -450,6 +455,7 @@
 				83CF15641732E225006044B0 /* TeamRunCompletedViewController.m in Sources */,
 				83CF15671733E82B006044B0 /* TeamRunView.m in Sources */,
 				839027AA174C2AD100C53698 /* TeamRunLogger.m in Sources */,
+				839027B0174EF03500C53698 /* TeamRun.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
