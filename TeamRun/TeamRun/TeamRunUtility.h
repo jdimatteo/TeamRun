@@ -13,5 +13,8 @@
 // note that [NSString stringWithFormat:@"%.2f", 0.339] rounds to @"0.34" -- this function doesn't round
 NSString* truncateToTwoDecimals(const double value);
 double absoluteValue(const double value);
+NSString* minutesPerMilePaceString(const double metersPerSecond, bool verbose);
 
 @end
+
+static const double MILES_PER_METER = 0.000621371;

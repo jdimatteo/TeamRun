@@ -15,7 +15,6 @@
 - (void)setMilesRan:(double)rawMiles
             seconds:(int)seconds
           teamMiles:(double)teamMiles
-             logger:(TeamRunLogger*)logger
     facebookMessage:(NSString*)message;
 
 @end

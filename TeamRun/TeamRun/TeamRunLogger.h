@@ -10,48 +10,30 @@
 
 @interface TeamRunLogger : NSObject
 
-/* The macros below are the preferred way of using this logger. In order to use the macros, there 
-   needs to be a TeamRunLogger available via "self.logger". These macros should be preferred over 
-   the actual logger methods below because they include the line numbers and function names.
+/* these macros should be used instead of directly calling the TeamRunLogger methods.
+   the macros have some advantages over the methods:
+   
+   1. line number and method name are included from where the logging statement is
+   2. the logging framework can be changed (e.g. if I later choose to switch to CocoaLumberjack we can make all the changes in TeamRunLogger instead of changing every logging line directly)
+   3. we can remove all the logging at compile time by replacing the below macro definitions with empty definitions
+ */
 
-   example usage:
- 
-    self.logger = [[TeamRunLogger alloc] init];
-    self.logger.scrollingLogText = self.scrollingText;
-    
-    LOG_DEBUG(@"Hi %d %d %d", 3, 2, 1);
- 
-   assuming the logging level is set equal to or greater than TEAMRUN_LOG_DEBUG and assuming this
-   is called from TeamRunViewController viewDidLoad line 98 will result in the following written 
-   to the console:
- 
-    2013-05-21 19:00:20.227 teamrun[8253:c07] DEBUG: -[TeamRunViewController viewDidLoad] [Line 98] Hi 3 2 1
- 
-   and the following appended to the end of scrollingText and the scrollingText is scrolled to 
-   the bottom so that the new line is visible:
- 
-   DEBUG: -[TeamRunViewController viewDidLoad] [Line 98] Hi 3 2 1
- 
- TODO: consider updating all code to use below macros, which would allow me to compile out all logging to improve performance, and easily change to a different logging library
- TODO: consider saving all logs to a file, and allowing a user to email me the log -- note that I should carefully review all log statements and verify that there is no personal info (e.g. GK names and GPS coordinates)
-*/
+#define LOG_TRACE() [TeamRunLogger logTrace:[NSString stringWithFormat:@"TRACE: %s [Line %d]", __PRETTY_FUNCTION__, __LINE__]]
 
-#define LOG_TRACE() [self.logger logDebug:[NSString stringWithFormat:@"TRACE: %s [Line %d]", __PRETTY_FUNCTION__, __LINE__]]
+#define LOG_DEBUG(fmt, ...) [TeamRunLogger logDebug:[NSString stringWithFormat:@"DEBUG: %s [Line %d] %@", __PRETTY_FUNCTION__, __LINE__, fmt], ##__VA_ARGS__]
+#define LOG_INFO(fmt, ...) [TeamRunLogger logInfo:[NSString stringWithFormat:@"INFO: %s [Line %d] %@", __PRETTY_FUNCTION__, __LINE__, fmt], ##__VA_ARGS__]
+#define LOG_WARN(fmt, ...) [TeamRunLogger logWarn:[NSString stringWithFormat:@"WARN: %s [Line %d] %@", __PRETTY_FUNCTION__, __LINE__, fmt], ##__VA_ARGS__]
+#define LOG_ERROR(fmt, ...) [TeamRunLogger logError:[NSString stringWithFormat:@"ERROR: %s [Line %d] %@", __PRETTY_FUNCTION__, __LINE__, fmt], ##__VA_ARGS__]
+#define LOG_TMP(fmt, ...) [TeamRunLogger logTmp:[NSString stringWithFormat:@"TMP: %s [Line %d] %@", __PRETTY_FUNCTION__, __LINE__, fmt], ##__VA_ARGS__]
 
-#define LOG_DEBUG(fmt, ...) [self.logger logDebug:[NSString stringWithFormat:@"DEBUG: %s [Line %d] %@", __PRETTY_FUNCTION__, __LINE__, fmt], ##__VA_ARGS__]
-#define LOG_INFO(fmt, ...) [self.logger logDebug:[NSString stringWithFormat:@"INFO: %s [Line %d] %@", __PRETTY_FUNCTION__, __LINE__, fmt], ##__VA_ARGS__]
-#define LOG_WARN(fmt, ...) [self.logger logDebug:[NSString stringWithFormat:@"WARN: %s [Line %d] %@", __PRETTY_FUNCTION__, __LINE__, fmt], ##__VA_ARGS__]
-#define LOG_ERROR(fmt, ...) [self.logger logDebug:[NSString stringWithFormat:@"ERROR: %s [Line %d] %@", __PRETTY_FUNCTION__, __LINE__, fmt], ##__VA_ARGS__]
-#define LOG_TMP(fmt, ...) [self.logger logDebug:[NSString stringWithFormat:@"TMP: %s [Line %d] %@", __PRETTY_FUNCTION__, __LINE__, fmt], ##__VA_ARGS__]
+// todo: make below C functions instead of objective C methods
 
-
-@property UITextView *scrollingLogText;
-
-- (void)logTrace:(NSString*)format,...;
-- (void)logDebug:(NSString*)format,...;
-- (void)logInfo:(NSString*)format,...;
-- (void)logWarn:(NSString*)format,...;
-- (void)logError:(NSString*)format,...;
-- (void)logTmp:(NSString*)format,...;
++ (void)logTrace:(NSString*)format,...;
++ (void)logDebug:(NSString*)format,...;
++ (void)logInfo:(NSString*)format,...;
++ (void)logWarn:(NSString*)format,...;
++ (void)logError:(NSString*)format,...;
++ (void)logTmp:(NSString*)format,...;
++ (void)setScrollingLogText:(UITextView*)scrollingLogText;
 
 @end

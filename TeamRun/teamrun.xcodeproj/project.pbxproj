@@ -213,8 +213,6 @@
 			isa = PBXGroup;
 			children = (
 				839027A7174B978100C53698 /* Notes.txt */,
-				833A3145172746EC00E8A61E /* PSLocationManager.m */,
-				833A3146172746EC00E8A61E /* PSLocationManager.h */,
 				5202770516762D300004BBDC /* MainStoryboard.storyboard */,
 				5202770816762D300004BBDC /* TeamRunViewController.h */,
 				5202770916762D300004BBDC /* TeamRunViewController.m */,
@@ -236,6 +234,8 @@
 		520276F416762D300004BBDC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				833A3145172746EC00E8A61E /* PSLocationManager.m */,
+				833A3146172746EC00E8A61E /* PSLocationManager.h */,
 				520276FC16762D300004BBDC /* TeamRunAppDelegate.h */,
 				520276FD16762D300004BBDC /* TeamRunAppDelegate.m */,
 				83CF15661733E82B006044B0 /* TeamRunView.m */,

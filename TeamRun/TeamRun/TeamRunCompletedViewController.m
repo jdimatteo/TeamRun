@@ -41,8 +41,6 @@
 
 @property (nonatomic) int remainingScoresToLoad;
 
-@property (weak, nonatomic) TeamRunLogger* logger;
-
 @property (strong, nonatomic) NSString* initialPostMessage;
 
 @end
@@ -85,13 +83,13 @@
     [postSheet setCompletionHandler:^(SLComposeViewControllerResult result) {
         switch (result) {
             case SLComposeViewControllerResultCancelled:
-                [self.logger logInfo:@"Post cancelled"];
+                LOG_INFO(@"Post cancelled");
                 break;
             case SLComposeViewControllerResultDone:
-                [self.logger logInfo:@"Post successfull"];
+                LOG_INFO(@"Post successfull");
                 break;
             default:
-                [self.logger logError:@"Unexpected post result: %@", result];
+                LOG_ERROR(@"Unexpected post result: %@", result);
                 break;
         }
     }];
@@ -105,12 +103,10 @@
 - (void)setMilesRan:(double)rawMiles
             seconds:(int)seconds
           teamMiles:(double)teamMiles
-             logger:(TeamRunLogger*)logger
     facebookMessage:(NSString*)message
 {
     // todo: this function is a mess, clean it up!
 
-    self.logger = logger;
     self.initialPostMessage = message;
     
     [self.currentRunRawMilesLabel setText:truncateToTwoDecimals(rawMiles)];
@@ -153,7 +149,7 @@
                 [bestScoreRequest loadScoresWithCompletionHandler: ^(NSArray *scores, NSError *error) {
                     if (error != nil)
                     {
-                        [logger logError:@"%@ loadScoresWithCompletionHandler error: %@", scoreCategory, error];
+                        LOG_ERROR(@"%@ loadScoresWithCompletionHandler error: %@", scoreCategory, error);
                     }
                     if (scores != nil)
                     {
@@ -189,7 +185,7 @@
                             }
                             else
                             {
-                                [logger logError:@"Unexpected category in loop: %@", scoreCategory];
+                                LOG_ERROR(@"Unexpected category in loop: %@", scoreCategory);
                             }
 
                         }
@@ -203,7 +199,7 @@
             }
             else
             {
-                [logger logError:@"%@ bestScoreRequest is nil", scoreCategory];
+                LOG_ERROR(@"%@ bestScoreRequest is nil", scoreCategory);
             }
         }
         
@@ -218,7 +214,7 @@
                 [totalScoreRequest loadScoresWithCompletionHandler: ^(NSArray *scores, NSError *error) {
                     if (error != nil)
                     {
-                        [logger logError:@"%@ loadScoresWithCompletionHandler error: %@", scoreCategory, error];
+                        LOG_ERROR(@"%@ loadScoresWithCompletionHandler error: %@", scoreCategory, error);
                     }
                     GKScore* currentScore = [scoreCategory isEqualToString:@"grp.org.teamrun.TotalRawMiles"]
                                           ? categoryToCurrentScore[@"grp.org.teamrun.SingleRunRawMiles"]
@@ -234,7 +230,7 @@
                     }
                     
                     [totalScore reportScoreWithCompletionHandler:^(NSError *error) {
-                        if (error != nil) [logger logError:@"%@ reportScoreWithCompletionHandler error: %@", scoreCategory, error];
+                        if (error != nil) LOG_ERROR(@"%@ reportScoreWithCompletionHandler error: %@", scoreCategory, error);
                         // game center will automatically resend the score later
                     }];
                     
@@ -259,7 +255,7 @@
             }
             else
             {
-                [logger logError:@"%@ totalScoreRequest is nil", scoreCategory];
+                LOG_ERROR(@"%@ totalScoreRequest is nil", scoreCategory);
             }
         }
     }
@@ -274,7 +270,7 @@
     scoreReporter.context = 0;
     
     [scoreReporter reportScoreWithCompletionHandler:^(NSError *error) {
-        if (error != nil) [self.logger logError:@"%@ reportScoreWithCompletionHandler error: %@", category, error];
+        if (error != nil) LOG_ERROR(@"%@ reportScoreWithCompletionHandler error: %@", category, error);
         // game center will automatically resend the score later
         // todo: test that this really is automatically resent
     }];

@@ -8,11 +8,13 @@
 
 #import "TeamRunLogger.h"
 
+static UITextView* scrollingLogText = nil;
+
 typedef enum {TEAMRUN_LOG_TRACE, TEAMRUN_LOG_DEBUG, TEAMRUN_LOG_INFO, TEAMRUN_LOG_WARN, TEAMRUN_LOG_ERROR, TEAMRUN_LOG_TEMP_ESCALATION} LogLevel;
 
 @interface TeamRunLogger ()
 
-- (void)logWithLevel:(LogLevel)level message:(NSString*)message;
++ (void)logWithLevel:(LogLevel)level message:(NSString*)message;
 
 @end
 
@@ -20,67 +22,72 @@ typedef enum {TEAMRUN_LOG_TRACE, TEAMRUN_LOG_DEBUG, TEAMRUN_LOG_INFO, TEAMRUN_LO
 
 // todo: consider using CocoaLumberjack logging framework
 
-- (void)logTrace:(NSString*)format,...
++ (void)setScrollingLogText:(UITextView*)newScrollingLogText
+{
+    scrollingLogText = newScrollingLogText;
+}
+
++ (void)logTrace:(NSString*)format,...
 {
     va_list args;
     va_start(args, format);
     NSString *message = [[NSString alloc] initWithFormat:format arguments:args];
     va_end(args);
     
-    [self logWithLevel:TEAMRUN_LOG_TRACE message:message];
+    [TeamRunLogger logWithLevel:TEAMRUN_LOG_TRACE message:message];
 }
 
-- (void)logDebug:(NSString*)format,...
++ (void)logDebug:(NSString*)format,...
 {
     va_list args;
     va_start(args, format);
     NSString *message = [[NSString alloc] initWithFormat:format arguments:args];
     va_end(args);
     
-    [self logWithLevel:TEAMRUN_LOG_DEBUG message:message];
+    [TeamRunLogger logWithLevel:TEAMRUN_LOG_DEBUG message:message];
 }
 
-- (void)logInfo:(NSString*)format,...
++ (void)logInfo:(NSString*)format,...
 {
     va_list args;
     va_start(args, format);
     NSString *message = [[NSString alloc] initWithFormat:format arguments:args];
     va_end(args);
     
-    [self logWithLevel:TEAMRUN_LOG_INFO message:message];
+    [TeamRunLogger logWithLevel:TEAMRUN_LOG_INFO message:message];
 }
 
-- (void)logWarn:(NSString*)format,...
++ (void)logWarn:(NSString*)format,...
 {
     va_list args;
     va_start(args, format);
     NSString *message = [[NSString alloc] initWithFormat:format arguments:args];
     va_end(args);
     
-    [self logWithLevel:TEAMRUN_LOG_WARN message:message];
+    [TeamRunLogger logWithLevel:TEAMRUN_LOG_WARN message:message];
 }
 
-- (void)logError:(NSString*)format,...
++ (void)logError:(NSString*)format,...
 {
     va_list args;
     va_start(args, format);
     NSString *message = [[NSString alloc] initWithFormat:format arguments:args];
     va_end(args);
     
-    [self logWithLevel:TEAMRUN_LOG_ERROR message:message];
+    [TeamRunLogger logWithLevel:TEAMRUN_LOG_ERROR message:message];
 }
 
-- (void)logTmp:(NSString*)format,...
++ (void)logTmp:(NSString*)format,...
 {
     va_list args;
     va_start(args, format);
     NSString *message = [[NSString alloc] initWithFormat:format arguments:args];
     va_end(args);
     
-    [self logWithLevel:TEAMRUN_LOG_TEMP_ESCALATION message:message];
+    [TeamRunLogger logWithLevel:TEAMRUN_LOG_TEMP_ESCALATION message:message];
 }
 
-- (void)logWithLevel:(LogLevel)level message:(NSString*)message
++ (void)logWithLevel:(LogLevel)level message:(NSString*)message
 {
     static LogLevel currentLevel = TEAMRUN_LOG_WARN;
     
@@ -88,11 +95,11 @@ typedef enum {TEAMRUN_LOG_TRACE, TEAMRUN_LOG_DEBUG, TEAMRUN_LOG_INFO, TEAMRUN_LO
     {
         NSLog(@"%@", message);
         
-        if (self.scrollingLogText != nil)
+        if (scrollingLogText != nil)
         {
-            [self.scrollingLogText setText:[NSString stringWithFormat:@"%@\n\n%@", [self.scrollingLogText text], message]];
+            [scrollingLogText setText:[NSString stringWithFormat:@"%@\n\n%@", [scrollingLogText text], message]];
             
-            [self.scrollingLogText scrollRangeToVisible:NSMakeRange([self.scrollingLogText.text length], 0)];
+            [scrollingLogText scrollRangeToVisible:NSMakeRange([scrollingLogText.text length], 0)];
         }
     }
 }
