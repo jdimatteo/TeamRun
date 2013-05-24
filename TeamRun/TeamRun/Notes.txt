@@ -5,6 +5,13 @@ Deployment Instructions:
 - Title: TeamRun
 - rest leave blank
 
+Open Sourcing / Licence:
+
+- every file must be Copyright John DiMatteo
+-- other peoples contributions must assign copyright to me -- nobody else is allowed to have copyright in my repositories
+-- this allows me to change the licence as I wish.  of course if anyone has a copy of my software they can continue to use it under the prior licence, but I am free to make changes and distribute under a different licence
+- every file is GNU v3
+
 Release History
 
     May 20, 2012 - distributed to testers for beta testing as http://teamrun.org/uploads/TeamRunBeta2.plist
