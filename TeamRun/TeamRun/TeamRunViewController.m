@@ -419,7 +419,7 @@ dispatch_queue_t speachQueue;
             withMessage = [NSString stringWithFormat:@" with %@", playerNames];
         }
         
-        NSString* facebookMessage = [NSString stringWithFormat:@"I completed a %@ mile run%@", truncateToTwoDecimals(rawMiles), withMessage];
+        NSString* facebookMessage = [NSString stringWithFormat:@"I just ran %@ miles%@", truncateToTwoDecimals(rawMiles), withMessage];
 
         [self presentViewController:completionViewController animated:YES completion:nil];
         
