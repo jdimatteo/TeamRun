@@ -41,6 +41,7 @@
 - (void)startRunWithMatch:(GKMatch*)match;
 - (void)endRun;
 - (void)playerAuthenticated;
+
 - (void)secondRan:(NSTimer *)timer;
 - (void)speakNotification:(NSTimer *)timer;
 - (void)updateNotificationsTimerIfNecessary;
@@ -99,29 +100,6 @@ dispatch_queue_t speachQueue;
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (void)updateNotificationsTimerIfNecessary
-{
-    bool notifications = [TeamRunSettings notificationsEnabled] && self.run != nil;
-    
-    if (self.paceUpdateTimer != nil)
-    {
-        if (!notifications || [self.paceUpdateTimer timeInterval] != [TeamRunSettings secondsBetweenNotifications])
-        {
-            [self.paceUpdateTimer invalidate];
-            self.paceUpdateTimer = nil;
-        }
-    }
-    
-    if (notifications && self.paceUpdateTimer == nil)
-    {
-        self.paceUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:[TeamRunSettings secondsBetweenNotifications]
-                                                                target:self
-                                                              selector:@selector(speakNotification:)
-                                                              userInfo:nil
-                                                               repeats:YES];
-    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -197,6 +175,29 @@ dispatch_queue_t speachQueue;
                               [TeamRunSettings paceNotificationsEnabled] ? paceNotification : @"",
                               [TeamRunSettings relativePositionNotificationsEnabled] ? relativePositionNotification : @""];
     [self say:notification];
+}
+
+- (void)updateNotificationsTimerIfNecessary
+{
+    bool notifications = [TeamRunSettings notificationsEnabled] && self.run != nil;
+    
+    if (self.paceUpdateTimer != nil)
+    {
+        if (!notifications || [self.paceUpdateTimer timeInterval] != [TeamRunSettings secondsBetweenNotifications])
+        {
+            [self.paceUpdateTimer invalidate];
+            self.paceUpdateTimer = nil;
+        }
+    }
+    
+    if (notifications && self.paceUpdateTimer == nil)
+    {
+        self.paceUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:[TeamRunSettings secondsBetweenNotifications]
+                                                                target:self
+                                                              selector:@selector(speakNotification:)
+                                                              userInfo:nil
+                                                               repeats:YES];
+    }
 }
 
 - (void)refreshRunDisplay:(NSNotification *)notif
