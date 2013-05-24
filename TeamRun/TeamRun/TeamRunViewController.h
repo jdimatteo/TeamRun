@@ -1,5 +1,5 @@
 //
-//  TeamRunViewController.h
+//  TeamRunViewController.h - main view controller
 //  TeamRun
 //
 //  Created by John DiMatteo on 12/10/12.
