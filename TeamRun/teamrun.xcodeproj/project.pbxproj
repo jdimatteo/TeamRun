@@ -43,6 +43,7 @@
 		839027A8174B978100C53698 /* Notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 839027A7174B978100C53698 /* Notes.txt */; };
 		839027AA174C2AD100C53698 /* TeamRunLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 839027A9174C2AD100C53698 /* TeamRunLogger.m */; };
 		839027B0174EF03500C53698 /* TeamRun.m in Sources */ = {isa = PBXBuildFile; fileRef = 839027AF174EF03500C53698 /* TeamRun.m */; };
+		839027E817502C1F00C53698 /* UIGlossyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 839027E717502C1F00C53698 /* UIGlossyButton.m */; };
 		83CF153B1729FECB006044B0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CF15391729FECB006044B0 /* AudioToolbox.framework */; };
 		83CF153C1729FECB006044B0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CF153A1729FECB006044B0 /* AVFoundation.framework */; };
 		83CF1544172AB580006044B0 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CF1543172AB580006044B0 /* SenTestingKit.framework */; };
@@ -116,6 +117,8 @@
 		839027A9174C2AD100C53698 /* TeamRunLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamRunLogger.m; sourceTree = "<group>"; };
 		839027AE174EF03400C53698 /* TeamRun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamRun.h; sourceTree = "<group>"; };
 		839027AF174EF03500C53698 /* TeamRun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamRun.m; sourceTree = "<group>"; };
+		839027E617502C1F00C53698 /* UIGlossyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIGlossyButton.h; sourceTree = "<group>"; };
+		839027E717502C1F00C53698 /* UIGlossyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIGlossyButton.m; sourceTree = "<group>"; };
 		83CF15391729FECB006044B0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		83CF153A1729FECB006044B0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		83CF1542172AB580006044B0 /* TeamRunUnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TeamRunUnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -241,6 +244,8 @@
 				83CF1557172AB7C3006044B0 /* TeamRunUtility.m */,
 				833A3145172746EC00E8A61E /* PSLocationManager.m */,
 				833A3146172746EC00E8A61E /* PSLocationManager.h */,
+				839027E617502C1F00C53698 /* UIGlossyButton.h */,
+				839027E717502C1F00C53698 /* UIGlossyButton.m */,
 				520276FC16762D300004BBDC /* TeamRunAppDelegate.h */,
 				520276FD16762D300004BBDC /* TeamRunAppDelegate.m */,
 				83CF15661733E82B006044B0 /* TeamRunView.m */,
@@ -456,6 +461,7 @@
 				83CF15671733E82B006044B0 /* TeamRunView.m in Sources */,
 				839027AA174C2AD100C53698 /* TeamRunLogger.m in Sources */,
 				839027B0174EF03500C53698 /* TeamRun.m in Sources */,
+				839027E817502C1F00C53698 /* UIGlossyButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

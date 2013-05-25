@@ -54,7 +54,10 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qQY-1Z-lPc">
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5mu-FP-zpB">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5mu-FP-zpB" customClass="UIGlossyButton">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="65" id="J0D-Tf-9ue"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="Run">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -67,7 +70,7 @@
                                             <action selector="startStopButtonClicked:" destination="2" eventType="touchUpInside" id="t32-5f-TgJ"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bxd-6G-T09">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bxd-6G-T09" customClass="UIGlossyButton">
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" type="user" id="is2-c7-lAT"/>
                                             <constraint firstAttribute="height" constant="44" type="user" id="qIt-Bk-B98"/>
@@ -84,7 +87,10 @@
                                             <segue destination="7VN-1N-Sd7" kind="modal" id="1e2-W8-MKj"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ol6-CP-9Mo">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ol6-CP-9Mo" customClass="UIGlossyButton">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="125" id="7q7-ho-p2q"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="Leaderboard">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -105,7 +111,8 @@
                                     <constraint firstItem="Ol6-CP-9Mo" firstAttribute="top" secondItem="qQY-1Z-lPc" secondAttribute="top" constant="20" symbolic="YES" type="default" id="G8l-eN-amX"/>
                                     <constraint firstItem="Bxd-6G-T09" firstAttribute="height" secondItem="Ol6-CP-9Mo" secondAttribute="height" type="user" id="OP3-0d-UB8"/>
                                     <constraint firstItem="Bxd-6G-T09" firstAttribute="leading" secondItem="qQY-1Z-lPc" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="a5o-Dz-icW"/>
-                                    <constraint firstAttribute="trailing" secondItem="5mu-FP-zpB" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="u8R-u6-Zxz"/>
+                                    <constraint firstItem="Ol6-CP-9Mo" firstAttribute="baseline" secondItem="5mu-FP-zpB" secondAttribute="baseline" type="default" id="crh-Mc-3kl"/>
+                                    <constraint firstAttribute="trailing" secondItem="5mu-FP-zpB" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="p2h-5v-6sq"/>
                                     <constraint firstItem="Bxd-6G-T09" firstAttribute="top" secondItem="qQY-1Z-lPc" secondAttribute="top" constant="20" symbolic="YES" type="default" id="uM5-dX-HHr"/>
                                     <constraint firstItem="Ol6-CP-9Mo" firstAttribute="leading" secondItem="qQY-1Z-lPc" secondAttribute="leading" constant="77" id="zNH-4N-NwN"/>
                                 </constraints>
@@ -188,9 +195,11 @@
                     <connections>
                         <outlet property="averagePaceLabel" destination="Y7u-lm-hIR" id="uyL-Wf-Uwd"/>
                         <outlet property="currentPaceLabel" destination="tNo-Bc-8nc" id="oE5-Mp-OrW"/>
+                        <outlet property="leaderboardButton" destination="Ol6-CP-9Mo" id="leI-xE-k0p"/>
                         <outlet property="milesAheadLabel" destination="OEi-bS-BKb" id="aJD-8U-DUr"/>
                         <outlet property="milesRanLabel" destination="CCp-oV-Hae" id="f8i-kS-hvs"/>
                         <outlet property="scrollingText" destination="oXd-wa-f0B" id="5lh-jQ-wb9"/>
+                        <outlet property="settingsButton" destination="Bxd-6G-T09" id="Cb0-V9-NMs"/>
                         <outlet property="startStopButton" destination="5mu-FP-zpB" id="Lhk-jo-BvT"/>
                         <outlet property="timeDescriptionLabel" destination="0cf-Rh-IEq" id="GwN-Xd-CSw"/>
                         <outlet property="timeLabel" destination="aEd-jh-KIp" id="Uer-ax-TlR"/>
@@ -652,66 +661,6 @@
     <resources>
         <image name="FB-f-Logo__blue_29.png" width="29" height="29"/>
     </resources>
-    <classes>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="TeamRunCompletedViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TeamRunCompletedViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="doneTapped"/>
-                <relationship kind="action" name="facebookTapped"/>
-                <relationship kind="outlet" name="bestRunPaceLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="bestRunRawMilesLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="bestRunTeamMilesLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="bestRunTimeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="currentRunPaceLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="currentRunRawMilesLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="currentRunTeamMilesLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="currentRunTimeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="personalBestLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="teamMilesRowLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="totalRawMilesLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="totalTeamMilesLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="TeamRunSettingsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TeamRunSettingsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="doneChangingSettings"/>
-                <relationship kind="action" name="updateEnabledFields"/>
-                <relationship kind="outlet" name="minutesBetweenNotificationsTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="multiplayerModeSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="noteSectionView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="notificationsSectionView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="paceNotificationsSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="relativePositionNotificationsSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="secondsBetweenNotificationsTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="targetMilePaceMinutesTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="targetMilePaceSecondsTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="targetMilePaceSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="targetPaceSectionView" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="TeamRunView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TeamRunView.h"/>
-        </class>
-        <class className="TeamRunViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TeamRunViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="openLeaderboards:"/>
-                <relationship kind="action" name="startStopButtonClicked:"/>
-                <relationship kind="outlet" name="averagePaceLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="currentPaceLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="milesAheadLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="milesRanLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="scrollingText" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="startStopButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="timeDescriptionLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="timeLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

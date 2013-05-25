@@ -27,6 +27,8 @@
 #import "TeamRunLogger.h"
 #import "TeamRun.h"
 
+#import "UIGlossyButton.h"
+
 #import <Awb/Awb.h>
 #import <OpenEars/FliteController.h>
 #import <OpenEars/AudioSessionManager.h>
@@ -37,12 +39,24 @@
 
 @interface TeamRunViewController ()
 <GKGameCenterControllerDelegate, GKMatchmakerViewControllerDelegate, GKMatchDelegate, UIActionSheetDelegate>
+{
+    FliteController *fliteController;
+    Awb *voice;
+    
+    dispatch_queue_t speachQueue;
+    
+    UIColor* runGreen;
+    UIColor* stopRed;
+}
 
 - (IBAction)startStopButtonClicked:(id)sender;
 - (IBAction)openLeaderboards:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UITextView *scrollingText;
-@property (weak, nonatomic) IBOutlet UIButton *startStopButton;
+
+@property (weak, nonatomic) IBOutlet UIGlossyButton *startStopButton;
+@property (weak, nonatomic) IBOutlet UIGlossyButton *leaderboardButton;
+@property (weak, nonatomic) IBOutlet UIGlossyButton *settingsButton;
 
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *currentPaceLabel;
@@ -73,11 +87,6 @@
 // could just be noise.  40 meters is about .0249 miles, so don't report any difference less than .025 miles
 static const double ON_PACE_THRESHOLD_MILES = 0.025;
 
-FliteController *fliteController;
-Awb *voice;
-
-dispatch_queue_t speachQueue;
-
 @implementation TeamRunViewController
 
 - (void)viewDidLoad
@@ -102,6 +111,15 @@ dispatch_queue_t speachQueue;
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(refreshRunDisplay:)
                                                  name:NOTIF_RunStateChanged object:nil];
+    
+    runGreen = [UIColor colorWithRed:6/256.0 green:122/256.0 blue:24/256.0 alpha:1];
+    stopRed = [UIColor redColor];
+    
+	[self.startStopButton setActionSheetButtonWithColor: runGreen];
+    [self.leaderboardButton setActionSheetButtonWithColor: [UIColor navigationBarButtonColor]];
+    [self.settingsButton setActionSheetButtonWithColor: [UIColor navigationBarButtonColor]];
+    
+    [self.settingsButton.titleLabel setFont: [UIFont boldSystemFontOfSize: 30]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -392,6 +410,7 @@ dispatch_queue_t speachQueue;
                                                        userInfo:nil
                                                         repeats:YES];
     
+    [self.startStopButton setActionSheetButtonWithColor: stopRed];
     [self.startStopButton setTitle:@"Stop" forState:UIControlStateNormal];
     
     [self updateNotificationsTimerIfNecessary];
@@ -437,6 +456,7 @@ dispatch_queue_t speachQueue;
     
     [self updateNotificationsTimerIfNecessary];
     
+    [self.startStopButton setActionSheetButtonWithColor: runGreen];
     [self.startStopButton setTitle:@"Run" forState:UIControlStateNormal];
 }
 
