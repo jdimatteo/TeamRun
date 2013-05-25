@@ -38,7 +38,7 @@
 #import <AudioToolbox/AudioSession.h>
 
 @interface TeamRunViewController ()
-<GKGameCenterControllerDelegate, GKMatchmakerViewControllerDelegate, GKMatchDelegate, UIActionSheetDelegate>
+<GKMatchmakerViewControllerDelegate, GKMatchDelegate, UIActionSheetDelegate>
 {
     FliteController *fliteController;
     Awb *voice;
@@ -50,13 +50,10 @@
 }
 
 - (IBAction)startStopButtonClicked:(id)sender;
-- (IBAction)openLeaderboards:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UITextView *scrollingText;
-
 @property (weak, nonatomic) IBOutlet UIGlossyButton *startStopButton;
-@property (weak, nonatomic) IBOutlet UIGlossyButton *leaderboardButton;
-@property (weak, nonatomic) IBOutlet UIGlossyButton *settingsButton;
+@property (weak, nonatomic) IBOutlet UIButton *settingsButton;
 
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *currentPaceLabel;
@@ -116,10 +113,6 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
     stopRed = [UIColor redColor];
     
 	[self.startStopButton setActionSheetButtonWithColor: runGreen];
-    [self.leaderboardButton setActionSheetButtonWithColor: [UIColor navigationBarButtonColor]];
-    [self.settingsButton setActionSheetButtonWithColor: [UIColor navigationBarButtonColor]];
-    
-    [self.settingsButton.titleLabel setFont: [UIFont boldSystemFontOfSize: 30]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -343,21 +336,6 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
             [self presentViewController:mmvc animated:YES completion:nil];
         }
     };
-}
-
-- (IBAction)openLeaderboards:(id)sender
-{
-    GKGameCenterViewController *gameCenterController = [[GKGameCenterViewController alloc] init];
-    if (gameCenterController != nil)
-    {
-        gameCenterController.gameCenterDelegate = self;
-        [self presentViewController: gameCenterController animated: YES completion:nil];
-    }
-}
-
-- (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)createMatch {

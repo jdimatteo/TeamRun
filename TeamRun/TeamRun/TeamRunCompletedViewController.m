@@ -29,7 +29,9 @@
 #import <GameKit/GameKit.h>
 
 @interface TeamRunCompletedViewController ()
+<GKGameCenterControllerDelegate>
 
+- (IBAction)openLeaderboards:(id)sender;
 - (IBAction)doneTapped;
 - (IBAction)facebookTapped;
 
@@ -107,6 +109,21 @@
                 break;
         }
     }];
+}
+
+- (IBAction)openLeaderboards:(id)sender
+{
+    GKGameCenterViewController *gameCenterController = [[GKGameCenterViewController alloc] init];
+    if (gameCenterController != nil)
+    {
+        gameCenterController.gameCenterDelegate = self;
+        [self presentViewController: gameCenterController animated: YES completion:nil];
+    }
+}
+
+- (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)doneTapped
