@@ -294,9 +294,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NBQ-cK-ywK" customClass="UIGlossyButton">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="Dao-LT-mpi"/>
-                                    <constraint firstAttribute="width" constant="116" id="l2W-16-0jD"/>
+                                    <constraint firstAttribute="width" constant="108" id="OGo-f1-FM2"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <state key="normal" title="  Share" image="FB-f-Logo__blue_29.png">
                                     <color key="titleColor" red="0.21568629145622253" green="0.31764706969261169" blue="0.63921570777893066" alpha="1" colorSpace="deviceRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -342,7 +342,6 @@
                             <constraint firstItem="tPA-vG-cs0" firstAttribute="leading" secondItem="moG-id-yFF" secondAttribute="leading" type="default" id="8Lg-el-LBj"/>
                             <constraint firstItem="9s4-sq-zCu" firstAttribute="top" secondItem="3Vp-hQ-PSD" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="BXG-Su-TPC"/>
                             <constraint firstItem="QNW-BB-KEB" firstAttribute="centerY" secondItem="MOO-Wh-cGA" secondAttribute="centerY" type="user" id="Blz-YF-fST"/>
-                            <constraint firstItem="NBQ-cK-ywK" firstAttribute="leading" secondItem="E1L-6b-IP2" secondAttribute="leading" constant="108" id="CYs-vJ-hh9"/>
                             <constraint firstItem="ImY-cv-mvG" firstAttribute="trailing" secondItem="Q1t-Ef-5j6" secondAttribute="trailing" type="default" id="HbG-Ql-9Tw"/>
                             <constraint firstItem="hyf-BC-8Qj" firstAttribute="leading" secondItem="MOO-Wh-cGA" secondAttribute="leading" type="default" id="I4y-ha-n71"/>
                             <constraint firstItem="3Vp-hQ-PSD" firstAttribute="trailing" secondItem="9s4-sq-zCu" secondAttribute="trailing" type="default" id="IDd-JZ-yTR"/>
@@ -363,6 +362,7 @@
                             <constraint firstItem="wed-FR-O4l" firstAttribute="centerX" secondItem="hyf-BC-8Qj" secondAttribute="centerX" type="user" id="cKN-nZ-Mck"/>
                             <constraint firstItem="wed-FR-O4l" firstAttribute="height" secondItem="Ovm-2r-ClE" secondAttribute="height" type="user" id="e0q-pM-MbW"/>
                             <constraint firstItem="Ovm-2r-ClE" firstAttribute="leading" secondItem="wed-FR-O4l" secondAttribute="leading" type="default" id="fdt-fX-3LH"/>
+                            <constraint firstAttribute="centerX" secondItem="NBQ-cK-ywK" secondAttribute="centerX" type="user" id="fjO-Wx-hbB"/>
                             <constraint firstItem="3Vp-hQ-PSD" firstAttribute="leading" secondItem="IYs-1x-PAE" secondAttribute="leading" type="default" id="g8B-V8-dwW"/>
                             <constraint firstItem="tPA-vG-cs0" firstAttribute="centerX" secondItem="0Ev-ng-OY8" secondAttribute="centerX" type="user" id="hOl-ya-KMG"/>
                             <constraint firstItem="tPA-vG-cs0" firstAttribute="centerY" secondItem="Ovm-2r-ClE" secondAttribute="centerY" type="user" id="jaw-Fl-g0z"/>
