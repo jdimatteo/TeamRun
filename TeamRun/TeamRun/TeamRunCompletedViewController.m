@@ -23,9 +23,10 @@
 #import "TeamRunCompletedViewController.h"
 #import "TeamRunUtility.h"
 
+#import "UIGlossyButton.h"
+
 #import <Social/Social.h>
 #import <Accounts/Accounts.h>
-
 #import <GameKit/GameKit.h>
 
 @interface TeamRunCompletedViewController ()
@@ -34,6 +35,7 @@
 - (IBAction)openLeaderboards:(id)sender;
 - (IBAction)doneTapped;
 - (IBAction)facebookTapped;
+@property (weak, nonatomic) IBOutlet UIGlossyButton *facebookButton;
 
 @property (weak, nonatomic) IBOutlet UILabel *currentRunRawMilesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *currentRunTimeLabel;
@@ -76,6 +78,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    UIColor* facebookBlue = [UIColor colorWithRed:0.164215 green:0.234407 blue:0.571473 alpha:1];
+    [self.facebookButton setActionSheetButtonWithColor:[UIColor whiteColor]];
+    [self.facebookButton setTitleColor:facebookBlue forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning

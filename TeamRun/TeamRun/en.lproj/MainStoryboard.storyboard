@@ -291,9 +291,10 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NBQ-cK-ywK">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NBQ-cK-ywK" customClass="UIGlossyButton">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="Dao-LT-mpi"/>
+                                    <constraint firstAttribute="width" constant="116" id="l2W-16-0jD"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="  Share" image="FB-f-Logo__blue_29.png">
@@ -309,15 +310,15 @@
                             </button>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackOpaque" translatesAutoresizingMaskIntoConstraints="NO" id="aBi-fR-3iS">
                                 <items>
-                                    <barButtonItem title="Done" style="done" id="liE-Gd-sP4">
-                                        <connections>
-                                            <action selector="doneTapped" destination="xUX-un-ppx" id="0b5-Ms-xby"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="HkP-0I-HAf"/>
                                     <barButtonItem title="Leaderboards" id="SGt-K9-aav">
                                         <connections>
                                             <action selector="openLeaderboards:" destination="xUX-un-ppx" id="HMq-cy-0HN"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="HkP-0I-HAf"/>
+                                    <barButtonItem title="Done" style="done" id="liE-Gd-sP4">
+                                        <connections>
+                                            <action selector="doneTapped" destination="xUX-un-ppx" id="0b5-Ms-xby"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -341,6 +342,7 @@
                             <constraint firstItem="tPA-vG-cs0" firstAttribute="leading" secondItem="moG-id-yFF" secondAttribute="leading" type="default" id="8Lg-el-LBj"/>
                             <constraint firstItem="9s4-sq-zCu" firstAttribute="top" secondItem="3Vp-hQ-PSD" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="BXG-Su-TPC"/>
                             <constraint firstItem="QNW-BB-KEB" firstAttribute="centerY" secondItem="MOO-Wh-cGA" secondAttribute="centerY" type="user" id="Blz-YF-fST"/>
+                            <constraint firstItem="NBQ-cK-ywK" firstAttribute="leading" secondItem="E1L-6b-IP2" secondAttribute="leading" constant="108" id="CYs-vJ-hh9"/>
                             <constraint firstItem="ImY-cv-mvG" firstAttribute="trailing" secondItem="Q1t-Ef-5j6" secondAttribute="trailing" type="default" id="HbG-Ql-9Tw"/>
                             <constraint firstItem="hyf-BC-8Qj" firstAttribute="leading" secondItem="MOO-Wh-cGA" secondAttribute="leading" type="default" id="I4y-ha-n71"/>
                             <constraint firstItem="3Vp-hQ-PSD" firstAttribute="trailing" secondItem="9s4-sq-zCu" secondAttribute="trailing" type="default" id="IDd-JZ-yTR"/>
@@ -362,7 +364,6 @@
                             <constraint firstItem="wed-FR-O4l" firstAttribute="height" secondItem="Ovm-2r-ClE" secondAttribute="height" type="user" id="e0q-pM-MbW"/>
                             <constraint firstItem="Ovm-2r-ClE" firstAttribute="leading" secondItem="wed-FR-O4l" secondAttribute="leading" type="default" id="fdt-fX-3LH"/>
                             <constraint firstItem="3Vp-hQ-PSD" firstAttribute="leading" secondItem="IYs-1x-PAE" secondAttribute="leading" type="default" id="g8B-V8-dwW"/>
-                            <constraint firstItem="9s4-sq-zCu" firstAttribute="centerX" secondItem="NBQ-cK-ywK" secondAttribute="centerX" type="default" id="hM3-cv-jda"/>
                             <constraint firstItem="tPA-vG-cs0" firstAttribute="centerX" secondItem="0Ev-ng-OY8" secondAttribute="centerX" type="user" id="hOl-ya-KMG"/>
                             <constraint firstItem="tPA-vG-cs0" firstAttribute="centerY" secondItem="Ovm-2r-ClE" secondAttribute="centerY" type="user" id="jaw-Fl-g0z"/>
                             <constraint firstItem="0Ev-ng-OY8" firstAttribute="centerY" secondItem="5aZ-3a-LYw" secondAttribute="centerY" type="user" id="noW-ho-76C"/>
@@ -385,6 +386,7 @@
                         <outlet property="currentRunRawMilesLabel" destination="hyf-BC-8Qj" id="FRm-Ld-6yE"/>
                         <outlet property="currentRunTeamMilesLabel" destination="Ovm-2r-ClE" id="3W4-20-470"/>
                         <outlet property="currentRunTimeLabel" destination="MOO-Wh-cGA" id="lyV-cY-cfK"/>
+                        <outlet property="facebookButton" destination="NBQ-cK-ywK" id="ZZf-sK-4NJ"/>
                         <outlet property="personalBestLabel" destination="0Ev-ng-OY8" id="h4n-YB-UfU"/>
                         <outlet property="teamMilesRowLabel" destination="IYs-1x-PAE" id="DkI-Mu-KD0"/>
                         <outlet property="totalRawMilesLabel" destination="3Vp-hQ-PSD" id="o82-wC-g9N"/>
@@ -651,6 +653,7 @@
                 <relationship kind="outlet" name="currentRunRawMilesLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="currentRunTeamMilesLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="currentRunTimeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="facebookButton" candidateClass="UIGlossyButton"/>
                 <relationship kind="outlet" name="personalBestLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="teamMilesRowLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="totalRawMilesLabel" candidateClass="UILabel"/>

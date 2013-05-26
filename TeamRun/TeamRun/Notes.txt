@@ -17,7 +17,8 @@ Release History
     May 20, 2012 - distributed to testers for beta testing as http://teamrun.org/uploads/TeamRunBeta2.plist
                    git revision 3a62835317ab8893b53d3dde6797e2948487a70e
  
-pickup here: add colorful buttons to completion and settings screen.  make settings screen a table view without the black background 
+pickup here: clean up layout/autolayout of completed run screen,
+add colorful buttons to completion and settings screen.  make settings screen a table view without the black background 
 
 next time running with two phones:
   -- have Sarah's phone use speedCalcMethod = PS and my phone use speedCalcMethod = CL, and compare smoothness, and responsiveness to sprinting and stopping
