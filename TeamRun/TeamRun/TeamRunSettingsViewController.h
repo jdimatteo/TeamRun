@@ -22,6 +22,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TeamRunSettingsViewController : UIViewController
+@interface TeamRunSettingsViewController : UITableViewController
 
 @end

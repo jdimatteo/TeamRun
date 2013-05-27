@@ -31,15 +31,16 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *minutesBetweenNotificationsTextField;
 @property (weak, nonatomic) IBOutlet UITextField *secondsBetweenNotificationsTextField;
+
 @property (weak, nonatomic) IBOutlet UITextField *targetMilePaceMinutesTextField;
 @property (weak, nonatomic) IBOutlet UITextField *targetMilePaceSecondsTextField;
+
 @property (weak, nonatomic) IBOutlet UISwitch *paceNotificationsSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *relativePositionNotificationsSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *targetMilePaceSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *multiplayerModeSwitch;
-@property (weak, nonatomic) IBOutlet UIView *notificationsSectionView;
-@property (weak, nonatomic) IBOutlet UIView *targetPaceSectionView;
-@property (weak, nonatomic) IBOutlet UIView *noteSectionView;
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 - (IBAction)updateEnabledFields;
 
 -(void)doneWithNumberPad;
@@ -76,13 +77,6 @@
     [_targetMilePaceSecondsTextField setText:[NSString stringWithFormat:@"%d", [TeamRunSettings targetSecondsPerMile]%60]];
     
     [_multiplayerModeSwitch setOn:[TeamRunSettings multiplayerMode]];
-    
-    _notificationsSectionView.layer.cornerRadius = 5;
-    _notificationsSectionView.layer.masksToBounds = YES;
-    _targetPaceSectionView.layer.cornerRadius = 5;
-    _targetPaceSectionView.layer.masksToBounds = YES;
-    _noteSectionView.layer.cornerRadius = 5;
-    _noteSectionView.layer.masksToBounds = YES;
         
     [self updateEnabledFields];
 }
