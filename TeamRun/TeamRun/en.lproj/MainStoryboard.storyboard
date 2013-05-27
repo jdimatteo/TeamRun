@@ -401,7 +401,7 @@
         <scene sceneID="xoO-dj-nfE">
             <objects>
                 <viewController modalTransitionStyle="flipHorizontal" id="7VN-1N-Sd7" customClass="TeamRunSettingsViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="nTQ-KJ-O4V" customClass="TeamRunView">
+                    <view key="view" contentMode="scaleToFill" id="nTQ-KJ-O4V">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
@@ -456,7 +456,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="W8f-Cm-1os" firstAttribute="centerY" secondItem="Kei-0i-8us" secondAttribute="centerY" type="default" id="4s8-gc-dMZ"/>
                                     <constraint firstItem="4ta-c9-4dz" firstAttribute="leading" secondItem="IGP-5E-2lZ" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="8I0-fi-Do3"/>
@@ -516,7 +516,6 @@
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Scales your pace when running with friends with different target paces." translatesAutoresizingMaskIntoConstraints="NO" id="tDt-22-mdJ">
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="276" id="3F4-0T-P5z"/>
                                             <constraint firstAttribute="height" constant="46" id="5kd-2A-ZHm"/>
@@ -525,7 +524,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="miL-1j-GDI" firstAttribute="leading" secondItem="Kpl-LI-dc8" secondAttribute="leading" constant="78" id="JmE-z7-UX4"/>
                                     <constraint firstItem="frc-fQ-BSu" firstAttribute="leading" secondItem="Kpl-LI-dc8" secondAttribute="leading" constant="67" id="MXm-Sq-Q7E"/>
@@ -570,7 +569,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="zfQ-yl-Txq" firstAttribute="leading" secondItem="wed-1O-lmy" secondAttribute="leading" constant="8" id="0or-qh-e7z"/>
                                     <constraint firstAttribute="height" constant="121" type="user" id="8NJ-Cn-lT2"/>
@@ -598,6 +597,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Kpl-LI-dc8" firstAttribute="leading" secondItem="Ird-Lq-cpv" secondAttribute="leading" type="default" id="BhQ-mY-xRp"/>
                             <constraint firstAttribute="bottom" secondItem="XGb-oS-V35" secondAttribute="bottom" constant="20" symbolic="YES" type="user" id="J4X-zC-gaR"/>

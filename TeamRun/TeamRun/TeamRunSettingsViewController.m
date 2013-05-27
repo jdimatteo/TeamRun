@@ -83,7 +83,7 @@
     _targetPaceSectionView.layer.masksToBounds = YES;
     _noteSectionView.layer.cornerRadius = 5;
     _noteSectionView.layer.masksToBounds = YES;
-    
+        
     [self updateEnabledFields];
 }
 
