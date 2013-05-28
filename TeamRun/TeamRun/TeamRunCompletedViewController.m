@@ -51,7 +51,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalTeamMilesLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *teamMilesRowLabel;
-@property (weak, nonatomic) IBOutlet UILabel *personalBestLabel;
+
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingIndicator;
 
 - (void) reportScore: (int64_t) score
     forLeaderboardID: (NSString*) category
@@ -163,7 +164,8 @@
         
     if ([GKLocalPlayer localPlayer].playerID == nil)
     {
-        [self.personalBestLabel setText:@"Personal Bests NA, Game Center required"];
+        [self.totalRawMilesLabel setText:@"Personal bests and total miles require Game Center login"];
+        [self.loadingIndicator stopAnimating];
     }
     else
     {
@@ -230,7 +232,7 @@
                     self.remainingScoresToLoad--;
                     if (self.remainingScoresToLoad == 0)
                     {
-                        [self.personalBestLabel setText:@"Personal Best"];
+                        [self.loadingIndicator stopAnimating];
                     }
                 }];
             }
@@ -285,8 +287,7 @@
                     self.remainingScoresToLoad--;
                     if (self.remainingScoresToLoad == 0)
                     {
-                        // over wifi this whole process is fast and the user probably will never see the original title "Personal Best (Loading...)", but over cellular it can be slow
-                        [self.personalBestLabel setText:@"Personal Best"];
+                        [self.loadingIndicator stopAnimating];
                     }
                 }];
             }

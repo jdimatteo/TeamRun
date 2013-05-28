@@ -218,17 +218,17 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="... total miles" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Vp-hQ-PSD">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="294" translatesAutoresizingMaskIntoConstraints="NO" id="3Vp-hQ-PSD">
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="... total team miles" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9s4-sq-zCu">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9s4-sq-zCu">
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Personal Best (loading...)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="130" translatesAutoresizingMaskIntoConstraints="NO" id="0Ev-ng-OY8">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Personal Best" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="130" translatesAutoresizingMaskIntoConstraints="NO" id="0Ev-ng-OY8">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="EDN-Gw-SlU"/>
                                     <constraint firstAttribute="width" constant="130" id="cDc-iJ-0uU"/>
@@ -237,7 +237,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="17" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="122" translatesAutoresizingMaskIntoConstraints="NO" id="QNW-BB-KEB">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="17" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="122" translatesAutoresizingMaskIntoConstraints="NO" id="QNW-BB-KEB">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="49" id="KQM-r7-kYx"/>
                                     <constraint firstAttribute="width" constant="122" type="user" id="vSs-Pv-aMI"/>
@@ -276,17 +276,23 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P4p-k5-cBm">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P4p-k5-cBm">
                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="moG-id-yFF">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="moG-id-yFF">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Oz1-qn-FSt"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPA-vG-cs0">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPA-vG-cs0">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="omk-ti-PT1"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -323,6 +329,7 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="umQ-n7-tde"/>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -340,6 +347,7 @@
                             <constraint firstItem="BXh-eS-A8v" firstAttribute="trailing" secondItem="Q1t-Ef-5j6" secondAttribute="trailing" type="default" id="7rX-r4-6J9"/>
                             <constraint firstItem="moG-id-yFF" firstAttribute="centerY" secondItem="wed-FR-O4l" secondAttribute="centerY" type="user" id="873-Ca-9PQ"/>
                             <constraint firstItem="tPA-vG-cs0" firstAttribute="leading" secondItem="moG-id-yFF" secondAttribute="leading" type="default" id="8Lg-el-LBj"/>
+                            <constraint firstAttribute="trailing" secondItem="umQ-n7-tde" secondAttribute="trailing" constant="28" id="AxX-hl-kZ9"/>
                             <constraint firstItem="9s4-sq-zCu" firstAttribute="top" secondItem="3Vp-hQ-PSD" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="BXG-Su-TPC"/>
                             <constraint firstItem="QNW-BB-KEB" firstAttribute="centerY" secondItem="MOO-Wh-cGA" secondAttribute="centerY" type="user" id="Blz-YF-fST"/>
                             <constraint firstItem="ImY-cv-mvG" firstAttribute="trailing" secondItem="Q1t-Ef-5j6" secondAttribute="trailing" type="default" id="HbG-Ql-9Tw"/>
@@ -353,6 +361,7 @@
                             <constraint firstItem="Q1t-Ef-5j6" firstAttribute="leading" secondItem="E1L-6b-IP2" secondAttribute="leading" type="default" id="Rse-yR-C0f"/>
                             <constraint firstItem="hyf-BC-8Qj" firstAttribute="leading" secondItem="E1L-6b-IP2" secondAttribute="leading" constant="57" id="TKd-ou-Ywv"/>
                             <constraint firstItem="3Vp-hQ-PSD" firstAttribute="top" secondItem="Ovm-2r-ClE" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="WNC-k8-Xsl"/>
+                            <constraint firstItem="umQ-n7-tde" firstAttribute="centerY" secondItem="NBQ-cK-ywK" secondAttribute="centerY" type="default" id="WNs-cX-cXl"/>
                             <constraint firstItem="aBi-fR-3iS" firstAttribute="trailing" secondItem="E1L-6b-IP2" secondAttribute="trailing" type="default" id="XMy-PB-Qpg"/>
                             <constraint firstAttribute="centerX" secondItem="3Vp-hQ-PSD" secondAttribute="centerX" type="user" id="ZE5-jw-ap0"/>
                             <constraint firstItem="MOO-Wh-cGA" firstAttribute="centerY" secondItem="Q1t-Ef-5j6" secondAttribute="centerY" type="user" id="Zz0-JZ-2fP"/>
@@ -369,6 +378,7 @@
                             <constraint firstItem="0Ev-ng-OY8" firstAttribute="centerY" secondItem="5aZ-3a-LYw" secondAttribute="centerY" type="user" id="noW-ho-76C"/>
                             <constraint firstItem="wed-FR-O4l" firstAttribute="centerX" secondItem="Ovm-2r-ClE" secondAttribute="centerX" type="user" id="oEh-bm-6nM"/>
                             <constraint firstItem="0Ev-ng-OY8" firstAttribute="centerX" secondItem="P4p-k5-cBm" secondAttribute="centerX" type="user" id="t2f-t4-F3W"/>
+                            <constraint firstItem="P4p-k5-cBm" firstAttribute="baseline" secondItem="BXh-eS-A8v" secondAttribute="baseline" type="default" id="trs-FE-iIl"/>
                             <constraint firstItem="5aZ-3a-LYw" firstAttribute="top" secondItem="E1L-6b-IP2" secondAttribute="top" constant="40" type="user" id="uBC-5X-n3a"/>
                             <constraint firstItem="MOO-Wh-cGA" firstAttribute="centerX" secondItem="5aZ-3a-LYw" secondAttribute="centerX" type="user" id="wWp-TO-g7B"/>
                             <constraint firstItem="moG-id-yFF" firstAttribute="leading" secondItem="QNW-BB-KEB" secondAttribute="leading" type="default" id="xnq-yF-nno"/>
@@ -387,7 +397,7 @@
                         <outlet property="currentRunTeamMilesLabel" destination="Ovm-2r-ClE" id="3W4-20-470"/>
                         <outlet property="currentRunTimeLabel" destination="MOO-Wh-cGA" id="lyV-cY-cfK"/>
                         <outlet property="facebookButton" destination="NBQ-cK-ywK" id="ZZf-sK-4NJ"/>
-                        <outlet property="personalBestLabel" destination="0Ev-ng-OY8" id="h4n-YB-UfU"/>
+                        <outlet property="loadingIndicator" destination="umQ-n7-tde" id="pBr-n4-QIA"/>
                         <outlet property="teamMilesRowLabel" destination="IYs-1x-PAE" id="DkI-Mu-KD0"/>
                         <outlet property="totalRawMilesLabel" destination="3Vp-hQ-PSD" id="o82-wC-g9N"/>
                         <outlet property="totalTeamMilesLabel" destination="9s4-sq-zCu" id="B7E-UH-PDU"/>
@@ -656,7 +666,7 @@
                 <relationship kind="outlet" name="currentRunTeamMilesLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="currentRunTimeLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="facebookButton" candidateClass="UIGlossyButton"/>
-                <relationship kind="outlet" name="personalBestLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
                 <relationship kind="outlet" name="teamMilesRowLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="totalRawMilesLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="totalTeamMilesLabel" candidateClass="UILabel"/>
