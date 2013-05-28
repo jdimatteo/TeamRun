@@ -42,6 +42,7 @@
 @property (nonatomic, readonly) double    miles;                  // distance ran
 @property (nonatomic, readonly) double    targetMiles;            // miles ran if running at exactly the target mile pace
 @property (nonatomic, readonly) double    milesOtherPlayerRan;    // based off last message received by other player
+@property (nonatomic, readonly) double    milesAhead;             // miles ahead of other runner (ahead of target miles if single player)
 @property (nonatomic, readonly) double    seconds;                // seconds since run started
 @property (nonatomic, readonly) double    averageMetersPerSecond; // average pace
 @property (nonatomic, readonly) double    currentMetersPerSecond; // current pace

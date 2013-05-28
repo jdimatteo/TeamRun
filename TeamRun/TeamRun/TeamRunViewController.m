@@ -191,8 +191,8 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
     NSString* paceNotification = [NSString stringWithFormat:@"You have run %@, %@ miles, at %@ mile pace.", durationRan, truncateToTwoDecimals(self.run.miles), pace];
     
     // todo: some of this relative position logic is duplicated in refreshRunDisplay -- consider refactoring to remove the duplication
-    const double referenceMiles = self.run.isMultiplayer ? self.run.milesOtherPlayerRan : self.run.targetMiles;
-    const double milesAhead = self.run.miles - referenceMiles;
+    
+    const double milesAhead = self.run.milesAhead;
     NSString* relativePositionNotification = absoluteValue(milesAhead) > ON_PACE_THRESHOLD_MILES
         ? [NSString stringWithFormat:@"You are about %@ miles %@.", truncateToTwoDecimals(absoluteValue(milesAhead)), milesAhead >= 0 ? @"ahead" : @"behind"]
         : @"You are on pace";
@@ -247,8 +247,7 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
         [self.milesRanLabel setText:truncateToTwoDecimals(milesRan)];
         LOG_DEBUG(@"targetMilesRanIfRunningAtTargetMilePace = %@, seconds: %d, target seconds per mile: %d", truncateToTwoDecimals(targetMilesRanIfRunningAtTargetMilePace), (int) self.run.seconds, [TeamRunSettings targetSecondsPerMile]);
         
-        const double referenceMiles = self.run.isMultiplayer ? self.run.milesOtherPlayerRan : targetMilesRanIfRunningAtTargetMilePace;
-        const double milesAhead = milesRan - referenceMiles;
+        const double milesAhead = self.run.milesAhead;
         
         if ( absoluteValue(milesAhead) < ON_PACE_THRESHOLD_MILES)
         {
@@ -256,7 +255,7 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
         }
         else
         {
-            NSString* aheadOrBehind = (milesRan >= referenceMiles) ? @"ahead" : @"behind";
+            NSString* aheadOrBehind = (milesAhead >= 0) ? @"ahead" : @"behind";
             [self.milesAheadLabel setText:[NSString stringWithFormat:@"%@ mi %@", truncateToTwoDecimals(absoluteValue(milesAhead)), aheadOrBehind]];
         }
     }

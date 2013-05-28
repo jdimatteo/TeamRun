@@ -205,6 +205,12 @@ typedef struct
     return milesOtherPlayerRan;
 }
 
+- (double) milesAhead
+{
+    const double referenceMiles = self.isMultiplayer ? self.milesOtherPlayerRan : self.targetMiles;
+    return self.miles - referenceMiles;
+}
+
 - (void)notify
 {
     LOG_TRACE();
