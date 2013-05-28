@@ -360,7 +360,16 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
 - (void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFailWithError:(NSError *)error
 {
     [self dismissViewControllerAnimated:YES completion:nil];
-    LOG_ERROR(@"matchmaker failed with error: %@", error);
+    if (error.code == 1001)
+    {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Multiplayer failed" message:@"Multiplayer is not possible without internet access" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
+    else
+    {
+        // todo: consider displaying any error that isn't the user cancelling
+        LOG_ERROR(@"matchmaker failed with error: %@", error);
+    }
 }
 
 - (void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFindMatch:(GKMatch *)match
@@ -481,10 +490,14 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
 		fliteController = [[FliteController alloc] init];
 	}
     
-    // creating the audio from text takes a second or two to create (before it starts playing),
-    // and this noticibly ties up the main thread preventing user interaction (e.g. buttons don't respond to taps),
-    // so we execute this asynchronously
-    dispatch_async(speachQueue, ^{ [fliteController say:textToSay withVoice:voice]; });    
+    // only add text to the speach queue if no speach is currently in progress -- this prevents accumulating old audio notifications
+    if (fliteController.speechInProgress == false)
+    {        
+        // creating the audio from text takes a second or two to create (before it starts playing),
+        // and this noticibly ties up the main thread preventing user interaction (e.g. buttons don't respond to taps),
+        // so we execute this asynchronously
+        dispatch_async(speachQueue, ^{ [fliteController say:textToSay withVoice:voice]; });
+    }
 }
 
 @end
