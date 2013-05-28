@@ -401,7 +401,7 @@
         <scene sceneID="OG9-Ai-CGc">
             <objects>
                 <tableViewController id="bD3-0m-hcP" customClass="TeamRunSettingsViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="rHO-yJ-YV0">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="2" id="rHO-yJ-YV0">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -418,7 +418,7 @@
                             </items>
                         </toolbar>
                         <sections>
-                            <tableViewSection headerTitle="Audio Status Updates" id="mRv-AU-byy">
+                            <tableViewSection headerTitle="Audio Updates" id="mRv-AU-byy">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="EdA-M0-bDr">
                                         <rect key="frame" x="0.0" y="80" width="320" height="45"/>
@@ -531,7 +531,7 @@
                             <tableViewSection headerTitle="Target Mile Pace" footerTitle="Scales your pace when running with friends with different target paces." id="fSY-Hs-MHf">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="VLh-ho-9Jk">
-                                        <rect key="frame" x="0.0" y="259" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="251" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
@@ -587,7 +587,7 @@
                             <tableViewSection footerTitle="If you have trouble finding a running buddy, try Sunday at 11 AM EST." id="A6F-pQ-bnH">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="zod-ta-oqu">
-                                        <rect key="frame" x="0.0" y="374" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="357" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
@@ -672,7 +672,6 @@
                 <relationship kind="outlet" name="paceNotificationsSwitch" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="relativePositionNotificationsSwitch" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="secondsBetweenNotificationsTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="targetMilePaceMinutesTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="targetMilePaceSecondsTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="targetMilePaceSwitch" candidateClass="UISwitch"/>

@@ -40,7 +40,6 @@
 @property (weak, nonatomic) IBOutlet UISwitch *targetMilePaceSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *multiplayerModeSwitch;
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 - (IBAction)updateEnabledFields;
 
 -(void)doneWithNumberPad;
@@ -100,6 +99,26 @@ void enable(UITextField* textField, const bool enabled)
 -(void)doneWithNumberPad
 {
     [self.view endEditing:YES];
+    
+    // Editing a field can force the screen to scroll so that the field is visible despite the number
+    // pad. Now that we are done with the number pad, we should scroll back up so that the done button
+    // is visible.  The following works correctly:
+    //
+    //      [self.tableView setContentOffset:CGPointMake(0, 0)];
+    //
+    // However, it doesn't animate the scrolling.  Unfortunately if I set animated:YES, using the point
+    // 0,0 results in too much of a scroll so that the done button is near the middle of the screen.
+    // I guess this is a bug with UITableView.  For whatever reason, 0,125 results in the correct
+    // behavior with the animation on a 3.5 inch screen.  This scroll to the right spot on a 4 inch
+    // screen, but in that case the screen is big enough that we shouldn't need to scroll anyway.
+    
+    const bool hasFourInchDisplay = [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone && [UIScreen mainScreen].bounds.size.height == 568.0;
+    
+    if (!hasFourInchDisplay)
+    {
+        // 125 was working until I reduced the Table View Size Section footer from 10 to 2
+        [self.tableView setContentOffset:CGPointMake(0, 125+8) animated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning
