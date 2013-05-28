@@ -360,16 +360,8 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
 - (void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFailWithError:(NSError *)error
 {
     [self dismissViewControllerAnimated:YES completion:nil];
-    if (error.code == 1001)
-    {
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Multiplayer failed" message:@"Multiplayer is not possible without internet access" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-    }
-    else
-    {
-        // todo: consider displaying any error that isn't the user cancelling
-        LOG_ERROR(@"matchmaker failed with error: %@", error);
-    }
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Multiplayer failed" message:error.description delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
 }
 
 - (void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFindMatch:(GKMatch *)match
