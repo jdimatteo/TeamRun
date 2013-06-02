@@ -239,6 +239,12 @@
             else
             {
                 LOG_ERROR(@"%@ bestScoreRequest is nil", scoreCategory);
+                
+                self.remainingScoresToLoad--;
+                if (self.remainingScoresToLoad == 0)
+                {
+                    [self.loadingIndicator stopAnimating];
+                }
             }
         }
         
@@ -294,6 +300,12 @@
             else
             {
                 LOG_ERROR(@"%@ totalScoreRequest is nil", scoreCategory);
+                
+                self.remainingScoresToLoad--;
+                if (self.remainingScoresToLoad == 0)
+                {
+                    [self.loadingIndicator stopAnimating];
+                }
             }
         }
     }
