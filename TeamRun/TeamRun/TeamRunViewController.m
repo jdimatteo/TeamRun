@@ -409,7 +409,7 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
         
         const double rawMiles = self.run.miles;
         const double teamRunMiles = self.run.isSinglePlayer ? rawMiles
-                                                            : 2*(rawMiles + self.run.milesOtherPlayerRan);
+                                                            : rawMiles + self.run.milesOtherPlayerRan;
         NSString* withMessage = @"";
         NSString* playerNames = self.run.playerNames;
         if (playerNames.length > 0 )
