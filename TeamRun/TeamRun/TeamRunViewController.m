@@ -38,7 +38,7 @@
 #import <AudioToolbox/AudioSession.h>
 
 @interface TeamRunViewController ()
-<GKMatchmakerViewControllerDelegate, GKMatchDelegate, UIActionSheetDelegate>
+<GKMatchmakerViewControllerDelegate, GKMatchDelegate, UIActionSheetDelegate, UIAlertViewDelegate>
 {
     FliteController *fliteController;
     Awb *voice;
@@ -178,6 +178,12 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
 - (void)secondRan:(NSTimer *)timer
 {
     [self refreshRunDisplay];
+
+    if (self.run.secondsRemaining <= 0)
+    {
+        LOG_INFO(@"run is over, so ending team run");
+        [self endRun];
+    }
 }
 
 - (void)speakNotification:(NSTimer *)timer
@@ -232,20 +238,15 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
 }
 
 - (void)refreshRunDisplay
-{
-    // first save the values used in multiple calculations at about the same time so they are consistent
-    const double milesRan = self.run.miles;
-    const double targetMilesRanIfRunningAtTargetMilePace = self.run.targetMiles;
-    const double secondsRan = self.run.seconds;
-    
-    // now update pace views
+{    
+    // update pace views
     [self.currentPaceLabel setText:minutesPerMilePaceString(self.run.currentMetersPerSecond, false)];
     [self.averagePaceLabel setText:minutesPerMilePaceString(self.run.averageMetersPerSecond, false)];
     
     // next update distance and miles ahead views
     {
-        [self.milesRanLabel setText:truncateToTwoDecimals(milesRan)];
-        LOG_DEBUG(@"targetMilesRanIfRunningAtTargetMilePace = %@, seconds: %d, target seconds per mile: %d", truncateToTwoDecimals(targetMilesRanIfRunningAtTargetMilePace), (int) self.run.seconds, [TeamRunSettings targetSecondsPerMile]);
+        [self.milesRanLabel setText:truncateToTwoDecimals(self.run.miles)];
+        LOG_DEBUG(@"targetMilesRanIfRunningAtTargetMilePace = %@, seconds: %d, target seconds per mile: %d", truncateToTwoDecimals(self.run.targetMiles), (int) self.run.seconds, [TeamRunSettings targetSecondsPerMile]);
         
         const double milesAhead = self.run.milesAhead;
         
@@ -263,21 +264,14 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
     // finally update time ran view
     if (self.run.isSinglePlayer)
     {
+        const double secondsRan = self.run.seconds;
         [self.timeLabel setText:[NSString stringWithFormat:@"%d:%02d", (int) (secondsRan / 60), ((int) secondsRan) % 60]];
     }
     else
     {
-        // all multiplayer runs are 30 minutes long
-        const int remainingSeconds = 30*60 - round(secondsRan);
+        const int secondsRemaining = round(self.run.secondsRemaining);
         
-        if (remainingSeconds <= 0)
-        {
-            [self endRun];
-        }
-        else
-        {
-            [self.timeLabel setText:[NSString stringWithFormat:@"%d:%02d", remainingSeconds / 60, remainingSeconds % 60]];
-        }
+        [self.timeLabel setText:[NSString stringWithFormat:@"%d:%02d", secondsRemaining / 60, secondsRemaining % 60]];
     }
 }
 
@@ -360,7 +354,7 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
 - (void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFailWithError:(NSError *)error
 {
     [self dismissViewControllerAnimated:YES completion:nil];
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Multiplayer failed" message:error.description delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Multiplayer failed" message:[error localizedDescription] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
 }
 
@@ -401,6 +395,9 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
 
 - (void)endRun
 {
+    [self.runningTimer invalidate];
+    self.runningTimer = nil;
+    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     TeamRunCompletedViewController *completionViewController = [storyboard instantiateViewControllerWithIdentifier:@"RunCompletedViewController"];
     
@@ -429,9 +426,6 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
     
     [self.run end];
     self.run = nil;
-        
-    [self.runningTimer invalidate];
-    self.runningTimer = nil;
     
     [self updateNotificationsTimerIfNecessary];
     
@@ -444,18 +438,13 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
     switch (state)
     {
         case GKPlayerStateConnected:
-            LOG_INFO(@"player (%@) connected (%d\nexpected player count is now %d)", playerID, match.expectedPlayerCount);
+            LOG_INFO(@"player (%@) connected (expected player count is now %d)", playerID, match.expectedPlayerCount);
             break;
         case GKPlayerStateDisconnected:
-            LOG_WARN(@"player (%@) disconnected (%d\nexpected player count is now %d)", playerID, match.expectedPlayerCount);
+            LOG_WARN(@"player (%@) disconnected (expected player count is now %d)", playerID, match.expectedPlayerCount);
             break;
         default:
             LOG_ERROR(@"match (%@) player (%@) unrecognized state (%d), expected player count is now %d", match.description, playerID, state, match.expectedPlayerCount);
-    }
-    
-    if (self.run == nil && match.expectedPlayerCount == 0)
-    {
-        [self startRunWithMatch:match];
     }
 }
 

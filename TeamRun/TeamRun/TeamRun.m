@@ -124,6 +124,13 @@ typedef struct
     return [PSLocationManager sharedLocationManager].totalSeconds;
 }
 
+- (double) secondsRemaining
+{
+    const double secondsInRun = self.isMultiplayer ? /*30*60*/10 : INFINITY;
+
+    return secondsInRun - self.seconds;
+}
+
 - (double) meters
 {
     return [PSLocationManager sharedLocationManager].totalDistance;
