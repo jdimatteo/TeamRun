@@ -93,16 +93,12 @@
 
 - (IBAction)facebookTapped
 {
-    SLComposeViewController *postSheet;
+    SLComposeViewController *postSheet = [[SLComposeViewController alloc] init];
+    postSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+    [postSheet setInitialText:self.initialPostMessage];
+    [postSheet addURL:[NSURL URLWithString:@"http://teamrun.org/"]];
+    [self presentViewController:postSheet animated:YES completion:nil];
     
-    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) //check if Facebook Account is linked
-    {
-        postSheet = [[SLComposeViewController alloc] init];
-        postSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
-        [postSheet setInitialText:self.initialPostMessage];
-        [postSheet addURL:[NSURL URLWithString:@"http://teamrun.org/"]];
-        [self presentViewController:postSheet animated:YES completion:nil];
-    }
     [postSheet setCompletionHandler:^(SLComposeViewControllerResult result) {
         switch (result) {
             case SLComposeViewControllerResultCancelled:
