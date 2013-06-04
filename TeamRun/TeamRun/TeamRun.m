@@ -126,7 +126,7 @@ typedef struct
 
 - (double) secondsRemaining
 {
-    const double secondsInRun = self.isMultiplayer ? /*30*60*/10 : INFINITY;
+    const double secondsInRun = self.isMultiplayer ? 30*60 : INFINITY;
 
     return secondsInRun - self.seconds;
 }
