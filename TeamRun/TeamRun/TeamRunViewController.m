@@ -62,6 +62,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *milesAheadLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeDescriptionLabel;
 
+- (void)configureAudio;
+
 - (void)createMatch;
 - (void)startRunWithMatch:(GKMatch*)match;
 - (void)endRun;
@@ -113,6 +115,20 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
     stopRed = [UIColor redColor];
     
 	[self.startStopButton setActionSheetButtonWithColor: runGreen];
+    
+    [self configureAudio];
+}
+
+- (void)configureAudio
+{
+    NSError *error = nil;
+    
+    if (! [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback
+                                           withOptions:AVAudioSessionCategoryOptionDuckOthers
+                                                 error:&error])
+    {
+        LOG_ERROR(@"Unable to set audio category: %@", error);
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -360,6 +376,13 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
 
 - (void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFindMatch:(GKMatch *)match
 {
+    // we need to de-activate the audio session to unduck any background music that might be playing -- the audio session was started by game center to play the stupid trumpet sound that I don't know how to disable
+    NSError *activationError = nil;
+    if (![[AVAudioSession sharedInstance] setActive:FALSE error: &activationError])
+    {
+        LOG_ERROR(@"Unable to de-activate the audio session: %@", activationError);
+    }
+    
     match.delegate = self;
     
     [self dismissViewControllerAnimated:YES completion:nil];

@@ -572,8 +572,6 @@
 				GCC_PREFIX_HEADER = "TeamRun/teamrun-Prefix.pch";
 				INFOPLIST_FILE = "TeamRun/teamrun-Info.plist";
 				PRODUCT_NAME = teamrun;
-				PROVISIONING_PROFILE = "B8E7705A-B26B-435B-A007-E3B626AEBD51";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B8E7705A-B26B-435B-A007-E3B626AEBD51";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -593,8 +591,6 @@
 				GCC_PREFIX_HEADER = "TeamRun/teamrun-Prefix.pch";
 				INFOPLIST_FILE = "TeamRun/teamrun-Info.plist";
 				PRODUCT_NAME = teamrun;
-				PROVISIONING_PROFILE = "42C3BC27-0F0D-4CFF-BF92-20D5A60CE7AB";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "42C3BC27-0F0D-4CFF-BF92-20D5A60CE7AB";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
