@@ -92,7 +92,7 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
 {
     [super viewDidLoad];
     
-    [TeamRunLogger setScrollingLogText:self.scrollingText];
+    setScrollingLogText(self.scrollingText);
     
     [TeamRun startWarmingUpGPS];
     
