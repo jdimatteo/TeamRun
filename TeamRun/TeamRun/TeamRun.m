@@ -30,7 +30,7 @@
 NSString * const NOTIF_RunStateChanged = @"TeamRunStateChanged";
 
 typedef enum {PS, CL} SpeedCalcMethod;
-static const SpeedCalcMethod speedCalcMethod = CL;
+static const SpeedCalcMethod speedCalcMethod = PS;
 
 typedef struct
 {
