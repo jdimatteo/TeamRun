@@ -317,6 +317,7 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackOpaque" translatesAutoresizingMaskIntoConstraints="NO" id="aBi-fR-3iS">
                                 <items>
                                     <barButtonItem title="Leaderboards" id="SGt-K9-aav">
+                                        <color key="tintColor" red="0.67058825492858887" green="0.40784317255020142" blue="0.30196079611778259" alpha="1" colorSpace="deviceRGB"/>
                                         <connections>
                                             <action selector="openLeaderboards:" destination="xUX-un-ppx" id="HMq-cy-0HN"/>
                                         </connections>
