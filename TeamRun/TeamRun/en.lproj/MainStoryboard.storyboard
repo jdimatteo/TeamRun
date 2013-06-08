@@ -389,14 +389,14 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="bestRunPaceLabel" destination="moG-id-yFF" id="o9L-Oa-SFO"/>
-                        <outlet property="bestRunRawMilesLabel" destination="P4p-k5-cBm" id="lvw-sl-VOc"/>
-                        <outlet property="bestRunTeamMilesLabel" destination="tPA-vG-cs0" id="smZ-S5-iwF"/>
-                        <outlet property="bestRunTimeLabel" destination="QNW-BB-KEB" id="uYD-vw-EyP"/>
-                        <outlet property="currentRunPaceLabel" destination="wed-FR-O4l" id="IQh-28-pZH"/>
-                        <outlet property="currentRunRawMilesLabel" destination="hyf-BC-8Qj" id="FRm-Ld-6yE"/>
-                        <outlet property="currentRunTeamMilesLabel" destination="Ovm-2r-ClE" id="3W4-20-470"/>
-                        <outlet property="currentRunTimeLabel" destination="MOO-Wh-cGA" id="lyV-cY-cfK"/>
+                        <outlet property="bestPaceLabel" destination="moG-id-yFF" id="N1q-pc-oma"/>
+                        <outlet property="bestRawMilesLabel" destination="P4p-k5-cBm" id="CHZ-kw-2Ym"/>
+                        <outlet property="bestTeamMilesLabel" destination="tPA-vG-cs0" id="i51-wH-t6b"/>
+                        <outlet property="bestTimeLabel" destination="QNW-BB-KEB" id="31U-tx-4Y9"/>
+                        <outlet property="currentPaceLabel" destination="wed-FR-O4l" id="OhF-X2-DId"/>
+                        <outlet property="currentRawMilesLabel" destination="hyf-BC-8Qj" id="DKO-kV-0mi"/>
+                        <outlet property="currentTeamMilesLabel" destination="Ovm-2r-ClE" id="Cqk-R0-5op"/>
+                        <outlet property="currentTimeLabel" destination="MOO-Wh-cGA" id="aE7-1g-uDi"/>
                         <outlet property="facebookButton" destination="NBQ-cK-ywK" id="ZZf-sK-4NJ"/>
                         <outlet property="loadingIndicator" destination="umQ-n7-tde" id="pBr-n4-QIA"/>
                         <outlet property="teamMilesRowLabel" destination="IYs-1x-PAE" id="DkI-Mu-KD0"/>

@@ -35,17 +35,25 @@
 - (IBAction)openLeaderboards:(id)sender;
 - (IBAction)doneTapped;
 - (IBAction)facebookTapped;
+
+- (void) process:(NSString*) identifier
+                :(double) milesOrSeconds
+                :(bool) formatAsSeconds
+                :(UILabel*) currentLabel
+                :(UILabel*) personalBestLabel
+                :(UILabel*) totalLabel;
+
 @property (weak, nonatomic) IBOutlet UIGlossyButton *facebookButton;
 
-@property (weak, nonatomic) IBOutlet UILabel *currentRunRawMilesLabel;
-@property (weak, nonatomic) IBOutlet UILabel *currentRunTimeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *currentRunPaceLabel;
-@property (weak, nonatomic) IBOutlet UILabel *currentRunTeamMilesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *currentRawMilesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *currentTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *currentPaceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *currentTeamMilesLabel;
 
-@property (weak, nonatomic) IBOutlet UILabel *bestRunRawMilesLabel;
-@property (weak, nonatomic) IBOutlet UILabel *bestRunTimeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *bestRunPaceLabel;
-@property (weak, nonatomic) IBOutlet UILabel *bestRunTeamMilesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *bestRawMilesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *bestTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *bestPaceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *bestTeamMilesLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *totalRawMilesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalTeamMilesLabel;
@@ -53,10 +61,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *teamMilesRowLabel;
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingIndicator;
-
-- (void) reportScore: (int64_t) score
-    forLeaderboardID: (NSString*) category
-               addTo: (NSMutableDictionary*) categoryToCurrentScore;
 
 @property (nonatomic) int remainingScoresToLoad;
 
@@ -66,29 +70,13 @@
 
 @implementation TeamRunCompletedViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
     
     UIColor* facebookBlue = [UIColor colorWithRed:0.164215 green:0.234407 blue:0.571473 alpha:1];
     [self.facebookButton setActionSheetButtonWithColor:[UIColor whiteColor]];
     [self.facebookButton setTitleColor:facebookBlue forState:UIControlStateNormal];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (IBAction)facebookTapped
@@ -120,7 +108,7 @@
     if (gameCenterController != nil)
     {
         gameCenterController.gameCenterDelegate = self;
-        [self presentViewController: gameCenterController animated: YES completion:nil];
+        [self presentViewController:gameCenterController animated:YES completion:nil];
     }
 }
 
@@ -143,184 +131,142 @@
 
     self.initialPostMessage = message;
     
-    [self.currentRunRawMilesLabel setText:truncateToTwoDecimals(rawMiles)];
-    [self.currentRunTimeLabel setText:[NSString stringWithFormat:@"%.2d:%.2d", seconds / 60, seconds % 60]];
-    [self.currentRunTeamMilesLabel setText:truncateToTwoDecimals(teamMiles)];
+    [self.totalRawMilesLabel setText:@"total miles"];
+    [self.totalTeamMilesLabel setText:@"total team miles"];
     
+    self.remainingScoresToLoad = 6; // 4 personal bests + 2 totals
+    
+    const int secondsPerMile = rawMiles > 0 ? seconds/rawMiles : 0;
+    
+    //              ScoreID          score     formatAsSeconds
+    [self process:@"RawMiles"       :rawMiles       :NO  :_currentRawMilesLabel  :_bestRawMilesLabel  :_totalRawMilesLabel];
+    [self process:@"TeamMiles"      :teamMiles      :NO  :_currentTeamMilesLabel :_bestTeamMilesLabel :_totalTeamMilesLabel];
+    [self process:@"Seconds"        :seconds        :YES :_currentTimeLabel      :_bestTimeLabel      :nil];
+    [self process:@"SecondsPerMile" :secondsPerMile :YES :_currentPaceLabel      :_bestPaceLabel      :nil];
+}
+
+NSString* formattedScore(int64_t score, bool formatAsSeconds)
+{
+    return formatAsSeconds
+         ? [NSString stringWithFormat:@"%.2lld:%.2lld", score / 60, score % 60]
+         : truncateToTwoDecimals(score/100.0);
+}
+
+- (void) process:(NSString*) identifier
+                :(double) milesOrSeconds
+                :(bool) formatAsSeconds
+                :(UILabel*) currentLabel
+                :(UILabel*) personalBestLabel
+                :(UILabel*) totalLabel
+{
+    void (^scoreProcessed)(void) = ^{
+        self.remainingScoresToLoad--;
+        if (self.remainingScoresToLoad == 0)
+        {
+            [self.loadingIndicator stopAnimating];
+        }
+    };
+    
+    const int64_t score = formatAsSeconds ? milesOrSeconds : milesOrSeconds * 100;
+    [currentLabel setText:formattedScore(score, formatAsSeconds)];
+    
+    if ([GKLocalPlayer localPlayer].playerID != nil)
     {
-        const int secondsPerMile = rawMiles > 0 ? seconds/rawMiles : 0;
-        [self.currentRunPaceLabel setText:[NSString stringWithFormat:@"%.2d:%.2d", secondsPerMile / 60, secondsPerMile % 60]];
-    }
-    
-    NSMutableDictionary* categoryToCurrentScore = [NSMutableDictionary dictionaryWithCapacity:3];
-    [self reportScore:rawMiles*100 forLeaderboardID:@"grp.org.teamrun.SingleRunRawMiles" addTo:categoryToCurrentScore];
-    [self reportScore:teamMiles*100 forLeaderboardID:@"grp.org.teamrun.SingleRunTeamMiles" addTo:categoryToCurrentScore];
-    [self reportScore:seconds forLeaderboardID:@"grp.org.teamrun.SingleRunSeconds" addTo:categoryToCurrentScore];
-    [self reportScore:seconds/rawMiles forLeaderboardID:@"grp.org.teamrun.SingleRunSecondsPerMile" addTo:categoryToCurrentScore];
+        NSString* leaderboardID = [NSString stringWithFormat:@"grp.org.teamrun.SingleRun%@", identifier];
         
-    if ([GKLocalPlayer localPlayer].playerID == nil)
+        GKScore *currentScore = [[GKScore alloc] initWithCategory:leaderboardID];
+        currentScore.value = score;
+        currentScore.context = 0;
+        
+        [currentScore reportScoreWithCompletionHandler:^(NSError *error) {
+            if (error != nil) LOG_ERROR(@"%@ reportScoreWithCompletionHandler error: %@", leaderboardID, error);
+            // game center will automatically resend the score later
+            // todo: test that this really is automatically resent
+        }];
+        
+        NSArray* currentPlayer = @[[GKLocalPlayer localPlayer].playerID];
+        
+        GKLeaderboard *bestScoreRequest = [[GKLeaderboard alloc] initWithPlayerIDs:currentPlayer];
+        if (bestScoreRequest != nil)
+        {
+            bestScoreRequest.timeScope = GKLeaderboardTimeScopeAllTime;
+            bestScoreRequest.category = leaderboardID;
+            bestScoreRequest.range = NSMakeRange(1,1);
+            [bestScoreRequest loadScoresWithCompletionHandler: ^(NSArray *scores, NSError *error) {
+                if (error != nil)
+                {
+                    LOG_ERROR(@"%@ loadScoresWithCompletionHandler error: %@", leaderboardID, error);
+                }
+                if (scores != nil)
+                {
+                    if (scores.count > 0)
+                    {
+                        GKScore* personalBest = scores[0];
+                        
+                        if (currentScore.value > personalBest.value)
+                        {
+                            personalBest = currentScore;
+                        }
+                        
+                        [personalBestLabel setText:formattedScore(personalBest.value, formatAsSeconds)];
+                    }
+                }
+                scoreProcessed();
+            }];
+        }
+        else
+        {
+            LOG_ERROR(@"%@ bestScoreRequest is nil", leaderboardID);
+
+            scoreProcessed();
+        }
+        
+        if (totalLabel != nil)
+        {
+            GKLeaderboard *previousTotalScore = [[GKLeaderboard alloc] initWithPlayerIDs:currentPlayer];
+            if (previousTotalScore != nil)
+            {
+                previousTotalScore.timeScope = GKLeaderboardTimeScopeAllTime;
+                previousTotalScore.category = [NSString stringWithFormat:@"grp.org.teamrun.Total%@", identifier];
+                previousTotalScore.range = NSMakeRange(1,1);
+                [previousTotalScore loadScoresWithCompletionHandler: ^(NSArray *scores, NSError *error) {
+                    if (error != nil)
+                    {
+                        LOG_ERROR(@"%@ loadScoresWithCompletionHandler error: %@", previousTotalScore.category, error);
+                    }
+                    
+                    GKScore* newTotalScore = [[GKScore alloc] initWithCategory:previousTotalScore.category];
+                    newTotalScore.value = currentScore.value; // temporarily set to just the current score
+                    newTotalScore.context = 0;
+                    
+                    if (scores != nil && scores.count > 0)
+                    {
+                        newTotalScore.value += ((GKScore*)scores[0]).value;
+                    }
+                    
+                    [newTotalScore reportScoreWithCompletionHandler:^(NSError *error) {
+                        if (error != nil) LOG_ERROR(@"%@ reportScoreWithCompletionHandler error: %@", newTotalScore.category, error);
+                        // game center will automatically resend the score later
+                    }];
+                    
+                    [totalLabel setText:[NSString stringWithFormat:@"%@ %@", truncateToTwoDecimals(newTotalScore.value/100.0), totalLabel.text]];
+                    
+                    scoreProcessed();
+                }];
+            }
+            else
+            {
+                LOG_ERROR(@"%@ previousTotalScore is nil", identifier);
+                
+                scoreProcessed();
+            }
+
+        }
+    }
+    else
     {
         [self.totalRawMilesLabel setText:@"Personal bests and total miles require Game Center login"];
         [self.loadingIndicator stopAnimating];
     }
-    else
-    {
-        NSArray* currentPlayer = @[[GKLocalPlayer localPlayer].playerID];
-        
-        NSArray* totalScoreCateogries = @[@"grp.org.teamrun.TotalRawMiles", @"grp.org.teamrun.TotalTeamMiles"];
-        
-        self.remainingScoresToLoad = categoryToCurrentScore.count + totalScoreCateogries.count;
-        
-        // note: I am not using any GKScore formattedValue properties because these are null for scores that I initialize (they are only set for downloaded scores)
-        
-        for (NSString* scoreCategory in categoryToCurrentScore.allKeys)
-        {
-            GKLeaderboard *bestScoreRequest = [[GKLeaderboard alloc] initWithPlayerIDs:currentPlayer];
-            if (bestScoreRequest != nil)
-            {
-                bestScoreRequest.timeScope = GKLeaderboardTimeScopeAllTime;
-                bestScoreRequest.category = scoreCategory;
-                bestScoreRequest.range = NSMakeRange(1,1);
-                [bestScoreRequest loadScoresWithCompletionHandler: ^(NSArray *scores, NSError *error) {
-                    if (error != nil)
-                    {
-                        LOG_ERROR(@"%@ loadScoresWithCompletionHandler error: %@", scoreCategory, error);
-                    }
-                    if (scores != nil)
-                    {
-                        if (scores.count > 0)
-                        {
-                            GKScore* personalBest = scores[0];
-                            GKScore* currentScore = categoryToCurrentScore[scoreCategory];
-                            
-                            if (currentScore.value > personalBest.value)
-                            {
-                                personalBest = currentScore;
-                            }
-                            
-                            NSString* formattedMiles = truncateToTwoDecimals(personalBest.value/100.0);
-                            
-                            if ([scoreCategory isEqualToString:@"grp.org.teamrun.SingleRunRawMiles"])
-                            {
-                                [self.bestRunRawMilesLabel setText:formattedMiles];
-                            }
-                            else if ([scoreCategory isEqualToString:@"grp.org.teamrun.SingleRunTeamMiles"])
-                            {
-                                [self.bestRunTeamMilesLabel setText:formattedMiles];
-                            }
-                            else if ([scoreCategory isEqualToString:@"grp.org.teamrun.SingleRunSeconds"])
-                            {
-                                const int bestSeconds = personalBest.value;
-                                [self.bestRunTimeLabel setText:[NSString stringWithFormat:@"%.2d:%.2d", bestSeconds/ 60, bestSeconds % 60]];
-                            }
-                            else if ([scoreCategory isEqualToString:@"grp.org.teamrun.SingleRunSecondsPerMile"])
-                            {
-                                const int bestSecondsPerMile = personalBest.value;
-                                [self.bestRunPaceLabel setText:[NSString stringWithFormat:@"%.2d:%.2d", bestSecondsPerMile / 60, bestSecondsPerMile % 60]];
-                            }
-                            else
-                            {
-                                LOG_ERROR(@"Unexpected category in loop: %@", scoreCategory);
-                            }
-
-                        }
-                    }
-                    self.remainingScoresToLoad--;
-                    if (self.remainingScoresToLoad == 0)
-                    {
-                        [self.loadingIndicator stopAnimating];
-                    }
-                }];
-            }
-            else
-            {
-                LOG_ERROR(@"%@ bestScoreRequest is nil", scoreCategory);
-                
-                self.remainingScoresToLoad--;
-                if (self.remainingScoresToLoad == 0)
-                {
-                    [self.loadingIndicator stopAnimating];
-                }
-            }
-        }
-        
-        for (NSString* scoreCategory in totalScoreCateogries)
-        {
-            GKLeaderboard *totalScoreRequest = [[GKLeaderboard alloc] initWithPlayerIDs:currentPlayer];
-            if (totalScoreRequest != nil)
-            {
-                totalScoreRequest.timeScope = GKLeaderboardTimeScopeAllTime;
-                totalScoreRequest.category = scoreCategory;
-                totalScoreRequest.range = NSMakeRange(1,1);
-                [totalScoreRequest loadScoresWithCompletionHandler: ^(NSArray *scores, NSError *error) {
-                    if (error != nil)
-                    {
-                        LOG_ERROR(@"%@ loadScoresWithCompletionHandler error: %@", scoreCategory, error);
-                    }
-                    GKScore* currentScore = [scoreCategory isEqualToString:@"grp.org.teamrun.TotalRawMiles"]
-                                          ? categoryToCurrentScore[@"grp.org.teamrun.SingleRunRawMiles"]
-                                          : categoryToCurrentScore[@"grp.org.teamrun.SingleRunTeamMiles"];
-                    
-                    GKScore* totalScore = [[GKScore alloc] initWithCategory:scoreCategory];
-                    totalScore.value = currentScore.value; // temporarily set to just the current score
-                    totalScore.context = 0;
-                    
-                    if (scores != nil && scores.count > 0)
-                    {
-                        totalScore.value += ((GKScore*)scores[0]).value;
-                    }
-                    
-                    [totalScore reportScoreWithCompletionHandler:^(NSError *error) {
-                        if (error != nil) LOG_ERROR(@"%@ reportScoreWithCompletionHandler error: %@", scoreCategory, error);
-                        // game center will automatically resend the score later
-                    }];
-                    
-                    NSString* formattedScore = truncateToTwoDecimals(totalScore.value/100.0);
-                    
-                    if ([scoreCategory isEqualToString:@"grp.org.teamrun.TotalRawMiles"])
-                    {
-                        [self.totalRawMilesLabel setText:[NSString stringWithFormat:@"%@ total miles", formattedScore]];
-                    }
-                    else
-                    {
-                        [self.totalTeamMilesLabel setText:[NSString stringWithFormat:@"%@ total team miles", formattedScore]];
-                    }
-                    
-                    self.remainingScoresToLoad--;
-                    if (self.remainingScoresToLoad == 0)
-                    {
-                        [self.loadingIndicator stopAnimating];
-                    }
-                }];
-            }
-            else
-            {
-                LOG_ERROR(@"%@ totalScoreRequest is nil", scoreCategory);
-                
-                self.remainingScoresToLoad--;
-                if (self.remainingScoresToLoad == 0)
-                {
-                    [self.loadingIndicator stopAnimating];
-                }
-            }
-        }
-    }
-}
-
-- (void) reportScore: (int64_t) score
-    forLeaderboardID: (NSString*) category
-               addTo: (NSMutableDictionary*) categoryToCurrentScore
-{
-    GKScore *scoreReporter = [[GKScore alloc] initWithCategory:category];
-    scoreReporter.value = score;
-    scoreReporter.context = 0;
-    
-    [scoreReporter reportScoreWithCompletionHandler:^(NSError *error) {
-        if (error != nil) LOG_ERROR(@"%@ reportScoreWithCompletionHandler error: %@", category, error);
-        // game center will automatically resend the score later
-        // todo: test that this really is automatically resent
-    }];
-    
-    categoryToCurrentScore[category]=scoreReporter;
 }
 @end
