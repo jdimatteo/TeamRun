@@ -160,7 +160,7 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    LOG_TMP(@"button index %d", buttonIndex);
+    LOG_DEBUG(@"button index %d", buttonIndex);
     switch (buttonIndex) {
         // the start run prompt has 2 buttons (1. Multiplayer, 2. Single Player)
         // all other prompts only have a single dismiss/OK button (with buttonIndex 0)
@@ -372,9 +372,7 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
         GKMatchmakerViewController *mmvc = [[GKMatchmakerViewController alloc] initWithMatchRequest:request];
         mmvc.matchmakerDelegate = self;
         
-        [self presentViewController:mmvc animated:YES completion:^() {
-            LOG_TMP(@"Completion handler");
-        }];
+        [self presentViewController:mmvc animated:YES completion:nil];
     }
     else
     {
