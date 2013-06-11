@@ -421,6 +421,8 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <items>
                                 <barButtonItem style="plain" systemItem="flexibleSpace" id="FDV-iZ-xEu"/>
+                                <barButtonItem title="TeamRun v1.0.2" style="plain" id="eVp-hp-iHY"/>
+                                <barButtonItem style="plain" systemItem="flexibleSpace" id="JSs-Tc-KPi"/>
                                 <barButtonItem title="Done" style="done" id="Uip-KP-nF5">
                                     <connections>
                                         <action selector="doneChangingSettings" destination="bD3-0m-hcP" id="5Ch-Wk-Xqu"/>
@@ -595,73 +597,6 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection footerTitle="If you have trouble finding a running buddy, try Sunday at 11 AM EST." id="A6F-pQ-bnH">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="zod-ta-oqu">
-                                        <rect key="frame" x="0.0" y="357" width="320" height="45"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cYL-TI-BwM"/>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Next Run is Multiplayer" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahK-Ao-han">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <constraints>
-                                            <constraint firstItem="ahK-Ao-han" firstAttribute="centerY" secondItem="cYL-TI-BwM" secondAttribute="centerY" type="default" id="91x-T3-PTi"/>
-                                            <constraint firstItem="ahK-Ao-han" firstAttribute="leading" secondItem="zod-ta-oqu" secondAttribute="leading" constant="30" id="BFA-ZX-JSj"/>
-                                            <constraint firstAttribute="trailing" secondItem="cYL-TI-BwM" secondAttribute="trailing" constant="25" type="user" id="hr7-Fs-7Sm"/>
-                                            <constraint firstItem="cYL-TI-BwM" firstAttribute="centerY" secondItem="zod-ta-oqu" secondAttribute="centerY" type="default" id="mbR-bB-SSc"/>
-                                        </constraints>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection headerTitle="   " id="omn-qn-DW5">
-                                <cells>
-                                    <tableViewCell hidden="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="YLf-Bj-oeC">
-                                        <rect key="frame" x="0.0" y="498" width="320" height="45"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection headerTitle="Advanced" id="1ua-sR-EKC">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="YAO-3F-0pU">
-                                        <rect key="frame" x="0.0" y="581" width="320" height="45"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Version 1.0.1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Fj-FE-q8S">
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="175" id="TEx-q0-Bml"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <constraints>
-                                            <constraint firstItem="1Fj-FE-q8S" firstAttribute="leading" secondItem="YAO-3F-0pU" secondAttribute="leading" constant="30" id="YPR-iT-k8Q"/>
-                                            <constraint firstItem="1Fj-FE-q8S" firstAttribute="top" secondItem="YAO-3F-0pU" secondAttribute="top" constant="13" id="fXW-Ve-mMX"/>
-                                        </constraints>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="bD3-0m-hcP" id="jMG-3f-IFo"/>
@@ -670,7 +605,6 @@
                     </tableView>
                     <connections>
                         <outlet property="minutesBetweenNotificationsTextField" destination="a7W-VK-W5Z" id="8Ah-up-x4A"/>
-                        <outlet property="multiplayerModeSwitch" destination="cYL-TI-BwM" id="Sj3-s3-OIR"/>
                         <outlet property="paceNotificationsSwitch" destination="MPL-1u-C8E" id="fUj-yB-lAV"/>
                         <outlet property="relativePositionNotificationsSwitch" destination="diL-V7-YkC" id="k58-bZ-AHH"/>
                         <outlet property="secondsBetweenNotificationsTextField" destination="nKg-oi-HWT" id="Rfc-Ht-r5B"/>
@@ -698,14 +632,14 @@
                 <relationship kind="action" name="doneTapped"/>
                 <relationship kind="action" name="facebookTapped"/>
                 <relationship kind="action" name="openLeaderboards:"/>
-                <relationship kind="outlet" name="bestRunPaceLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="bestRunRawMilesLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="bestRunTeamMilesLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="bestRunTimeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="currentRunPaceLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="currentRunRawMilesLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="currentRunTeamMilesLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="currentRunTimeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="bestPaceLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="bestRawMilesLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="bestTeamMilesLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="bestTimeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="currentPaceLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="currentRawMilesLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="currentTeamMilesLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="currentTimeLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="facebookButton" candidateClass="UIGlossyButton"/>
                 <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
                 <relationship kind="outlet" name="teamMilesRowLabel" candidateClass="UILabel"/>
@@ -718,8 +652,8 @@
             <relationships>
                 <relationship kind="action" name="doneChangingSettings"/>
                 <relationship kind="action" name="updateEnabledFields"/>
+                <relationship kind="outlet" name="barLabel" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="minutesBetweenNotificationsTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="multiplayerModeSwitch" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="paceNotificationsSwitch" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="relativePositionNotificationsSwitch" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="secondsBetweenNotificationsTextField" candidateClass="UITextField"/>

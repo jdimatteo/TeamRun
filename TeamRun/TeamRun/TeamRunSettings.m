@@ -24,18 +24,6 @@
 
 @implementation TeamRunSettings
 
-// note that I store singlePlayerMode instead of multiplayerMode so that that it defaults to multiplayer mode (since the BOOL NSUserDefaults initial value is false)
-// same goes for for paceNotificationsDisabled and paceNotificationsDisabled.
-+ (BOOL)multiplayerMode
-{
-    return ![[NSUserDefaults standardUserDefaults] boolForKey:@"singlePlayerMode"];
-}
-
-+ (void)setMultiplayerMode:(const bool) enabled
-{
-    [[NSUserDefaults standardUserDefaults] setBool:!enabled forKey:@"singlePlayerMode"];
-}
-
 + (int)secondsBetweenNotifications
 {
     int seconds = [[NSUserDefaults standardUserDefaults] integerForKey:@"secondsBetweenPaceNotifications"];
@@ -54,6 +42,8 @@
     return [TeamRunSettings paceNotificationsEnabled] || [TeamRunSettings relativePositionNotificationsEnabled];
 }
 
+// note that I store paceNotificationsDisabled instead of paceNotificationsEnabled so that that it defaults to pace notifications disabled (since the BOOL NSUserDefaults initial value is false)
+// same goes for relativePositionNotificationsDisabled.
 + (BOOL)paceNotificationsEnabled
 {
     return ![[NSUserDefaults standardUserDefaults] boolForKey:@"paceNotificationsDisabled"];

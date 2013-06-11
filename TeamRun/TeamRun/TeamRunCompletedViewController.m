@@ -127,8 +127,6 @@
           teamMiles:(double)teamMiles
     facebookMessage:(NSString*)message
 {
-    // todo: this function is a mess, clean it up!
-
     self.initialPostMessage = message;
     
     [self.totalRawMilesLabel setText:@"total miles"];
@@ -170,7 +168,7 @@ NSString* formattedScore(int64_t score, bool formatAsSeconds)
     const int64_t score = formatAsSeconds ? milesOrSeconds : milesOrSeconds * 100;
     [currentLabel setText:formattedScore(score, formatAsSeconds)];
     
-    if ([GKLocalPlayer localPlayer].playerID != nil)
+    if ([GKLocalPlayer localPlayer].playerID != nil) // todo: is this the right way to check if logged in?
     {
         NSString* leaderboardID = [NSString stringWithFormat:@"grp.org.teamrun.SingleRun%@", identifier];
         
@@ -266,6 +264,7 @@ NSString* formattedScore(int64_t score, bool formatAsSeconds)
     else
     {
         [self.totalRawMilesLabel setText:@"Personal bests and total miles require Game Center login"];
+        [self.totalTeamMilesLabel setText:@""];
         [self.loadingIndicator stopAnimating];
     }
 }

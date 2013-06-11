@@ -158,18 +158,29 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
     }
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    LOG_TMP(@"button index %d", buttonIndex);
+    switch (buttonIndex) {
+        // the start run prompt has 2 buttons (1. Multiplayer, 2. Single Player)
+        // all other prompts only have a single dismiss/OK button (with buttonIndex 0)
+        case 1:
+            [self createMatch];
+            break;
+        case 2:
+            [self startRunWithMatch:nil];
+            break;
+        default:
+            break;
+    }
+}
+
 - (IBAction)startStopButtonClicked:(id)sender
 {
     if (self.run == nil)
     {
-        if ([TeamRunSettings multiplayerMode])
-        {
-            [self createMatch];
-        }
-        else
-        {
-            [self startRunWithMatch:nil];
-        }
+        UIAlertView* runPrompt = [[UIAlertView alloc] initWithTitle:@"Run with a friend or solo?" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Multiplayer", @"Single Player", nil];
+        [runPrompt show];
     }
     else
     {
@@ -348,17 +359,28 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
     };
 }
 
-- (void)createMatch {
-    // todo: remove duplicate code from here and invite handler
-    GKMatchRequest *request = [[GKMatchRequest alloc] init];
-    request.minPlayers = 2;
-    request.maxPlayers = 2;
-    request.defaultNumberOfPlayers = 2;
-    
-    GKMatchmakerViewController *mmvc = [[GKMatchmakerViewController alloc] initWithMatchRequest:request];
-    mmvc.matchmakerDelegate = self;
-    
-    [self presentViewController:mmvc animated:YES completion:nil];
+- (void)createMatch
+{
+    if ([GKLocalPlayer localPlayer].playerID != nil) // todo: is this the right way to check if logged in?
+    {
+        // todo: remove duplicate code from here and invite handler
+        GKMatchRequest *request = [[GKMatchRequest alloc] init];
+        request.minPlayers = 2;
+        request.maxPlayers = 2;
+        request.defaultNumberOfPlayers = 2;
+        
+        GKMatchmakerViewController *mmvc = [[GKMatchmakerViewController alloc] initWithMatchRequest:request];
+        mmvc.matchmakerDelegate = self;
+        
+        [self presentViewController:mmvc animated:YES completion:^() {
+            LOG_TMP(@"Completion handler");
+        }];
+    }
+    else
+    {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Game Center Login Required" message:@"Login with the Game Center app" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
 }
 
 - (void)matchmakerViewControllerWasCancelled:(GKMatchmakerViewController *)viewController
@@ -369,6 +391,7 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
 
 - (void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFailWithError:(NSError *)error
 {
+    LOG_ERROR(@"match failed with error: %@", error);
     [self dismissViewControllerAnimated:YES completion:nil];
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Multiplayer failed" message:[error localizedDescription] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];

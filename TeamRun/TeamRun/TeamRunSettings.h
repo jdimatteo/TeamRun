@@ -24,9 +24,6 @@
 
 @interface TeamRunSettings : NSObject
 
-+ (BOOL)multiplayerMode;
-+ (void)setMultiplayerMode:(const bool) enabled;
-
 + (int)secondsBetweenNotifications;
 + (void)setSecondsBetweenNotifications:(const int) seconds;
 
