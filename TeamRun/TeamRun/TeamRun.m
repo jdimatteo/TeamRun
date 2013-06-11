@@ -72,6 +72,7 @@ typedef struct
     otherRunnerState.milesRan = 0;
     otherRunnerState.secondsPerMileTargetPace = 0;
     
+    [[PSLocationManager sharedLocationManager] prepLocationUpdates]; // this does some initialization like clearing current speed history
     [PSLocationManager sharedLocationManager].delegate = self;
     [[PSLocationManager sharedLocationManager] resetLocationUpdates];
     [[PSLocationManager sharedLocationManager] startLocationUpdates];

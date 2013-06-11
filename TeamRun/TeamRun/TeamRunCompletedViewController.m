@@ -228,26 +228,29 @@ NSString* formattedScore(int64_t score, bool formatAsSeconds)
                 previousTotalScore.category = [NSString stringWithFormat:@"grp.org.teamrun.Total%@", identifier];
                 previousTotalScore.range = NSMakeRange(1,1);
                 [previousTotalScore loadScoresWithCompletionHandler: ^(NSArray *scores, NSError *error) {
-                    if (error != nil)
+                    if (error == nil)
+                    {
+                        GKScore* newTotalScore = [[GKScore alloc] initWithCategory:previousTotalScore.category];
+                        newTotalScore.value = currentScore.value; // temporarily set to just the current score
+                        newTotalScore.context = 0;
+                        
+                        if (scores != nil && scores.count > 0)
+                        {
+                            newTotalScore.value += ((GKScore*)scores[0]).value;
+                        }
+                        
+                        [newTotalScore reportScoreWithCompletionHandler:^(NSError *error) {
+                            if (error != nil) LOG_ERROR(@"%@ reportScoreWithCompletionHandler error: %@", newTotalScore.category, error);
+                            // game center will automatically resend the score later
+                        }];
+                        
+                        [totalLabel setText:[NSString stringWithFormat:@"%@ %@", truncateToTwoDecimals(newTotalScore.value/100.0), totalLabel.text]];
+                    }
+                    else
                     {
                         LOG_ERROR(@"%@ loadScoresWithCompletionHandler error: %@", previousTotalScore.category, error);
+                        [totalLabel setText:@""];
                     }
-                    
-                    GKScore* newTotalScore = [[GKScore alloc] initWithCategory:previousTotalScore.category];
-                    newTotalScore.value = currentScore.value; // temporarily set to just the current score
-                    newTotalScore.context = 0;
-                    
-                    if (scores != nil && scores.count > 0)
-                    {
-                        newTotalScore.value += ((GKScore*)scores[0]).value;
-                    }
-                    
-                    [newTotalScore reportScoreWithCompletionHandler:^(NSError *error) {
-                        if (error != nil) LOG_ERROR(@"%@ reportScoreWithCompletionHandler error: %@", newTotalScore.category, error);
-                        // game center will automatically resend the score later
-                    }];
-                    
-                    [totalLabel setText:[NSString stringWithFormat:@"%@ %@", truncateToTwoDecimals(newTotalScore.value/100.0), totalLabel.text]];
                     
                     scoreProcessed();
                 }];
