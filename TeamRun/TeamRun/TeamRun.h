@@ -28,9 +28,10 @@
 
 + (void)startWarmingUpGPS; // it takes some time for the location to be initially accurately determined
 
-- (id)init;                           // start single player match
-- (id)initWithMatch:(GKMatch*)match;  // start multiplayer match (or single player if match is nil)
-- (void)end;                          // end match
+- (id)init;                           // start single player run
+- (id)initWithMatch:(GKMatch *)match  // start multiplayer match (or single player if match is nil)
+            players:(NSArray*)players;
+- (void)end;                          // end run
 
 - (void)processData:(NSData*)data fromPlayer:(NSString*)playerID;
 

@@ -65,7 +65,7 @@
 - (void)configureAudio;
 
 - (void)createMatch;
-- (void)startRunWithMatch:(GKMatch*)match;
+- (void)startRunWithMatch:(GKMatch*)match players:(NSArray*)players;
 - (void)endRun;
 - (void)playerAuthenticated;
 
@@ -168,7 +168,7 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
             [self createMatch];
             break;
         case 2:
-            [self startRunWithMatch:nil];
+            [self startRunWithMatch:nil players:nil];
             break;
         default:
             break;
@@ -397,6 +397,7 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
 
 - (void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFindMatch:(GKMatch *)match
 {
+    LOG_DEBUG(@"Did find match: %@", match);
     // we need to de-activate the audio session to unduck any background music that might be playing -- the audio session was started by game center to play the stupid trumpet sound that I don't know how to disable
     NSError *activationError = nil;
     if (![[AVAudioSession sharedInstance] setActive:FALSE error: &activationError])
@@ -404,22 +405,39 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
         LOG_ERROR(@"Unable to de-activate the audio session: %@", activationError);
     }
     
-    match.delegate = self;
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
-    LOG_DEBUG(@"Match found -- expectedPlayerCount: %d", match.expectedPlayerCount);
-    
-    if (self.run != nil) LOG_ERROR(@"self.run should be nil if didFindMatch called");
-    
-    if (self.run == nil && match.expectedPlayerCount == 0)
+    [GKPlayer loadPlayersForIdentifiers:match.playerIDs withCompletionHandler:^(NSArray *players, NSError *error)
     {
-        [self startRunWithMatch:match];
-    }
+        LOG_DEBUG(@"loadPlayersForIdentifiers completion handler called");
+        if (error != nil)
+        {
+            LOG_ERROR(@"Error loading player information: %@", error);
+            // todo: display a message that players counldn't be found and to try auto-match on Sunday at 11 AM EST.
+            
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Match Making Failed" message:@"If you have trouble finding a running buddy, try Sunday at 11 AM EST" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+        }
+        else
+        {
+            LOG_DEBUG(@"starting match with players: %@", players);
+
+            match.delegate = self;
+
+            LOG_DEBUG(@"Match found -- expectedPlayerCount: %d", match.expectedPlayerCount);
+
+            if (self.run != nil) LOG_ERROR(@"self.run should be nil if didFindMatch called");
+
+            if (self.run == nil && match.expectedPlayerCount == 0)
+            {
+                [self startRunWithMatch:match players:players];
+            }
+        }
+     }];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)startRunWithMatch:(GKMatch*)match
+- (void)startRunWithMatch:(GKMatch*)match players:(NSArray*)players
 {
-    self.run = [[TeamRun alloc] initWithMatch:match];
+    self.run = [[TeamRun alloc] initWithMatch:match players:players];
 
     self.runningTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                          target:self
@@ -482,10 +500,10 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
     switch (state)
     {
         case GKPlayerStateConnected:
-            LOG_INFO(@"player (%@) connected (expected player count is now %d)", playerID, match.expectedPlayerCount);
+            LOG_DEBUG(@"player (%@) connected (expected player count is now %d)", playerID, match.expectedPlayerCount);
             break;
         case GKPlayerStateDisconnected:
-            LOG_WARN(@"player (%@) disconnected (expected player count is now %d)", playerID, match.expectedPlayerCount);
+            LOG_DEBUG(@"player (%@) disconnected (expected player count is now %d)", playerID, match.expectedPlayerCount);
             break;
         default:
             LOG_ERROR(@"match (%@) player (%@) unrecognized state (%d), expected player count is now %d", match.description, playerID, state, match.expectedPlayerCount);

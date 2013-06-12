@@ -47,7 +47,6 @@ typedef struct
 @property (strong, nonatomic) NSArray*    players;
 @property (strong, nonatomic) CLLocation* lastWayPoint;
 
-- (void)updatePlayers;
 - (void)notify;
 
 @end
@@ -59,7 +58,7 @@ typedef struct
     [[PSLocationManager sharedLocationManager] prepLocationUpdates];
 }
 
-- (id)initWithMatch:(GKMatch *)match
+- (id)initWithMatch:(GKMatch *)match players:(NSArray*)players
 {
     if ( (self = [super init]) == nil)
     {
@@ -67,6 +66,7 @@ typedef struct
     }
     
     self.match = match;
+    self.players = players;
 
     // todo: are these automatically initialized to 0?  is this redundant?
     otherRunnerState.milesRan = 0;
@@ -76,15 +76,13 @@ typedef struct
     [PSLocationManager sharedLocationManager].delegate = self;
     [[PSLocationManager sharedLocationManager] resetLocationUpdates];
     [[PSLocationManager sharedLocationManager] startLocationUpdates];
-    
-    [self updatePlayers];
-    
+        
     return self;
 }
 
 -(id)init
 {
-    return [self initWithMatch:nil];
+    return [self initWithMatch:nil players:nil];
 }
 
 - (void)processData:(NSData*)data fromPlayer:(NSString*)playerID
@@ -224,31 +222,6 @@ typedef struct
     LOG_TRACE();
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIF_RunStateChanged object:nil];
     LOG_TRACE();
-}
-
-- (void)updatePlayers
-{
-    if (self.isMultiplayer)
-    {
-        [GKPlayer loadPlayersForIdentifiers:self.match.playerIDs withCompletionHandler:^(NSArray *players, NSError *error)
-         {
-             LOG_DEBUG(@"loadPlayersForIdentifiers completion handler called");
-             if (error != nil)
-             {
-                 LOG_ERROR(@"Error loading player information: %@", error);
-                 
-                 // todo: consider retrying to get players
-             }
-             
-             self.players = players;
-             
-             LOG_DEBUG(@"players set: %@", self.players);
-         }];
-    }
-    else
-    {
-        self.players = nil;
-    }
 }
 
 #pragma mark - GPS
