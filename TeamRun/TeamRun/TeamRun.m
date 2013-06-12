@@ -213,6 +213,8 @@ typedef struct
 
 - (double) milesAhead
 {
+    if (self.isSinglePlayer && [TeamRunSettings targetPaceEnabled] == NO) return 0;
+    
     const double referenceMiles = self.isMultiplayer ? self.milesOtherPlayerRan : self.targetMiles;
     return self.miles - referenceMiles;
 }
