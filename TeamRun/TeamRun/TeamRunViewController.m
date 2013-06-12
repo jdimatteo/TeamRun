@@ -415,6 +415,9 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
             
             UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Match Making Failed" message:@"If you have trouble finding a running buddy, try Sunday at 11 AM EST" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
+            
+            LOG_WARN(@"Disconnecting from match with no players");
+            [match disconnect];
         }
         else
         {
