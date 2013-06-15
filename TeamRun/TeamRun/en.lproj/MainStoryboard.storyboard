@@ -20,7 +20,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="on pace" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OEi-bS-BKb">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="on pace" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="14" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="OEi-bS-BKb">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" type="user" id="sXg-z4-bff"/>
                                 </constraints>
@@ -626,46 +626,11 @@
         <image name="FB-f-Logo__blue_29.png" width="29" height="29"/>
     </resources>
     <classes>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
         <class className="TeamRunCompletedViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TeamRunCompletedViewController.h"/>
             <relationships>
-                <relationship kind="action" name="doneTapped"/>
-                <relationship kind="action" name="facebookTapped"/>
                 <relationship kind="action" name="openLeaderboards:"/>
-                <relationship kind="outlet" name="bestPaceLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="bestRawMilesLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="bestTeamMilesLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="bestTimeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="currentPaceLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="currentRawMilesLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="currentTeamMilesLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="currentTimeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="facebookButton" candidateClass="UIGlossyButton"/>
-                <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
-                <relationship kind="outlet" name="teamMilesRowLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="totalRawMilesLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="totalTeamMilesLabel" candidateClass="UILabel"/>
             </relationships>
-        </class>
-        <class className="TeamRunSettingsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TeamRunSettingsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="doneChangingSettings"/>
-                <relationship kind="action" name="updateEnabledFields"/>
-                <relationship kind="outlet" name="minutesBetweenNotificationsTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="paceNotificationsSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="relativePositionNotificationsSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="secondsBetweenNotificationsTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="targetMilePaceMinutesTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="targetMilePaceSecondsTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="targetMilePaceSwitch" candidateClass="UISwitch"/>
-            </relationships>
-        </class>
-        <class className="TeamRunView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TeamRunView.h"/>
         </class>
         <class className="TeamRunViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TeamRunViewController.h"/>
@@ -676,14 +641,10 @@
                 <relationship kind="outlet" name="milesAheadLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="milesRanLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="scrollingText" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="settingsButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="startStopButton" candidateClass="UIGlossyButton"/>
                 <relationship kind="outlet" name="timeDescriptionLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="timeLabel" candidateClass="UILabel"/>
             </relationships>
-        </class>
-        <class className="UIGlossyButton" superclassName="UIButton">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIGlossyButton.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

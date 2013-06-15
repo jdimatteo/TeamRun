@@ -178,8 +178,14 @@ typedef struct
     return self.match == nil;
 }
 
-- (NSString*) playerNames
+- (NSString*) otherPlayerName
 {
+    if (self.isMultiplayer && self.players != nil && self.players.count > 0)
+    {
+        return [self.players[0] displayName];
+    }
+    return @"";
+    /* if we have have more than one player:
     NSMutableString *playerNames = [[NSMutableString alloc] init];
     
     if (self.isMultiplayer && self.players != nil)
@@ -193,13 +199,32 @@ typedef struct
             [playerNames appendString:[self.players[i] displayName]];
         }
     }
-    return playerNames;
+    return playerNames;*/
+}
+
+- (NSString*) otherPlayerShortName
+{
+    NSString* name = self.otherPlayerName;
+    if (name.length == 0) return name;
+    
+    NSMutableArray *array = (NSMutableArray *)[name componentsSeparatedByString:@" "];
+    [array removeObject:@""]; // removes all objects like @"", in case name is prefaced by a space
+    
+    if (array.count > 0) return array[0];
+    else return @"";
+}
+
+- (bool) otherPlayerPaceIsScaled
+{
+    return otherRunnerState.secondsPerMileTargetPace > 0
+        && [TeamRunSettings targetPaceEnabled]
+        && [TeamRunSettings targetSecondsPerMile] > 0;
 }
 
 - (double) milesOtherPlayerRan
 {
     double scalingFactor = 1.0;
-    if (otherRunnerState.secondsPerMileTargetPace > 0 && [TeamRunSettings targetPaceEnabled] && [TeamRunSettings targetSecondsPerMile] > 0)
+    if (self.otherPlayerPaceIsScaled)
     {
         scalingFactor = otherRunnerState.secondsPerMileTargetPace / (double) [TeamRunSettings targetSecondsPerMile];
     }

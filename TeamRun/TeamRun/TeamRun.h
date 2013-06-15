@@ -38,16 +38,18 @@
 
 @property (nonatomic, readonly) bool      isMultiplayer;
 @property (nonatomic, readonly) bool      isSinglePlayer;
-@property (nonatomic, readonly) NSString* playerNames;
-@property (nonatomic, readonly) double    meters;                 // distance ran
-@property (nonatomic, readonly) double    miles;                  // distance ran
-@property (nonatomic, readonly) double    targetMiles;            // miles ran if running at exactly the target mile pace
-@property (nonatomic, readonly) double    milesOtherPlayerRan;    // based off last message received by other player
-@property (nonatomic, readonly) double    milesAhead;             // miles ahead of other runner (ahead of target miles if single player)
-@property (nonatomic, readonly) double    seconds;                // seconds since run started
-@property (nonatomic, readonly) double    secondsRemaining;       // seconds remaining in multiplayer run
-@property (nonatomic, readonly) double    averageMetersPerSecond; // average pace
-@property (nonatomic, readonly) double    currentMetersPerSecond; // current pace
+@property (nonatomic, readonly) NSString* otherPlayerName;
+@property (nonatomic, readonly) NSString* otherPlayerShortName;
+@property (nonatomic, readonly) double    meters;                  // distance ran
+@property (nonatomic, readonly) double    miles;                   // distance ran
+@property (nonatomic, readonly) double    targetMiles;             // miles ran if running at exactly the target mile pace
+@property (nonatomic, readonly) double    milesOtherPlayerRan;     // based off last message received by other player
+@property (nonatomic, readonly) bool      otherPlayerPaceIsScaled; // based off last message received by other player
+@property (nonatomic, readonly) double    milesAhead;              // miles ahead of other runner (ahead of target miles if single player)
+@property (nonatomic, readonly) double    seconds;                 // seconds since run started
+@property (nonatomic, readonly) double    secondsRemaining;        // seconds remaining in multiplayer run
+@property (nonatomic, readonly) double    averageMetersPerSecond;  // average pace
+@property (nonatomic, readonly) double    currentMetersPerSecond;  // current pace
 
 extern NSString * const NOTIF_RunStateChanged;
 

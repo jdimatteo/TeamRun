@@ -186,13 +186,13 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
     {
         NSString *message = @"Are you sure you want to end your run?";
         
-        NSString *playerNames = self.run.playerNames;
+        NSString *playerName = self.run.otherPlayerName;
         
-        if (playerNames.length > 0)
+        if (playerName.length > 0)
         {
             const int remainingMinutes = (30*60 - round(self.run.seconds))/60;
             
-            message = [NSString stringWithFormat:@"%@\n\nThere are %d minutes remaining in your run with %@.", message, remainingMinutes, playerNames];
+            message = [NSString stringWithFormat:@"%@\n\nThere are %d minutes remaining in your run with %@.", message, remainingMinutes, playerName];
         }
         
         UIActionSheet *endRunConfirmationPrompt = [[UIActionSheet alloc] initWithTitle:message delegate:self cancelButtonTitle:@"Keep Running" destructiveButtonTitle:@"End Run" otherButtonTitles:nil];
@@ -275,16 +275,29 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
         [self.milesRanLabel setText:truncateToTwoDecimals(self.run.miles)];
         LOG_DEBUG(@"targetMilesRanIfRunningAtTargetMilePace = %@, seconds: %d, target seconds per mile: %d", truncateToTwoDecimals(self.run.targetMiles), (int) self.run.seconds, [TeamRunSettings targetSecondsPerMile]);
         
+        NSString* appendToMilesAhead = @"";
+        if (self.run.isMultiplayer)
+        {
+            [self.milesAheadLabel setFont:[UIFont systemFontOfSize:22]];
+            appendToMilesAhead = [NSString stringWithFormat:@"%@%@", self.run.otherPlayerShortName, self.run.otherPlayerPaceIsScaled ? @"*" : @""];
+        }
+        else
+        {
+            [self.milesAheadLabel setFont:[UIFont systemFontOfSize:36]];
+        }
+        
         const double milesAhead = self.run.milesAhead;
         
-        if ( absoluteValue(milesAhead) < ON_PACE_THRESHOLD_MILES)
+        if (absoluteValue(milesAhead) < ON_PACE_THRESHOLD_MILES)
         {
-            [self.milesAheadLabel setText:@"on pace"];
+            if (appendToMilesAhead.length > 0) appendToMilesAhead = [NSString stringWithFormat:@" with %@", appendToMilesAhead];
+            [self.milesAheadLabel setText:[NSString stringWithFormat:@"on pace%@", appendToMilesAhead]];
         }
         else
         {
             NSString* aheadOrBehind = (milesAhead >= 0) ? @"ahead" : @"behind";
-            [self.milesAheadLabel setText:[NSString stringWithFormat:@"%@ mi %@", truncateToTwoDecimals(absoluteValue(milesAhead)), aheadOrBehind]];
+            if (appendToMilesAhead.length > 0) appendToMilesAhead = [NSString stringWithFormat:@" of %@", appendToMilesAhead];
+            [self.milesAheadLabel setText:[NSString stringWithFormat:@"%@ mi %@%@", truncateToTwoDecimals(absoluteValue(milesAhead)), aheadOrBehind, appendToMilesAhead]];
         }
     }
     
@@ -439,7 +452,7 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
 }
 
 - (void)startRunWithMatch:(GKMatch*)match players:(NSArray*)players
-{
+{    
     self.run = [[TeamRun alloc] initWithMatch:match players:players];
 
     self.runningTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
@@ -473,10 +486,10 @@ static const double ON_PACE_THRESHOLD_MILES = 0.025;
         const double teamRunMiles = self.run.isSinglePlayer ? rawMiles
                                                             : rawMiles + self.run.milesOtherPlayerRan;
         NSString* withMessage = @"";
-        NSString* playerNames = self.run.playerNames;
-        if (playerNames.length > 0 )
+        NSString* playerName = self.run.otherPlayerName;
+        if (playerName.length > 0 )
         {
-            withMessage = [NSString stringWithFormat:@" with %@", playerNames];
+            withMessage = [NSString stringWithFormat:@" with %@", playerName];
         }
         
         NSString* facebookMessage = [NSString stringWithFormat:@"I just ran %@ miles%@", truncateToTwoDecimals(rawMiles), withMessage];
