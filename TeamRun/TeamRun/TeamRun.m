@@ -208,7 +208,6 @@ typedef struct
     if (name.length == 0) return name;
     
     NSMutableArray *array = (NSMutableArray *)[name componentsSeparatedByString:@" "];
-    [array removeObject:@""]; // removes all objects like @"", in case name is prefaced by a space
     
     if (array.count > 0) return array[0];
     else return @"";
